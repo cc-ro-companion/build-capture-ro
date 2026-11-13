@@ -247,5 +247,11 @@ ccRO.
   `generatedAt`; appending a line to `items.yml` failed `pnpm test` with "Run
   `pnpm data`…", reverted; check/lint/test (72)/build pass · 52b4820
 - 2026-11-13 · 8 footer · check/lint/test (73)/build pass; `dist` JS
-  contains "ccRO 2026-11" and no item/monster data (bundle +0.45 kB) · next
-  commit
+  contains "ccRO 2026-11" and no item/monster data (bundle +0.45 kB) ·
+  299eb42
+- 2026-11-13 · review fixes: rAthena forced genders (Musical male, Whip
+  female, wedding rings) drop Dancer/Bard from opposite-sex items; monster
+  AttackDelay/AttackMotion default 100 (`MAX_ASPD_NOPC`); comment-safe
+  e_job parser; job groups merge maps; nested override fields must be maps;
+  `db/import` footer imports skipped; dirty check includes mmo.hpp; stale
+  generated files removed · check/lint/test (78)/build pass · 9b6a4d2
