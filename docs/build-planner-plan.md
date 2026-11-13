@@ -62,7 +62,7 @@ tests/fixtures/  validated characters with expected numbers
 Each phase ends with something usable in the deployed app and, from phase 2
 on, a validation session against the training dummy.
 
-1. [ ] **Foundation.** Project scaffold, license (GPL-3.0, rAthena credit,
+1. [x] **Foundation.** Project scaffold, license (GPL-3.0, rAthena credit,
    disclaimer), CI (type check, lint, tests, build), GitHub Pages deploy with
    an "unfinished" banner, empty app shell with the layout above.
 2. [ ] **Data pipeline, first cut.** Read `db/pre-re` from the local
@@ -143,3 +143,4 @@ maintainer's step.
 
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
+- 2026-11-13 · Phase 1 Foundation · verification passes; deployed to GitHub Pages and confirmed by the maintainer; plan archived at [plans/archive/phase-1-foundation-plan.md](plans/archive/phase-1-foundation-plan.md) · 3ba8b26

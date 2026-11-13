@@ -1,8 +1,8 @@
 # Phase 1: Foundation — plan
 
-Status: approved
+Status: done
 
-Parent: [build-planner-plan.md](build-planner-plan.md), phase 1.
+Parent: [build-planner-plan.md](../../build-planner-plan.md), phase 1.
 
 ## Goal
 A Svelte 5 + TypeScript + Vite app that passes type check, lint, tests and
@@ -53,8 +53,10 @@ corepack pnpm check && corepack pnpm lint && corepack pnpm test && corepack pnpm
 
 ## Progress log
 <!-- date · task · result · commit -->
-- 2026-11-13 · 1 Scaffold · check, lint, test (1/1), build pass · 2268225
-- 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · 5616c9d
-- 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · ccbb3e7
-- 2026-11-13 · 4 License and docs · verification passes; LICENSE md5 d32239bc… (canonical GPL-3.0) · 7e67126
-- 2026-11-13 · 5 CI and deploy · verification passes; workflow YAML parsed and structure asserted; frozen-lockfile install OK; dist uses ./assets paths; workflows not run (no remote) · cae8a21
+- 2026-11-13 · 1 Scaffold · check, lint, test (1/1), build pass · b28fc81
+- 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · 1a16cbf
+- 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · fcc69b8
+- 2026-11-13 · 4 License and docs · verification passes; LICENSE md5 d32239bc… (canonical GPL-3.0) · 81d871b
+- 2026-11-13 · 5 CI and deploy · verification passes; workflow YAML parsed and structure asserted; frozen-lockfile install OK; dist uses ./assets paths; workflows not run (no remote) · 56ffe9c
+- 2026-11-13 · Review fixes · verification passes; code review and plan review done · 3ba8b26
+- 2026-11-13 · Phase closed · deployed to GitHub Pages; maintainer confirmed banner and footer on the live site
