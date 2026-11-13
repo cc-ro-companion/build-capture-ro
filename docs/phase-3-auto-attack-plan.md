@@ -30,7 +30,8 @@ validation session at ccRO's training dummy, recorded as test fixtures.
   phase 7. All 26 supported jobs are selectable; their base formulas apply.
 - Special monster modes that change damage (plants taking 1 damage, etc.)
   and damage taken: phase 9.
-- Named build lists, duplicate/import/export: phase 10. Only the current
+- Named build lists, duplicate/import/export (import accepts share codes
+  and the readable build JSON): phase 10. Only the current
   build is kept.
 - Sprites, PWA: phase 11. Gender selection: no weapon in the data needs it
   beyond what Bard/Dancer already imply.
@@ -48,10 +49,10 @@ validation session at ccRO's training dummy, recorded as test fixtures.
 | Weapon search | Case-insensitive substring over English name, aegis name and id; only weapons the job can equip at the base level (`jobs`, `equipLevelMin/Max`); "No weapon" (bare hands, `Fist`) is always available; at most 50 results shown | 1762 items is small; filtering by job removes most noise. |
 | Monster search | Same matching over the monster's name, aegis name and id; at most 50 results | Same reason. |
 | Build model | `{ v: 1, job, baseLevel, jobLevel, stats: {str..luk}, weapon: id \| null, monster: id \| null }` | Ids only (master plan); `v` lets later phases migrate old builds. |
-| Share code | Versioned build JSON plus `d` (data hash) and `l` (data label), compressed with the built-in `CompressionStream('deflate-raw')`, base64url, in the URL fragment `#b=<code>` | Maintainer's choice; no dependency, extends as later phases add fields, the fragment never reaches a server. |
-| Data version hint | When a decoded code's `d` differs from the current `dataMeta.hash`, a notice shows "Made with data <l> (<d>); current data is <label> (<hash>). Numbers may differ." | Idea file: old builds show which data they were made with. |
+| Share code | Opaque binary code, base64url, in the URL fragment `#b=<code>`. Bytes: format version (1), then tagged fields as varint tag + varint value (1 job, 2 base level, 3 job level, 4–9 STR..LUK, 10 weapon, 11 monster; 0 = none for weapon/monster), tag 0 ends the fields, then the data hash as 4 raw bytes and the data label as varint length + UTF-8. No compression. A newer format version, an unknown tag, truncation or trailing bytes make the code undecodable; decoded fields go through build normalize | Maintainer's choice after measuring: a typical code is ~48 characters (link ~102), where deflated JSON gave ~174 (link ~228). The code is not meant to be read or edited; later phases add tags or bump the version, and old links must keep decoding. Phase 10 import accepts these codes. |
+| Data version hint | When a decoded code's or saved build's `d` differs from the current `dataMeta.hash`, a notice shows "Made with data <l> (<d>); current data is <label> (<hash>). Numbers may differ." | Idea file: old builds show which data they were made with. |
 | Invalid content on decode | Unknown ids and out-of-range values are dropped or clamped, each with a visible warning; a code that cannot be decoded at all shows an error and leaves the current build untouched | A removed item must not make a whole build unreadable. |
-| Saving | Current build autosaved to `localStorage` (key `ccro-build-planner:current`, same JSON as the uncompressed share payload), all access in try/catch; restored on load | Maintainer's choice; build lists are phase 10. |
+| Saving | Current build autosaved to `localStorage` (key `ccro-build-planner:current`) as readable JSON: the build model plus `d` (data hash) and `l` (data label), all access in try/catch; restored on load through build normalize, with the same warnings and data version hint as a link | Maintainer's choice: users may read, edit or generate this JSON with their own tools; phase 10 import also accepts it. Build lists are phase 10. |
 | Opening a share link | If the link's build differs from the saved one, ask before replacing it (`confirm`); then remove the fragment from the URL | Following a link must not silently overwrite work. |
 | Training dummy | Entered as a ccRO monster in `data-overrides/monsters.yml` once the maintainer has its stats (size, race, element and level, DEF, VIT, AGI, LUK, level, HP) | Unknown today; the maintainer reads it off in game. Fixtures target that entry. |
 | Fixture format | YAML in `tests/fixtures/auto-attack/`, one file per validated character | Comments for in-game notes; `yaml` is already a dev dependency. |
@@ -212,7 +213,7 @@ and hand the numbers over for fixtures.
    force average; verification passes.
 5. [x] Build model: `model.ts`, `resolve.ts`, `search.ts` with normalize
    warnings. Check: unit tests; verification passes.
-6. [ ] Share code and storage: `shareCode.ts`, `storage.ts`. Check:
+6. [x] Share code and storage: `shareCode.ts`, `storage.ts`. Check:
    round-trip, hint, corrupt code and storage tests; verification passes.
 7. [ ] UI: build state, Build/Target/Results panels, share bar, link
    opening with confirm. Check: component tests; verification passes; the
@@ -238,3 +239,5 @@ and hand the numbers over for fixtures.
 - 2026-11-13 · 2 engine stats: config, total stats, point cost/budget (99 → 628 points, level 1 budget 48) · check/lint/test (87)/build pass · f22b12d
 - 2026-11-13 · 3 engine status window: base ATK (STR/DEX main), HIT, FLEE, perfect dodge, CRIT incl. katar doubling, amotion/ASPD with config cap; status window ASPD truncated (to confirm in validation) · check/lint/test (99)/build pass · 5ed84bd
 - 2026-11-13 · 4 engine auto attack: pre-renewal base damage (DEX minimum × weapon level, `rnd()%(max−min)+min` so normal hits never roll the full ATK, bow arrow path, gun crits melee-like), size, hard/soft DEF, min 1, Neutral element, katar 1% off-hand hit, exact average by enumeration, hit/crit chance, DPS · check/lint/test (120)/build pass · 7d19263
+- 2026-11-13 · 5 build model: normalize (unknown ids dropped, levels/stats clamped, unequippable weapon dropped, each with a warning), resolve, weapon/monster search · check/lint/test (141)/build pass · c0dc1ab
+- 2026-11-13 · plan change agreed with the maintainer: the plan's deflated-JSON share code measured ~174 characters (link ~228, over the 200 limit). The share code is now an opaque binary format (link ~110), and storage keeps readable JSON (build + `d` + `l`) that users may edit; phase 10 import accepts both
