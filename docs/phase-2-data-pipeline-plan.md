@@ -207,7 +207,7 @@ ccRO.
 4. [x] Equipment: `items.ts` writing `items.json` and item names, with job
    resolution and the class filter. Check: item spot checks and the job id
    check pass; verification passes.
-5. [ ] Monsters: `monsters.ts` writing `monsters.json` and monster names.
+5. [x] Monsters: `monsters.ts` writing `monsters.json` and monster names.
    Check: monster spot checks pass; verification passes.
 6. [ ] Tables: `tables.ts` writing `tables.json` (size and element
    modifiers). Check: table spot checks pass; verification passes.
@@ -234,4 +234,6 @@ ccRO.
 - 2026-11-13 · 4 equipment, 1762 items (also drops costume-only items and
   items no supported job can use; Taekwon's only weapons are the four
   all-jobs items without a `Jobs` field, e.g. 1161 Balmung) ·
-  check/lint/test (52)/build pass · next commit
+  check/lint/test (52)/build pass · 020d81d
+- 2026-11-13 · 5 monsters, 1004 (`class` also has `battlefield`, used by 7
+  rAthena monsters) · check/lint/test (57)/build pass · next commit

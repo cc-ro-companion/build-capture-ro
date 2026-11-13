@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import items from './generated/items.json';
 import jobsData from './generated/jobs.json';
+import monsters from './generated/monsters.json';
 import names from './generated/names.en.json';
 
 describe('generated jobs', () => {
@@ -71,6 +72,28 @@ describe('generated equipment', () => {
     expect(ids).toEqual([...ids].sort((a, b) => a - b));
     for (const id of ids) {
       expect(names.items[String(id) as keyof typeof names.items], `item ${id}`).toBeTruthy();
+    }
+  });
+});
+
+describe('generated monsters', () => {
+  it('gives Poring (1002) 50 HP and water element level 1', () => {
+    expect(monsters.find((monster) => monster.id === 1002)).toMatchObject({
+      hp: 50,
+      element: 'Water',
+      elementLevel: 1,
+    });
+  });
+
+  it('includes every rAthena monster, sorted by id, each with a name', () => {
+    expect(monsters.length).toBeGreaterThan(900);
+    const ids = monsters.map((monster) => monster.id);
+    expect(ids).toEqual([...ids].sort((a, b) => a - b));
+    for (const id of ids) {
+      expect(
+        names.monsters[String(id) as keyof typeof names.monsters],
+        `monster ${id}`,
+      ).toBeTruthy();
     }
   });
 });

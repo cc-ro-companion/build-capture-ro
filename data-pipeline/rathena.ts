@@ -54,6 +54,14 @@ function isMap(value: unknown): value is YamlMap {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+/** Keys set to `true` in an rAthena flag map such as `Locations` or `Modes`. */
+export function enabledKeys(map: unknown): string[] {
+  if (!isMap(map)) return [];
+  return Object.entries(map)
+    .filter(([, enabled]) => enabled === true)
+    .map(([key]) => key);
+}
+
 /**
  * Loads an rAthena YAML db file and the files named in its `Footer.Imports`,
  * recursively, concatenating their bodies in file order. Import paths are

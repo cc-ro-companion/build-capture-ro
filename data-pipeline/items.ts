@@ -1,6 +1,6 @@
 import { SUPPORTED_JOBS } from './jobs.ts';
 import { applyOverrides, ITEM_SCHEMA, type OverrideFile } from './overrides.ts';
-import { loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
+import { enabledKeys, loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
 
 export interface ItemRecord {
   id: number;
@@ -80,13 +80,6 @@ const COSTUME_LOCATION = /^Costume_/;
 
 function where(record: YamlMap): string {
   return `item ${String(record.Id)}`;
-}
-
-function enabledKeys(map: unknown): string[] {
-  if (typeof map !== 'object' || map === null) return [];
-  return Object.entries(map)
-    .filter(([, enabled]) => enabled === true)
-    .map(([key]) => key);
 }
 
 /**

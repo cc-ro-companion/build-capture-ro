@@ -3,6 +3,7 @@ import path from 'node:path';
 import { generateItems } from './items.ts';
 import { generateJobs } from './jobs.ts';
 import { formatJson } from './json.ts';
+import { generateMonsters } from './monsters.ts';
 import { loadMeta, loadOverrideFile } from './overrides.ts';
 import { readRathenaSource, resolveRathenaDir } from './rathena.ts';
 
@@ -39,11 +40,18 @@ function main(): void {
   console.log(`Jobs: ${jobs.data.jobs.length}`);
   const items = generateItems(rathenaDir, overrides.items);
   console.log(`Equipment: ${items.data.length}`);
+  const monsters = generateMonsters(rathenaDir, overrides.monsters);
+  console.log(`Monsters: ${monsters.data.length}`);
 
   mkdirSync(outputDir, { recursive: true });
   writeOutput('jobs.json', jobs.data);
   writeOutput('items.json', items.data);
-  writeOutput('names.en.json', { items: items.names, jobs: jobs.names });
+  writeOutput('monsters.json', monsters.data);
+  writeOutput('names.en.json', {
+    items: items.names,
+    monsters: monsters.names,
+    jobs: jobs.names,
+  });
 }
 
 try {
