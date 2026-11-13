@@ -2,6 +2,7 @@
 // build keeps its own list of dummy settings by value. HP and the boss flag
 // cannot be seen or changed in game, so they are not part of a dummy.
 import type { Monster, Size } from '../data/types';
+import { integerOrUndefined, isRecord } from './untrusted';
 
 // These lists double as the share code's index tables: only ever append.
 export const DUMMY_SIZES: readonly Size[] = ['small', 'medium', 'large'];
@@ -93,14 +94,6 @@ export function defaultDummy(index: number): Dummy {
     element: 'Neutral',
     elementLevel: 1,
   };
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-function integerOrUndefined(value: unknown): number | undefined {
-  return typeof value === 'number' && Number.isFinite(value) ? Math.trunc(value) : undefined;
 }
 
 function normalizeName(raw: unknown, index: number, warnings: string[]): string {

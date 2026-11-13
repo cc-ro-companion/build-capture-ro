@@ -98,8 +98,8 @@ export interface StatusWindow {
   /** ASPD with one decimal. */
   aspdExact: number;
   /**
-   * ASPD as the status window shows it. The client truncates, as far as is
-   * known; the validation session confirms it.
+   * ASPD as the status window shows it. The client truncates: amotion 633
+   * (ASPD 136.7) shows as 136 in ccRO.
    */
   aspd: number;
 }

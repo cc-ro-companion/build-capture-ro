@@ -6,6 +6,7 @@ import type { EngineConfig } from '../engine/config';
 import { STAT_NAMES } from '../engine/stats';
 import { normalizeDummies, sameDummy, type Dummy } from './dummy';
 import { canEquip, itemName, jobName, type GameData } from './resolve';
+import { integerOrUndefined, isRecord } from './untrusted';
 
 export const BUILD_VERSION = 1;
 
@@ -41,14 +42,6 @@ export function defaultBuild(): Build {
 }
 
 export type NormalizeResult = { build: Build; warnings: string[] } | { error: string };
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-function integerOrUndefined(value: unknown): number | undefined {
-  return typeof value === 'number' && Number.isFinite(value) ? Math.trunc(value) : undefined;
-}
 
 /**
  * Turns untrusted build data (a share code, saved state) into a valid build.

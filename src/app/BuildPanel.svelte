@@ -2,6 +2,7 @@
   import { jobName, itemName } from '../build/resolve';
   import { searchWeapons } from '../build/search';
   import { jobBonus, statPointCost, STAT_NAMES, type StatName } from '../engine/stats';
+  import { usesArrowPath } from '../engine/status';
   import type { BuildState } from './build.svelte';
   import NumberInput from './NumberInput.svelte';
 
@@ -16,11 +17,7 @@
     searchWeapons(weaponQuery, planner.build.job, planner.build.baseLevel, planner.data),
   );
   const weapon = $derived(planner.resolved.character.weapon);
-  const rangedWeapon = $derived(
-    ['Bow', 'Revolver', 'Rifle', 'Gatling', 'Shotgun', 'Grenade'].includes(
-      weapon?.weaponType ?? '',
-    ),
-  );
+  const rangedWeapon = $derived(usesArrowPath(weapon?.weaponType ?? ''));
 
   function onJobChange(event: Event & { currentTarget: HTMLSelectElement }) {
     planner.setJob(Number(event.currentTarget.value));

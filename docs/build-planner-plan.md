@@ -131,9 +131,9 @@ maintainer's step.
 ## Open questions
 - ~~How CI and the Pages deploy get the rAthena data.~~ Decided in phase 2:
   the generator runs locally and the generated JSON is committed.
-- ~~Share code format.~~ Decided in phase 3: versioned build JSON,
-  `deflate-raw` via `CompressionStream`, base64url, in the URL fragment
-  `#b=<code>` (see [phase-3-auto-attack-plan.md](phase-3-auto-attack-plan.md)).
+- ~~Share code format.~~ Decided in phase 3: an opaque, versioned binary
+  code of tagged varint fields, base64url, in the URL fragment `#b=<code>`;
+  the saved build stays readable JSON (see [phase-3-auto-attack-plan.md](phase-3-auto-attack-plan.md)).
 - Script conversion approach: parse rAthena scripts automatically, convert
   by hand, or a mix. Phase 4.
 - Format of the hand-entered ccRO data (runes, card system, costumes) and
