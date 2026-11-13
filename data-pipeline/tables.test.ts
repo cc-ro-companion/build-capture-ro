@@ -9,6 +9,14 @@ describe('convertSizeFix', () => {
     expect(Object.keys(table)).toHaveLength(24);
   });
 
+  it('lets a later entry change only the sizes it lists', () => {
+    const table = convertSizeFix([
+      { Weapon: 'Whip', Small: 75 },
+      { Weapon: 'Whip', Large: 50 },
+    ]);
+    expect(table.Whip).toEqual({ small: 75, medium: 100, large: 50 });
+  });
+
   it('rejects an unknown weapon type', () => {
     expect(() => convertSizeFix([{ Weapon: 'Lance' }])).toThrow('unknown weapon type "Lance"');
   });

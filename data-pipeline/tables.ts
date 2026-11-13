@@ -1,5 +1,5 @@
 import type { SizeModifier, TablesFile } from '../src/data/types.ts';
-import { loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
+import { loadDb, PRE_RE_DIR, SIZE_FIX_BASE_FILE, type YamlMap } from './rathena.ts';
 
 /** rAthena element names in `enum e_element` order. */
 export const ELEMENTS = [
@@ -60,7 +60,9 @@ export function convertSizeFix(entries: readonly YamlMap[]): Record<string, Size
     if (!(WEAPON_TYPES as readonly string[]).includes(weapon)) {
       throw new Error(`size_fix.yml: unknown weapon type "${weapon}".`);
     }
-    byWeapon.set(weapon, entry);
+    // A later entry for the same weapon only changes the sizes it lists, as in
+    // rAthena's SizeFixDatabase.
+    byWeapon.set(weapon, { ...byWeapon.get(weapon), ...entry });
   }
   return Object.fromEntries(
     WEAPON_TYPES.map((weapon) => {
@@ -103,7 +105,9 @@ export function convertAttrFix(
 
 export function generateTables(rathenaDir: string): TablesFile {
   return {
-    sizeModifier: convertSizeFix(loadDb(rathenaDir, `${PRE_RE_DIR}/size_fix.yml`).body),
+    // The full table lives in db/size_fix.yml; its Footer imports
+    // db/pre-re/size_fix.yml, which only changes Knuckle and Whip.
+    sizeModifier: convertSizeFix(loadDb(rathenaDir, SIZE_FIX_BASE_FILE).body),
     elementModifier: convertAttrFix(loadDb(rathenaDir, `${PRE_RE_DIR}/attr_fix.yml`).body),
   };
 }

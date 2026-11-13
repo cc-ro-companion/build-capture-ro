@@ -135,6 +135,11 @@ describe('generated tables', () => {
     expect(tables.sizeModifier.Knuckle?.large).toBe(50);
   });
 
+  it('takes the base size table from db/size_fix.yml with the pre-renewal changes on top', () => {
+    expect(tables.sizeModifier.Dagger).toEqual({ small: 100, medium: 75, large: 50 });
+    expect(tables.sizeModifier.Whip).toEqual({ small: 75, medium: 100, large: 50 });
+  });
+
   it('gives water attacking fire at element level 1 150 %', () => {
     expect(tables.elementModifier[0]?.Water?.Fire).toBe(150);
   });

@@ -20,6 +20,8 @@ export const PRE_RE_DIR = 'db/pre-re';
 const IMPORT_DIR = 'db/import/';
 /** Source file holding `enum e_job`, read to check job ids. */
 export const JOB_ENUM_FILE = 'src/common/mmo.hpp';
+/** Base size table in `db/`; its footer imports the pre-renewal changes. */
+export const SIZE_FIX_BASE_FILE = 'db/size_fix.yml';
 
 /**
  * Picks the rAthena checkout: `--rathena <dir>`, else `RATHENA_DIR`, else a
@@ -119,6 +121,13 @@ export function readRathenaSource(rathenaDir: string): RathenaSource {
   const [commit = '', commitDate = ''] = git(rathenaDir, ['log', '-1', '--format=%H%n%cI']).split(
     '\n',
   );
-  const status = git(rathenaDir, ['status', '--porcelain', '--', PRE_RE_DIR, JOB_ENUM_FILE]);
+  const status = git(rathenaDir, [
+    'status',
+    '--porcelain',
+    '--',
+    PRE_RE_DIR,
+    SIZE_FIX_BASE_FILE,
+    JOB_ENUM_FILE,
+  ]);
   return { commit, commitDate, dirty: status.length > 0 };
 }

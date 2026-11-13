@@ -255,3 +255,10 @@ ccRO.
   e_job parser; job groups merge maps; nested override fields must be maps;
   `db/import` footer imports skipped; dirty check includes mmo.hpp; stale
   generated files removed · check/lint/test (78)/build pass · 9b6a4d2
+- 2026-11-13 · size table fix: `db/pre-re/size_fix.yml` only holds the
+  pre-renewal changes (Knuckle, Whip) on top of the base `db/size_fix.yml`,
+  which imports it. The generator now loads the base file and merges per size
+  like rAthena. **Open:** other inputs also have base files in `db/`
+  (`job_stats.yml`, `statpoint.yml`, `attr_fix.yml`, `mob_db.yml`,
+  `item_db.yml`, ...); check each against its `db/` counterpart, as
+  `db/pre-re` may not be the full picture there either.

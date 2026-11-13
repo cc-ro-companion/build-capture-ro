@@ -20,8 +20,16 @@ RATHENA_DIR=/path/to/rathena pnpm data
 
 The rAthena checkout is chosen in this order: `--rathena <dir>`, the
 `RATHENA_DIR` environment variable, then a `rathena` directory next to this
-repository. It must contain `db/pre-re`. Only `db/pre-re` is read; `db/import`
-is ignored, because ccRO differences live in `data-overrides/`.
+repository. It must contain `db/pre-re`. The generator reads `db/pre-re`,
+plus `db/size_fix.yml`, the base file whose footer imports
+`db/pre-re/size_fix.yml`. `db/import` is ignored, because ccRO differences
+live in `data-overrides/`.
+
+Note: rAthena also has base files directly in `db/` for other inputs
+(`job_stats.yml`, `statpoint.yml`, `attr_fix.yml`, `mob_db.yml`,
+`item_db.yml`, ...), and `db/pre-re` may only hold the pre-renewal changes on
+top of them, as with `size_fix.yml`. Check each input against its `db/`
+counterpart before relying on it.
 
 Needs Node 22.18 or later: the generator is TypeScript run directly by Node's
 type stripping, so it uses no enums or namespaces and imports with `.ts`
@@ -34,17 +42,17 @@ same inputs changes only `generatedAt` in `meta.json`.
 The generator stops with a message naming the file and entry if an override
 is invalid (see [`../data-overrides/README.md`](../data-overrides/README.md))
 or if rAthena data has a value it does not know, such as a new job name or
-element. It warns, but continues, if rAthena's `db/pre-re` has uncommitted
-changes, and records `rathenaDirty: true`.
+element. It warns, but continues, if any rAthena file it reads has
+uncommitted changes, and records `rathenaDirty: true`.
 
 ## Inputs and outputs
 
-| Output | From rAthena `db/pre-re/` | Override |
+| Output | From rAthena `db/pre-re/` (unless a path is given) | Override |
 | --- | --- | --- |
 | `jobs.json` | `job_stats.yml`, `job_aspd.yml`, `job_exp.yml`, `statpoint.yml`; ids checked against `enum e_job` in `src/common/mmo.hpp` | `jobs.yml` |
 | `items.json` | `item_db.yml` → `item_db_equip.yml` | `items.yml` |
 | `monsters.json` | `mob_db.yml` | `monsters.yml` |
-| `tables.json` | `size_fix.yml`, `attr_fix.yml` | – |
+| `tables.json` | `db/size_fix.yml` → `size_fix.yml`, `attr_fix.yml` | – |
 | `names.en.json` | display names of the above | – |
 | `meta.json` | data version, see below | `meta.yml` |
 
