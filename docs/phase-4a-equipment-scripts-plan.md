@@ -165,4 +165,4 @@ app is the maintainer's step.
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · setup · baseline green (check, lint, 215 tests, build); `pnpm data` drift check treats `generatedAt` in `meta.json` as expected, as the pipeline README says · 5340639
-- 2026-11-13 · 1 hidden items · 883 items hidden; pipeline loader + unknown-id check, search filter, "Show hidden items" toggle in the weapon picker; check, lint, 222 tests pass · HASH1
+- 2026-11-13 · 1 hidden items · 883 items hidden; pipeline loader + unknown-id check, search filter, "Show hidden items" toggle in the weapon picker; check, lint, 222 tests pass · 9cdd5ef
