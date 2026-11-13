@@ -1,4 +1,5 @@
 import type { Item, ScriptStmt } from '../src/data/types.ts';
+import { COMPUTED_BONUSES } from '../src/engine/bonuses.ts';
 import { parseScript } from './script/parser.ts';
 
 export const COVERAGE_FILE = 'docs/script-coverage.md';
@@ -11,24 +12,25 @@ function cell(text: string): string {
   return text.replace(/\|/g, '\\|').replace(/`/g, "'");
 }
 
-function collectBonusNames(statements: readonly ScriptStmt[], into: Set<string>): void {
+/** Collects `name/arity` of every bonus call, in both branches of each if. */
+function collectBonusKeys(statements: readonly ScriptStmt[], into: Set<string>): void {
   for (const statement of statements) {
-    if (statement.k === 'bonus') into.add(statement.name);
+    if (statement.k === 'bonus') into.add(`${statement.name}/${statement.args.length}`);
     else if (statement.k === 'if') {
-      collectBonusNames(statement.then, into);
-      collectBonusNames(statement.else, into);
+      collectBonusKeys(statement.then, into);
+      collectBonusKeys(statement.else, into);
     }
   }
 }
 
-/** Number of items whose parsed effects use each bonus name, most used first. */
+/** Number of items whose parsed effects use each bonus (`name/arity`), most used first. */
 export function bonusUsage(items: readonly Item[]): [string, number][] {
   const counts = new Map<string, number>();
   for (const item of items) {
     if (item.effects === null) continue;
-    const names = new Set<string>();
-    collectBonusNames(item.effects, names);
-    for (const name of names) counts.set(name, (counts.get(name) ?? 0) + 1);
+    const keys = new Set<string>();
+    collectBonusKeys(item.effects, keys);
+    for (const key of keys) counts.set(key, (counts.get(key) ?? 0) + 1);
   }
   return [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
@@ -88,7 +90,25 @@ export function coverageReport(
       );
     }
   }
-  lines.push('', '## Bonuses in parsed scripts', '', '| Bonus | Items |', '| --- | ---: |');
-  for (const [name, count] of bonusUsage(items)) lines.push(`| \`${name}\` | ${count} |`);
+  const usage = bonusUsage(items);
+  const computed = usage.filter(([key]) => COMPUTED_BONUSES.has(key));
+  lines.push(
+    '',
+    '## Bonuses in parsed scripts',
+    '',
+    'By name and number of values; computed bonuses change the status window',
+    'and auto attack, the others are stored and shown as "not modelled".',
+    '',
+    `${computed.length} of ${usage.length} bonuses are computed; ` +
+      `${usage.length - computed.length} are stored only.`,
+    '',
+    '| Bonus | Values | Items | Computed |',
+    '| --- | ---: | ---: | --- |',
+  );
+  for (const [key, count] of usage) {
+    const [name, arity] = key.split('/') as [string, string];
+    const isComputed = COMPUTED_BONUSES.has(key) ? 'yes' : '';
+    lines.push(`| \`${name}\` | ${arity} | ${count} | ${isComputed} |`);
+  }
   return `${lines.join('\n')}\n`;
 }

@@ -162,109 +162,123 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 
 ## Bonuses in parsed scripts
 
-| Bonus | Items |
-| --- | ---: |
-| `bMdef` | 207 |
-| `bInt` | 171 |
-| `bStr` | 130 |
-| `bDex` | 126 |
-| `bMatkRate` | 100 |
-| `bSubRace` | 93 |
-| `bAtkEle` | 89 |
-| `bAddRace` | 86 |
-| `bAgi` | 86 |
-| `bLuk` | 78 |
-| `bUnbreakableWeapon` | 75 |
-| `bSubEle` | 60 |
-| `bMaxHP` | 58 |
-| `bAutoSpell` | 56 |
-| `bVit` | 55 |
-| `bAspdRate` | 53 |
-| `bMaxSP` | 52 |
-| `bAddEff` | 50 |
-| `bCritical` | 48 |
-| `bResEff` | 46 |
-| `bAllStats` | 41 |
-| `bFlee` | 39 |
-| `bHit` | 39 |
-| `bAddClass` | 38 |
-| `bIgnoreDefRaceRate` | 32 |
-| `bAutoSpellWhenHit` | 30 |
-| `bBaseAtk` | 28 |
-| `bCastrate` | 25 |
-| `bMaxHPrate` | 24 |
-| `bSkillAtk` | 24 |
-| `bDef` | 22 |
-| `bAddMonsterDropItem` | 21 |
-| `bIgnoreDefRace` | 20 |
-| `bMaxSPrate` | 20 |
-| `bFlee2` | 17 |
-| `bSPrecovRate` | 16 |
-| `bUnbreakableHelm` | 16 |
-| `bAddEle` | 15 |
-| `bAddSize` | 15 |
-| `bAutoSpellOnSkill` | 14 |
-| `bExpAddRace` | 14 |
-| `bUseSPrate` | 14 |
-| `bAddEff2` | 9 |
-| `bBreakArmorRate` | 9 |
-| `bDelayrate` | 9 |
-| `bHealPower` | 9 |
-| `bHPrecovRate` | 9 |
-| `bDefEle` | 8 |
-| `bSPDrainValue` | 8 |
-| `bMagicAddRace` | 7 |
-| `bSpeedRate` | 7 |
-| `bSplashRange` | 7 |
-| `bBreakWeaponRate` | 6 |
-| `bComaRace` | 6 |
-| `bCritAtkRate` | 5 |
-| `bCriticalAddRace` | 5 |
-| `bDef2Rate` | 5 |
-| `bDefRate` | 5 |
-| `bIgnoreMdefRaceRate` | 5 |
-| `bLongAtkRate` | 5 |
-| `bSubClass` | 5 |
-| `bAddDamageClass` | 4 |
-| `bHPDrainRate` | 4 |
-| `bIgnoreDefClass` | 4 |
-| `bLongAtkDef` | 4 |
-| `bSPRegenRate` | 4 |
-| `bAddEffWhenHit` | 3 |
-| `bAddItemHealRate` | 3 |
-| `bHPGainValue` | 3 |
-| `bShortWeaponDamageReturn` | 3 |
-| `bAddDefMonster` | 2 |
-| `bAddMonsterIdDropItem` | 2 |
-| `bAddRace2` | 2 |
-| `bAddSkillBlow` | 2 |
-| `bDefRatioAtkClass` | 2 |
-| `bHPLossRate` | 2 |
-| `bHPRegenRate` | 2 |
-| `bMagicHPGainValue` | 2 |
-| `bMatk` | 2 |
-| `bNoKnockback` | 2 |
-| `bPerfectHitRate` | 2 |
-| `bSPDrainRate` | 2 |
-| `bSPGainRace` | 2 |
-| `bSPGainValue` | 2 |
-| `bSPLossRate` | 2 |
-| `bSPVanishRate` | 2 |
-| `bSubSize` | 2 |
-| `bUnbreakableArmor` | 2 |
-| `bUnbreakableShield` | 2 |
-| `bAddEffOnSkill` | 1 |
-| `bAspd` | 1 |
-| `bClassChange` | 1 |
-| `bComaClass` | 1 |
-| `bExpAddClass` | 1 |
-| `bGetZenyNum` | 1 |
-| `bHealPower2` | 1 |
-| `bHitRate` | 1 |
-| `bMagicSPGainValue` | 1 |
-| `bNoCastCancel` | 1 |
-| `bNoRegen` | 1 |
-| `bSPDrainValueRace` | 1 |
-| `bSpeedAddRate` | 1 |
-| `bSubRace2` | 1 |
-| `bUnbreakableGarment` | 1 |
+By name and number of values; computed bonuses change the status window
+and auto attack, the others are stored and shown as "not modelled".
+
+36 of 113 bonuses are computed; 77 are stored only.
+
+| Bonus | Values | Items | Computed |
+| --- | ---: | ---: | --- |
+| `bMdef` | 1 | 207 | yes |
+| `bInt` | 1 | 171 | yes |
+| `bStr` | 1 | 130 | yes |
+| `bDex` | 1 | 126 | yes |
+| `bMatkRate` | 1 | 100 |  |
+| `bSubRace` | 2 | 93 |  |
+| `bAtkEle` | 1 | 89 | yes |
+| `bAddRace` | 2 | 86 | yes |
+| `bAgi` | 1 | 86 | yes |
+| `bLuk` | 1 | 78 | yes |
+| `bUnbreakableWeapon` | 0 | 75 |  |
+| `bSubEle` | 2 | 60 |  |
+| `bMaxHP` | 1 | 58 | yes |
+| `bAutoSpell` | 3 | 55 |  |
+| `bVit` | 1 | 55 | yes |
+| `bAspdRate` | 1 | 53 | yes |
+| `bMaxSP` | 1 | 52 | yes |
+| `bCritical` | 1 | 48 | yes |
+| `bResEff` | 2 | 46 |  |
+| `bAddEff` | 2 | 41 |  |
+| `bAllStats` | 1 | 41 | yes |
+| `bFlee` | 1 | 39 | yes |
+| `bHit` | 1 | 39 | yes |
+| `bAddClass` | 2 | 38 | yes |
+| `bIgnoreDefRaceRate` | 2 | 32 | yes |
+| `bBaseAtk` | 1 | 28 | yes |
+| `bMaxHPrate` | 1 | 24 | yes |
+| `bSkillAtk` | 2 | 24 |  |
+| `bDef` | 1 | 22 | yes |
+| `bAutoSpellWhenHit` | 3 | 20 |  |
+| `bCastrate` | 1 | 20 |  |
+| `bIgnoreDefRace` | 1 | 20 | yes |
+| `bMaxSPrate` | 1 | 20 | yes |
+| `bFlee2` | 1 | 17 | yes |
+| `bSPrecovRate` | 1 | 16 |  |
+| `bAddEle` | 2 | 15 | yes |
+| `bAddMonsterDropItem` | 2 | 15 |  |
+| `bAddSize` | 2 | 15 | yes |
+| `bExpAddRace` | 2 | 14 |  |
+| `bUseSPrate` | 1 | 14 |  |
+| `bAutoSpellOnSkill` | 4 | 12 |  |
+| `bUnbreakableHelm` | 0 | 12 |  |
+| `bAddEff` | 3 | 9 |  |
+| `bAddEff2` | 2 | 9 |  |
+| `bBreakArmorRate` | 1 | 9 |  |
+| `bDelayrate` | 1 | 9 |  |
+| `bHealPower` | 1 | 9 |  |
+| `bHPrecovRate` | 1 | 9 |  |
+| `bAutoSpellWhenHit` | 4 | 8 |  |
+| `bDefEle` | 1 | 8 |  |
+| `bSPDrainValue` | 1 | 8 |  |
+| `bMagicAddRace` | 2 | 7 |  |
+| `bSpeedRate` | 1 | 7 |  |
+| `bSplashRange` | 1 | 7 |  |
+| `bAddMonsterDropItem` | 3 | 6 |  |
+| `bBreakWeaponRate` | 1 | 6 |  |
+| `bComaRace` | 2 | 6 |  |
+| `bCastrate` | 2 | 5 |  |
+| `bCritAtkRate` | 1 | 5 | yes |
+| `bCriticalAddRace` | 2 | 5 | yes |
+| `bDef2Rate` | 1 | 5 |  |
+| `bDefRate` | 1 | 5 | yes |
+| `bIgnoreMdefRaceRate` | 2 | 5 |  |
+| `bLongAtkRate` | 1 | 5 | yes |
+| `bSubClass` | 2 | 5 |  |
+| `bAddDamageClass` | 2 | 4 |  |
+| `bAutoSpellWhenHit` | 5 | 4 |  |
+| `bHPDrainRate` | 2 | 4 |  |
+| `bIgnoreDefClass` | 1 | 4 | yes |
+| `bLongAtkDef` | 1 | 4 |  |
+| `bSPRegenRate` | 2 | 4 |  |
+| `bUnbreakableHelm` | 1 | 4 |  |
+| `bAddEffWhenHit` | 2 | 3 |  |
+| `bHPGainValue` | 1 | 3 |  |
+| `bShortWeaponDamageReturn` | 1 | 3 |  |
+| `bAddDefMonster` | 2 | 2 |  |
+| `bAddItemHealRate` | 2 | 2 |  |
+| `bAddMonsterIdDropItem` | 3 | 2 |  |
+| `bAddRace2` | 2 | 2 | yes |
+| `bAddSkillBlow` | 2 | 2 |  |
+| `bAutoSpell` | 4 | 2 |  |
+| `bAutoSpellOnSkill` | 5 | 2 |  |
+| `bDefRatioAtkClass` | 1 | 2 | yes |
+| `bHPLossRate` | 2 | 2 |  |
+| `bHPRegenRate` | 2 | 2 |  |
+| `bMagicHPGainValue` | 1 | 2 |  |
+| `bMatk` | 1 | 2 |  |
+| `bNoKnockback` | 0 | 2 |  |
+| `bPerfectHitRate` | 1 | 2 | yes |
+| `bSPDrainRate` | 2 | 2 |  |
+| `bSPGainRace` | 2 | 2 |  |
+| `bSPGainValue` | 1 | 2 |  |
+| `bSPLossRate` | 2 | 2 |  |
+| `bSPVanishRate` | 2 | 2 |  |
+| `bSubSize` | 2 | 2 |  |
+| `bUnbreakableArmor` | 0 | 2 |  |
+| `bUnbreakableShield` | 0 | 2 |  |
+| `bAddEffOnSkill` | 3 | 1 |  |
+| `bAddItemHealRate` | 1 | 1 |  |
+| `bAspd` | 1 | 1 | yes |
+| `bClassChange` | 1 | 1 |  |
+| `bComaClass` | 2 | 1 |  |
+| `bExpAddClass` | 2 | 1 |  |
+| `bGetZenyNum` | 2 | 1 |  |
+| `bHealPower2` | 1 | 1 |  |
+| `bHitRate` | 1 | 1 | yes |
+| `bMagicSPGainValue` | 1 | 1 |  |
+| `bNoCastCancel` | 0 | 1 |  |
+| `bNoRegen` | 1 | 1 |  |
+| `bSPDrainValueRace` | 2 | 1 |  |
+| `bSpeedAddRate` | 1 | 1 |  |
+| `bSubRace2` | 2 | 1 |  |
+| `bUnbreakableGarment` | 0 | 1 |  |

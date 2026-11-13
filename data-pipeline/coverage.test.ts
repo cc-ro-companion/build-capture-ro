@@ -43,8 +43,8 @@ const scripts = new Map([
 describe('bonusUsage', () => {
   it('counts items per bonus name, including if branches, once per item', () => {
     expect(bonusUsage(items)).toEqual([
-      ['bStr', 2],
-      ['bAgi', 1],
+      ['bStr/0', 2],
+      ['bAgi/0', 1],
     ]);
   });
 });
@@ -66,7 +66,9 @@ describe('coverageReport', () => {
     );
   });
 
-  it('ends with the bonus usage table', () => {
-    expect(report).toContain('| `bStr` | 2 |');
+  it('ends with the bonus usage table, marking computed bonuses by arity', () => {
+    // bonus bStr; without a value is not the computed bStr/1.
+    expect(report).toContain('| `bStr` | 0 | 2 |  |');
+    expect(report).toContain('0 of 2 bonuses are computed; 2 are stored only.');
   });
 });
