@@ -196,7 +196,7 @@ ccRO.
    hash/date, dirty check) and `generate.ts` that runs with no steps yet.
    Check: verification passes; unit tests for the loader against fixtures;
    `pnpm data` prints the rAthena commit.
-2. [ ] Override layer: `overrides.ts` with the merge rules, `data-overrides/`
+2. [x] Override layer: `overrides.ts` with the merge rules, `data-overrides/`
    files (`meta.yml` with a label, empty `jobs.yml`, `items.yml`,
    `monsters.yml`), format documented in `data-overrides/README.md`.
    Check: one unit test per rule; verification passes.
@@ -225,4 +225,6 @@ ccRO.
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · 1 generator skeleton (also added `@types/node@22` and
   `"node"` to `types`, plus `erasableSyntaxOnly`) · check/lint/test (12)/build
-  pass, `pnpm data` prints commit 7f080871 · see git log
+  pass, `pnpm data` prints commit 7f080871 · 9f42941
+- 2026-11-13 · 2 override layer (jobs: patch only, no add/remove, since the
+  job list is fixed) · check/lint/test (23)/build pass · next commit

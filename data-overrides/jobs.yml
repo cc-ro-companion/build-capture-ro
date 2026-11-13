@@ -1,0 +1,3 @@
+# ccRO differences to rAthena's db/pre-re job_stats.yml, job_aspd.yml and
+# job_exp.yml, per job. See README.md.
+Body: []

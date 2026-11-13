@@ -1,0 +1,32 @@
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 1101
+    AegisName: Sword
+    Name: Sword
+    Type: Weapon
+    SubType: 1hSword
+    Attack: 25
+    Slots: 3
+    Jobs:
+      Novice: true
+      Swordman: true
+    Flags:
+      BuyingStore: true
+  - Id: 1102
+    AegisName: Sword_
+    Name: Sword
+    Type: Weapon
+    SubType: 1hSword
+    Attack: 25
+    Jobs:
+      Novice: true
+      Swordman: true
+  - Id: 1103
+    AegisName: Sword__
+    Name: Sword
+    Type: Weapon
+    SubType: 1hSword
+    Attack: 25

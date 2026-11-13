@@ -1,0 +1,18 @@
+# Patch, nested map merge, add and remove in one file.
+Body:
+  - Id: 1101
+    Attack: 30
+    Flags:
+      DeadBranch: true
+  - Id: 1102
+    Jobs:
+      Novice: false
+      Thief: true
+  - Id: 990001
+    AegisName: Example_Sword
+    Name: Example Sword
+    Type: Weapon
+    SubType: 1hSword
+    Attack: 40
+Remove:
+  - 1103

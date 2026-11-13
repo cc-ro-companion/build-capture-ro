@@ -1,0 +1,3 @@
+# Human-readable data version shown in the app. Bump it when the data changes
+# in a way users should notice; the content hash changes on its own.
+Label: 'ccRO 2026-11'
