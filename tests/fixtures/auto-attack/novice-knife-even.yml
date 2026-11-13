@@ -1,0 +1,32 @@
+name: Novice 1/1 Knife, even stats, plain dummy
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 0 # Novice
+  baseLevel: 1
+  jobLevel: 1
+  stats: { str: 7, agi: 5, vit: 5, int: 1, dex: 7, luk: 5 }
+  weapon: 1201 # Knife
+  dummies:
+    - name: Plain dummy
+      level: 1
+      def: 1
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 1
+      int: 1
+      dex: 1
+      luk: 1
+      size: medium
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 }
+observed:
+  status: { atk: [26, 0], hit: 8, flee: 6, crit: 2, aspd: 136 }
+  # 15 hits sampled.
+  normal: { min: 13, max: 18, rangeComplete: false }
+notes: >-
+  Short session. Dummy DPS windows: 9/12/12/2; missed twice in a row at the end.

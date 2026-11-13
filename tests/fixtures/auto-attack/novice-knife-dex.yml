@@ -1,0 +1,37 @@
+name: Novice 1/1 Knife, DEX 20, plain dummy
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 0 # Novice
+  baseLevel: 1
+  jobLevel: 1
+  stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 20, luk: 1 }
+  weapon: 1201 # Knife
+  dummies:
+    - name: Plain dummy
+      level: 1
+      def: 1
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 1
+      int: 1
+      dex: 1
+      luk: 1
+      size: medium
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 }
+observed:
+  status: { atk: [22, 0], hit: 21, flee: 2, crit: 1, aspd: 136 }
+  # First session 15 hits; long session (2 min) 92 hits, 2 of them crits.
+  normal: { min: 15, max: 15, rangeComplete: true }
+  crit: { min: 17, max: 17 }
+  # Long session, 2 min.
+  dps:
+    windows:
+      [6, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 12, 12, 12, 12, 12, 9, 12, 12, 9, 12, 12, 12]
+notes: >-
+  DEX at least the Knife ATK, so every normal hit is the same. First session DPS windows: 9/12/12/9.

@@ -59,7 +59,7 @@ validation session at ccRO's training dummy, recorded as test fixtures.
 | Training dummy | ccRO's dummy is configurable per player, so builds hold their own **dummies**: up to 20 per build, each with a name (1–30 characters, default "Dummy N") and the settings the game offers: level 1–99; DEF, MDEF, STR, AGI, VIT, INT, DEX, LUK 1–999; size; race (Formless, Undead, Brute, Plant, Insect, Fish, Demon, Demihuman, Angel, Dragon); element (the 10 elements) with element level 1–4. A dummy can be added, edited, renamed, removed and selected as the target instead of a monster. Engine-wise it becomes a `Monster` record with class `normal`, no modes and no race groups; HP is not configurable and shown as "–" | Maintainer: every stat is configurable in game except HP and the boss flag, which can be neither seen nor changed. Several dummies per build let one build be tested against different setups. |
 | Dummy normalize | Out-of-range numbers are clamped and unknown size/race/element values replaced by the default (medium, Formless, Neutral), each with a warning; an empty or too long name is replaced or cut with a warning; dummies beyond 20 are dropped with a warning; a target dummy index that does not exist clears the target with a warning | Same rule as for ids: bad content must not make a build unreadable. |
 | Fixture format | YAML in `tests/fixtures/auto-attack/`, one file per validated character | Comments for in-game notes; `yaml` is already a dev dependency. |
-| Fixture comparison | Status window values must match exactly; observed min/max damage must lie inside the computed range (observations are a sample) and, if marked `rangeComplete: true`, equal it; observed crit damage must equal the computed crit range bounds it falls in; DPS within ±5 % | The in-game sample cannot prove extremes; the DPS meter averages over a time window. |
+| Fixture comparison | Status window values must match exactly; observed min/max damage must lie inside the computed range (observations are a sample) and, if marked `rangeComplete: true`, equal it; observed crit damage must equal the computed crit range bounds it falls in; DPS: the training dummy's 5-second windows from one session, first and last dropped as partial, mean + 0.4 (the dummy prints damage ÷ 5 rounded down) within ±5 %, a wider per-fixture tolerance only with a reason | The in-game sample cannot prove extremes; short DPS windows swing by 20 % and more, so DPS needs a session of 2 minutes or longer. |
 
 ## Design
 
@@ -145,7 +145,8 @@ observed:
   status: { atk: [n, n], hit: n, flee: n, crit: n, aspd: n }
   normal: { min: n, max: n, rangeComplete: false }
   crit: { min: n, max: n }      # optional
-  dps: n                        # optional, from the DPS meter
+  dps:                          # optional, the dummy's windows from one session
+    windows: [n, n, n]
 notes: free text
 ```
 
@@ -255,6 +256,22 @@ and hand the numbers over for fixtures.
 
 ## Validation findings
 <!-- deviations between engine and ccRO found in task 10 -->
+No formula deviations: all 8 validated characters match the status window
+exactly, every observed hit lies inside the engine's range, crits equal the
+engine's crit damage, and the damage histograms fit the engine's
+distribution. Long-session DPS (2–5 min) is within ±2.1 % after the
+rounding correction.
+- **Training dummy DPS rounds down.** The dummy prints the 5-second damage ÷ 5
+  without decimals; raw means were below the engine in 4 of 5 sessions by
+  0.2–0.5 DPS. Handled in the fixture rule (+0.4). Not a formula deviation.
+- **Crit rate at LUK 1 looks high (open).** The DEX Novice and both Swordman
+  long sessions show 9 crits where the engine expects about 3.9 (CRIT 1,
+  critRate 13 − 2 × dummy LUK 1 = 1.1 %); chance alone gives this about
+  1.6 % of the time. LUK 20 fits (18 crits vs 17.4). Follow-up: a 10-minute
+  Swordman session on the plain dummy (maintainer, pending).
+- **Blade top roll (closed).** The long Swordman sessions never showed the
+  highest normal hit (80 plain, 42 armored), but the first session did record
+  80 on the plain dummy, so the roll exists; the armored gap is chance (~3 %).
 
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->

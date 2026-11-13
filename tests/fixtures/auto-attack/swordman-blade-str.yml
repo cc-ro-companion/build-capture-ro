@@ -1,0 +1,62 @@
+name: Swordman 12/1 Blade, STR 25, plain dummy
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 1 # Swordman
+  baseLevel: 12
+  jobLevel: 1
+  stats: { str: 25, agi: 1, vit: 1, int: 1, dex: 9, luk: 1 }
+  weapon: 1108 # Blade
+  dummies:
+    - name: Plain dummy
+      level: 1
+      def: 1
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 1
+      int: 1
+      dex: 1
+      luk: 1
+      size: medium
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 }
+observed:
+  status: { atk: [83, 0], hit: 21, flee: 13, crit: 1, aspd: 145 }
+  # First session 15 hits; long session (2 min) 111 hits, 3 of them crits.
+  normal: { min: 37, max: 80, rangeComplete: false }
+  crit: { min: 83, max: 83 }
+  # Long session, 2 min.
+  dps:
+    windows:
+      [
+        43,
+        50,
+        58,
+        53,
+        60,
+        55,
+        54,
+        54,
+        47,
+        48,
+        56,
+        53,
+        52,
+        57,
+        59,
+        54,
+        50,
+        51,
+        55,
+        46,
+        69,
+        42,
+        58,
+        50,
+      ]
+notes: >-
+  Blade is the weapon received at the job change. First session DPS windows: 50/61/55/28.

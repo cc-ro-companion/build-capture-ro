@@ -1,0 +1,63 @@
+name: Swordman 12/1 Blade, STR 25, armored dummy
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 1 # Swordman
+  baseLevel: 12
+  jobLevel: 1
+  stats: { str: 25, agi: 1, vit: 1, int: 1, dex: 9, luk: 1 }
+  weapon: 1108 # Blade
+  dummies:
+    - name: Armored dummy
+      level: 1
+      def: 10
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 20
+      int: 1
+      dex: 1
+      luk: 1
+      size: large
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 }
+observed:
+  status: { atk: [83, 0], hit: 21, flee: 13, crit: 1, aspd: 145 }
+  # First session 16 hits; long sessions (one interrupted, one 2 min) 157 hits, 4 of them crits.
+  normal: { min: 12, max: 41, rangeComplete: false }
+  crit: { min: 69, max: 69 }
+  # The 2 min session after the "armored" chat marker; the interrupted one is left out.
+  dps:
+    windows:
+      [
+        2,
+        24,
+        23,
+        31,
+        25,
+        25,
+        33,
+        14,
+        18,
+        22,
+        21,
+        23,
+        21,
+        26,
+        29,
+        25,
+        28,
+        28,
+        12,
+        30,
+        28,
+        19,
+        26,
+        21,
+        29,
+      ]
+notes: >-
+  Hits from both long sessions count for the range; same character and dummy. First session DPS windows: 25/19/26/15.

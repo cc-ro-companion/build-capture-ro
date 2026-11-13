@@ -1,0 +1,99 @@
+name: Novice 1/1 Knife, LUK 20, plain dummy
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 0 # Novice
+  baseLevel: 1
+  jobLevel: 1
+  stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 20 }
+  weapon: 1201 # Knife
+  dummies:
+    - name: Plain dummy
+      level: 1
+      def: 1
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 1
+      int: 1
+      dex: 1
+      luk: 1
+      size: medium
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 }
+observed:
+  status: { atk: [22, 0], hit: 2, flee: 2, crit: 7, aspd: 135 }
+  # First session 30 hits; long sessions 5 min (185 hits) and 1 min (36 hits).
+  normal: { min: 3, max: 15, rangeComplete: true }
+  crit: { min: 17, max: 17 }
+  # Long session, 5 min.
+  dps:
+    windows:
+      [
+        5,
+        5,
+        3,
+        4,
+        6,
+        3,
+        11,
+        8,
+        4,
+        3,
+        4,
+        3,
+        4,
+        5,
+        5,
+        6,
+        8,
+        9,
+        5,
+        7,
+        5,
+        9,
+        6,
+        4,
+        6,
+        3,
+        4,
+        6,
+        4,
+        7,
+        9,
+        9,
+        8,
+        4,
+        9,
+        9,
+        5,
+        5,
+        2,
+        3,
+        6,
+        4,
+        4,
+        7,
+        5,
+        8,
+        3,
+        3,
+        7,
+        2,
+        6,
+        9,
+        4,
+        7,
+        7,
+        5,
+        1,
+        9,
+        7,
+        6,
+        3,
+      ]
+notes: >-
+  Crits: 2 in the first session, 18 in the 5 min session, 1 in the 1 min session. The 1 min session is too short for the DPS check; its windows: 1/2/5/4/5/9/4/5/10/7/2/5/4. First session DPS windows: 2/4/5/5/7/6/5/6.

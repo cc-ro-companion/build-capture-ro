@@ -1,0 +1,32 @@
+name: Novice 1/1 bare hands, STR 20, plain dummy
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 0 # Novice
+  baseLevel: 1
+  jobLevel: 1
+  stats: { str: 20, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 }
+  weapon: null # bare hands
+  dummies:
+    - name: Plain dummy
+      level: 1
+      def: 1
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 1
+      int: 1
+      dex: 1
+      luk: 1
+      size: medium
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 }
+observed:
+  status: { atk: [24, 0], hit: 2, flee: 2, crit: 1, aspd: 150 }
+  # 20 hits sampled, all 22.
+  normal: { min: 22, max: 22, rangeComplete: true }
+notes: >-
+  Dummy DPS windows: 22 (one hit per second, every hit 22).

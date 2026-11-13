@@ -1,0 +1,826 @@
+Phase 3, task 10: long DPS runs
+================================
+
+Paste the chat lines below the matching marker, as they come out of the
+client. No need to clean them up or reformat anything; timestamps and other
+lines can stay in.
+
+- DUMMY CHAT: the dummy's "I've taken x DPS in last 5 seconds." messages.
+- BATTLE CHAT: the damage lines for the same session.
+
+Same character, stats, weapon and dummy settings as in
+phase-3-validation-runs.yml. If anything differed, write it on the NOTES line.
+
+
+##### SESSION 1: novice-knife-dex, plain dummy, 2 min #####
+NOTES:
+
+--- DUMMY CHAT ---
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+
+--- BATTLE CHAT ---
+[Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+
+
+
+##### SESSION 2: novice-knife-luk, plain dummy, 5 min #####
+NOTES:
+
+--- DUMMY CHAT ---
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 11 DPS in last 5 seconds.
+Punching Bag : I've taken 8 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 8 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 8 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 2 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 8 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 2 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 1 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 6 DPS in last 5 seconds.
+Punching Bag : I've taken 3 DPS in last 5 seconds.
+
+--- BATTLE CHAT ---
+[Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '15' damage points.
+
+
+##### SESSION 3: novice-knife-luk, plain dummy, 1 min #####
+NOTES:
+
+--- DUMMY CHAT ---
+Punching Bag : I've taken 1 DPS in last 5 seconds.
+Punching Bag : I've taken 2 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 9 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 10 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 2 DPS in last 5 seconds.
+Punching Bag : I've taken 5 DPS in last 5 seconds.
+Punching Bag : I've taken 4 DPS in last 5 seconds.
+
+
+--- BATTLE CHAT ---
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '8' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '10' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '6' damage points.
+ [Punching Bag] receives '11' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '5' damage points.
+ [Punching Bag] receives '7' damage points.
+ [Punching Bag] receives '4' damage points.
+ [Punching Bag] receives '3' damage points.
+ [Punching Bag] receives '9' damage points.
+ [Punching Bag] receives '8' damage points.
+
+
+##### SESSION 4: swordman-sword-str, plain dummy, 2 min #####
+NOTES:
+
+--- DUMMY CHAT ---
+Punching Bag : I've taken 43 DPS in last 5 seconds.
+Punching Bag : I've taken 50 DPS in last 5 seconds.
+Punching Bag : I've taken 58 DPS in last 5 seconds.
+Punching Bag : I've taken 53 DPS in last 5 seconds.
+Punching Bag : I've taken 60 DPS in last 5 seconds.
+Punching Bag : I've taken 55 DPS in last 5 seconds.
+Punching Bag : I've taken 54 DPS in last 5 seconds.
+Punching Bag : I've taken 54 DPS in last 5 seconds.
+Punching Bag : I've taken 47 DPS in last 5 seconds.
+Punching Bag : I've taken 48 DPS in last 5 seconds.
+Punching Bag : I've taken 56 DPS in last 5 seconds.
+Punching Bag : I've taken 53 DPS in last 5 seconds.
+Punching Bag : I've taken 52 DPS in last 5 seconds.
+Punching Bag : I've taken 57 DPS in last 5 seconds.
+Punching Bag : I've taken 59 DPS in last 5 seconds.
+Punching Bag : I've taken 54 DPS in last 5 seconds.
+Punching Bag : I've taken 50 DPS in last 5 seconds.
+Punching Bag : I've taken 51 DPS in last 5 seconds.
+Punching Bag : I've taken 55 DPS in last 5 seconds.
+Punching Bag : I've taken 46 DPS in last 5 seconds.
+Punching Bag : I've taken 69 DPS in last 5 seconds.
+Punching Bag : I've taken 42 DPS in last 5 seconds.
+Punching Bag : I've taken 58 DPS in last 5 seconds.
+Punching Bag : I've taken 50 DPS in last 5 seconds.
+
+
+--- BATTLE CHAT ---
+[Punching Bag] receives '66' damage points.
+ [Punching Bag] receives '79' damage points.
+ [Punching Bag] receives '73' damage points.
+ [Punching Bag] receives '45' damage points.
+ [Punching Bag] receives '83' damage points.
+ [Punching Bag] receives '74' damage points.
+ [Punching Bag] receives '49' damage points.
+ [Punching Bag] receives '74' damage points.
+ [Punching Bag] receives '83' damage points.
+ [Punching Bag] receives '41' damage points.
+ [Punching Bag] receives '58' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '71' damage points.
+ [Punching Bag] receives '65' damage points.
+ [Punching Bag] receives '79' damage points.
+ [Punching Bag] receives '53' damage points.
+ [Punching Bag] receives '59' damage points.
+ [Punching Bag] receives '44' damage points.
+ [Punching Bag] receives '48' damage points.
+ [Punching Bag] receives '77' damage points.
+ [Punching Bag] receives '76' damage points.
+ [Punching Bag] receives '70' damage points.
+ [Punching Bag] receives '47' damage points.
+ [Punching Bag] receives '64' damage points.
+ [Punching Bag] receives '59' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '76' damage points.
+ [Punching Bag] receives '45' damage points.
+ [Punching Bag] receives '74' damage points.
+ [Punching Bag] receives '78' damage points.
+ [Punching Bag] receives '58' damage points.
+ [Punching Bag] receives '68' damage points.
+ [Punching Bag] receives '44' damage points.
+ [Punching Bag] receives '52' damage points.
+ [Punching Bag] receives '51' damage points.
+ [Punching Bag] receives '45' damage points.
+ [Punching Bag] receives '67' damage points.
+ [Punching Bag] receives '72' damage points.
+ [Punching Bag] receives '52' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '49' damage points.
+ [Punching Bag] receives '54' damage points.
+ [Punching Bag] receives '63' damage points.
+ [Punching Bag] receives '66' damage points.
+ [Punching Bag] receives '68' damage points.
+ [Punching Bag] receives '44' damage points.
+ [Punching Bag] receives '67' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '65' damage points.
+ [Punching Bag] receives '71' damage points.
+ [Punching Bag] receives '58' damage points.
+ [Punching Bag] receives '75' damage points.
+ [Punching Bag] receives '54' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '76' damage points.
+ [Punching Bag] receives '43' damage points.
+ [Punching Bag] receives '49' damage points.
+ [Punching Bag] receives '71' damage points.
+ [Punching Bag] receives '77' damage points.
+ [Punching Bag] receives '72' damage points.
+ [Punching Bag] receives '67' damage points.
+ [Punching Bag] receives '73' damage points.
+ [Punching Bag] receives '83' damage points.
+ [Punching Bag] receives '56' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '48' damage points.
+ [Punching Bag] receives '41' damage points.
+ [Punching Bag] receives '71' damage points.
+ [Punching Bag] receives '40' damage points.
+ [Punching Bag] receives '55' damage points.
+ [Punching Bag] receives '67' damage points.
+ [Punching Bag] receives '77' damage points.
+ [Punching Bag] receives '60' damage points.
+ [Punching Bag] receives '56' damage points.
+ [Punching Bag] receives '59' damage points.
+ [Punching Bag] receives '42' damage points.
+ [Punching Bag] receives '55' damage points.
+ [Punching Bag] receives '69' damage points.
+ [Punching Bag] receives '49' damage points.
+ [Punching Bag] receives '44' damage points.
+ [Punching Bag] receives '68' damage points.
+ [Punching Bag] receives '67' damage points.
+ [Punching Bag] receives '49' damage points.
+ [Punching Bag] receives '54' damage points.
+ [Punching Bag] receives '41' damage points.
+ [Punching Bag] receives '71' damage points.
+ [Punching Bag] receives '52' damage points.
+ [Punching Bag] receives '50' damage points.
+ [Punching Bag] receives '61' damage points.
+ [Punching Bag] receives '75' damage points.
+ [Punching Bag] receives '46' damage points.
+ [Punching Bag] receives '78' damage points.
+ [Punching Bag] receives '72' damage points.
+ [Punching Bag] receives '78' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '42' damage points.
+ [Punching Bag] receives '57' damage points.
+ [Punching Bag] receives '77' damage points.
+ [Punching Bag] receives '65' damage points.
+ [Punching Bag] receives '64' damage points.
+ [Punching Bag] receives '48' damage points.
+ [Punching Bag] receives '66' damage points.
+ [Punching Bag] receives '48' damage points.
+ [Punching Bag] receives '63' damage points.
+ [Punching Bag] receives '46' damage points.
+ [Punching Bag] receives '48' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '58' damage points.
+ [Punching Bag] receives '77' damage points.
+ [Punching Bag] receives '74' damage points.
+
+
+
+##### SESSION 5: swordman-sword-armored, armored dummy, 2 min #####
+NOTES:
+
+--- DUMMY CHAT ---
+Punching Bag : I've taken 43 DPS in last 5 seconds.
+Punching Bag : I've taken 50 DPS in last 5 seconds.
+Punching Bag : I've taken 58 DPS in last 5 seconds.
+Punching Bag : I've taken 53 DPS in last 5 seconds.
+Punching Bag : I've taken 60 DPS in last 5 seconds.
+Punching Bag : I've taken 55 DPS in last 5 seconds.
+Punching Bag : I've taken 54 DPS in last 5 seconds.
+Punching Bag : I've taken 54 DPS in last 5 seconds.
+Punching Bag : I've taken 47 DPS in last 5 seconds.
+Punching Bag : I've taken 48 DPS in last 5 seconds.
+Punching Bag : I've taken 56 DPS in last 5 seconds.
+Punching Bag : I've taken 53 DPS in last 5 seconds.
+Punching Bag : I've taken 52 DPS in last 5 seconds.
+Punching Bag : I've taken 57 DPS in last 5 seconds.
+Punching Bag : I've taken 59 DPS in last 5 seconds.
+Punching Bag : I've taken 54 DPS in last 5 seconds.
+Punching Bag : I've taken 50 DPS in last 5 seconds.
+Punching Bag : I've taken 51 DPS in last 5 seconds.
+Punching Bag : I've taken 55 DPS in last 5 seconds.
+Punching Bag : I've taken 46 DPS in last 5 seconds.
+Punching Bag : I've taken 69 DPS in last 5 seconds.
+Punching Bag : I've taken 42 DPS in last 5 seconds.
+Punching Bag : I've taken 58 DPS in last 5 seconds.
+Punching Bag : I've taken 50 DPS in last 5 seconds.
+F:\Spiele\ccRO\Chat\Chat_Chat_008.txt is Saved.
+F:\Spiele\ccRO\Chat\Chat_NewTab_2_008.txt is Saved.
+Punching Bag : I've taken 30 DPS in last 5 seconds.
+Punching Bag : I've taken 7 DPS in last 5 seconds.
+Punching Bag : I've taken 23 DPS in last 5 seconds.
+Punching Bag : I've taken 29 DPS in last 5 seconds.
+Punching Bag : I've taken 22 DPS in last 5 seconds.
+Punching Bag : I've taken 32 DPS in last 5 seconds.
+Punching Bag : I've taken 24 DPS in last 5 seconds.
+Punching Bag : I've taken 26 DPS in last 5 seconds.
+Punching Bag : I've taken 26 DPS in last 5 seconds.
+Punching Bag : I've taken 23 DPS in last 5 seconds.
+Punching Bag : I've taken 36 DPS in last 5 seconds.
+Punching Bag : I've taken 31 DPS in last 5 seconds.
+Punching Bag : I've taken 26 DPS in last 5 seconds.
+PlannerTeaser : armored
+Punching Bag : I've taken 2 DPS in last 5 seconds.
+Punching Bag : I've taken 24 DPS in last 5 seconds.
+Punching Bag : I've taken 23 DPS in last 5 seconds.
+Punching Bag : I've taken 31 DPS in last 5 seconds.
+Punching Bag : I've taken 25 DPS in last 5 seconds.
+Punching Bag : I've taken 25 DPS in last 5 seconds.
+Punching Bag : I've taken 33 DPS in last 5 seconds.
+Punching Bag : I've taken 14 DPS in last 5 seconds.
+Punching Bag : I've taken 18 DPS in last 5 seconds.
+Punching Bag : I've taken 22 DPS in last 5 seconds.
+Punching Bag : I've taken 21 DPS in last 5 seconds.
+Punching Bag : I've taken 23 DPS in last 5 seconds.
+Punching Bag : I've taken 21 DPS in last 5 seconds.
+Punching Bag : I've taken 26 DPS in last 5 seconds.
+Punching Bag : I've taken 29 DPS in last 5 seconds.
+Punching Bag : I've taken 25 DPS in last 5 seconds.
+Punching Bag : I've taken 28 DPS in last 5 seconds.
+Punching Bag : I've taken 28 DPS in last 5 seconds.
+Punching Bag : I've taken 12 DPS in last 5 seconds.
+Punching Bag : I've taken 30 DPS in last 5 seconds.
+Punching Bag : I've taken 28 DPS in last 5 seconds.
+Punching Bag : I've taken 19 DPS in last 5 seconds.
+Punching Bag : I've taken 26 DPS in last 5 seconds.
+Punching Bag : I've taken 21 DPS in last 5 seconds.
+Punching Bag : I've taken 29 DPS in last 5 seconds.
+
+
+--- BATTLE CHAT ---
+ [Punching Bag] receives '40' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '23' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '40' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '18' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '69' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '32' damage points.
+ [Punching Bag] receives '33' damage points.
+ [Punching Bag] receives '69' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '18' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '26' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '23' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '28' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '69' damage points.
+ [Punching Bag] receives '69' damage points.
+ [Punching Bag] receives '28' damage points.
+ [Punching Bag] receives '32' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '30' damage points.
+ [Punching Bag] receives '27' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '18' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '41' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '22' damage points.
+ [Punching Bag] receives '23' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '41' damage points.
+ [Punching Bag] receives '19' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '30' damage points.
+ [Punching Bag] receives '35' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '24' damage points.
+ [Punching Bag] receives '13' damage points.
+ [Punching Bag] receives '23' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '21' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '14' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '28' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '27' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '29' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '17' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '22' damage points.
+ [Punching Bag] receives '22' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '33' damage points.
+ [Punching Bag] receives '24' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '29' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '29' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '19' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '29' damage points.
+ [Punching Bag] receives '41' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '35' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '30' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '35' damage points.
+ [Punching Bag] receives '28' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '20' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '25' damage points.
+ [Punching Bag] receives '31' damage points.
+ [Punching Bag] receives '40' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '21' damage points.
+ [Punching Bag] receives '37' damage points.
+ [Punching Bag] receives '39' damage points.
+ [Punching Bag] receives '28' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '27' damage points.
+ [Punching Bag] receives '33' damage points.
+ [Punching Bag] receives '12' damage points.
+ [Punching Bag] receives '23' damage points.
+ [Punching Bag] receives '40' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '15' damage points.
+ [Punching Bag] receives '28' damage points.
+ [Punching Bag] receives '35' damage points.
+ [Punching Bag] receives '16' damage points.
+ [Punching Bag] receives '21' damage points.
+ [Punching Bag] receives '34' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '36' damage points.
+ [Punching Bag] receives '38' damage points.
+ [Punching Bag] receives '39' damage points.
+

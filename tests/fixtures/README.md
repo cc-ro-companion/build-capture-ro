@@ -43,7 +43,9 @@ observed:
   status: { atk: [n, n], hit: n, flee: n, crit: n, aspd: n }
   normal: { min: n, max: n, rangeComplete: false }
   crit: { min: n, max: n } # optional
-  dps: n # optional, from the DPS meter
+  dps: # optional, from one uninterrupted session of 2 minutes or more
+    windows: [n, n, n] # every "I've taken x DPS in last 5 seconds." value, in order
+    # tolerance: 0.1 # only with toleranceReason
 notes: free text, e.g. how many hits were sampled
 ```
 
@@ -54,8 +56,13 @@ How the numbers are compared ([`compare.ts`](compare.ts)):
 | `status` | ATK (both numbers), HIT, FLEE (without perfect dodge), CRIT and ASPD as shown in the status window must match exactly. |
 | `normal` | The lowest and highest normal hit seen must lie inside the engine's range. With `rangeComplete: true` they must equal it. |
 | `crit` | Must equal the engine's crit range. |
-| `dps` | Within ±5 % of the engine's DPS. |
+| `dps` | The first and last window are dropped as partial; the mean of the rest plus 0.4 (the dummy prints damage ÷ 5 rounded down) must be within ±5 % of the engine's DPS, or within `tolerance` when the fixture gives a `toleranceReason`. |
 
 The build must be valid with the current data (no normalize warnings) and
 must have a target, normally the training dummy as configured in game. `synthetic: true` marks a fixture that holds engine
 output rather than game observations; it only tests the runner.
+
+The fixtures from the first validation session (2026-11-13) come from the
+in-game notes in `docs/phase-3-validation-runs.yml` and the chat logs in
+`docs/phase-3-validation-long-runs.txt`. Hit counts and DPS windows of
+short sessions are kept in each fixture's notes.

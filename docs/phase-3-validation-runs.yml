@@ -1,0 +1,146 @@
+# Phase 3, task 10: validation runs. Fill every TODO, then send me one
+# prompt saying the file is done. Delete runs you did not do.
+#
+# Rules for every run: no equipment except the weapon, no cards, no buffs,
+# food or mount, no skills learned. The status window must show no "+n"
+# bonuses other than the weapon's own ATK.
+#
+# Stat budget at base level 1 is 48 points. Cost per point is 2 up to
+# stat 11, then 3 up to 21. Suggested spreads below are valid and use
+# 47-48 points; change them if you like, but record what you really set.
+
+dummies:
+  # Same shape as in the app. Copy the values you set on the in-game dummy.
+  plain: # use for most runs
+    level: 1
+    def: 1
+    mdef: 1
+    str: 1
+    agi: 1
+    vit: 1
+    int: 1
+    dex: 1
+    luk: 1
+    size: medium # small / medium / large
+    race: formless # Formless, Undead, Brute, Plant, Insect, Fish, Demon, Demihuman, Angel, Dragon
+    element: neutral # Neutral, Water, Earth, Fire, Wind, Poison, Holy, Shadow, Ghost, Undead
+    elementLevel: 1 # 1-4
+  armored: # DEF/VIT clearly above 1, e.g. DEF 30, VIT 30
+    level: 1
+    def: 10
+    mdef: 1
+    str: 1
+    agi: 1
+    vit: 20
+    int: 1
+    dex: 1
+    luk: 1
+    size: large
+    race: formless
+    element: neutral
+    elementLevel: 1
+
+runs:
+  # ---- Novice 1/1 -------------------------------------------------------
+  - id: novice-bare-str
+    job: Novice
+    baseLevel: 1
+    jobLevel: 1
+    weapon: none # bare hands
+    stats: { str: 20, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 } # 47 points
+    dummy: plain
+    status: { atk: [24, 0], hit: 2, flee: 2, crit: 1, aspd: 150 }
+    normal: { min: 22, max: 22 } # lowest / highest normal hit seen
+    hits: 20 # how many hits you sampled
+    notes: 'dps: 22'
+
+  - id: novice-knife-str
+    job: Novice
+    baseLevel: 1
+    jobLevel: 1
+    weapon: Knife (1201)
+    stats: { str: 20, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 } # 47 points
+    dummy: plain
+    status: { atk: [41, 0], hit: 2, flee: 2, crit: 1, aspd: 135 }
+    normal: { min: 24, max: 34 }
+    hits: 15
+    notes: 'dps: 11/18/15/12, missed 5 times'
+
+  - id: novice-knife-dex
+    job: Novice
+    baseLevel: 1
+    jobLevel: 1
+    weapon: Knife (1201)
+    stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 20, luk: 1 } # 47 points
+    dummy: plain
+    status: { atk: [22, 0], hit: 21, flee: 2, crit: 1, aspd: 136 }
+    normal: { min: 15, max: 15 }
+    hits: 15
+    notes: 'dps: 9/12/12/9'
+
+  - id: novice-knife-even
+    job: Novice
+    baseLevel: 1
+    jobLevel: 1
+    weapon: Knife (1201)
+    stats: { str: 7, agi: 5, vit: 5, int: 1, dex: 7, luk: 5 } # 48 points
+    dummy: plain
+    status: { atk: [26, 0], hit: 8, flee: 6, crit: 2, aspd: 136 }
+    normal: { min: 13, max: 18 }
+    hits: 15
+    notes: 'dps: 9/12/12/2, missed 2 times in row at the end'
+
+  - id: novice-knife-luk
+    job: Novice
+    baseLevel: 1
+    jobLevel: 1
+    weapon: Knife (1201)
+    stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 20 } # 47 points
+    dummy: plain
+    status: { atk: [22, 0], hit: 2, flee: 2, crit: 7, aspd: 135 }
+    normal: { min: 3, max: 12 }
+    hits: 30
+    crit: { min: 17, max: 17 } # LUK-heavy, so crits should show up
+    notes: 'dps: 2/4/5/5/7/6/5/6, 2 times crits'
+
+  - id: novice-knife-str-armored
+    job: Novice
+    baseLevel: 1
+    jobLevel: 1
+    weapon: Knife (1201)
+    stats: { str: 20, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 } # 47 points
+    dummy: armored # tests hard and soft DEF
+    status: { atk: [41, 0], hit: 2, flee: 2, crit: 1, aspd: 135 }
+    normal: { min: 1, max: 7 }
+    hits: 15
+    notes: 'dps: 3/2/1/2, missed 2 times'
+
+  # ---- After the job change ----------------------------------------------
+  # The Sword needs base level 2, so level the Swordman to at least 2 first.
+  # Without that, use a Knife and say so in the notes.
+  - id: swordman-sword-str
+    job: Swordman
+    baseLevel: 12 # 2 or higher
+    jobLevel: 1 # right after the change this is 1
+    weapon: Blade (1108)
+    stats: { str: 25, agi: 1, vit: 1, int: 1, dex: 9, luk: 1 }
+    dummy: plain
+    status: { atk: [83, 0], hit: 21, flee: 13, crit: 1, aspd: 145 }
+    normal: { min: 40, max: 80 }
+    hits: 15
+    notes: 'dps: 50/61/55/28'
+
+  - id: swordman-sword-armored
+    job: Swordman
+    baseLevel: 12
+    jobLevel: 1
+    weapon: Blade (1108)
+    stats: { str: 25, agi: 1, vit: 1, int: 1, dex: 9, luk: 1 }
+    dummy: armored
+    status: { atk: [83, 0], hit: 21, flee: 13, crit: 1, aspd: 145 }
+    normal: { min: 14, max: 37 }
+    hits: 16
+    notes: 'dps: 25/19/26/15'
+
+  # NOTE FOR CLAUDE: Its impossible to do a lvl 2 run with a Swordsman, because until job change you are at least lvl 10
+  # Also, i get a free weapon at job change, i changed from sword to the new weapon

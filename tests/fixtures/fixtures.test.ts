@@ -80,7 +80,8 @@ describe('fixture comparison rules', () => {
     status: { atk: [104, 0], hit: 62, flee: 81, crit: 1, aspd: 152 },
     normal: { min: 92, max: 100 },
     crit: { min: 104, max: 104 },
-    dps: 100,
+    // Full windows average 99.5; plus 0.4 for the dummy's rounding is 99.9.
+    dps: { windows: [40, 99, 100, 99, 100, 12] },
   };
 
   it('accepts matching observations', () => {
@@ -109,8 +110,23 @@ describe('fixture comparison rules', () => {
     expect(compareObserved(wrong, status, attack)).toHaveLength(1);
   });
 
-  it('allows DPS within 5 %', () => {
-    expect(compareObserved({ ...observed, dps: 104 }, status, attack)).toEqual([]);
-    expect(compareObserved({ ...observed, dps: 110 }, status, attack)).toHaveLength(1);
+  it('compares the mean of the full DPS windows plus rounding, within 5 %', () => {
+    const windows = (value: number) => ({ windows: [1, value, value, 1] });
+    expect(compareObserved({ ...observed, dps: windows(95.6) }, status, attack)).toEqual([]);
+    expect(compareObserved({ ...observed, dps: windows(104.6) }, status, attack)).toEqual([]);
+    expect(compareObserved({ ...observed, dps: windows(90) }, status, attack)).toHaveLength(1);
+    expect(compareObserved({ ...observed, dps: windows(110) }, status, attack)).toHaveLength(1);
+  });
+
+  it('needs at least three DPS windows', () => {
+    const short = { ...observed, dps: { windows: [100, 100] } };
+    expect(compareObserved(short, status, attack)).toEqual(['DPS: needs at least three windows']);
+  });
+
+  it('allows a wider DPS tolerance only with a reason', () => {
+    const wide = { windows: [1, 90, 90, 1], tolerance: 0.15 };
+    expect(compareObserved({ ...observed, dps: wide }, status, attack)).toHaveLength(1);
+    const reasoned = { ...wide, toleranceReason: 'short session' };
+    expect(compareObserved({ ...observed, dps: reasoned }, status, attack)).toEqual([]);
   });
 });
