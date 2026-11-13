@@ -2,7 +2,7 @@
 
 Status: done
 
-Parent: [build-planner-plan.md](build-planner-plan.md), phase 2.
+Parent: [build-planner-plan.md](../../build-planner-plan.md), phase 2.
 
 ## Goal
 A generator that reads rAthena's `db/pre-re` YAML from the local checkout,

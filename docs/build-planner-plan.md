@@ -133,7 +133,7 @@ maintainer's step.
   the generator runs locally and the generated JSON is committed.
 - ~~Share code format.~~ Decided in phase 3: an opaque, versioned binary
   code of tagged varint fields, base64url, in the URL fragment `#b=<code>`;
-  the saved build stays readable JSON (see [phase-3-auto-attack-plan.md](phase-3-auto-attack-plan.md)).
+  the saved build stays readable JSON (see [plans/archive/phase-3-auto-attack-plan.md](plans/archive/phase-3-auto-attack-plan.md)).
 - Script conversion approach: parse rAthena scripts automatically, convert
   by hand, or a mix. Phase 4.
 - Format of the hand-entered ccRO data (runes, card system, costumes) and

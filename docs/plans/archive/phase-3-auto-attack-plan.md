@@ -1,9 +1,9 @@
 # Phase 3: Vertical slice, auto attack — plan
 
-Status: approved
+Status: done
 
-Parent: [build-planner-plan.md](build-planner-plan.md), phase 3. Data comes
-from phase 2 ([plans/archive/phase-2-data-pipeline-plan.md](plans/archive/phase-2-data-pipeline-plan.md)).
+Parent: [build-planner-plan.md](../../build-planner-plan.md), phase 3. Data comes
+from phase 2 ([phase-2-data-pipeline-plan.md](phase-2-data-pipeline-plan.md)).
 
 ## Goal
 The first end-to-end feature in the deployed app: pick a job, base and job
@@ -261,8 +261,8 @@ exactly, every observed hit lies inside the engine's range, crits equal the
 engine's crit damage, and the damage histograms fit the engine's
 distribution. Long-session DPS (2–7.5 min) is within ±2.1 % after the
 rounding correction. The raw in-game notes and chat logs are in
-[plans/archive/phase-3-validation-runs.yml](plans/archive/phase-3-validation-runs.yml)
-and [plans/archive/phase-3-validation-long-runs.txt](plans/archive/phase-3-validation-long-runs.txt).
+[phase-3-validation-runs.yml](phase-3-validation-runs.yml)
+and [phase-3-validation-long-runs.txt](phase-3-validation-long-runs.txt).
 - **Training dummy DPS rounds down.** The dummy prints the 5-second damage ÷ 5
   without decimals; raw means were below the engine in 4 of 5 sessions by
   0.2–0.5 DPS. Handled in the fixture rule (+0.4). Not a formula deviation.
