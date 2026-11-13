@@ -8,6 +8,7 @@ import {
   tables as allTables,
 } from '../data';
 import type { Item, Job, Monster, NamesFile, TablesFile } from '../data/types';
+import { weaponRefine } from '../engine/equipment';
 import type { CharacterInput } from '../engine/stats';
 import { dummyMonster, type Dummy } from './dummy';
 import type { Build } from './model';
@@ -118,6 +119,8 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
       jobLevel: build.jobLevel,
       baseStats: { ...build.stats },
       weapon,
+      // Builds have no refine yet; the equipment model adds it.
+      weaponRefine: weaponRefine(data.tables.refine, weapon, 0),
     },
     monster,
     dummy,

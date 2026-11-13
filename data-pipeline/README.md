@@ -52,7 +52,7 @@ uncommitted changes, and records `rathenaDirty: true`.
 | `jobs.json` | `job_stats.yml`, `job_aspd.yml`, `job_exp.yml`, `statpoint.yml`; ids checked against `enum e_job` in `src/common/mmo.hpp` | `jobs.yml` |
 | `items.json` | `item_db.yml` → `item_db_equip.yml` | `items.yml`, `hidden-items.yml` |
 | `monsters.json` | `mob_db.yml` | `monsters.yml` |
-| `tables.json` | `db/size_fix.yml` → `size_fix.yml`, `attr_fix.yml` | – |
+| `tables.json` | `db/size_fix.yml` → `size_fix.yml`, `attr_fix.yml`, `refine.yml` (Armor and Weapon groups) | – |
 | `names.en.json` | display names of the above | – |
 | `meta.json` | data version, see below | `meta.yml` |
 | `docs/script-coverage.md` | which item scripts parse, see below | – |

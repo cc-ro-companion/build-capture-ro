@@ -1,4 +1,4 @@
-import type { SizeModifier, TablesFile } from '../src/data/types.ts';
+import type { RefineLevel, RefineTables, SizeModifier, TablesFile } from '../src/data/types.ts';
 import { loadDb, PRE_RE_DIR, SIZE_FIX_BASE_FILE, type YamlMap } from './rathena.ts';
 
 /** rAthena element names in `enum e_element` order. */
@@ -103,11 +103,59 @@ export function convertAttrFix(
   return levels;
 }
 
+function refineNumber(value: unknown, where: string): number {
+  if (value === undefined) return 0;
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < 0) {
+    throw new Error(`${where} must be a non-negative integer.`);
+  }
+  return value;
+}
+
+function asList(value: unknown, where: string): YamlMap[] {
+  if (!Array.isArray(value)) throw new Error(`${where} must be a list.`);
+  return value as YamlMap[];
+}
+
+/**
+ * refine.yml's Armor and Weapon groups. A refine level missing from the file
+ * gives no bonus, as rAthena's RefineDatabase finds no entry for it.
+ */
+export function convertRefine(entries: readonly YamlMap[]): RefineTables {
+  const groups: Record<string, RefineLevel[][]> = { Armor: [], Weapon: [] };
+  for (const entry of entries) {
+    const group = groups[String(entry.Group)];
+    if (group === undefined) continue; // Shadow_Armor, Shadow_Weapon: renewal shadow gear.
+    for (const levelEntry of asList(entry.Levels, `refine.yml: ${String(entry.Group)}.Levels`)) {
+      const where = `refine.yml: ${String(entry.Group)} level ${String(levelEntry.Level)}`;
+      const itemLevel = refineNumber(levelEntry.Level, `${where}.Level`);
+      const levels: RefineLevel[] = group[itemLevel - 1] ?? [];
+      for (const refineEntry of asList(levelEntry.RefineLevels, `${where}.RefineLevels`)) {
+        const refine = refineNumber(refineEntry.Level, `${where}.RefineLevels.Level`);
+        if (refine < 1) throw new Error(`${where}: refine level must be at least 1.`);
+        levels[refine - 1] = {
+          bonus: refineNumber(refineEntry.Bonus, `${where} +${refine}.Bonus`),
+          randomBonus: refineNumber(refineEntry.RandomBonus, `${where} +${refine}.RandomBonus`),
+        };
+      }
+      group[itemLevel - 1] = levels;
+    }
+  }
+  const fill = (levels: RefineLevel[][]) =>
+    Array.from(levels, (refines) =>
+      Array.from(refines ?? [], (level) => level ?? { bonus: 0, randomBonus: 0 }),
+    );
+  return {
+    armor: fill(groups.Armor as RefineLevel[][]),
+    weapon: fill(groups.Weapon as RefineLevel[][]),
+  };
+}
+
 export function generateTables(rathenaDir: string): TablesFile {
   return {
     // The full table lives in db/size_fix.yml; its Footer imports
     // db/pre-re/size_fix.yml, which only changes Knuckle and Whip.
     sizeModifier: convertSizeFix(loadDb(rathenaDir, SIZE_FIX_BASE_FILE).body),
     elementModifier: convertAttrFix(loadDb(rathenaDir, `${PRE_RE_DIR}/attr_fix.yml`).body),
+    refine: convertRefine(loadDb(rathenaDir, `${PRE_RE_DIR}/refine.yml`).body),
   };
 }

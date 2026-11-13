@@ -140,11 +140,26 @@ export interface SizeModifier {
   large: number;
 }
 
+/** One refine level of a refine.yml group, in rAthena's units (1/100). */
+export interface RefineLevel {
+  /** `Bonus`: weapon ATK (`atk2`) or armor DEF, × 100. */
+  bonus: number;
+  /** `RandomBonus`: weapons only; overupgrade damage is 1..randomBonus/100. */
+  randomBonus: number;
+}
+
+/** refine.yml groups: index = item level − 1, then refine level − 1. */
+export interface RefineTables {
+  armor: RefineLevel[][];
+  weapon: RefineLevel[][];
+}
+
 export interface TablesFile {
   /** Weapon type → damage % against each monster size. */
   sizeModifier: Record<string, SizeModifier>;
   /** Index = element level - 1; attack element → defence element → damage %. */
   elementModifier: Record<string, Record<string, number>>[];
+  refine: RefineTables;
 }
 
 /** Display names by kind and id; one file per language. */

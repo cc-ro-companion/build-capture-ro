@@ -1,6 +1,7 @@
 // A player's normal attack against a monster, following rAthena's pre-renewal
 // `battle_calc_weapon_attack` for skill_id 0: crit roll, hit roll, base
-// damage, DEF, minimum damage, element, katar off-hand hit.
+// damage, overupgrade, DEF, refine ATK, minimum damage, element, katar
+// off-hand hit.
 import type { Monster, TablesFile } from '../data/types';
 import type { EngineConfig } from './config';
 import { totalStats, type CharacterInput } from './stats';
@@ -81,7 +82,7 @@ function sizeRatio(input: CharacterInput, monster: Monster, tables: TablesFile):
 /**
  * Damage over every combination of weapon roll and soft DEF roll, each
  * equally likely. A VIT 999 target has 2401 soft DEF values, so they are not
- * enumerated: damage only depends on `max(1, afterHardDef − softDef)` through
+ * enumerated: damage only depends on `max(1, beforeSoftDef − softDef)` through
  * a monotone function, so each weapon value's soft DEF range is summed from
  * prefix sums and its extremes are the range ends.
  */
@@ -108,13 +109,21 @@ function hitDamage(
     return katar ? damage + Math.trunc(damage / 100) : damage;
   };
 
-  const afterHardDefs = weaponRoll(input, total.dex, critical).map((weaponValue) => {
-    // Size fix on the weapon part, then base ATK (`battle_calc_base_damage`).
-    const base = Math.trunc((weaponValue * size) / 100) + batk;
-    return critical ? base : Math.trunc((base * (100 - hardDef)) / 100);
-  });
+  // `battle_add_weapon_damage`: overupgrade adds 1..overrefine (rnd() % n + 1), crits included.
+  const { atk: refineAtk, overrefine } = input.weaponRefine;
+  const overValues = overrefine > 0 ? Array.from({ length: overrefine }, (_, i) => i + 1) : [0];
+  // Refine ATK is added after DEF (`battle_calc_attack_post_defense`), before
+  // the floor of 1, so it is folded into the value soft DEF is taken from.
+  const beforeSoftDefs = weaponRoll(input, total.dex, critical).flatMap((weaponValue) =>
+    overValues.map((over) => {
+      // Size fix on the weapon part, then base ATK and overupgrade (`battle_calc_base_damage`).
+      const base = Math.trunc((weaponValue * size) / 100) + batk + over;
+      const afterDef = critical ? base : Math.trunc((base * (100 - hardDef)) / 100);
+      return afterDef + refineAtk;
+    }),
+  );
   // prefix[x] = finish(1) + … + finish(x).
-  const highest = Math.max(1, ...afterHardDefs.map((value) => value - softDef.first));
+  const highest = Math.max(1, ...beforeSoftDefs.map((value) => value - softDef.first));
   const prefix = [0];
   for (let x = 1; x <= highest; x++) prefix.push((prefix[x - 1] ?? 0) + finish(x));
   const prefixAt = (x: number) => prefix[x] ?? 0;
@@ -122,12 +131,12 @@ function hitDamage(
   let min = Infinity;
   let max = -Infinity;
   let sum = 0;
-  for (const afterHardDef of afterHardDefs) {
+  for (const beforeSoftDef of beforeSoftDefs) {
     // Floor of 1 after DEF and refine (`battle_calc_attack_post_defense`), before element.
-    const high = Math.max(1, afterHardDef - softDef.first);
-    const low = Math.max(1, afterHardDef - lastSoftDef);
+    const high = Math.max(1, beforeSoftDef - softDef.first);
+    const low = Math.max(1, beforeSoftDef - lastSoftDef);
     // Soft DEF values that leave 1 or less all give damage 1 before element.
-    const atFloor = Math.min(softDef.count, Math.max(0, lastSoftDef - (afterHardDef - 1) + 1));
+    const atFloor = Math.min(softDef.count, Math.max(0, lastSoftDef - (beforeSoftDef - 1) + 1));
     const aboveFloor = softDef.count - atFloor;
     sum += atFloor * finish(1);
     if (aboveFloor > 0) sum += prefixAt(high) - prefixAt(high - aboveFloor);
@@ -135,7 +144,7 @@ function hitDamage(
     min = Math.min(min, ...ends);
     max = Math.max(max, ...ends);
   }
-  return { min, max, avg: sum / (afterHardDefs.length * softDef.count) };
+  return { min, max, avg: sum / (beforeSoftDefs.length * softDef.count) };
 }
 
 export function autoAttack(

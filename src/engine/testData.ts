@@ -81,6 +81,7 @@ export function character(partial: Partial<CharacterInput> = {}): CharacterInput
     jobLevel: 1,
     baseStats: stats(),
     weapon: null,
+    weaponRefine: { atk: 0, overrefine: 0 },
     ...partial,
   };
 }

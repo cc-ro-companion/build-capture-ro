@@ -104,6 +104,7 @@ describe('dummyMonster', () => {
       jobLevel: 1,
       baseStats: { str: 50, agi: 1, vit: 1, int: 1, dex: 10, luk: 1 },
       weapon: testWeapon(),
+      weaponRefine: { atk: 0, overrefine: 0 },
     };
     // Neutral attacks do 0 % against Ghost level 4.
     const ghost = dummyMonster({ ...defaultDummy(0), element: 'Ghost', elementLevel: 4 });

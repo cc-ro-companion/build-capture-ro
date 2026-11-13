@@ -79,7 +79,7 @@ export function aspdFromAmotion(amotion: number): number {
 export interface StatusWindow {
   /**
    * The two ATK numbers the status window shows: `pc_leftside_atk`
-   * (base ATK + weapon ATK) and `pc_rightside_atk` (refine bonus, 0 for now).
+   * (base ATK + weapon ATK) and `pc_rightside_atk` (refine ATK, `rhw.atk2`).
    */
   atk: [number, number];
   /** Base ATK from stats alone. */
@@ -113,7 +113,7 @@ export function statusWindow(input: CharacterInput, config: EngineConfig): Statu
   const amotion = attackMotion(input, config);
   const aspdExact = aspdFromAmotion(amotion);
   return {
-    atk: [batk + weaponAtk, 0],
+    atk: [batk + weaponAtk, input.weaponRefine.atk],
     baseAtk: batk,
     weaponAtk,
     // status_calc_misc pre-renewal: HIT = level + DEX, FLEE = level + AGI, both at least 1.

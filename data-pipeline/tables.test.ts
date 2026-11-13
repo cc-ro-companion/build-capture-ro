@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { convertAttrFix, convertSizeFix } from './tables.ts';
+import { convertAttrFix, convertRefine, convertSizeFix } from './tables.ts';
 
 describe('convertSizeFix', () => {
   it('lists every weapon type and defaults unlisted sizes to 100', () => {
@@ -36,5 +36,45 @@ describe('convertAttrFix', () => {
 
   it('fails when a level is missing', () => {
     expect(() => convertAttrFix(levels.slice(0, 3))).toThrow('no entry for level 4');
+  });
+});
+
+describe('convertRefine', () => {
+  const entries = [
+    {
+      Group: 'Weapon',
+      Levels: [
+        {
+          Level: 2,
+          RefineLevels: [
+            { Level: 1, Bonus: 300, Chances: [] },
+            { Level: 3, Bonus: 900, RandomBonus: 500 },
+          ],
+        },
+      ],
+    },
+    { Group: 'Armor', Levels: [{ Level: 1, RefineLevels: [{ Level: 1, Bonus: 70 }] }] },
+    { Group: 'Shadow_Weapon', Levels: [{ Level: 1, RefineLevels: [{ Level: 1, Bonus: 1 }] }] },
+  ];
+
+  it('indexes by item level and refine level, filling gaps with no bonus', () => {
+    const tables = convertRefine(entries);
+    expect(tables.armor).toEqual([[{ bonus: 70, randomBonus: 0 }]]);
+    expect(tables.weapon).toEqual([
+      [],
+      [
+        { bonus: 300, randomBonus: 0 },
+        { bonus: 0, randomBonus: 0 },
+        { bonus: 900, randomBonus: 500 },
+      ],
+    ]);
+  });
+
+  it('rejects a bad value', () => {
+    expect(() =>
+      convertRefine([
+        { Group: 'Armor', Levels: [{ Level: 1, RefineLevels: [{ Level: 1, Bonus: -5 }] }] },
+      ]),
+    ).toThrow('refine.yml: Armor level 1 +1.Bonus must be a non-negative integer.');
   });
 });

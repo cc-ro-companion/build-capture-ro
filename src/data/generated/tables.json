@@ -74,5 +74,71 @@
       "Ghost": { "Neutral": 0, "Water": 25, "Earth": 25, "Fire": 25, "Wind": 25, "Poison": 25, "Holy": 0, "Dark": 0, "Ghost": 200, "Undead": 175 },
       "Undead": { "Neutral": 100, "Water": 25, "Earth": 25, "Fire": 25, "Wind": 25, "Poison": -25, "Holy": 175, "Dark": 0, "Ghost": 100, "Undead": 0 }
     }
-  ]
+  ],
+  "refine": {
+    "armor": [
+      [
+        { "bonus": 70, "randomBonus": 0 },
+        { "bonus": 140, "randomBonus": 0 },
+        { "bonus": 210, "randomBonus": 0 },
+        { "bonus": 280, "randomBonus": 0 },
+        { "bonus": 350, "randomBonus": 0 },
+        { "bonus": 420, "randomBonus": 0 },
+        { "bonus": 490, "randomBonus": 0 },
+        { "bonus": 560, "randomBonus": 0 },
+        { "bonus": 630, "randomBonus": 0 },
+        { "bonus": 700, "randomBonus": 0 }
+      ]
+    ],
+    "weapon": [
+      [
+        { "bonus": 200, "randomBonus": 0 },
+        { "bonus": 400, "randomBonus": 0 },
+        { "bonus": 600, "randomBonus": 0 },
+        { "bonus": 800, "randomBonus": 0 },
+        { "bonus": 1000, "randomBonus": 0 },
+        { "bonus": 1200, "randomBonus": 0 },
+        { "bonus": 1400, "randomBonus": 0 },
+        { "bonus": 1600, "randomBonus": 300 },
+        { "bonus": 1800, "randomBonus": 600 },
+        { "bonus": 2000, "randomBonus": 900 }
+      ],
+      [
+        { "bonus": 300, "randomBonus": 0 },
+        { "bonus": 600, "randomBonus": 0 },
+        { "bonus": 900, "randomBonus": 0 },
+        { "bonus": 1200, "randomBonus": 0 },
+        { "bonus": 1500, "randomBonus": 0 },
+        { "bonus": 1800, "randomBonus": 0 },
+        { "bonus": 2100, "randomBonus": 500 },
+        { "bonus": 2400, "randomBonus": 1000 },
+        { "bonus": 2700, "randomBonus": 1500 },
+        { "bonus": 3000, "randomBonus": 2000 }
+      ],
+      [
+        { "bonus": 500, "randomBonus": 0 },
+        { "bonus": 1000, "randomBonus": 0 },
+        { "bonus": 1500, "randomBonus": 0 },
+        { "bonus": 2000, "randomBonus": 0 },
+        { "bonus": 2500, "randomBonus": 0 },
+        { "bonus": 3000, "randomBonus": 800 },
+        { "bonus": 3500, "randomBonus": 1600 },
+        { "bonus": 4000, "randomBonus": 2400 },
+        { "bonus": 4500, "randomBonus": 3200 },
+        { "bonus": 5000, "randomBonus": 4000 }
+      ],
+      [
+        { "bonus": 700, "randomBonus": 0 },
+        { "bonus": 1400, "randomBonus": 0 },
+        { "bonus": 2100, "randomBonus": 0 },
+        { "bonus": 2800, "randomBonus": 0 },
+        { "bonus": 3500, "randomBonus": 1300 },
+        { "bonus": 4200, "randomBonus": 2600 },
+        { "bonus": 4900, "randomBonus": 3900 },
+        { "bonus": 5600, "randomBonus": 5200 },
+        { "bonus": 6300, "randomBonus": 6500 },
+        { "bonus": 7000, "randomBonus": 7800 }
+      ]
+    ]
+  }
 }

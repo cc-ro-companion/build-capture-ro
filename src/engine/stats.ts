@@ -1,5 +1,6 @@
 // Character stats: base + job bonus, and the stat point budget.
 import type { BonusStats, Item, Job } from '../data/types';
+import type { WeaponRefine } from './equipment';
 
 export const STAT_NAMES = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
 export type StatName = (typeof STAT_NAMES)[number];
@@ -12,6 +13,8 @@ export interface CharacterInput {
   baseStats: BonusStats;
   /** Right-hand weapon; null for bare hands. */
   weapon: Item | null;
+  /** Refine ATK and overupgrade of the right-hand weapon (equipment.ts `weaponRefine`). */
+  weaponRefine: WeaponRefine;
 }
 
 /** Job bonus row for the job level; rAthena `job_info->job_bonus[job_level - 1]`. */

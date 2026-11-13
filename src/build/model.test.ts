@@ -22,7 +22,7 @@ const data = createGameData({
   ],
   monsters: [testMonster()],
   statPoints: [48, 51, 54],
-  tables: { sizeModifier: {}, elementModifier: [] },
+  tables: { sizeModifier: {}, elementModifier: [], refine: { armor: [], weapon: [] } },
   names: { items: { 1101: 'Sword', 1102: 'Sword' }, monsters: { 1002: 'Poring' }, jobs: {} },
 });
 

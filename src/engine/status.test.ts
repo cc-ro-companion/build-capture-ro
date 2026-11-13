@@ -43,6 +43,14 @@ describe('status window', () => {
     expect(window.crit).toBe(4);
   });
 
+  it('shows refine ATK right of the "+" (pc_rightside_atk pre-renewal: rhw.atk2)', () => {
+    const window = statusWindow(
+      character({ weapon: testWeapon(), weaponRefine: { atk: 14, overrefine: 0 } }),
+      rAthenaDefaults,
+    );
+    expect(window.atk[1]).toBe(14);
+  });
+
   it('uses DEX for the ATK of a bow', () => {
     const window = statusWindow(
       character({ baseStats: stats({ str: 10, dex: 80, luk: 5 }), weapon: bow }),

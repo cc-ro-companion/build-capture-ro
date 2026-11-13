@@ -18,6 +18,7 @@ const tables: TablesFile = {
   elementModifier: neutralVsGhost.map((ghost) => ({
     Neutral: { Neutral: 100, Water: 100, Ghost: ghost },
   })),
+  refine: { armor: [], weapon: [] },
 };
 
 const sword = testWeapon(); // ATK 25, weapon level 1
@@ -30,6 +31,36 @@ const poring = testMonster();
 function attack(partial: Parameters<typeof character>[0], monster = poring) {
   return autoAttack(character(partial), monster, tables, rAthenaDefaults);
 }
+
+describe('weapon refinement', () => {
+  // DEX 80 > ATK 25, so the weapon always rolls 25; base ATK 1 + 0 + 16 + 0 = 17.
+  const input = { baseStats: stats({ dex: 80 }), weapon: sword };
+
+  it('adds refine ATK after hard and soft DEF (battle_calc_attack_post_defense)', () => {
+    const armored = testMonster({ defense: 50 });
+    // (25 + 17) × (100 − 50) / 100 = 21, − soft DEF 1 = 20 without refine.
+    expect(attack(input, armored).normal.avg).toBe(20);
+    // +7 sword: atk2 14 is not halved by DEF: 21 + 14 − 1 = 34.
+    const refined = { ...input, weaponRefine: { atk: 14, overrefine: 0 } };
+    expect(attack(refined, armored).normal).toEqual({ min: 34, max: 34, avg: 34 });
+    // Crits ignore DEF and still get refine ATK: 25 + 17 + 14.
+    expect(attack(refined, armored).crit.avg).toBe(56);
+  });
+
+  it('lets refine ATK lift damage that DEF took below 1 (floor applies after refine)', () => {
+    const wall = testMonster({ defense: 100, vit: 1 });
+    // Hard DEF 100 leaves 0; 0 + 5 − 1 = 4, not max(1, 0 − 1) + 5.
+    const refined = { ...input, weaponRefine: { atk: 5, overrefine: 0 } };
+    expect(attack(refined, wall).normal.avg).toBe(4);
+  });
+
+  it('adds overupgrade 1..n with equal chance, also on crits (battle_add_weapon_damage)', () => {
+    const over = { ...input, weaponRefine: { atk: 0, overrefine: 3 } };
+    // 25 + 17 + {1, 2, 3} − soft DEF 1 → 42..44.
+    expect(attack(over).normal).toEqual({ min: 42, max: 44, avg: 43 });
+    expect(attack(over).crit).toEqual({ min: 43, max: 45, avg: 44 });
+  });
+});
 
 describe('weapon damage (battle_calc_base_damage pre-renewal)', () => {
   it('rolls DEX-based minimum to ATK − 1, adds base ATK, subtracts soft DEF', () => {
