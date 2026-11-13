@@ -134,8 +134,12 @@ maintainer's step.
 - ~~Share code format.~~ Decided in phase 3: an opaque, versioned binary
   code of tagged varint fields, base64url, in the URL fragment `#b=<code>`;
   the saved build stays readable JSON (see [plans/archive/phase-3-auto-attack-plan.md](plans/archive/phase-3-auto-attack-plan.md)).
-- Script conversion approach: parse rAthena scripts automatically, convert
-  by hand, or a mix. Phase 4.
+- ~~Script conversion approach.~~ Decided for phase 4: the pipeline parses
+  a subset of rAthena script, unsupported scripts are rewritten by hand as
+  overrides, and ccRO runes are written in rAthena script too. Phase 4 is
+  split into [4a](phase-4a-equipment-scripts-plan.md) (equipment,
+  refinement, script conversion) and [4b](phase-4b-runes-combos-inventory-plan.md)
+  (runes, combos, inventory).
 - Format of the hand-entered ccRO data (runes, card system, costumes) and
   where the maintainer's prepared material comes in. Runes in phase 4, the
   rest in phase 8.
