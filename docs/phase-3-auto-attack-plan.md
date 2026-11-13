@@ -249,7 +249,7 @@ and hand the numbers over for fixtures.
    storage, fixtures, synthetic fixture moved to a dummy); Target panel and
    `DummyEditor.svelte`. Check: unit and component tests for the dummy
    criteria; verification passes.
-10. [ ] Validation session: **maintainer's numbers.** Record each validated
+10. [x] Validation session: **maintainer's numbers.** Record each validated
     character as a fixture, with the dummy settings used; fix formula deviations or log them under
     "Validation findings". Remove the synthetic fixture. Check: verification
     passes.
@@ -259,16 +259,19 @@ and hand the numbers over for fixtures.
 No formula deviations: all 8 validated characters match the status window
 exactly, every observed hit lies inside the engine's range, crits equal the
 engine's crit damage, and the damage histograms fit the engine's
-distribution. Long-session DPS (2–5 min) is within ±2.1 % after the
-rounding correction.
+distribution. Long-session DPS (2–7.5 min) is within ±2.1 % after the
+rounding correction. The raw in-game notes and chat logs are in
+[plans/archive/phase-3-validation-runs.yml](plans/archive/phase-3-validation-runs.yml)
+and [plans/archive/phase-3-validation-long-runs.txt](plans/archive/phase-3-validation-long-runs.txt).
 - **Training dummy DPS rounds down.** The dummy prints the 5-second damage ÷ 5
   without decimals; raw means were below the engine in 4 of 5 sessions by
   0.2–0.5 DPS. Handled in the fixture rule (+0.4). Not a formula deviation.
-- **Crit rate at LUK 1 looks high (open).** The DEX Novice and both Swordman
-  long sessions show 9 crits where the engine expects about 3.9 (CRIT 1,
-  critRate 13 − 2 × dummy LUK 1 = 1.1 %); chance alone gives this about
-  1.6 % of the time. LUK 20 fits (18 crits vs 17.4). Follow-up: a 10-minute
-  Swordman session on the plain dummy (maintainer, pending).
+- **Crit rate at LUK 1 (closed).** The DEX Novice and the first Swordman long
+  sessions showed 9 crits where the engine expected about 4.0 (CRIT 1,
+  critRate 13 − 2 × dummy LUK 1 = 1.1 %), which chance gives only about 2 %
+  of the time. A 7.5-minute Swordman session then logged 0 crits in 167 hits.
+  Together: 9 crits in 527 logged hits vs 5.8 expected, which chance gives
+  about 13 % of the time. No deviation; rAthena's formula stays.
 - **Blade top roll (closed).** The long Swordman sessions never showed the
   highest normal hit (80 plain, 42 armored), but the first session did record
   80 on the plain dummy, so the roll exists; the armored gap is chance (~3 %).

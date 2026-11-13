@@ -31,7 +31,10 @@ observed:
   crit: { min: 17, max: 17 }
   # Long session, 2 min.
   dps:
-    windows:
-      [6, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 12, 12, 12, 12, 12, 9, 12, 12, 9, 12, 12, 12]
+    # prettier-ignore
+    windows: [
+      6, 12, 12, 12, 12, 12, 12, 12, 12, 9, 9, 12, 12, 12, 12, 12, 12, 9, 12, 12,
+      9, 12, 12, 12
+    ]
 notes: >-
   DEX at least the Knife ATK, so every normal hit is the same. First session DPS windows: 9/12/12/9.

@@ -26,37 +26,18 @@ build:
   target: { dummy: 0 }
 observed:
   status: { atk: [83, 0], hit: 21, flee: 13, crit: 1, aspd: 145 }
-  # First session 15 hits; long session (2 min) 111 hits, 3 of them crits.
+  # First session 15 hits; long sessions 2 min (111 hits, 3 crits) and 7.5 min (167 hits in the battle chat, which was cut off; 0 crits).
   normal: { min: 37, max: 80, rangeComplete: false }
   crit: { min: 83, max: 83 }
-  # Long session, 2 min.
+  # Long session, 7.5 min.
   dps:
-    windows:
-      [
-        43,
-        50,
-        58,
-        53,
-        60,
-        55,
-        54,
-        54,
-        47,
-        48,
-        56,
-        53,
-        52,
-        57,
-        59,
-        54,
-        50,
-        51,
-        55,
-        46,
-        69,
-        42,
-        58,
-        50,
-      ]
+    # prettier-ignore
+    windows: [
+      55, 52, 52, 61, 65, 49, 49, 52, 48, 63, 40, 57, 52, 48, 55, 51, 66, 60, 52, 51,
+      35, 63, 55, 48, 57, 56, 64, 58, 38, 58, 46, 46, 57, 48, 66, 63, 47, 56, 53, 52,
+      62, 45, 56, 45, 66, 57, 51, 49, 49, 60, 56, 52, 56, 51, 41, 66, 38, 56, 58, 37,
+      69, 47, 64, 58, 51, 53, 45, 39, 70, 51, 64, 47, 62, 64, 49, 61, 65, 46, 63, 47,
+      53, 56, 54, 70, 54, 58, 50, 39
+    ]
 notes: >-
-  Blade is the weapon received at the job change. First session DPS windows: 50/61/55/28.
+  Blade is the weapon received at the job change. 2 min session DPS windows: 43/50/58/53/60/55/54/54/47/48/56/53/52/57/59/54/50/51/55/46/69/42/58/50. First session DPS windows: 50/61/55/28.

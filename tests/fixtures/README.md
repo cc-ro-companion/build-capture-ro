@@ -63,6 +63,6 @@ must have a target, normally the training dummy as configured in game. `syntheti
 output rather than game observations; it only tests the runner.
 
 The fixtures from the first validation session (2026-11-13) come from the
-in-game notes in `docs/phase-3-validation-runs.yml` and the chat logs in
-`docs/phase-3-validation-long-runs.txt`. Hit counts and DPS windows of
+in-game notes in [`docs/plans/archive/phase-3-validation-runs.yml`](../../docs/plans/archive/phase-3-validation-runs.yml) and the chat logs in
+[`docs/plans/archive/phase-3-validation-long-runs.txt`](../../docs/plans/archive/phase-3-validation-long-runs.txt). Hit counts and DPS windows of
 short sessions are kept in each fixture's notes.

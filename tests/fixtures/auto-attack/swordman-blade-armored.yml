@@ -31,33 +31,10 @@ observed:
   crit: { min: 69, max: 69 }
   # The 2 min session after the "armored" chat marker; the interrupted one is left out.
   dps:
-    windows:
-      [
-        2,
-        24,
-        23,
-        31,
-        25,
-        25,
-        33,
-        14,
-        18,
-        22,
-        21,
-        23,
-        21,
-        26,
-        29,
-        25,
-        28,
-        28,
-        12,
-        30,
-        28,
-        19,
-        26,
-        21,
-        29,
-      ]
+    # prettier-ignore
+    windows: [
+      2, 24, 23, 31, 25, 25, 33, 14, 18, 22, 21, 23, 21, 26, 29, 25, 28, 28, 12, 30,
+      28, 19, 26, 21, 29
+    ]
 notes: >-
   Hits from both long sessions count for the range; same character and dummy. First session DPS windows: 25/19/26/15.
