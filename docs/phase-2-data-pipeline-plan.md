@@ -211,7 +211,7 @@ ccRO.
    Check: monster spot checks pass; verification passes.
 6. [x] Tables: `tables.ts` writing `tables.json` (size and element
    modifiers). Check: table spot checks pass; verification passes.
-7. [ ] Data version and typed access: `hash.ts`, `meta.json`,
+7. [x] Data version and typed access: `hash.ts`, `meta.json`,
    `src/data/types.ts`, `src/data/index.ts`, staleness test,
    `.prettierignore` entry, `data-pipeline/README.md`. Check: regenerating
    twice changes only `generatedAt`; editing an override without
@@ -239,4 +239,10 @@ ccRO.
   rAthena monsters) · check/lint/test (57)/build pass · 6ebe23e
 - 2026-11-13 · 6 tables (`elementModifier` is an array, index = element
   level - 1, like the other level tables) · check/lint/test (65)/build pass ·
-  next commit
+  8ee5ab5
+- 2026-11-13 · 7 data version and typed access (`types.ts` is the single
+  source of record types, the generator imports them; `overridesHash` covers
+  `data-overrides/*.yml` only, so README edits need no regeneration; a second
+  test catches hand-edited generated files) · regenerating twice changed only
+  `generatedAt`; appending a line to `items.yml` failed `pnpm test` with "Run
+  `pnpm data`…", reverted; check/lint/test (72)/build pass · next commit

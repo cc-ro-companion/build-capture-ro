@@ -1,42 +1,7 @@
 import { applyOverrides, MONSTER_SCHEMA, type OverrideFile } from './overrides.ts';
 import { enabledKeys, loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
 import { ELEMENTS } from './tables.ts';
-
-export type Size = 'small' | 'medium' | 'large';
-export type MonsterClass = 'normal' | 'boss' | 'guardian' | 'battlefield';
-
-export interface MonsterRecord {
-  id: number;
-  aegisName: string;
-  level: number;
-  hp: number;
-  attackMin: number;
-  attackMax: number;
-  defense: number;
-  magicDefense: number;
-  str: number;
-  agi: number;
-  vit: number;
-  int: number;
-  dex: number;
-  luk: number;
-  size: Size;
-  /** rAthena race name, e.g. `Demihuman`. */
-  race: string;
-  /** rAthena race group names that are set, e.g. `Goblin`. */
-  raceGroups: string[];
-  /** rAthena element name, e.g. `Water`. */
-  element: string;
-  elementLevel: number;
-  class: MonsterClass;
-  /** rAthena mode names that are set, e.g. `Mvp`, `Detector`. */
-  modes: string[];
-  attackRange: number;
-  attackDelay: number;
-  attackMotion: number;
-  damageMotion: number;
-  walkSpeed: number;
-}
+import type { Monster, MonsterClass, Size } from '../src/data/types.ts';
 
 // rAthena's DEFAULT_WALK_SPEED in src/common/mmo.hpp.
 const DEFAULT_WALK_SPEED = 150;
@@ -94,7 +59,7 @@ function nameField(record: YamlMap, field: string, fallback: string, names: Set<
 }
 
 /** Converts one rAthena monster, filling rAthena's defaults for absent fields. */
-export function convertMonster(record: YamlMap): MonsterRecord {
+export function convertMonster(record: YamlMap): Monster {
   const aegisName = record.AegisName;
   if (typeof aegisName !== 'string') throw new Error(`${where(record)}: missing AegisName.`);
   return {
@@ -130,7 +95,7 @@ export function convertMonster(record: YamlMap): MonsterRecord {
 export function generateMonsters(
   rathenaDir: string,
   overrides: OverrideFile,
-): { data: MonsterRecord[]; names: Record<number, string> } {
+): { data: Monster[]; names: Record<number, string> } {
   const records = loadDb(rathenaDir, `${PRE_RE_DIR}/mob_db.yml`).body;
   const merged = applyOverrides(records, overrides, MONSTER_SCHEMA);
   const monsters = merged.map(convertMonster).sort((a, b) => a.id - b.id);

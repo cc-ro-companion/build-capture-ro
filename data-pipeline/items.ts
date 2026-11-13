@@ -1,34 +1,11 @@
+import type { Item } from '../src/data/types.ts';
 import { SUPPORTED_JOBS } from './jobs.ts';
 import { applyOverrides, ITEM_SCHEMA, type OverrideFile } from './overrides.ts';
 import { enabledKeys, loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
 
-export interface ItemRecord {
-  id: number;
-  aegisName: string;
-  type: 'weapon' | 'armor';
-  /** rAthena weapon SubType, e.g. `1hSword`; weapons only. */
-  weaponType?: string;
-  attack: number;
-  defense: number;
-  range: number;
-  slots: number;
-  /** Weapons only. */
-  weaponLevel?: number;
-  equipLevelMin: number;
-  /** 0 means no upper limit, as in rAthena. */
-  equipLevelMax: number;
-  refineable: boolean;
-  /** rAthena location names, e.g. `Right_Hand`, `Head_Top`. */
-  locations: string[];
-  /** Supported job ids that can equip the item, ascending. */
-  jobs: number[];
-  /** Only present when restricted. */
-  gender?: 'male' | 'female';
-}
-
 const jobIdByKey = new Map(SUPPORTED_JOBS.map((job) => [job.key, job.id]));
 
-/** Item `Jobs` names (rAthena `EAJ_*` constants) → supported job keys. */
+/** Item `Jobs` names (rAthena `EAJ_*` constants) â†’ supported job keys. */
 const ITEM_JOB_NAMES: Record<string, readonly string[]> = {
   Novice: ['Novice'],
   Swordman: ['Swordman'],
@@ -141,7 +118,7 @@ function stringField(record: YamlMap, field: string): string {
  * Converts one rAthena item, or returns undefined when it is not equipment a
  * normal character of a supported job can wear.
  */
-export function convertItem(record: YamlMap): ItemRecord | undefined {
+export function convertItem(record: YamlMap): Item | undefined {
   const rawType = record.Type;
   if (rawType !== 'Weapon' && rawType !== 'Armor') return undefined;
   if (!allowsNormalClass(record)) return undefined;
@@ -171,7 +148,7 @@ export function convertItem(record: YamlMap): ItemRecord | undefined {
   };
 }
 
-function genderField(record: YamlMap): Pick<ItemRecord, 'gender'> {
+function genderField(record: YamlMap): Pick<Item, 'gender'> {
   switch (record.Gender) {
     case undefined:
     case 'Both':
@@ -188,12 +165,12 @@ function genderField(record: YamlMap): Pick<ItemRecord, 'gender'> {
 export function generateItems(
   rathenaDir: string,
   overrides: OverrideFile,
-): { data: ItemRecord[]; names: Record<number, string> } {
+): { data: Item[]; names: Record<number, string> } {
   const records = loadDb(rathenaDir, `${PRE_RE_DIR}/item_db.yml`, (importPath) =>
     importPath.endsWith('/item_db_equip.yml'),
   ).body;
   const merged = applyOverrides(records, overrides, ITEM_SCHEMA);
-  const items: ItemRecord[] = [];
+  const items: Item[] = [];
   const names: Record<number, string> = {};
   for (const record of merged) {
     const item = convertItem(record);

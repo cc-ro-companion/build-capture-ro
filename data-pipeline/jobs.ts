@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { applyOverrides, JOB_SCHEMA, type OverrideFile } from './overrides.ts';
+import type { BonusStats, Job, JobsFile } from '../src/data/types.ts';
 import { loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
 
 export interface SupportedJob {
@@ -52,32 +53,6 @@ const JOB_FILE_ALIASES: Record<string, string> = {
 
 const JOB_FILES = ['job_stats.yml', 'job_aspd.yml', 'job_exp.yml'];
 const CLASSIC_STATS = ['Str', 'Agi', 'Vit', 'Int', 'Dex', 'Luk'] as const;
-
-export interface BonusStats {
-  str: number;
-  agi: number;
-  vit: number;
-  int: number;
-  dex: number;
-  luk: number;
-}
-
-export interface JobRecord {
-  id: number;
-  key: string;
-  maxBaseLevel: number;
-  maxJobLevel: number;
-  /** Index = job level - 1; cumulative bonus up to and including that level. */
-  bonusStats: BonusStats[];
-  /** rAthena weapon type → base attack delay; lists exactly the usable types. */
-  baseAspd: Record<string, number>;
-}
-
-export interface JobsData {
-  /** Index = base level - 1; total stat points at that level. */
-  statPoints: number[];
-  jobs: JobRecord[];
-}
 
 /** Parses `enum e_job` from rAthena's source into name → value. */
 export function parseJobEnum(source: string): Map<string, number> {
@@ -154,7 +129,7 @@ function cumulativeBonusStats(record: YamlMap, maxJobLevel: number): BonusStats[
   return rows;
 }
 
-export function convertJob(record: YamlMap): JobRecord {
+export function convertJob(record: YamlMap): Job {
   const job = SUPPORTED_JOBS.find((candidate) => candidate.key === record.Job);
   if (job === undefined) throw new Error(`Unknown job ${String(record.Job)}.`);
   const maxJobLevel = requireNumber(record, 'MaxJobLevel');
@@ -186,7 +161,7 @@ export function convertStatPoints(entries: readonly YamlMap[], maxBaseLevel: num
 export function generateJobs(
   rathenaDir: string,
   overrides: OverrideFile,
-): { data: JobsData; names: Record<number, string> } {
+): { data: JobsFile; names: Record<number, string> } {
   checkJobIds(parseJobEnum(readFileSync(path.join(rathenaDir, 'src/common/mmo.hpp'), 'utf8')));
   const groups = JOB_FILES.flatMap((file) => loadDb(rathenaDir, `${PRE_RE_DIR}/${file}`).body);
   const records = applyOverrides(expandJobGroups(groups), overrides, JOB_SCHEMA);

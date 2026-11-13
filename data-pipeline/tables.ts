@@ -1,3 +1,4 @@
+import type { SizeModifier, TablesFile } from '../src/data/types.ts';
 import { loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
 
 /** rAthena element names in `enum e_element` order. */
@@ -45,19 +46,6 @@ export const WEAPON_TYPES = [
 const ELEMENT_LEVELS = 4;
 // rAthena's default for any size_fix or attr_fix value not listed.
 const DEFAULT_PERCENT = 100;
-
-export interface SizeModifier {
-  small: number;
-  medium: number;
-  large: number;
-}
-
-export interface TablesData {
-  /** Weapon type → damage % against each monster size. */
-  sizeModifier: Record<string, SizeModifier>;
-  /** Index = element level - 1; attack element → defence element → damage %. */
-  elementModifier: Record<string, Record<string, number>>[];
-}
 
 function percent(value: unknown, where: string): number {
   if (value === undefined) return DEFAULT_PERCENT;
@@ -113,7 +101,7 @@ export function convertAttrFix(
   return levels;
 }
 
-export function generateTables(rathenaDir: string): TablesData {
+export function generateTables(rathenaDir: string): TablesFile {
   return {
     sizeModifier: convertSizeFix(loadDb(rathenaDir, `${PRE_RE_DIR}/size_fix.yml`).body),
     elementModifier: convertAttrFix(loadDb(rathenaDir, `${PRE_RE_DIR}/attr_fix.yml`).body),

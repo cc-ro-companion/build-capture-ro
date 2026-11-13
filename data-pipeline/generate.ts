@@ -1,5 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import type { DataMeta, NamesFile } from '../src/data/types.ts';
+import { hashData, hashOverrides, META_FILE } from './hash.ts';
 import { generateItems } from './items.ts';
 import { generateJobs } from './jobs.ts';
 import { formatJson } from './json.ts';
@@ -12,8 +14,8 @@ const repoRoot = path.resolve(import.meta.dirname, '..');
 const overridesDir = path.join(repoRoot, 'data-overrides');
 const outputDir = path.join(repoRoot, 'src', 'data', 'generated');
 
-function writeOutput(fileName: string, value: unknown): void {
-  writeFileSync(path.join(outputDir, fileName), formatJson(value));
+function writeOutput(fileName: string, text: string): void {
+  writeFileSync(path.join(outputDir, fileName), text);
   console.log(`  wrote src/data/generated/${fileName}`);
 }
 
@@ -44,17 +46,29 @@ function main(): void {
   const monsters = generateMonsters(rathenaDir, overrides.monsters);
   console.log(`Monsters: ${monsters.data.length}`);
   const tables = generateTables(rathenaDir);
+  const names: NamesFile = { items: items.names, monsters: monsters.names, jobs: jobs.names };
+
+  const dataFiles: Record<string, string> = {
+    'jobs.json': formatJson(jobs.data),
+    'items.json': formatJson(items.data),
+    'monsters.json': formatJson(monsters.data),
+    'tables.json': formatJson(tables),
+    'names.en.json': formatJson(names),
+  };
+  const dataMeta: DataMeta = {
+    label: meta.label,
+    hash: hashData(dataFiles),
+    rathenaCommit: source.commit,
+    rathenaCommitDate: source.commitDate,
+    rathenaDirty: source.dirty,
+    overridesHash: hashOverrides(overridesDir),
+    generatedAt: new Date().toISOString(),
+  };
 
   mkdirSync(outputDir, { recursive: true });
-  writeOutput('jobs.json', jobs.data);
-  writeOutput('items.json', items.data);
-  writeOutput('monsters.json', monsters.data);
-  writeOutput('tables.json', tables);
-  writeOutput('names.en.json', {
-    items: items.names,
-    monsters: monsters.names,
-    jobs: jobs.names,
-  });
+  for (const [fileName, text] of Object.entries(dataFiles)) writeOutput(fileName, text);
+  writeOutput(META_FILE, formatJson(dataMeta));
+  console.log(`Data version: ${dataMeta.label} (${dataMeta.hash})`);
 }
 
 try {

@@ -1,9 +1,38 @@
+import { readdirSync, readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import items from './generated/items.json';
-import jobsData from './generated/jobs.json';
-import monsters from './generated/monsters.json';
-import names from './generated/names.en.json';
-import tables from './generated/tables.json';
+import { hashData, hashOverrides, META_FILE } from '../../data-pipeline/hash.ts';
+import { dataMeta, items, jobsData, monsters, namesEn as names, tables } from './index';
+
+const repoRoot = path.resolve(import.meta.dirname, '..', '..');
+const generatedDir = path.join(import.meta.dirname, 'generated');
+
+describe('data version', () => {
+  it('matches data-overrides/ (fails if an override was edited without regenerating)', () => {
+    const current = hashOverrides(path.join(repoRoot, 'data-overrides'));
+    expect(
+      current,
+      'data-overrides/ changed since src/data/generated/ was written. ' +
+        'Run `pnpm data` and commit the regenerated files.',
+    ).toBe(dataMeta.overridesHash);
+  });
+
+  it('matches the generated files (fails if one was edited by hand)', () => {
+    const files = readdirSync(generatedDir).filter((name) => name !== META_FILE);
+    const texts = Object.fromEntries(
+      files.map((name) => [name, readFileSync(path.join(generatedDir, name), 'utf8')]),
+    );
+    expect(
+      hashData(texts),
+      'src/data/generated/ differs from its recorded hash. Run `pnpm data` instead of editing it.',
+    ).toBe(dataMeta.hash);
+  });
+
+  it('records a label and the rAthena commit', () => {
+    expect(dataMeta.label).not.toBe('');
+    expect(dataMeta.rathenaCommit).toMatch(/^[0-9a-f]{40}$/);
+  });
+});
 
 describe('generated jobs', () => {
   const byKey = (key: string) => jobsData.jobs.find((job) => job.key === key);
@@ -101,11 +130,11 @@ describe('generated monsters', () => {
 
 describe('generated tables', () => {
   it('gives Knuckle 50 % against large monsters', () => {
-    expect(tables.sizeModifier.Knuckle.large).toBe(50);
+    expect(tables.sizeModifier.Knuckle?.large).toBe(50);
   });
 
   it('gives water attacking fire at element level 1 150 %', () => {
-    expect(tables.elementModifier[0]?.Water.Fire).toBe(150);
+    expect(tables.elementModifier[0]?.Water?.Fire).toBe(150);
   });
 
   it('has a size modifier for every weapon type that jobs and items use', () => {
