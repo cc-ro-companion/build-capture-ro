@@ -1,7 +1,8 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { hashData, hashOverrides, META_FILE } from '../../data-pipeline/hash.ts';
+import { COVERAGE_FILE } from '../../data-pipeline/coverage.ts';
+import { hashData, hashOverrides, hashTexts, META_FILE } from '../../data-pipeline/hash.ts';
 import { dataMeta, items, jobsData, monsters, namesEn as names, tables } from './index';
 
 const repoRoot = path.resolve(import.meta.dirname, '..', '..');
@@ -28,6 +29,14 @@ describe('data version', () => {
       hashData(texts),
       'src/data/generated/ differs from its recorded hash. Run `pnpm data` instead of editing it.',
     ).toBe(dataMeta.hash);
+  });
+
+  it('matches docs/script-coverage.md (fails if the report was edited by hand)', () => {
+    const report = readFileSync(path.join(repoRoot, COVERAGE_FILE), 'utf8');
+    expect(
+      hashTexts({ [COVERAGE_FILE]: report }),
+      `${COVERAGE_FILE} differs from its recorded hash. Run \`pnpm data\` instead of editing it.`,
+    ).toBe(dataMeta.coverageHash);
   });
 
   it('records a label and the rAthena commit', () => {

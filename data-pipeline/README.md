@@ -55,6 +55,7 @@ uncommitted changes, and records `rathenaDirty: true`.
 | `tables.json` | `db/size_fix.yml` → `size_fix.yml`, `attr_fix.yml` | – |
 | `names.en.json` | display names of the above | – |
 | `meta.json` | data version, see below | `meta.yml` |
+| `docs/script-coverage.md` | which item scripts parse, see below | – |
 
 The shapes are defined in [`../src/data/types.ts`](../src/data/types.ts);
 the app reads the data through [`../src/data/index.ts`](../src/data/index.ts).
@@ -67,6 +68,23 @@ Filters:
   and at least one supported job.
 - Monsters: every entry in `mob_db.yml`.
 
+## Item scripts
+
+Each item's `Script` is parsed into `effects`, an AST of the rAthena script
+subset in `script/parser.ts` (types `ScriptStmt`/`ScriptExpr` in
+`src/data/types.ts`); the engine evaluates it per build. A script outside the
+subset gets `effects: null` and an `unsupported` reason, and is listed in
+`docs/script-coverage.md` with the statement that stopped the parser. To fix
+one, rewrite its `Script:` in `data-overrides/items.yml`; the parser reads the
+override like any other script.
+
+Constants (`RC_*`, `Ele_*`, `Job_*`, bonus names, ...) come from a static table,
+`script/constants.ts`, so the parser tests run without rAthena. After an
+rAthena update, regenerate it:
+```
+node data-pipeline/script/extract-constants.ts && pnpm format
+```
+
 ## Data version
 
 `meta.json` holds:
@@ -75,9 +93,10 @@ Filters:
   files. Share codes store it; it changes whenever the data changes;
 - `rathenaCommit`, `rathenaCommitDate`, `rathenaDirty`;
 - `overridesHash`: SHA-256 over `data-overrides/*.yml`;
+- `coverageHash`: SHA-256 over `docs/script-coverage.md`;
 - `generatedAt`.
 
-`src/data/data.test.ts` recomputes both hashes, so `pnpm test` fails if an
+`src/data/data.test.ts` recomputes all three hashes, so `pnpm test` fails if an
 override was edited without running `pnpm data`, or if a generated file was
 edited by hand.
 
@@ -88,6 +107,9 @@ edited by hand.
   reads the commit.
 - `overrides.ts`: loads and merges override files.
 - `jobs.ts`, `items.ts`, `monsters.ts`, `tables.ts`: one converter per kind.
+- `hiddenItems.ts`: reads `data-overrides/hidden-items.yml`.
+- `script/`: lexer, parser and constants for item scripts.
+- `coverage.ts`: writes `docs/script-coverage.md`.
 - `hash.ts`: overrides hash and data hash.
 - `json.ts`: JSON formatting for small diffs.
 - `fixtures/`: tiny YAML inputs for the unit tests (`*.test.ts`).

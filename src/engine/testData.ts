@@ -37,6 +37,7 @@ export function testWeapon(partial: Partial<Item> = {}): Item {
     refineable: true,
     locations: ['Right_Hand'],
     jobs: [0, 1],
+    effects: [],
     ...partial,
   };
 }

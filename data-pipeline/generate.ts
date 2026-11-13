@@ -1,7 +1,8 @@
 import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { DataMeta, NamesFile } from '../src/data/types.ts';
-import { hashData, hashOverrides, META_FILE } from './hash.ts';
+import { COVERAGE_FILE, coverageReport } from './coverage.ts';
+import { hashData, hashOverrides, hashTexts, META_FILE } from './hash.ts';
 import { loadHiddenItems } from './hiddenItems.ts';
 import { generateItems } from './items.ts';
 import { generateJobs } from './jobs.ts';
@@ -48,6 +49,10 @@ function main(): void {
   const monsters = generateMonsters(rathenaDir, overrides.monsters);
   console.log(`Monsters: ${monsters.data.length}`);
   const tables = generateTables(rathenaDir);
+  const coverage = coverageReport(items.data, items.names, items.scripts);
+  const scripted = items.data.filter((item) => (items.scripts.get(item.id) ?? '').trim() !== '');
+  const parsed = scripted.filter((item) => item.effects !== null).length;
+  console.log(`Scripts: ${parsed} of ${scripted.length} parsed`);
   const names: NamesFile = { items: items.names, monsters: monsters.names, jobs: jobs.names };
 
   const dataFiles: Record<string, string> = {
@@ -64,6 +69,7 @@ function main(): void {
     rathenaCommitDate: source.commitDate,
     rathenaDirty: source.dirty,
     overridesHash: hashOverrides(overridesDir),
+    coverageHash: hashTexts({ [COVERAGE_FILE]: coverage }),
     generatedAt: new Date().toISOString(),
   };
 
@@ -77,6 +83,8 @@ function main(): void {
   }
   for (const [fileName, text] of Object.entries(dataFiles)) writeOutput(fileName, text);
   writeOutput(META_FILE, formatJson(dataMeta));
+  writeFileSync(path.join(repoRoot, COVERAGE_FILE), coverage);
+  console.log(`  wrote ${COVERAGE_FILE}`);
   console.log(`Data version: ${dataMeta.label} (${dataMeta.hash})`);
 }
 

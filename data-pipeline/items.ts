@@ -2,6 +2,7 @@ import type { Item } from '../src/data/types.ts';
 import { SUPPORTED_JOBS } from './jobs.ts';
 import { applyOverrides, ITEM_SCHEMA, type OverrideFile } from './overrides.ts';
 import { enabledKeys, loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
+import { parseScript } from './script/parser.ts';
 
 const jobIdByKey = new Map(SUPPORTED_JOBS.map((job) => [job.key, job.id]));
 
@@ -113,6 +114,20 @@ function numberField(record: YamlMap, field: string, fallback: number): number {
   return value;
 }
 
+/** The item's `Script`, or an empty string when it has none. */
+export function itemScript(record: YamlMap): string {
+  const script = record.Script;
+  if (script === undefined || script === null) return '';
+  if (typeof script !== 'string') throw new Error(`${where(record)}: Script must be a string.`);
+  return script;
+}
+
+/** Parsed effects, or `effects: null` plus the reason when the script is outside the subset. */
+function scriptFields(record: YamlMap): Pick<Item, 'effects' | 'unsupported'> {
+  const result = parseScript(itemScript(record));
+  return result.ok ? { effects: result.effects } : { effects: null, unsupported: result.reason };
+}
+
 function stringField(record: YamlMap, field: string): string {
   const value = record[field];
   if (typeof value !== 'string') throw new Error(`${where(record)}: missing ${field}.`);
@@ -155,6 +170,7 @@ export function convertItem(record: YamlMap): Item | undefined {
     locations,
     jobs,
     ...(gender === undefined ? {} : { gender }),
+    ...scriptFields(record),
   };
 }
 
@@ -190,24 +206,26 @@ export function generateItems(
   rathenaDir: string,
   overrides: OverrideFile,
   hidden: ReadonlySet<number> = new Set(),
-): { data: Item[]; names: Record<number, string> } {
+): { data: Item[]; names: Record<number, string>; scripts: Map<number, string> } {
   const records = loadDb(rathenaDir, `${PRE_RE_DIR}/item_db.yml`, (importPath) =>
     importPath.endsWith('/item_db_equip.yml'),
   ).body;
   const merged = applyOverrides(records, overrides, ITEM_SCHEMA);
   const items: Item[] = [];
   const names: Record<number, string> = {};
+  const scripts = new Map<number, string>();
   for (const record of merged) {
     const item = convertItem(record);
     if (item === undefined) continue;
     if (hidden.has(item.id)) item.hidden = true;
     items.push(item);
     names[item.id] = stringField(record, 'Name');
+    scripts.set(item.id, itemScript(record));
   }
   items.sort((a, b) => a.id - b.id);
   const unknown = [...hidden].filter((id) => names[id] === undefined);
   if (unknown.length > 0) {
     throw new Error(`hidden-items.yml: no such equipment: ${unknown.join(', ')}.`);
   }
-  return { data: items, names };
+  return { data: items, names, scripts };
 }

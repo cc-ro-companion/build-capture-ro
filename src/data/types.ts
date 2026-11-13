@@ -89,6 +89,10 @@ export interface Item {
   jobs: number[];
   /** Only present when restricted. */
   gender?: 'male' | 'female';
+  /** Parsed `Script`; `[]` without a script, `null` when the script is outside the parsed subset. */
+  effects: ScriptStmt[] | null;
+  /** Why `effects` is null, e.g. `command "autobonus"`. */
+  unsupported?: string;
   /** Not obtainable on ccRO (data-overrides/hidden-items.yml); left out of search by default. */
   hidden?: true;
 }
@@ -161,5 +165,7 @@ export interface DataMeta {
   rathenaDirty: boolean;
   /** SHA-256 over data-overrides/*.yml, for the staleness test. */
   overridesHash: string;
+  /** SHA-256 over docs/script-coverage.md, which the generator writes alongside. */
+  coverageHash: string;
   generatedAt: string;
 }

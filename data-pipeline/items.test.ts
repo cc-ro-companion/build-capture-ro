@@ -72,7 +72,17 @@ describe('convertItem', () => {
       refineable: false,
       locations: ['Right_Hand'],
       jobs: allJobIds,
+      effects: [],
     });
+  });
+
+  it('parses the script into effects, or records why it cannot', () => {
+    expect(convertItem({ ...weapon, Script: 'bonus bStr,1;\n' })?.effects).toEqual([
+      { k: 'bonus', name: 'bStr', args: [{ k: 'num', v: 1 }] },
+    ]);
+    const unsupported = convertItem({ ...weapon, Script: 'skill "TF_DOUBLE",5;' });
+    expect(unsupported?.effects).toBeNull();
+    expect(unsupported?.unsupported).toBe('command "skill"');
   });
 
   it('records a gender restriction and leaves weapon fields off armor', () => {
