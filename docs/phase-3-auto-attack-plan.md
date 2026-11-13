@@ -218,7 +218,7 @@ and hand the numbers over for fixtures.
 7. [x] UI: build state, Build/Target/Results panels, share bar, link
    opening with confirm. Check: component tests; verification passes; the
    built app renders a result for a sample build.
-8. [ ] Fixture runner: `tests/fixtures/fixtures.test.ts` and the format,
+8. [x] Fixture runner: `tests/fixtures/fixtures.test.ts` and the format,
    with one synthetic fixture (marked `synthetic: true`, from engine output
    against Poring) so the runner is tested before real data exists; update
    `tests/fixtures/README.md`. Check: verification passes.
@@ -242,3 +242,4 @@ and hand the numbers over for fixtures.
 - 2026-11-13 · 5 build model: normalize (unknown ids dropped, levels/stats clamped, unequippable weapon dropped, each with a warning), resolve, weapon/monster search · check/lint/test (141)/build pass · c0dc1ab
 - 2026-11-13 · plan change agreed with the maintainer: the plan's deflated-JSON share code measured ~174 characters (link ~228, over the 200 limit). The share code is now an opaque binary format (link ~110), and storage keeps readable JSON (build + `d` + `l`) that users may edit; phase 10 import accepts both
 - 2026-11-13 · 6 share code and storage: binary code (typical link ~110 chars), readable JSON storage with `d`/`l`, hint, corrupt-code and throwing-storage tests · check/lint/test (159)/build pass · ae9166b
+- 2026-11-13 · 7 UI: build state (runes), Build/Target/Results panels, share bar with copy link, data hint, warnings, load errors; autosave; `#b=` link opening with confirm and fragment removal; a weapon the new job/level cannot equip is removed with a notice; garbage codes are no longer reported as "newer version" · check/lint/test (171)/build pass; built app rendered headless in Chrome for a Swordman/Sword/Poring link (status window, damage table, DPS shown). Bundle is ~1 MB minified (126 kB gzip) because the data JSON is bundled; Vite warns about chunk size · 4c54266

@@ -1,0 +1,22 @@
+# Not from the game: numbers are the engine's own output, so the fixture
+# runner is exercised before real validation data exists. Remove it once the
+# first validated fixture is in.
+name: Synthetic Swordman 50/30 Sword vs Poring
+synthetic: true
+validatedOn: 2026-11-13
+dataHash: a1000f15
+build:
+  v: 1
+  job: 1 # Swordman
+  baseLevel: 50
+  jobLevel: 30
+  stats: { str: 50, agi: 30, vit: 30, int: 1, dex: 10, luk: 1 }
+  weapon: 1101 # Sword
+  monster: 1002 # Poring
+observed:
+  status: { atk: [104, 0], hit: 62, flee: 81, crit: 1, aspd: 152 }
+  # A sample from inside the 90–102 range, as a real session would record.
+  normal: { min: 92, max: 101, rangeComplete: false }
+  crit: { min: 104, max: 104 }
+  dps: 100.8
+notes: Synthetic; see the comment at the top.
