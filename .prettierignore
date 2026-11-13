@@ -6,3 +6,5 @@ LICENSE
 *.md
 # Written by the data generator, which owns its formatting.
 src/data/generated/
+# Review worksheet, one entry per line on purpose.
+docs/hidden-items-review.yml
