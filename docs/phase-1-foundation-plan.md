@@ -33,7 +33,7 @@ and has the directory layout from the parent plan in place. No game logic.
    empty main area with placeholder regions (build, target, results),
    footer with disclaimer and rAthena credit. Check: verification passes;
    a component test renders banner and disclaimer.
-4. [ ] License and docs: `LICENSE` (GPL-3.0 full text), `README.md` with
+4. [x] License and docs: `LICENSE` (GPL-3.0 full text), `README.md` with
    purpose, disclaimer, "based on rAthena" credit, development commands.
    Check: verification passes.
 5. [ ] CI and deploy: `.github/workflows/ci.yml` (check, lint, test, build
@@ -55,4 +55,5 @@ corepack pnpm check && corepack pnpm lint && corepack pnpm test && corepack pnpm
 <!-- date · task · result · commit -->
 - 2026-11-13 · 1 Scaffold · check, lint, test (1/1), build pass · 2268225
 - 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · 5616c9d
-- 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · (this commit)
+- 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · ccbb3e7
+- 2026-11-13 · 4 License and docs · verification passes; LICENSE md5 d32239bc… (canonical GPL-3.0) · (this commit)
