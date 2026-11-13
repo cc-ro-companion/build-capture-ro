@@ -1,6 +1,6 @@
 # Phase 2: Data pipeline, first cut — plan
 
-Status: approved
+Status: done
 
 Parent: [build-planner-plan.md](build-planner-plan.md), phase 2.
 
