@@ -5,7 +5,7 @@ import { defaultDummy, MAX_DUMMIES } from '../build/dummy';
 import { defaultBuild, type Build } from '../build/model';
 import { gameData, resolveBuild } from '../build/resolve';
 import { encodeShareCode } from '../build/shareCode';
-import { saveBuild, STORAGE_KEY } from '../build/storage';
+import { saveBuild, STORAGE_KEY, UNREADABLE_KEY } from '../build/storage';
 import { dataMeta } from '../data';
 import { autoAttack } from '../engine/autoAttack';
 import { rAthenaDefaults } from '../engine/config';
@@ -287,6 +287,26 @@ describe('saving and share links', () => {
     render(App);
     expect(screen.getByRole('alert').textContent).toMatch(/not valid.*unchanged/);
     expect((screen.getByLabelText('Base level') as HTMLInputElement).value).toBe('77');
+  });
+
+  it('keeps an unreadable saved build before autosave replaces it', () => {
+    const newer = JSON.stringify({ ...swordman, v: 2 });
+    localStorage.setItem(STORAGE_KEY, newer);
+    render(App);
+    expect(screen.getByRole('alert').textContent).toMatch(/newer version.*copy is kept/);
+    expect(localStorage.getItem(UNREADABLE_KEY)).toBe(newer);
+    expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject({ v: 1, job: 0 });
+  });
+
+  it('shows both errors when the saved build and the link are unreadable', () => {
+    localStorage.setItem(STORAGE_KEY, '{oops');
+    window.history.replaceState(null, '', '/#b=zzzz');
+    render(App);
+    const alerts = screen.getAllByRole('alert').map((alert) => alert.textContent);
+    expect(alerts).toHaveLength(2);
+    expect(alerts[0]).toMatch(/Saved build ignored/);
+    expect(alerts[1]).toMatch(/not valid/);
+    expect(alerts[1]).not.toMatch(/unchanged/);
   });
 
   it('still works when localStorage throws', async () => {

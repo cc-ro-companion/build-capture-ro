@@ -9,7 +9,7 @@ import {
   type DataVersion,
   type RestoreResult,
 } from '../build/shareCode';
-import { loadBuild, saveBuild } from '../build/storage';
+import { keepUnreadableBuild, loadBuild, saveBuild, UNREADABLE_KEY } from '../build/storage';
 import { autoAttack } from '../engine/autoAttack';
 import type { EngineConfig } from '../engine/config';
 import { statPointBudget, statPointsSpent, type StatName } from '../engine/stats';
@@ -37,8 +37,8 @@ export class BuildState {
   warnings = $state<string[]>([]);
   /** Set when the loaded build was made with other data. */
   dataHint = $state<string | null>(null);
-  /** A share code or saved build that could not be read at all. */
-  loadError = $state<string | null>(null);
+  /** Share codes or saved builds that could not be read at all. */
+  loadErrors = $state<string[]>([]);
 
   resolved = $derived.by(() => resolveBuild(this.build, this.data));
   status = $derived.by(() => statusWindow(this.resolved.character, this.config));
@@ -58,16 +58,23 @@ export class BuildState {
     this.storage = options.storage;
 
     const saved = loadBuild(this.data, this.config, this.version, this.storage);
-    if (saved && 'error' in saved) this.loadError = `Saved build ignored: ${saved.error}`;
-    else if (saved) this.apply(saved);
+    const savedLoaded = saved !== null && !('error' in saved);
+    if (saved && 'error' in saved) {
+      const kept = keepUnreadableBuild(this.storage)
+        ? ` A copy is kept in this browser's localStorage under "${UNREADABLE_KEY}".`
+        : '';
+      this.loadErrors.push(`Saved build ignored: ${saved.error}${kept}`);
+    } else if (saved) {
+      this.apply(saved);
+    }
 
     if (options.sharedCode !== null) {
       const shared = decodeShareCode(options.sharedCode, this.data, this.config, this.version);
       if ('error' in shared) {
-        this.loadError = `${shared.error} Your current build is unchanged.`;
+        const unchanged = savedLoaded ? ' Your current build is unchanged.' : '';
+        this.loadErrors.push(`${shared.error}${unchanged}`);
       } else if (
-        !saved ||
-        'error' in saved ||
+        !savedLoaded ||
         sameBuild(saved.build, shared.build) ||
         options.confirmReplace('Replace your current build with the build from this link?')
       ) {

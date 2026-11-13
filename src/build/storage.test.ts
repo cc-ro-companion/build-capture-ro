@@ -5,7 +5,7 @@ import { defaultDummy } from './dummy';
 import { defaultBuild, type Build } from './model';
 import { gameData } from './resolve';
 import type { DataVersion } from './shareCode';
-import { loadBuild, saveBuild, STORAGE_KEY } from './storage';
+import { keepUnreadableBuild, loadBuild, saveBuild, STORAGE_KEY, UNREADABLE_KEY } from './storage';
 
 const current: DataVersion = { hash: dataMeta.hash, label: dataMeta.label };
 const build: Build = {
@@ -89,5 +89,14 @@ describe('storage', () => {
     expect(load(throwingStorage())).toBeNull();
     expect(saveBuild(build, current, null)).toBe(false);
     expect(load(null)).toBeNull();
+  });
+
+  it('keeps a copy of the saved build under the unreadable key', () => {
+    const storage = memoryStorage();
+    storage.setItem(STORAGE_KEY, '{oops');
+    expect(keepUnreadableBuild(storage)).toBe(true);
+    expect(storage.getItem(UNREADABLE_KEY)).toBe('{oops');
+    expect(keepUnreadableBuild(memoryStorage())).toBe(false);
+    expect(keepUnreadableBuild(throwingStorage())).toBe(false);
   });
 });

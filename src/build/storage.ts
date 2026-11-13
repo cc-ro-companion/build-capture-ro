@@ -7,6 +7,8 @@ import type { GameData } from './resolve';
 import { restoreBuild, type DataVersion, type RestoreResult } from './shareCode';
 
 export const STORAGE_KEY = 'ccro-build-planner:current';
+/** Where a saved build that could not be read is kept before autosave replaces it. */
+export const UNREADABLE_KEY = 'ccro-build-planner:unreadable';
 
 /** What is stored: the build plus the data version it was saved with. */
 export interface StoredBuild extends Build {
@@ -84,4 +86,21 @@ export function loadBuild(
     return null;
   }
   return json === null ? null : parseBuildJson(json, data, config, current);
+}
+
+/**
+ * Copies the saved build to UNREADABLE_KEY, so autosave does not destroy a
+ * build that a newer planner made or that was edited by hand and broken.
+ * Returns false when storage is unavailable or the copy fails.
+ */
+export function keepUnreadableBuild(storage: Storage | null = browserStorage()): boolean {
+  if (!storage) return false;
+  try {
+    const json = storage.getItem(STORAGE_KEY);
+    if (json === null) return false;
+    storage.setItem(UNREADABLE_KEY, json);
+    return true;
+  } catch {
+    return false;
+  }
 }

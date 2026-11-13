@@ -30,9 +30,9 @@
     />
     <span class="status" aria-live="polite">{copyStatus}</span>
   </div>
-  {#if planner.loadError}
-    <p class="error" role="alert">{planner.loadError}</p>
-  {/if}
+  {#each planner.loadErrors as error, index (index)}
+    <p class="error" role="alert">{error}</p>
+  {/each}
   {#if planner.dataHint}
     <p class="hint" data-testid="data-hint">{planner.dataHint}</p>
   {/if}
