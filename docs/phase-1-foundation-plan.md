@@ -57,4 +57,4 @@ corepack pnpm check && corepack pnpm lint && corepack pnpm test && corepack pnpm
 - 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · 5616c9d
 - 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · ccbb3e7
 - 2026-11-13 · 4 License and docs · verification passes; LICENSE md5 d32239bc… (canonical GPL-3.0) · 7e67126
-- 2026-11-13 · 5 CI and deploy · verification passes; workflow YAML parsed and structure asserted; frozen-lockfile install OK; dist uses ./assets paths; workflows not run (no remote) · (this commit)
+- 2026-11-13 · 5 CI and deploy · verification passes; workflow YAML parsed and structure asserted; frozen-lockfile install OK; dist uses ./assets paths; workflows not run (no remote) · cae8a21

@@ -19,13 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/verify
-      - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
     needs: build
+    # A manual run can be started on any branch; only main may reach the live site.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       pages: write

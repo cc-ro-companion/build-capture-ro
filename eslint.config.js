@@ -13,7 +13,14 @@ export default ts.config(
   ...svelte.configs.prettier,
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
+      globals: globals.browser,
+    },
+  },
+  {
+    // Node globals only where code runs in Node; app code ships to the browser.
+    files: ['*.config.{js,ts}', 'data-pipeline/**/*.{js,ts}'],
+    languageOptions: {
+      globals: globals.node,
     },
   },
   {
