@@ -207,7 +207,7 @@ and hand the numbers over for fixtures.
    budget). Check: unit tests; verification passes.
 3. [x] Engine status window: `status.ts` (ATK, HIT, FLEE, CRIT, ASPD incl.
    cap). Check: unit tests; verification passes.
-4. [ ] Engine auto attack: `autoAttack.ts` (normal and crit damage with
+4. [x] Engine auto attack: `autoAttack.ts` (normal and crit damage with
    exact average, hit and crit chance, DPS). Check: unit tests incl. brute
    force average; verification passes.
 5. [ ] Build model: `model.ts`, `resolve.ts`, `search.ts` with normalize
@@ -236,3 +236,4 @@ and hand the numbers over for fixtures.
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · 1 housekeeping: phase 2 ticked and logged in the master plan, base-file open item settled (verified: the five `db/` base files only hold imports), share code question marked decided · lint passes · 43c3609
 - 2026-11-13 · 2 engine stats: config, total stats, point cost/budget (99 → 628 points, level 1 budget 48) · check/lint/test (87)/build pass · f22b12d
+- 2026-11-13 · 3 engine status window: base ATK (STR/DEX main), HIT, FLEE, perfect dodge, CRIT incl. katar doubling, amotion/ASPD with config cap; status window ASPD truncated (to confirm in validation) · check/lint/test (99)/build pass · 5ed84bd
