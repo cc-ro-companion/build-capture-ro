@@ -34,6 +34,38 @@ export interface JobsFile {
   jobs: Job[];
 }
 
+/**
+ * An expression of the parsed rAthena script subset. Integer arithmetic as in
+ * rAthena's `op_2num`; strings only appear as skill names and bonus arguments.
+ */
+export type ScriptExpr =
+  | { k: 'num'; v: number }
+  | { k: 'str'; v: string }
+  /** An rAthena script constant, resolved at parse time; `name` is rAthena's spelling. */
+  | { k: 'const'; name: string; v: number }
+  /** A `.@name` script variable. */
+  | { k: 'var'; name: string }
+  /** `readparam` takes a bonus name (`bStr`), `getskilllv` a skill name or id. */
+  | { k: 'call'; fn: ScriptFunction; args: ScriptExpr[] }
+  | { k: 'ref'; name: ScriptRef }
+  /**
+   * Unary `-` `!` `~` (one arg), binary operators (two args), or `?:` (three
+   * args: condition, then, else).
+   */
+  | { k: 'op'; op: string; args: ScriptExpr[] };
+
+export type ScriptFunction =
+  'getrefine' | 'readparam' | 'getskilllv' | 'eaclass' | 'min' | 'max' | 'pow';
+
+/** Character parameters a script can read by name. */
+export type ScriptRef = 'BaseLevel' | 'JobLevel' | 'BaseJob' | 'BaseClass' | 'Class';
+
+export type ScriptStmt =
+  /** `bonus`…`bonus5`: the arity is `args.length` (a flag bonus like `bUnbreakableWeapon` has none). */
+  | { k: 'bonus'; name: string; args: ScriptExpr[] }
+  | { k: 'if'; cond: ScriptExpr; then: ScriptStmt[]; else: ScriptStmt[] }
+  | { k: 'set'; name: string; value: ScriptExpr };
+
 export interface Item {
   /** rAthena item id; stable, used in share codes. */
   id: number;

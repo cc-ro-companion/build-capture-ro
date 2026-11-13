@@ -133,7 +133,7 @@ app is the maintainer's step.
 1. [x] **Hidden items.** Move the review file to
    `data-overrides/hidden-items.yml`, pipeline sets `hidden`, search filter
    and "show hidden items" toggle. Check: pipeline and search tests.
-2. [ ] **Script parser.** Lexer, parser, constants for the subset above;
+2. [x] **Script parser.** Lexer, parser, constants for the subset above;
    unsupported reasons. Tests per grammar rule plus 20 real scripts
    (plain, refine-conditional, job-conditional, unsupported).
 3. [ ] **Effects in the data.** `items.json` gains `effects`/`unsupported`;
@@ -166,3 +166,4 @@ app is the maintainer's step.
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · setup · baseline green (check, lint, 215 tests, build); `pnpm data` drift check treats `generatedAt` in `meta.json` as expected, as the pipeline README says · 5340639
 - 2026-11-13 · 1 hidden items · 883 items hidden; pipeline loader + unknown-id check, search filter, "Show hidden items" toggle in the weapon picker; check, lint, 222 tests pass · 9cdd5ef
+- 2026-11-13 · 2 script parser · lexer, precedence-climbing parser (rAthena `parse_subexpr` levels), 465 constants + 242 bonus names extracted from rAthena 7f080871c by `script/extract-constants.ts`; 45 tests incl. 20 real scripts pass; 92.7 % of the 1,266 equipment scripts parse. Subset additions over the plan, all seen in real scripts: `min`/`max`/`pow`, `BaseClass`, `?:`, empty statements; bonus value counts checked per command (rAthena dispatches by count, a missing value is 0) · HASH2
