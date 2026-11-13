@@ -29,7 +29,7 @@ and has the directory layout from the parent plan in place. No game logic.
    is not edited by hand). An ESLint rule forbids `src/engine` from
    importing Svelte or `src/app`. Check: verification passes; a test
    import violating the rule is reported by lint (tried once, not kept).
-3. [ ] App shell: header with app name and version, "unfinished" banner,
+3. [x] App shell: header with app name and version, "unfinished" banner,
    empty main area with placeholder regions (build, target, results),
    footer with disclaimer and rAthena credit. Check: verification passes;
    a component test renders banner and disclaimer.
@@ -54,4 +54,5 @@ corepack pnpm check && corepack pnpm lint && corepack pnpm test && corepack pnpm
 ## Progress log
 <!-- date · task · result · commit -->
 - 2026-11-13 · 1 Scaffold · check, lint, test (1/1), build pass · 2268225
-- 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · (this commit)
+- 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · 5616c9d
+- 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · (this commit)
