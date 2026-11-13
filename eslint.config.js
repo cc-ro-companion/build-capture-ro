@@ -17,6 +17,27 @@ export default ts.config(
     },
   },
   {
+    // The engine must stay UI-free so it can be unit tested and moved into a web worker.
+    files: ['src/engine/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['svelte', 'svelte/*'],
+              message: 'src/engine must not depend on Svelte.',
+            },
+            {
+              group: ['**/app', '**/app/**', '*.svelte'],
+              message: 'src/engine must not import from src/app or Svelte components.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['**/*.svelte', '**/*.svelte.ts'],
     languageOptions: {
       parserOptions: {

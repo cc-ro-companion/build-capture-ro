@@ -23,7 +23,7 @@ and has the directory layout from the parent plan in place. No game logic.
 1. [x] Scaffold: `package.json`, Vite, Svelte 5, TypeScript, svelte-check,
    Vitest, ESLint, Prettier, `.gitignore`, `.editorconfig`. Check: the
    verification command passes with a minimal app and one trivial test.
-2. [ ] Layout: `data-pipeline/`, `data-overrides/`, `src/engine/`,
+2. [x] Layout: `data-pipeline/`, `data-overrides/`, `src/engine/`,
    `src/build/`, `src/app/`, `tests/fixtures/`, each with a short README
    stating its purpose and rules (engine has no UI imports; generated data
    is not edited by hand). An ESLint rule forbids `src/engine` from
@@ -53,3 +53,5 @@ corepack pnpm check && corepack pnpm lint && corepack pnpm test && corepack pnpm
 
 ## Progress log
 <!-- date · task · result · commit -->
+- 2026-11-13 · 1 Scaffold · check, lint, test (1/1), build pass · 2268225
+- 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · (this commit)
