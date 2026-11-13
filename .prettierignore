@@ -1,0 +1,6 @@
+dist/
+coverage/
+pnpm-lock.yaml
+LICENSE
+# Markdown is wrapped by hand; Prettier would widen tables and re-indent lists.
+*.md
