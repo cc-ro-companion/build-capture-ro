@@ -33,6 +33,8 @@ validation session at ccRO's training dummy, recorded as test fixtures.
 - Named build lists, duplicate/import/export (import accepts share codes
   and the readable build JSON): phase 10. Only the current
   build is kept.
+- Comparing results across several targets or dummies side by side:
+  phase 10. One target is selected at a time.
 - Sprites, PWA: phase 11. Gender selection: no weapon in the data needs it
   beyond what Bard/Dancer already imply.
 
@@ -48,13 +50,14 @@ validation session at ccRO's training dummy, recorded as test fixtures.
 | Stat budget | Base stats 1..`maxStat`; cost per point from rAthena's pre-renewal `PC_STATUS_POINT_COST(x) = 1 + (x + 9) / 10` (integer division); total from `jobsData.statPoints[baseLevel − 1]`. Going over budget is allowed and shown as an error, not prevented | Lowering the level of a shared build must not silently destroy its stats. |
 | Weapon search | Case-insensitive substring over English name, aegis name and id; only weapons the job can equip at the base level (`jobs`, `equipLevelMin/Max`); "No weapon" (bare hands, `Fist`) is always available; at most 50 results shown | 1762 items is small; filtering by job removes most noise. |
 | Monster search | Same matching over the monster's name, aegis name and id; at most 50 results | Same reason. |
-| Build model | `{ v: 1, job, baseLevel, jobLevel, stats: {str..luk}, weapon: id \| null, monster: id \| null }` | Ids only (master plan); `v` lets later phases migrate old builds. |
-| Share code | Opaque binary code, base64url, in the URL fragment `#b=<code>`. Bytes: format version (1), then tagged fields as varint tag + varint value (1 job, 2 base level, 3 job level, 4–9 STR..LUK, 10 weapon, 11 monster; 0 = none for weapon/monster), tag 0 ends the fields, then the data hash as 4 raw bytes and the data label as varint length + UTF-8. No compression. A newer format version, an unknown tag, truncation or trailing bytes make the code undecodable; decoded fields go through build normalize | Maintainer's choice after measuring: a typical code is ~48 characters (link ~102), where deflated JSON gave ~174 (link ~228). The code is not meant to be read or edited; later phases add tags or bump the version, and old links must keep decoding. Phase 10 import accepts these codes. |
+| Build model | `{ v: 1, job, baseLevel, jobLevel, stats: {str..luk}, weapon: id \| null, dummies: Dummy[], target: { monster: id } \| { dummy: index } \| null }` | Ids only for game data (master plan); dummies are the user's own records, so they are stored by value. `v` lets later phases migrate old builds; `v: 1` is changed in place because no link has been published yet. |
+| Share code | Opaque binary code, base64url, in the URL fragment `#b=<code>`. Bytes: format version (1), then tagged fields as varint tag + varint value (1 job, 2 base level, 3 job level, 4–9 STR..LUK, 10 weapon with 0 = none, 11 target monster id, 12 target dummy index + 1, 13 one dummy record; 11 and 12 are mutually exclusive), tag 0 ends the fields. A dummy record (tag 13, repeated in list order) is: name as varint length + UTF-8, then varints in fixed order level, DEF, MDEF, STR, AGI, VIT, INT, DEX, LUK, size index, race index, element index, element level; the size/race/element index tables are part of the format and are only ever appended to. After the fields: then the data hash as 4 raw bytes and the data label as varint length + UTF-8. No compression. A newer format version, an unknown tag, truncation or trailing bytes make the code undecodable; decoded fields go through build normalize | Maintainer's choice after measuring: a typical code is ~48 characters (link ~102), where deflated JSON gave ~174 (link ~228). The code is not meant to be read or edited; later phases add tags or bump the version, and old links must keep decoding. Phase 10 import accepts these codes. |
 | Data version hint | When a decoded code's or saved build's `d` differs from the current `dataMeta.hash`, a notice shows "Made with data <l> (<d>); current data is <label> (<hash>). Numbers may differ." | Idea file: old builds show which data they were made with. |
 | Invalid content on decode | Unknown ids and out-of-range values are dropped or clamped, each with a visible warning; a code that cannot be decoded at all shows an error and leaves the current build untouched | A removed item must not make a whole build unreadable. |
 | Saving | Current build autosaved to `localStorage` (key `ccro-build-planner:current`) as readable JSON: the build model plus `d` (data hash) and `l` (data label), all access in try/catch; restored on load through build normalize, with the same warnings and data version hint as a link | Maintainer's choice: users may read, edit or generate this JSON with their own tools; phase 10 import also accepts it. Build lists are phase 10. |
 | Opening a share link | If the link's build differs from the saved one, ask before replacing it (`confirm`); then remove the fragment from the URL | Following a link must not silently overwrite work. |
-| Training dummy | Entered as a ccRO monster in `data-overrides/monsters.yml` once the maintainer has its stats (size, race, element and level, DEF, VIT, AGI, LUK, level, HP) | Unknown today; the maintainer reads it off in game. Fixtures target that entry. |
+| Training dummy | ccRO's dummy is configurable per player, so builds hold their own **dummies**: up to 20 per build, each with a name (1–30 characters, default "Dummy N") and the settings the game offers: level 1–99; DEF, MDEF, STR, AGI, VIT, INT, DEX, LUK 1–999; size; race (Formless, Undead, Brute, Plant, Insect, Fish, Demon, Demihuman, Angel, Dragon); element (the 10 elements) with element level 1–4. A dummy can be added, edited, renamed, removed and selected as the target instead of a monster. Engine-wise it becomes a `Monster` record with class `normal`, no modes and no race groups; HP is not configurable and shown as "–" | Maintainer: every stat is configurable in game except HP and the boss flag, which can be neither seen nor changed. Several dummies per build let one build be tested against different setups. |
+| Dummy normalize | Out-of-range numbers are clamped and unknown size/race/element values replaced by the default (medium, Formless, Neutral), each with a warning; an empty or too long name is replaced or cut with a warning; dummies beyond 20 are dropped with a warning; a target dummy index that does not exist clears the target with a warning | Same rule as for ids: bad content must not make a build unreadable. |
 | Fixture format | YAML in `tests/fixtures/auto-attack/`, one file per validated character | Comments for in-game notes; `yaml` is already a dev dependency. |
 | Fixture comparison | Status window values must match exactly; observed min/max damage must lie inside the computed range (observations are a sample) and, if marked `rangeComplete: true`, equal it; observed crit damage must equal the computed crit range bounds it falls in; DPS within ±5 % | The in-game sample cannot prove extremes; the DPS meter averages over a time window. |
 
@@ -70,6 +73,7 @@ src/engine/
   *.test.ts          hand-computed cases, each comment citing the rAthena line it follows
 src/build/
   model.ts           Build type, default build, normalize (clamp, drop unknown ids, warnings)
+  dummy.ts           Dummy type, defaults, normalize, conversion to an engine Monster
   resolve.ts         Build -> engine inputs (job, weapon item, monster) from src/data
   search.ts          weapon and monster search
   shareCode.ts       encode/decode, data version comparison
@@ -78,7 +82,8 @@ src/build/
 src/app/
   App.svelte         layout from phase 1, regions filled by the components below
   BuildPanel.svelte  job, levels, stats with budget, weapon search
-  TargetPanel.svelte monster search and its relevant stats
+  TargetPanel.svelte target choice (monster search or one of the build's dummies), target stats
+  DummyEditor.svelte add, edit, rename, remove dummies
   ResultsPanel.svelte status values, auto attack numbers, notes on what is not modelled
   ShareBar.svelte    copy link, data version hint, decode warnings
   build.svelte.ts    the reactive build state (Svelte 5 runes), autosave
@@ -130,7 +135,12 @@ validatedOn: 2026-11-20
 dataHash: a1000f15          # data version used; informational
 build: { v: 1, job: 1, baseLevel: 50, jobLevel: 30,
          stats: { str: 50, agi: 30, vit: 30, int: 1, dex: 30, luk: 1 },
-         weapon: 1101, monster: <training dummy id> }
+         weapon: 1101,
+         dummies: [{ name: Default dummy, level: 1, def: 1, mdef: 1,
+                     str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1,
+                     size: medium, race: Formless, element: Neutral,
+                     elementLevel: 1 }],
+         target: { dummy: 0 } }
 observed:
   status: { atk: [n, n], hit: n, flee: n, crit: n, aspd: n }
   normal: { min: n, max: n, rangeComplete: false }
@@ -145,8 +155,10 @@ The three regions from phase 1 get real content; the banner stays.
   level inputs clamped to the job's maximums, six stat rows (base input,
   job bonus, total, cost of the next point), points left (red when
   negative), weapon search with "No weapon".
-- **Target**: monster search; the chosen monster's level, HP, size, race,
-  element and level, DEF, VIT, FLEE, LUK.
+- **Target**: choose a monster by search or one of the build's dummies;
+  the chosen target's level, HP ("–" for dummies), size, race, element and
+  level, DEF, VIT, FLEE, LUK. A dummy list with "Add dummy" and, per
+  dummy, select, edit (all settings and the name) and remove.
 - **Results**: status window values; normal hit min/max/avg, crit
   min/max/avg, hit chance, crit chance, ASPD, attacks per second, DPS; a
   short line listing what is not modelled yet (refinement, cards, skills,
@@ -182,7 +194,16 @@ The three regions from phase 1 get real content; the banner stays.
       fixture from the validation session exists and passes, or the
       deviation it reveals is listed under "Validation findings" in this
       plan with a follow-up.
-- [ ] The training dummy exists as a monster override and is searchable.
+- [ ] Training dummies: a build holds up to 20 named dummies with the
+      settings and ranges from "Training dummy"; they can be added, edited,
+      renamed, removed and selected as the target, and selecting one shows
+      its auto attack numbers (component test).
+- [ ] Dummies survive a reload and round-trip through share codes and the
+      readable JSON; normalize clamps out-of-range dummy values, replaces
+      unknown size/race/element, fixes names, drops dummies beyond 20 and
+      clears a missing target dummy, each with a warning.
+- [ ] A typical phase 3 build with one dummy as target still has a share
+      link under 200 characters.
 - [ ] The verification command passes locally and in CI; the deployed app
       shows the slice.
 
@@ -222,11 +243,13 @@ and hand the numbers over for fixtures.
    with one synthetic fixture (marked `synthetic: true`, from engine output
    against Poring) so the runner is tested before real data exists; update
    `tests/fixtures/README.md`. Check: verification passes.
-9. [ ] Training dummy: **needs the maintainer's in-game stats.** Add it to
-   `data-overrides/monsters.yml`, run `pnpm data`. Check: it appears in
-   monster search; verification passes.
+9. [ ] Training dummies: `dummy.ts`; build model `monster` replaced by
+   `dummies` + `target` (model, normalize, resolve, share code tags 11–13,
+   storage, fixtures, synthetic fixture moved to a dummy); Target panel and
+   `DummyEditor.svelte`. Check: unit and component tests for the dummy
+   criteria; verification passes.
 10. [ ] Validation session: **maintainer's numbers.** Record each validated
-    character as a fixture; fix formula deviations or log them under
+    character as a fixture, with the dummy settings used; fix formula deviations or log them under
     "Validation findings". Remove the synthetic fixture. Check: verification
     passes.
 
@@ -244,3 +267,4 @@ and hand the numbers over for fixtures.
 - 2026-11-13 · 6 share code and storage: binary code (typical link ~110 chars), readable JSON storage with `d`/`l`, hint, corrupt-code and throwing-storage tests · check/lint/test (159)/build pass · ae9166b
 - 2026-11-13 · 7 UI: build state (runes), Build/Target/Results panels, share bar with copy link, data hint, warnings, load errors; autosave; `#b=` link opening with confirm and fragment removal; a weapon the new job/level cannot equip is removed with a notice; garbage codes are no longer reported as "newer version" · check/lint/test (171)/build pass; built app rendered headless in Chrome for a Swordman/Sword/Poring link (status window, damage table, DPS shown). Bundle is ~1 MB minified (126 kB gzip) because the data JSON is bundled; Vite warns about chunk size · 4c54266
 - 2026-11-13 · 8 fixture runner: `tests/fixtures/fixtures.test.ts` + `compare.ts` (exact status window, damage sample inside range or equal when `rangeComplete`, exact crit, DPS ±5 %), synthetic Swordman/Poring fixture, README format · check/lint/test (179)/build pass · 5940a27
+- 2026-11-13 · plan change agreed with the maintainer: ccRO's training dummy is configurable per player (level 1–99; DEF, MDEF, STR, AGI, VIT, INT, DEX, LUK 1–999; size, race, element, element level 1–4; HP and boss flag not configurable). Task 9 is now "configurable dummies, several per build, one selected target"; build model, share code and acceptance criteria updated
