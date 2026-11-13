@@ -1,13 +1,22 @@
 import { describe, expect, it } from 'vitest';
 import { dataMeta } from '../data';
 import { rAthenaDefaults } from '../engine/config';
+import { defaultDummy } from './dummy';
 import { defaultBuild, type Build } from './model';
 import { gameData } from './resolve';
 import type { DataVersion } from './shareCode';
 import { loadBuild, saveBuild, STORAGE_KEY } from './storage';
 
 const current: DataVersion = { hash: dataMeta.hash, label: dataMeta.label };
-const build: Build = { ...defaultBuild(), job: 1, baseLevel: 50, jobLevel: 30, weapon: 1101 };
+const build: Build = {
+  ...defaultBuild(),
+  job: 1,
+  baseLevel: 50,
+  jobLevel: 30,
+  weapon: 1101,
+  dummies: [defaultDummy(0), { ...defaultDummy(1), name: 'Ghost', element: 'Ghost', def: 60 }],
+  target: { dummy: 1 },
+};
 
 function memoryStorage(): Storage {
   const entries = new Map<string, string>();
@@ -41,6 +50,7 @@ describe('storage', () => {
     const json = storage.getItem(STORAGE_KEY) ?? '';
     expect(JSON.parse(json)).toEqual({ ...build, d: current.hash, l: current.label });
     expect(json).toContain('\n  "baseLevel": 50');
+    expect(json).toContain('"name": "Ghost"');
     expect(load(storage)).toEqual({ build, warnings: [], dataHint: null });
   });
 

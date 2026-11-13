@@ -61,7 +61,7 @@
       <dd data-testid="dps">{round(result.dps)}</dd>
     </dl>
   {:else}
-    <p class="note">Pick a target monster for damage, hit chance and DPS.</p>
+    <p class="note">Pick a target monster or dummy for damage, hit chance and DPS.</p>
   {/if}
 
   <p class="note">

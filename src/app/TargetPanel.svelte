@@ -3,6 +3,7 @@
   import { searchMonsters } from '../build/search';
   import { monsterFlee } from '../engine/autoAttack';
   import type { BuildState } from './build.svelte';
+  import DummyEditor from './DummyEditor.svelte';
 
   let { planner }: { planner: BuildState } = $props();
 
@@ -10,19 +11,27 @@
 
   const monsters = $derived(searchMonsters(query, planner.data));
   const monster = $derived(planner.resolved.monster);
+  const dummy = $derived(planner.resolved.dummy);
+  const targetMonsterId = $derived(
+    planner.build.target && 'monster' in planner.build.target ? planner.build.target.monster : null,
+  );
 </script>
 
 <div class="panel">
   {#if monster}
-    <p class="selected" data-testid="selected-monster">
-      {monsterName(planner.data, monster.id)} ({monster.id})
-      <button type="button" class="clear" onclick={() => planner.setMonster(null)}>Clear</button>
+    <p class="selected" data-testid="selected-target">
+      {#if dummy}
+        {dummy.name} <span class="kind">(training dummy)</span>
+      {:else}
+        {monsterName(planner.data, monster.id)} ({monster.id})
+      {/if}
+      <button type="button" class="clear" onclick={() => planner.setTarget(null)}>Clear</button>
     </p>
     <dl class="facts">
       <dt>Level</dt>
       <dd>{monster.level}</dd>
       <dt>HP</dt>
-      <dd>{monster.hp}</dd>
+      <dd data-testid="target-hp">{dummy ? '–' : monster.hp}</dd>
       <dt>Size</dt>
       <dd>{monster.size}</dd>
       <dt>Race</dt>
@@ -39,7 +48,7 @@
       <dd>{monster.luk}</dd>
     </dl>
   {:else}
-    <p class="note">Pick a monster to see auto attack damage.</p>
+    <p class="note">Pick a monster or a training dummy to see auto attack damage.</p>
   {/if}
 
   <input
@@ -53,7 +62,7 @@
       <li>
         <button
           type="button"
-          class:active={candidate.id === planner.build.monster}
+          class:active={candidate.id === targetMonsterId}
           onclick={() => planner.setMonster(candidate.id)}
         >
           {monsterName(planner.data, candidate.id)}
@@ -67,6 +76,8 @@
       Showing {monsters.matches.length} of {monsters.total}; type to narrow the list.
     </p>
   {/if}
+
+  <DummyEditor {planner} />
 </div>
 
 <style>
@@ -79,6 +90,11 @@
   .selected {
     margin: 0;
     font-weight: 600;
+  }
+
+  .kind {
+    color: var(--color-muted);
+    font-weight: normal;
   }
 
   .clear {

@@ -1,6 +1,7 @@
 // The reactive build state shared by the panels: the current build, the
 // notices from loading it, and everything the engine derives from it.
-import { defaultBuild, normalizeBuild, sameBuild, type Build } from '../build/model';
+import { defaultDummy, MAX_DUMMIES, type Dummy } from '../build/dummy';
+import { defaultBuild, normalizeBuild, sameBuild, type Build, type Target } from '../build/model';
 import { canEquip, itemName, resolveBuild, type GameData } from '../build/resolve';
 import {
   decodeShareCode,
@@ -105,8 +106,45 @@ export class BuildState {
     this.update({ ...this.build, weapon: itemId });
   }
 
-  setMonster(monsterId: number | null): void {
-    this.update({ ...this.build, monster: monsterId });
+  setMonster(monsterId: number): void {
+    this.setTarget({ monster: monsterId });
+  }
+
+  selectDummy(index: number): void {
+    this.setTarget({ dummy: index });
+  }
+
+  setTarget(target: Target): void {
+    this.update({ ...this.build, target });
+  }
+
+  /** Adds a dummy with the default settings and makes it the target. */
+  addDummy(): void {
+    const index = this.build.dummies.length;
+    if (index >= MAX_DUMMIES) return;
+    this.update({
+      ...this.build,
+      dummies: [...this.build.dummies, defaultDummy(index)],
+      target: { dummy: index },
+    });
+  }
+
+  updateDummy(index: number, changes: Partial<Dummy>): void {
+    const dummies = this.build.dummies.map((dummy, position) =>
+      position === index ? { ...dummy, ...changes } : dummy,
+    );
+    this.update({ ...this.build, dummies });
+  }
+
+  /** Removes a dummy; a target pointing at a later dummy follows its shift. */
+  removeDummy(index: number): void {
+    const dummies = this.build.dummies.filter((_, position) => position !== index);
+    let target = this.build.target;
+    if (target && 'dummy' in target) {
+      if (target.dummy === index) target = null;
+      else if (target.dummy > index) target = { dummy: target.dummy - 1 };
+    }
+    this.update({ ...this.build, dummies, target });
   }
 
   /**

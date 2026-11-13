@@ -31,7 +31,7 @@ function computed(fixture: Fixture): { status: StatusWindow; attack: AutoAttackR
     throw new Error(`build is not valid with the current data: ${normalized.warnings.join(' ')}`);
   }
   const { character, monster } = resolveBuild(normalized.build, gameData);
-  if (!monster) throw new Error('build has no monster');
+  if (!monster) throw new Error('build has no target');
   return {
     status: statusWindow(character, rAthenaDefaults),
     attack: autoAttack(character, monster, gameData.tables, rAthenaDefaults),

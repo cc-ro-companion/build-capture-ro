@@ -23,7 +23,22 @@ build: # the readable build JSON the app saves, without d/l
   jobLevel: 30
   stats: { str: 50, agi: 30, vit: 30, int: 1, dex: 30, luk: 1 }
   weapon: 1101
-  monster: <training dummy id>
+  dummies: # the dummy settings used in game
+    - name: Default dummy
+      level: 1
+      def: 1
+      mdef: 1
+      str: 1
+      agi: 1
+      vit: 1
+      int: 1
+      dex: 1
+      luk: 1
+      size: medium # small, medium, large
+      race: Formless
+      element: Neutral
+      elementLevel: 1
+  target: { dummy: 0 } # or { monster: <id> }
 observed:
   status: { atk: [n, n], hit: n, flee: n, crit: n, aspd: n }
   normal: { min: n, max: n, rangeComplete: false }
@@ -42,5 +57,5 @@ How the numbers are compared ([`compare.ts`](compare.ts)):
 | `dps` | Within ±5 % of the engine's DPS. |
 
 The build must be valid with the current data (no normalize warnings) and
-must have a monster. `synthetic: true` marks a fixture that holds engine
+must have a target, normally the training dummy as configured in game. `synthetic: true` marks a fixture that holds engine
 output rather than game observations; it only tests the runner.

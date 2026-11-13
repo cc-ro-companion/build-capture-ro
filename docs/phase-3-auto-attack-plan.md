@@ -243,7 +243,7 @@ and hand the numbers over for fixtures.
    with one synthetic fixture (marked `synthetic: true`, from engine output
    against Poring) so the runner is tested before real data exists; update
    `tests/fixtures/README.md`. Check: verification passes.
-9. [ ] Training dummies: `dummy.ts`; build model `monster` replaced by
+9. [x] Training dummies: `dummy.ts`; build model `monster` replaced by
    `dummies` + `target` (model, normalize, resolve, share code tags 11–13,
    storage, fixtures, synthetic fixture moved to a dummy); Target panel and
    `DummyEditor.svelte`. Check: unit and component tests for the dummy

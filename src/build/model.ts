@@ -4,6 +4,7 @@
 import type { BonusStats } from '../data/types';
 import type { EngineConfig } from '../engine/config';
 import { STAT_NAMES } from '../engine/stats';
+import { normalizeDummies, sameDummy, type Dummy } from './dummy';
 import { canEquip, itemName, jobName, type GameData } from './resolve';
 
 export const BUILD_VERSION = 1;
@@ -16,8 +17,13 @@ export interface Build {
   stats: BonusStats;
   /** Right-hand weapon item id; null for bare hands. */
   weapon: number | null;
-  monster: number | null;
+  /** The user's own training dummy settings, stored by value. */
+  dummies: Dummy[];
+  target: Target;
 }
+
+/** A monster by id, or one of the build's dummies by list index. */
+export type Target = { monster: number } | { dummy: number } | null;
 
 export const DEFAULT_JOB_ID = 0;
 
@@ -29,7 +35,8 @@ export function defaultBuild(): Build {
     jobLevel: 1,
     stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 },
     weapon: null,
-    monster: null,
+    dummies: [],
+    target: null,
   };
 }
 
@@ -111,20 +118,55 @@ export function normalizeBuild(
     }
   }
 
-  let monster: number | null = null;
-  if (raw.monster !== null && raw.monster !== undefined) {
+  const dummies = normalizeDummies(raw.dummies, warnings);
+  const target = normalizeTarget(raw.target, dummies.length, data, warnings);
+
+  return {
+    build: {
+      v: BUILD_VERSION,
+      job: jobId,
+      baseLevel,
+      jobLevel,
+      stats,
+      weapon,
+      dummies,
+      target,
+    },
+    warnings,
+  };
+}
+
+function normalizeTarget(
+  raw: unknown,
+  dummyCount: number,
+  data: GameData,
+  warnings: string[],
+): Target {
+  if (raw === null || raw === undefined) return null;
+  if (isRecord(raw) && 'monster' in raw) {
     const monsterId = integerOrUndefined(raw.monster);
     if (monsterId === undefined || !data.monsters.has(monsterId)) {
       warnings.push(`Unknown monster ${String(raw.monster)} removed.`);
-    } else {
-      monster = monsterId;
+      return null;
     }
+    return { monster: monsterId };
   }
+  if (isRecord(raw) && 'dummy' in raw) {
+    const index = integerOrUndefined(raw.dummy);
+    if (index === undefined || index < 0 || index >= dummyCount) {
+      warnings.push(`The target dummy ${String(raw.dummy)} does not exist; target cleared.`);
+      return null;
+    }
+    return { dummy: index };
+  }
+  warnings.push('The target is neither a monster nor a dummy; target cleared.');
+  return null;
+}
 
-  return {
-    build: { v: BUILD_VERSION, job: jobId, baseLevel, jobLevel, stats, weapon, monster },
-    warnings,
-  };
+export function sameTarget(a: Target, b: Target): boolean {
+  if (a === null || b === null) return a === b;
+  if ('monster' in a) return 'monster' in b && a.monster === b.monster;
+  return 'dummy' in b && a.dummy === b.dummy;
 }
 
 export function sameBuild(a: Build, b: Build): boolean {
@@ -135,6 +177,11 @@ export function sameBuild(a: Build, b: Build): boolean {
     a.jobLevel === b.jobLevel &&
     STAT_NAMES.every((stat) => a.stats[stat] === b.stats[stat]) &&
     a.weapon === b.weapon &&
-    a.monster === b.monster
+    a.dummies.length === b.dummies.length &&
+    a.dummies.every((dummy, index) => {
+      const other = b.dummies[index];
+      return other !== undefined && sameDummy(dummy, other);
+    }) &&
+    sameTarget(a.target, b.target)
   );
 }

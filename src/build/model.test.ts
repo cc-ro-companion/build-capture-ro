@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { rAthenaDefaults } from '../engine/config';
 import { testJob, testMonster, testWeapon } from '../engine/testData';
+import { defaultDummy } from './dummy';
 import { defaultBuild, normalizeBuild, sameBuild, type Build } from './model';
 import { createGameData, resolveBuild } from './resolve';
 
@@ -32,7 +33,8 @@ function valid(partial: Partial<Build> = {}): Build {
     baseLevel: 50,
     jobLevel: 30,
     weapon: 1101,
-    monster: 1002,
+    dummies: [defaultDummy(0)],
+    target: { monster: 1002 },
     ...partial,
   };
 }
@@ -65,9 +67,29 @@ describe('normalizeBuild', () => {
   });
 
   it('drops an unknown monster id with a warning', () => {
-    const result = normalize(valid({ monster: 99999 }));
-    expect(result.build.monster).toBeNull();
+    const result = normalize(valid({ target: { monster: 99999 } }));
+    expect(result.build.target).toBeNull();
     expect(result.warnings).toEqual(['Unknown monster 99999 removed.']);
+  });
+
+  it('keeps a dummy target and clears one that does not exist, with a warning', () => {
+    expect(normalize(valid({ target: { dummy: 0 } })).build.target).toEqual({ dummy: 0 });
+    const result = normalize(valid({ target: { dummy: 1 } }));
+    expect(result.build.target).toBeNull();
+    expect(result.warnings).toEqual(['The target dummy 1 does not exist; target cleared.']);
+  });
+
+  it('clears a target that is neither a monster nor a dummy', () => {
+    const result = normalize({ ...valid(), target: { boss: 1 } });
+    expect(result.build.target).toBeNull();
+    expect(result.warnings).toHaveLength(1);
+  });
+
+  it('reads a build without dummies or target as having none', () => {
+    const rest: Record<string, unknown> = { ...valid() };
+    delete rest.dummies;
+    delete rest.target;
+    expect(normalize(rest).build).toMatchObject({ dummies: [], target: null });
   });
 
   it('drops a weapon the job cannot equip', () => {
@@ -129,6 +151,11 @@ describe('sameBuild', () => {
     expect(sameBuild(valid(), valid())).toBe(true);
     expect(sameBuild(valid(), valid({ weapon: null }))).toBe(false);
     expect(sameBuild(valid(), valid({ stats: { ...valid().stats, luk: 2 } }))).toBe(false);
+    expect(sameBuild(valid(), valid({ target: { dummy: 0 } }))).toBe(false);
+    expect(sameBuild(valid(), valid({ target: null }))).toBe(false);
+    expect(sameBuild(valid(), valid({ dummies: [] }))).toBe(false);
+    expect(sameBuild(valid(), valid({ dummies: [{ ...defaultDummy(0), vit: 2 }] }))).toBe(false);
+    expect(sameBuild(valid(), valid({ dummies: [{ ...defaultDummy(0), name: 'x' }] }))).toBe(false);
   });
 });
 
@@ -141,8 +168,23 @@ describe('resolveBuild', () => {
   });
 
   it('resolves bare hands and no target to null', () => {
-    const resolved = resolveBuild(valid({ weapon: null, monster: null }), data);
+    const resolved = resolveBuild(valid({ weapon: null, target: null }), data);
     expect(resolved.character.weapon).toBeNull();
     expect(resolved.monster).toBeNull();
+    expect(resolved.dummy).toBeNull();
+  });
+
+  it('resolves a dummy target into a monster record with its settings', () => {
+    const dummy = { ...defaultDummy(0), name: 'Tank', def: 80, vit: 120, element: 'Ghost' };
+    const resolved = resolveBuild(valid({ dummies: [dummy], target: { dummy: 0 } }), data);
+    expect(resolved.dummy).toEqual(dummy);
+    expect(resolved.monster).toMatchObject({
+      defense: 80,
+      vit: 120,
+      element: 'Ghost',
+      class: 'normal',
+      modes: [],
+      raceGroups: [],
+    });
   });
 });

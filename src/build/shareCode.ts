@@ -5,10 +5,17 @@
 // Format version 1:
 //   byte      format version (1)
 //   repeated  varint tag, varint value; tag 0 ends the list
+//             tags 1–10: job, base level, job level, STR..LUK, weapon (0 = none)
+//             tag 11: target monster id; tag 12: target dummy index + 1 (one of the two)
+//             tag 13, repeated in list order: a dummy record as the value:
+//               varint name length, the name as UTF-8, then varints level, DEF,
+//               MDEF, STR, AGI, VIT, INT, DEX, LUK, size index, race index,
+//               element index, element level (index tables in ./dummy)
 //   4 bytes   data hash (8 hex characters)
 //   varint    label length, then the label as UTF-8
 import type { EngineConfig } from '../engine/config';
-import { BUILD_VERSION, normalizeBuild, type Build } from './model';
+import { DUMMY_ELEMENTS, DUMMY_NUMBERS, DUMMY_RACES, DUMMY_SIZES } from './dummy';
+import { BUILD_VERSION, normalizeBuild, type Build, type Target } from './model';
 import type { GameData } from './resolve';
 
 const FORMAT_VERSION = 1;
@@ -26,8 +33,10 @@ const FIELD_TAGS = {
   dex: 8,
   luk: 9,
   weapon: 10,
-  monster: 11,
 } as const;
+const TAG_TARGET_MONSTER = 11;
+const TAG_TARGET_DUMMY = 12;
+const TAG_DUMMY = 13;
 type Field = keyof typeof FIELD_TAGS;
 const FIELD_BY_TAG = new Map(
   Object.entries(FIELD_TAGS).map(([field, tag]) => [tag as number, field as Field]),
@@ -111,25 +120,46 @@ export function encodeShareCode(build: Build, version: DataVersion): string {
     jobLevel: build.jobLevel,
     ...build.stats,
     weapon: build.weapon ?? 0,
-    monster: build.monster ?? 0,
   };
   const bytes: number[] = [FORMAT_VERSION];
-  for (const [field, tag] of Object.entries(FIELD_TAGS) as [Field, number][]) {
-    const value = values[field];
+  const writeValue = (name: string, value: number) => {
     if (!Number.isInteger(value) || value < 0 || value > MAX_VALUE) {
-      throw new Error(`Cannot encode ${field} = ${value}.`);
+      throw new Error(`Cannot encode ${name} = ${value}.`);
     }
-    writeVarint(bytes, tag);
     writeVarint(bytes, value);
+  };
+  for (const [field, tag] of Object.entries(FIELD_TAGS) as [Field, number][]) {
+    writeVarint(bytes, tag);
+    writeValue(field, values[field]);
+  }
+  if (build.target && 'monster' in build.target) {
+    writeVarint(bytes, TAG_TARGET_MONSTER);
+    writeValue('target monster', build.target.monster);
+  } else if (build.target && 'dummy' in build.target) {
+    writeVarint(bytes, TAG_TARGET_DUMMY);
+    writeValue('target dummy', build.target.dummy + 1);
+  }
+  for (const dummy of build.dummies) {
+    writeVarint(bytes, TAG_DUMMY);
+    writeText(bytes, dummy.name);
+    for (const { key } of DUMMY_NUMBERS) writeValue(`dummy ${key}`, dummy[key]);
+    writeValue('dummy size', DUMMY_SIZES.indexOf(dummy.size));
+    writeValue('dummy race', DUMMY_RACES.indexOf(dummy.race));
+    writeValue('dummy element', DUMMY_ELEMENTS.indexOf(dummy.element));
+    writeValue('dummy element level', dummy.elementLevel);
   }
   writeVarint(bytes, TAG_END);
   for (let offset = 0; offset < 8; offset += 2) {
     bytes.push(Number.parseInt(version.hash.slice(offset, offset + 2), 16));
   }
-  const label = new TextEncoder().encode(version.label);
-  writeVarint(bytes, label.length);
-  bytes.push(...label);
+  writeText(bytes, version.label);
   return toBase64Url(bytes);
+}
+
+function writeText(bytes: number[], text: string): void {
+  const encoded = new TextEncoder().encode(text);
+  writeVarint(bytes, encoded.length);
+  bytes.push(...encoded);
 }
 
 class Reader {
@@ -163,6 +193,10 @@ class Reader {
     throw new CorruptCode('holds a number that is too long');
   }
 
+  text(): string {
+    return new TextDecoder('utf-8', { fatal: true }).decode(this.take(this.varint()));
+  }
+
   take(length: number): Uint8Array {
     if (this.offset + length > this.bytes.length) throw new CorruptCode('ends early');
     const slice = this.bytes.subarray(this.offset, this.offset + length);
@@ -192,17 +226,30 @@ function readCode(code: string): DecodedCode | { error: string } {
         : { error: 'The share code is not valid.' };
     }
     const values: Partial<Record<Field, number>> = {};
+    let target: Target = null;
+    const dummies: Record<string, unknown>[] = [];
     for (let tag = reader.varint(); tag !== TAG_END; tag = reader.varint()) {
+      if (tag === TAG_TARGET_MONSTER || tag === TAG_TARGET_DUMMY) {
+        if (target !== null) throw new CorruptCode('has more than one target');
+        const value = reader.varint();
+        if (tag === TAG_TARGET_MONSTER) target = { monster: value };
+        // Index + 1 on the wire; 0 is not a valid dummy and becomes -1 for normalize.
+        else target = { dummy: value - 1 };
+        continue;
+      }
+      if (tag === TAG_DUMMY) {
+        dummies.push(readDummy(reader));
+        continue;
+      }
       const field = FIELD_BY_TAG.get(tag);
       if (!field) throw new CorruptCode(`has an unknown field ${tag}`);
       if (values[field] !== undefined) throw new CorruptCode(`repeats field ${tag}`);
       values[field] = reader.varint();
     }
     const hash = Array.from(reader.take(4), (byte) => byte.toString(16).padStart(2, '0')).join('');
-    const label = new TextDecoder('utf-8', { fatal: true }).decode(reader.take(reader.varint()));
+    const label = reader.text();
     if (!reader.done) throw new CorruptCode('has extra data at the end');
 
-    const optionalId = (value: number | undefined) => (value === 0 ? null : value);
     return {
       raw: {
         v: BUILD_VERSION,
@@ -217,16 +264,32 @@ function readCode(code: string): DecodedCode | { error: string } {
           dex: values.dex,
           luk: values.luk,
         },
-        weapon: optionalId(values.weapon),
-        monster: optionalId(values.monster),
+        weapon: values.weapon === 0 ? null : values.weapon,
+        dummies,
+        target,
       },
       made: { hash, label },
     };
   } catch (error) {
     if (error instanceof CorruptCode) return { error: `The share code ${error.message}.` };
-    if (error instanceof TypeError) return { error: 'The share code has an invalid data label.' };
+    if (error instanceof TypeError) return { error: 'The share code holds invalid text.' };
     throw error;
   }
+}
+
+/**
+ * A dummy record. Unknown index values are passed on as descriptive strings
+ * so normalize replaces them with a warning instead of failing the code.
+ */
+function readDummy(reader: Reader): Record<string, unknown> {
+  const dummy: Record<string, unknown> = { name: reader.text() };
+  for (const { key } of DUMMY_NUMBERS) dummy[key] = reader.varint();
+  const fromTable = (table: readonly string[], index: number) => table[index] ?? `#${index}`;
+  dummy.size = fromTable(DUMMY_SIZES, reader.varint());
+  dummy.race = fromTable(DUMMY_RACES, reader.varint());
+  dummy.element = fromTable(DUMMY_ELEMENTS, reader.varint());
+  dummy.elementLevel = reader.varint();
+  return dummy;
 }
 
 export function decodeShareCode(

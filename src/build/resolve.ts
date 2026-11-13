@@ -9,6 +9,7 @@ import {
 } from '../data';
 import type { Item, Job, Monster, NamesFile, TablesFile } from '../data/types';
 import type { CharacterInput } from '../engine/stats';
+import { dummyMonster, type Dummy } from './dummy';
 import type { Build } from './model';
 
 export interface GameData {
@@ -88,7 +89,10 @@ export function canEquip(item: Item, jobId: number, baseLevel: number): boolean 
 
 export interface ResolvedBuild {
   character: CharacterInput;
+  /** The target as the engine sees it; a dummy becomes a monster record. */
   monster: Monster | null;
+  /** The target dummy, when the target is one of the build's dummies. */
+  dummy: Dummy | null;
 }
 
 /**
@@ -99,7 +103,14 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
   const job = data.jobs.get(build.job);
   if (!job) throw new Error(`Unknown job id ${build.job}; normalize the build first.`);
   const weapon = build.weapon === null ? null : (data.items.get(build.weapon) ?? null);
-  const monster = build.monster === null ? null : (data.monsters.get(build.monster) ?? null);
+  let monster: Monster | null = null;
+  let dummy: Dummy | null = null;
+  if (build.target && 'monster' in build.target) {
+    monster = data.monsters.get(build.target.monster) ?? null;
+  } else if (build.target && 'dummy' in build.target) {
+    dummy = build.dummies[build.target.dummy] ?? null;
+    monster = dummy && dummyMonster(dummy);
+  }
   return {
     character: {
       job,
@@ -109,5 +120,6 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
       weapon,
     },
     monster,
+    dummy,
   };
 }

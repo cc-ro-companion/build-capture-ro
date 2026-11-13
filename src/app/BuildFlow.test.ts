@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/svelte';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { defaultDummy, MAX_DUMMIES } from '../build/dummy';
 import { defaultBuild, type Build } from '../build/model';
 import { gameData, resolveBuild } from '../build/resolve';
 import { encodeShareCode } from '../build/shareCode';
@@ -19,7 +20,7 @@ const swordman: Build = {
   jobLevel: 30,
   stats: { str: 50, agi: 30, vit: 1, int: 1, dex: 30, luk: 1 },
   weapon: 1101,
-  monster: 1002,
+  target: { monster: 1002 },
 };
 
 beforeEach(() => {
@@ -61,7 +62,7 @@ describe('build flow', () => {
     await pick('Monster results', 'Search monster', '1002', /^Poring/);
 
     expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
-    expect(screen.getByTestId('selected-monster').textContent).toContain('Poring (1002)');
+    expect(screen.getByTestId('selected-target').textContent).toContain('Poring (1002)');
 
     const expected = expectedResult(swordman);
     const normal = screen.getByTestId('damage-normal').textContent ?? '';
@@ -102,6 +103,135 @@ describe('build flow', () => {
   });
 });
 
+describe('training dummies', () => {
+  function editor() {
+    return within(screen.getByRole('form', { name: 'Edit dummy' }));
+  }
+
+  async function setDummyNumber(label: string, value: number) {
+    await fireEvent.input(editor().getByLabelText(label), { target: { value: String(value) } });
+  }
+
+  async function setDummyChoice(label: string, value: string) {
+    await fireEvent.change(editor().getByLabelText(label), { target: { value } });
+  }
+
+  function dummyRows() {
+    return within(screen.getByRole('list', { name: 'Dummies' })).getAllByRole('listitem');
+  }
+
+  it('adds a dummy, edits its settings and shows the engine numbers against it', async () => {
+    saveBuild({ ...swordman, target: null }, version, localStorage);
+    render(App);
+    await fireEvent.click(screen.getByRole('button', { name: 'Add dummy' }));
+    expect(screen.getByTestId('selected-target').textContent).toContain('Dummy 1');
+    expect(screen.getByTestId('target-hp').textContent).toBe('–');
+
+    const name = editor().getByLabelText('Name');
+    await fireEvent.change(name, { target: { value: 'Ghost tank' } });
+    await setDummyNumber('Level', 80);
+    await setDummyNumber('DEF', 40);
+    await setDummyNumber('VIT', 120);
+    await setDummyNumber('AGI', 150);
+    await setDummyNumber('LUK', 60);
+    await setDummyChoice('Size', 'large');
+    await setDummyChoice('Race', 'Undead');
+    await setDummyChoice('Element', 'Ghost');
+    await setDummyNumber('Element level', 2);
+
+    const dummy = {
+      ...defaultDummy(0),
+      name: 'Ghost tank',
+      level: 80,
+      def: 40,
+      vit: 120,
+      agi: 150,
+      luk: 60,
+      size: 'large' as const,
+      race: 'Undead',
+      element: 'Ghost',
+      elementLevel: 2,
+    };
+    const expected = expectedResult({ ...swordman, dummies: [dummy], target: { dummy: 0 } });
+    expect(screen.getByTestId('selected-target').textContent).toContain('Ghost tank');
+    const normal = screen.getByTestId('damage-normal').textContent ?? '';
+    expect(normal).toContain(`${expected.normal.min}`);
+    expect(normal).toContain(expected.normal.avg.toFixed(1));
+    expect(screen.getByTestId('dps').textContent).toBe(expected.dps.toFixed(1));
+    expect(screen.getByTestId('hit-chance').textContent).toBe(
+      `${(expected.hitChance * 100).toFixed(1)} %`,
+    );
+
+    // Survives a reload.
+    cleanup();
+    render(App);
+    expect(screen.getByTestId('selected-target').textContent).toContain('Ghost tank');
+    expect(screen.getByTestId('dps').textContent).toBe(expected.dps.toFixed(1));
+  });
+
+  it('keeps the old name when the name is cleared', async () => {
+    render(App);
+    await fireEvent.click(screen.getByRole('button', { name: 'Add dummy' }));
+    const name = editor().getByLabelText('Name') as HTMLInputElement;
+    await fireEvent.change(name, { target: { value: '   ' } });
+    expect(name.value).toBe('Dummy 1');
+    expect(dummyRows()[0]?.textContent).toContain('Dummy 1');
+  });
+
+  it('switches the target between dummies and monsters, and removes dummies', async () => {
+    saveBuild(
+      {
+        ...swordman,
+        dummies: [defaultDummy(0), { ...defaultDummy(1), name: 'Second' }, defaultDummy(2)],
+        target: { dummy: 2 },
+      },
+      version,
+      localStorage,
+    );
+    render(App);
+    expect(screen.getByTestId('selected-target').textContent).toContain('Dummy 3');
+
+    await fireEvent.click(
+      within(dummyRows()[1] as HTMLElement).getByRole('button', { name: /^Second/ }),
+    );
+    expect(screen.getByTestId('selected-target').textContent).toContain('Second');
+
+    // Removing an earlier dummy keeps the same dummy targeted.
+    await fireEvent.click(screen.getByRole('button', { name: 'Remove Dummy 1' }));
+    expect(dummyRows()).toHaveLength(2);
+    expect(screen.getByTestId('selected-target').textContent).toContain('Second');
+
+    // Removing the target dummy clears the target.
+    await fireEvent.click(screen.getByRole('button', { name: 'Remove Second' }));
+    expect(screen.queryByTestId('selected-target')).toBeNull();
+
+    await pick('Monster results', 'Search monster', '1002', /^Poring/);
+    expect(screen.getByTestId('selected-target').textContent).toContain('Poring (1002)');
+  });
+
+  it('allows at most 20 dummies', async () => {
+    const dummies = Array.from({ length: MAX_DUMMIES - 1 }, (_, index) => defaultDummy(index));
+    saveBuild({ ...swordman, dummies }, version, localStorage);
+    render(App);
+    const add = screen.getByRole('button', { name: 'Add dummy' }) as HTMLButtonElement;
+    await fireEvent.click(add);
+    expect(dummyRows()).toHaveLength(MAX_DUMMIES);
+    expect(add.disabled).toBe(true);
+  });
+
+  it('opens a #b= link with a dummy target', () => {
+    const build: Build = {
+      ...swordman,
+      dummies: [{ ...defaultDummy(0), name: 'Shared', def: 70 }],
+      target: { dummy: 0 },
+    };
+    window.history.replaceState(null, '', `/#b=${encodeShareCode(build, version)}`);
+    render(App);
+    expect(screen.getByTestId('selected-target').textContent).toContain('Shared');
+    expect(screen.getByTestId('dps').textContent).toBe(expectedResult(build).dps.toFixed(1));
+  });
+});
+
 describe('saving and share links', () => {
   it('keeps the build across a reload', async () => {
     render(App);
@@ -123,7 +253,7 @@ describe('saving and share links', () => {
     window.history.replaceState(null, '', `/#b=${encodeShareCode(swordman, version)}`);
     render(App);
     expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
-    expect(screen.getByTestId('selected-monster').textContent).toContain('Poring (1002)');
+    expect(screen.getByTestId('selected-target').textContent).toContain('Poring (1002)');
     expect(window.location.hash).toBe('');
   });
 
