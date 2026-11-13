@@ -136,6 +136,40 @@ describe('DEF (battle_calc_defense_reduction pre-renewal)', () => {
     expect(count).toBe(60);
   });
 
+  it.each([
+    ['Water', 100],
+    ['Ghost', 25],
+  ])(
+    'matches brute force for a high-VIT target partly at the damage floor (%s)',
+    (element, ratio) => {
+      // VIT 200: soft DEF 200 + rnd()%((200/20)²) → 200..299. Katar weapon level 3,
+      // DEX 10 → min 10 × 140 / 100 = 14; weapon 14..147. Base ATK 99 + 81 + 2 = 182.
+      const tank = testMonster({ vit: 200, element, elementLevel: 1 });
+      let min = Infinity;
+      let max = -Infinity;
+      let sum = 0;
+      let count = 0;
+      for (let weaponValue = 14; weaponValue <= 147; weaponValue++) {
+        for (let softDef = 200; softDef <= 299; softDef++) {
+          let damage = Math.max(1, weaponValue + 182 - softDef);
+          damage = Math.trunc((damage * ratio) / 100);
+          damage += Math.trunc(damage / 100);
+          min = Math.min(min, damage);
+          max = Math.max(max, damage);
+          sum += damage;
+          count++;
+        }
+      }
+      const result = attack({ baseStats: stats({ str: 99, dex: 10 }), weapon: katar }, tank);
+      expect(result.normal.min).toBe(min);
+      expect(result.normal.max).toBe(max);
+      expect(result.normal.avg).toBeCloseTo(sum / count, 10);
+      // The case must reach both the floor and the katar bonus to test anything.
+      expect(min).toBe(ratio === 100 ? 1 : 0);
+      if (ratio === 100) expect(max).toBeGreaterThan(100);
+    },
+  );
+
   it('caps hard DEF at 100 and floors damage at 1 before element', () => {
     const wall = testMonster({ defense: 120, vit: 1 });
     expect(attack(input, wall).normal).toEqual({ min: 1, max: 1, avg: 1 });
