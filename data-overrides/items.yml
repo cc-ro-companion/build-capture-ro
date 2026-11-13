@@ -1,3 +1,29 @@
 # ccRO differences to rAthena's db/pre-re/item_db_equip.yml. See README.md.
-Body: []
+Body:
+  # Blazing Sun exists on ccRO but only in rAthena's db/re. Fields from
+  # db/re/item_db_equip.yml; effects and stats from the in-game description
+  # (maintainer, 2026-11-13): upper headgear, DEF 0, no slot, all jobs.
+  # Pre-renewal has no fixed/variable cast split, so db/re's bVariableCastrate
+  # becomes bCastrate.
+  - Id: 5776
+    AegisName: Blazing_Sun
+    Name: Blazing Sun
+    Type: Armor
+    Weight: 500
+    Defense: 0
+    Slots: 0
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 654
+    Script: |
+      bonus2 bCastrate,"MG_FIREBOLT",-5;
+      bonus2 bSkillAtk,"MG_FIREBOLT",5;
+      bonus2 bCastrate,"MG_FIREBALL",-5;
+      bonus2 bSkillAtk,"MG_FIREBALL",5;
+      bonus2 bSkillAtk,"MG_FIREWALL",3;
+      bonus2 bSkillAtk,"WZ_METEOR",3;
+      bonus bUseSPrate,5;
 Remove: []

@@ -1,0 +1,1320 @@
+# Equipment that no monster drops in rAthena pre-renewal, for review.
+#
+# Set `hide: true` on every item that cannot be obtained on ccRO. Hidden items
+# stay in the data (old builds keep working) but are not offered in search
+# unless the user ticks "show hidden items". Leave everything else as it is.
+# A `reason` is optional but helps later reviews (e.g. "event 2009", "cash shop").
+#
+# Generated from rAthena 7f080871c8b3bbe7a79027194633201c63422ee1 (db/pre-re, npc/ without re, custom, test)
+# and the planner's items.json (data a1000f15): 1762 equipment items,
+# 511 dropped by monsters, 1251 listed here.
+#
+# `from` lists the other rAthena sources: shop (NPC shop), craft (produce_db),
+# npc reward (getitem in an NPC script), barter, box:<group> (item_group_db),
+# socket:<id> (socket enchant NPC adds slots to item <id>; only useful if that
+# base item is obtainable).
+# `npc mention` / `npc id?` only mean the name or id appears in some NPC script
+# (quest lists, dialogue, or a coincidental number); they are weak hints.
+# rAthena NPCs are not ccRO NPCs, so a source here does not prove the item
+# exists on ccRO, and a missing one does not prove it does not.
+
+# Sold in the current ccRO season shop; matched by name, all slot variants included: 36 items
+seasonShop:
+  # Head_Top
+  - { id: 2214, name: Bunny Band, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 5137, name: "Alice Doll [1]", from: [box:REDBOX, box:REDBOX_2], hide: false }
+  - { id: 5138, name: Magic Eyes, from: [box:REDBOX, box:REDBOX_2], hide: false }
+  - { id: 5146, name: Elephant Hat, hide: true, reason: "Not obtainable. The other elephant hat (5259) was during a season." }
+  - { id: 5189, name: Autumn Leaves, hide: true, reason: "Not obtainable. The other autumn leaves (5270) was during a season." }
+  - { id: 5208, name: "Rideword Hat [1]", hide: false }
+  - { id: 5211, name: "Dress Hat [1]", from: [box:MASQUERADE_2], hide: false }
+  - { id: 5225, name: "Parade Hat [1]", hide: false }
+  - { id: 5259, name: Elephant Hat, from: [box:YELLOWBOX], hide: false }
+  - { id: 5266, name: Bunny Band, hide: false, reason: "this is the normal one. it can stay here" }
+  - { id: 5270, name: "Autumn Leaves [1]", from: [box:OLDGIFTBOX], hide: false }
+  - { id: 5283, name: Chick Hat, hide: false }
+  - { id: 5289, name: Vanilmirth Hat, from: [box:MASQUERADE_2], hide: false }
+  - { id: 5291, name: Kettle Hat, hide: false }
+  - { id: 5293, name: Ramen Hat, hide: false }
+  - { id: 5333, name: Radio Antenna, hide: false }
+  - { id: 5360, name: Hyuke's Black Cat Ears, hide: false }
+  - { id: 5372, name: Koneko Hat, hide: false }
+  - { id: 5405, name: Filir Hat, hide: false }
+  - { id: 5416, name: Beer Hat, hide: false }
+  - { id: 5431, name: "Chicken Hat [1]", hide: false }
+  - { id: 5455, name: "Decorative Geographer [1]", from: [box:CHERISH_BOX], hide: false }
+  - { id: 5490, name: Anubis Helm, hide: false }
+  - { id: 5491, name: "Bandit Hat [1]", hide: false }
+  - { id: 5503, name: Magic Rabit Hat, hide: false }
+  - { id: 5533, name: "Emperor Wreath [1]", hide: false }
+  - { id: 5561, name: Magic Rabbit Hat, hide: false }
+  - { id: 5653, name: "Darkness Helm [1]", hide: false }
+  - { id: 5776, name: "Blazing Sun", hide: false}
+  - { id: 5654, name: "Holy Marching Hat [1]", hide: false }
+  - { id: 5367, name: "Hyegun Hat [1]", hide: false }
+  - { id: 5537, name: "Kwati Hat [1]", hide: false }
+  - { id: 5464, name: Zaha Doll Hat, hide: false }
+  # Head_Mid
+  - { id: 5358, name: Peco Ears, hide: false }
+  - { id: 5401, name: Black Frame Glasses, hide: false }
+  - { id: 5402, name: Mischievous Fairy, hide: false }
+  # Head_Mid+Head_Top
+  - { id: 5142, name: Crescent Helm, from: [box:REDBOX], hide: false }
+  - { id: 5357, name: Wings Of Victory, hide: false }
+  # Armor
+  - { id: 2347, name: "Saphien's Armor of Ocean [1]", from: [npc id?, npc mention], hide: false }
+  - { id: 2349, name: "Aebecee's Raging Typhoon Armor [1]", from: [npc id?, npc mention], hide: false }
+  - { id: 2351, name: "Claytos Cracking Earth Armor [1]", from: [npc id?, npc mention], hide: false }
+  # SummerEvent
+  - { id: 2202, name: "Sunglasses [1]", from: [npc id?], hide: false }
+
+# Not dropped, but obtainable on ccRO through craft, shop, BLUEBOX, VIOLETBOX, socket enchant or an NPC reward; stays visible: 329 items
+otherSourceVisible:
+  # Weapon
+  - { id: 1101, name: "Sword [3]", type: 1hSword, from: [craft, box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1102, name: "Sword [4]", type: 1hSword, from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc id?], hide: false }
+  - { id: 1107, name: "Blade [3]", type: 1hSword, from: [craft, box:BLUEBOX, npc id?, npc mention, shop], hide: false }
+  - { id: 1110, name: "Rapier [2]", type: 1hSword, from: [craft, box:BLUEBOX, shop, npc id?, npc mention], hide: false }
+  - { id: 1113, name: "Scimitar [2]", type: 1hSword, from: [craft, box:BLUEBOX, npc id?, shop, npc mention, npc reward], hide: false }
+  - { id: 1119, name: "Tsurugi [1]", type: 1hSword, from: [craft, box:BLUEBOX, npc mention, npc id?, npc reward, shop], hide: false }
+  - { id: 1122, name: "Ring Pommel Saber [2]", type: 1hSword, from: [craft, box:BLUEBOX, npc id?, npc mention, npc reward, shop], hide: false }
+  - { id: 1123, name: "Haedonggum [1]", type: 1hSword, from: [craft, box:BLUEBOX, npc id?, shop, npc mention, npc reward], hide: false }
+  - { id: 1126, name: "Saber [2]", type: 1hSword, from: [craft, box:BLUEBOX, npc id?, npc mention, shop], hide: false }
+  - { id: 1129, name: Flamberge, type: 1hSword, from: [craft, box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1134, name: Caesar's Sword, type: 1hSword, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1137, name: Excalibur, type: 1hSword, from: [npc mention, npc id?, npc reward], hide: false }
+  - { id: 1139, name: Tirfing, type: 1hSword, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1146, name: "Town Sword [1]", type: 1hSword, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1149, name: "Flamberge [2]", type: 1hSword, from: [socket:1129, npc id?], hide: false }
+  - { id: 1151, name: "Slayer [2]", type: 2hSword, from: [craft, box:BLUEBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 1154, name: "Bastard Sword [2]", type: 2hSword, from: [craft, box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1157, name: "Two-Handed Sword [1]", type: 2hSword, from: [craft, box:BLUEBOX, npc id?, shop, npc reward, npc mention], hide: false }
+  - { id: 1160, name: "Broad Sword [1]", type: 2hSword, from: [craft, box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1169, name: Executioner, type: 2hSword, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1171, name: "Zweihander [2]", type: 2hSword, from: [socket:1168, npc id?], hide: false }
+  - { id: 1172, name: "Claymore [2]", type: 2hSword, from: [socket:1163, npc id?], hide: false }
+  - { id: 1178, name: "Schweizersabel [2]", type: 2hSword, from: [npc id?, socket:1167], hide: false }
+  - { id: 1179, name: "Executioner [1]", type: 2hSword, from: [npc id?, socket:1169], hide: false }
+  - { id: 1180, name: "Dragon Slayer [2]", type: 2hSword, from: [npc id?, socket:1166], hide: false }
+  - { id: 1204, name: "Cutter [3]", type: Dagger, from: [craft, box:BLUEBOX, npc id?, shop, npc mention, npc reward], hide: false }
+  - { id: 1210, name: "Dirk [2]", type: Dagger, from: [craft, box:BLUEBOX, shop], hide: false }
+  - { id: 1213, name: "Dagger [2]", type: Dagger, from: [craft, box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1222, name: "Damascus [1]", type: Dagger, from: [craft, box:BLUEBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 1224, name: Swordbreaker, type: Dagger, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1225, name: Mailbreaker, type: Dagger, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1227, name: Weeder Knife, type: Dagger, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1243, name: Novice Main-Gauche, type: Dagger, from: [box:BLUEBOX, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 1245, name: "Cinquedea [1]", type: Dagger, from: [box:BLUEBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 1247, name: Kindle Dagger, type: Dagger, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1248, name: Obsidian Dagger, type: Dagger, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1250, name: "Jur [2]", type: Katar, from: [box:BLUEBOX, npc id?, npc mention, npc reward, shop], hide: false }
+  - { id: 1252, name: "Katar [1]", type: Katar, from: [box:BLUEBOX, npc mention, npc id?, npc reward, shop], hide: false }
+  - { id: 1254, name: Jamadhar, type: Katar, from: [box:BLUEBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 1266, name: "Infiltrator [1]", type: Katar, from: [socket:1261, npc id?], hide: false }
+  - { id: 1275, name: "Katar of Frozen Icicle [3]", type: Katar, from: [npc id?, socket:1256], hide: false }
+  - { id: 1276, name: "Katar of Quaking [3]", type: Katar, from: [npc id?, socket:1257], hide: false }
+  - { id: 1277, name: "Katar of Raging Blaze [3]", type: Katar, from: [npc id?, socket:1258], hide: false }
+  - { id: 1278, name: "Katar of Piercing Wind [3]", type: Katar, from: [npc id?, socket:1259], hide: false }
+  - { id: 1309, name: "Orcish Axe [4]", type: 1hAxe, from: [npc id?, socket:1304], hide: false }
+  - { id: 1351, name: "Battle Axe [3]", type: 2hAxe, from: [craft, box:BLUEBOX, shop, npc reward, npc mention, npc id?], hide: false }
+  - { id: 1354, name: "Hammer [2]", type: 2hAxe, from: [craft, box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1357, name: "Buster [1]", type: 2hAxe, from: [craft, box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 1360, name: "Two-Handed Axe [1]", type: 2hAxe, from: [craft, box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1367, name: Slaughter, type: 2hAxe, from: [npc mention, npc id?, npc reward], hide: false }
+  - { id: 1401, name: "Javelin [3]", type: 1hSpear, from: [craft, box:BLUEBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 1404, name: "Spear [3]", type: 1hSpear, from: [craft, box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1407, name: "Pike [3]", type: 1hSpear, from: [craft, box:BLUEBOX, shop, npc mention, npc id?], hide: false }
+  - { id: 1410, name: Lance, type: 2hSpear, from: [craft, box:BLUEBOX, box:GIFTBOXCHINA, npc mention, npc id?, shop], hide: false }
+  - { id: 1416, name: Tjungkuletti, type: 1hSpear, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 1418, name: "Gungnir [2]", type: 1hSpear, from: [npc id?, socket:1413], hide: false }
+  - { id: 1457, name: "Partizan [1]", type: 2hSpear, from: [craft, box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 1463, name: "Halberd [1]", type: 2hSpear, from: [craft, box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 1479, name: "Spectral Spear [1]", type: 2hSpear, from: [socket:1477, npc id?], hide: false }
+  - { id: 1480, name: "Gae Bolg [2]", type: 2hSpear, from: [socket:1474, npc id?], hide: false }
+  - { id: 1481, name: "Zephyrus [3]", type: 2hSpear, from: [socket:1468, npc id?], hide: false }
+  - { id: 1504, name: "Mace [3]", type: Mace, from: [craft, box:BLUEBOX, npc mention, npc id?, shop, npc reward], hide: false }
+  - { id: 1507, name: "Smasher [2]", type: Mace, from: [craft, box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1516, name: Sword Mace, type: Mace, from: [craft, box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1522, name: Stunner, type: Mace, from: [craft, box:BLUEBOX, box:VIOLETBOX, shop, npc mention, npc id?], hide: false }
+  - { id: 1526, name: Slash, type: Mace, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 1530, name: Mjolnir, type: Mace, from: [npc mention, npc id?, npc reward], hide: false }
+  - { id: 1532, name: "Stunner [2]", type: Mace, from: [socket:1522, npc id?], hide: false }
+  - { id: 1538, name: "Spike [2]", type: Mace, from: [socket:1523, npc id?], hide: false }
+  - { id: 1539, name: "Golden Mace [2]", type: Mace, from: [socket:1524, npc id?], hide: false }
+  - { id: 1540, name: "Grand Cross [1]", type: Mace, from: [socket:1528, npc id?], hide: false }
+  - { id: 1568, name: "Book of Billows [3]", type: Book, from: [socket:1553, npc id?], hide: false }
+  - { id: 1569, name: "Book of Mother Earth [3]", type: Book, from: [socket:1554, npc id?], hide: false }
+  - { id: 1570, name: "Book of Blazing Sun [3]", type: Book, from: [socket:1555, npc id?], hide: false }
+  - { id: 1571, name: "Book of Gust of Wind [3]", type: Book, from: [socket:1556, npc id?], hide: false }
+  - { id: 1601, name: "Rod [3]", type: Staff, from: [box:BLUEBOX, shop, npc mention, npc id?, npc reward], hide: false }
+  - { id: 1607, name: "Staff [2]", type: Staff, from: [box:BLUEBOX, npc mention, shop], hide: false }
+  - { id: 1610, name: "Arc Wand [1]", type: Staff, from: [box:BLUEBOX, npc mention, npc id?, npc reward, shop], hide: false }
+  - { id: 1617, name: Survivor's Rod, type: Staff, from: [box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 1619, name: Survivor's Rod, type: Staff, from: [box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 1621, name: "Hypnotist's Staff [1]", type: Staff, from: [box:BLUEBOX, npc id?], hide: false }
+  - { id: 1704, name: "Composite Bow [3]", type: Bow, from: [box:BLUEBOX, npc id?, shop, npc reward, npc mention], hide: false }
+  - { id: 1707, name: "Great Bow [2]", type: Bow, from: [box:BLUEBOX, npc id?, shop, npc reward, npc mention], hide: false }
+  - { id: 1710, name: "Crossbow [2]", type: Bow, from: [box:BLUEBOX, npc reward, npc mention, npc id?, shop], hide: false }
+  - { id: 1713, name: "Arbalest [1]", type: Bow, from: [box:BLUEBOX, box:GIFTBOXCHINA, npc id?, npc mention, npc reward, shop], hide: false }
+  - { id: 1714, name: "Gakkung Bow [1]", type: Bow, from: [box:BLUEBOX, box:GIFTBOXCHINA, npc id?, shop], hide: false }
+  - { id: 1718, name: Hunter Bow, type: Bow, from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc reward, npc mention, npc id?, shop], hide: false }
+  - { id: 1721, name: "Repeating Crossbow [1]", type: Bow, from: [npc id?, shop], hide: false }
+  - { id: 1726, name: "Hunter Bow [1]", type: Bow, from: [socket:1718, npc id?], hide: false }
+  - { id: 1727, name: "Ballista [1]", type: Bow, from: [socket:1722, npc id?], hide: false }
+  - { id: 1803, name: "Knuckle Dusters [2]", type: Knuckle, from: [craft, box:BLUEBOX, shop], hide: false }
+  - { id: 1804, name: "Knuckle Dusters [3]", type: Knuckle, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 1805, name: "Studded Knuckles [2]", type: Knuckle, from: [craft, box:BLUEBOX, shop], hide: false }
+  - { id: 1807, name: Fist, type: Knuckle, from: [craft, box:BLUEBOX, npc mention, shop], hide: false }
+  - { id: 1808, name: "Fist [1]", type: Knuckle, from: [box:BLUEBOX, box:VIOLETBOX, npc id?], hide: false }
+  - { id: 1809, name: "Claw [1]", type: Knuckle, from: [craft, box:BLUEBOX, npc mention, shop], hide: false }
+  - { id: 1811, name: "Finger [1]", type: Knuckle, from: [craft, box:BLUEBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 1813, name: Kaiser Knuckle, type: Knuckle, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1816, name: "Berserk [1]", type: Knuckle, from: [socket:1814, npc id?], hide: false }
+  - { id: 1901, name: "Violin [3]", type: Musical, from: [box:BLUEBOX, npc id?, shop, npc mention, npc reward], hide: false }
+  - { id: 1903, name: "Mandolin [2]", type: Musical, from: [box:BLUEBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 1905, name: "Lute [2]", type: Musical, from: [box:BLUEBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 1907, name: Guitar, type: Musical, from: [box:BLUEBOX, shop, npc mention, npc id?], hide: false }
+  - { id: 1911, name: "Gumoongoh [1]", type: Musical, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 1912, name: "Gumoongoh [2]", type: Musical, from: [box:BLUEBOX, box:VIOLETBOX, npc id?], hide: false }
+  - { id: 1913, name: Electric Guitar, type: Musical, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1922, name: "Oriental Lute [2]", type: Musical, from: [socket:1918, npc id?], hide: false }
+  - { id: 1950, name: "Rope [3]", type: Whip, from: [box:BLUEBOX, npc id?, npc reward, npc mention, shop], hide: false }
+  - { id: 1952, name: "Whip [2]", type: Whip, from: [box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1953, name: "Whip [3]", type: Whip, from: [box:BLUEBOX, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 1954, name: "Wire Whip [2]", type: Whip, from: [box:BLUEBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 1955, name: "Wire Whip [3]", type: Whip, from: [box:BLUEBOX, box:VIOLETBOX, socket:1954, npc id?], hide: false }
+  - { id: 1956, name: Rante Whip, type: Whip, from: [box:BLUEBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 1958, name: "Tail Whip [1]", type: Whip, from: [box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1959, name: "Tail Whip [2]", type: Whip, from: [box:BLUEBOX, box:VIOLETBOX, npc id?], hide: false }
+  - { id: 1960, name: "Whip [1]", type: Whip, from: [box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 1961, name: "Whip [2]", type: Whip, from: [box:BLUEBOX, box:VIOLETBOX, npc id?], hide: false }
+  - { id: 1963, name: Rapture Rose, type: Whip, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 1976, name: "Queen's Whip [2]", type: Whip, from: [socket:1970, npc id?], hide: false }
+  - { id: 13000, name: Jujube Dagger, type: Dagger, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 13003, name: "Cowardice Blade [1]", type: Dagger, from: [box:BLUEBOX, shop, npc mention], hide: false }
+  - { id: 13007, name: Jitte, type: Dagger, from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 13010, name: "Asura [2]", type: Dagger, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 13016, name: "Poison Knife [2]", type: Dagger, from: [socket:1239, npc id?], hide: false }
+  - { id: 13018, name: "Sucsamad [1]", type: Dagger, from: [socket:1236, npc id?], hide: false }
+  - { id: 13019, name: "Ginnungagap [1]", type: Dagger, from: [socket:13002, npc id?], hide: false }
+  - { id: 13030, name: "Dragon Killer [2]", type: Dagger, from: [socket:13001, npc id?], hide: false }
+  - { id: 13031, name: "Swordbreaker [3]", type: Dagger, from: [socket:1224, npc id?], hide: false }
+  - { id: 13032, name: "Mailbreaker [3]", type: Dagger, from: [socket:1225, npc id?], hide: false }
+  - { id: 13033, name: "Assassin Dagger [1]", type: Dagger, from: [socket:1232, npc id?], hide: false }
+  - { id: 13100, name: "Six Shooter [1]", type: Revolver, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 13102, name: "Crimson Bolt [1]", type: Revolver, from: [shop, npc id?, npc reward], hide: false }
+  - { id: 13105, name: "Garrison [2]", type: Revolver, from: [npc reward, npc id?], hide: false }
+  - { id: 13151, name: "Cyclone [1]", type: Rifle, from: [shop], hide: false }
+  - { id: 13154, name: "Rolling Stone [1]", type: Shotgun, from: [shop], hide: false }
+  - { id: 13155, name: "Black Rose [1]", type: Shotgun, from: [shop], hide: false }
+  - { id: 13162, name: "Inferno [1]", type: Grenade, from: [npc mention, npc id?, npc reward], hide: false }
+  - { id: 13163, name: Long Barrel, type: Rifle, from: [box:BLUEBOX, box:VIOLETBOX, shop], hide: false }
+  - { id: 13165, name: Jungle Carbine, type: Rifle, from: [shop], hide: false }
+  - { id: 13168, name: "Thunder P [1]", type: Shotgun, from: [box:BLUEBOX, box:VIOLETBOX, shop], hide: false }
+  - { id: 13400, name: "Cutlus [1]", type: 1hSword, from: [socket:1135, npc id?], hide: false }
+  # Left_Hand
+  - { id: 2103, name: Buckler, from: [box:BLUEBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2105, name: Shield, from: [box:BLUEBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2107, name: Mirror Shield, from: [box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 2112, name: Novice Guard, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2113, name: "Novice Shield [1]", from: [box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 2117, name: Arm Guard, from: [shop, npc id?], hide: false }
+  - { id: 2118, name: "Arm Guard [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 2119, name: Advanced Arm Guard, from: [npc reward, npc id?], hide: false }
+  - { id: 2120, name: "Advanced Arm Guard [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 2121, name: "Memory Book [1]", from: [socket:2109, npc id?], hide: false }
+  - { id: 2128, name: "Sacred Mission [1]", from: [socket:2111, npc id?], hide: false }
+  # Head_Top
+  - { id: 2215, name: Flower Band, from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 2216, name: Biretta, from: [box:BLUEBOX, box:VIOLETBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2222, name: Turban, from: [box:BLUEBOX, box:VIOLETBOX, shop, npc mention, npc id?], hide: false }
+  - { id: 2223, name: "Turban [1]", from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 2228, name: Helm, from: [box:BLUEBOX, box:VIOLETBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2230, name: Gemmed Sallet, from: [box:BLUEBOX, box:VIOLETBOX, shop, npc id?], hide: false }
+  - { id: 2232, name: Circlet, from: [box:BLUEBOX, box:VIOLETBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2261, name: Army Cap, from: [box:BLUEBOX, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 2271, name: Jack be Dandy, from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc id?, npc mention, npc reward], hide: false }
+  - { id: 2273, name: Doctor Band, from: [box:GIFTBOXCHINA, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2280, name: Sakkat, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 2284, name: Antlers, from: [box:GIFTBOXCHINA, npc mention, npc reward, npc id?], hide: false }
+  - { id: 2290, name: Funeral Hat, from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 2293, name: Pretend Murdered, from: [box:GIFTBOXCHINA, npc id?, npc reward, npc mention], hide: false }
+  - { id: 5001, name: Headset, from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 5016, name: Boy's Cap, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5018, name: Feather Bonnet, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5021, name: Grief for Greed, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5023, name: Parcel Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5026, name: Chef Hat, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5028, name: Candle, from: [npc mention, npc id?, npc reward], hide: false }
+  - { id: 5029, name: Spore Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5031, name: Mine Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5032, name: Sunday Hat, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5033, name: Raccoon Hat, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 5034, name: Bulb Band, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5036, name: Cross Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5038, name: Deviruchi Hat, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5039, name: Rainbow Eggshell, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5041, name: Heart Hairpin, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 5047, name: Fashionable Glasses, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5048, name: Cresent Hairpin, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5049, name: Striped Hairband, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 5050, name: Wonder Nutshell, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5052, name: Blue Hairband, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5055, name: Novice False Eggshell, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 5057, name: Black Cat Ears, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5058, name: Drooping Cat, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5059, name: Teddybear Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5060, name: Party Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5061, name: Flower Hairpin, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5062, name: Straw Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5063, name: Giant Band Aid, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5064, name: Smokie Leaf, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 5065, name: Blue Fish, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5067, name: Sombrero, from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 5069, name: Kitsune Mask, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5070, name: Hot-blooded Headband, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5071, name: Indian Headband, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5073, name: Model Training Hat, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 5075, name: Cowboy Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5076, name: Beanie, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5077, name: Tulip Hairpin, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5078, name: Sea-Otter Hat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5079, name: X Hairpin, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5080, name: Crown of Ancient Queen, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5081, name: Crown of Mistress, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5082, name: Decorative Mushroom, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5083, name: Red Ribbon, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5084, name: Lazy Smokie, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5105, name: "2nd Anniversary Hat", from: [npc id?, npc reward], hide: false }
+  - { id: 5108, name: "Renown Detective's Cap [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 5109, name: Red Bonnet, from: [npc reward, npc id?, npc mention], hide: false }
+  - { id: 5112, name: Super Novice Hat, from: [box:BLUEBOX, shop], hide: false }
+  - { id: 5114, name: Bucket Hat, from: [box:BLUEBOX, shop, npc id?], hide: false }
+  - { id: 5115, name: Winter Hat, from: [npc reward, npc id?], hide: false }
+  - { id: 5117, name: Mystic Rose, from: [npc reward, npc id?], hide: false }
+  - { id: 5136, name: Antonio's Santa Hat, from: [box:XMAS_GIFT, npc reward, npc mention, npc id?], hide: false }
+  - { id: 5147, name: "Baseball Cap [1]", from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5157, name: "Orc Helm [1]", from: [socket:2299, npc id?, npc reward, npc mention], hide: false }
+  - { id: 5158, name: "Monk Hat [1]", from: [socket:2251, npc id?, npc reward, npc mention], hide: false }
+  - { id: 5161, name: "Spiky Band [1]", from: [socket:2258, npc id?], hide: false }
+  - { id: 5163, name: "Corsair [1]", from: [socket:5019, npc id?], hide: false }
+  - { id: 5164, name: "Tiara [1]", from: [socket:2234, npc id?], hide: false }
+  - { id: 5165, name: "Crown [1]", from: [socket:2235, npc id?], hide: false }
+  - { id: 5170, name: Feather Beret, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5173, name: "Magistrate Hat [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 5174, name: "Ayam [1]", from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 5202, name: Fantastic Pumpkin-Head, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5302, name: Flower Lily, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5347, name: "Ph.D Hat [1]", from: [socket:5012, npc id?], hide: false }
+  - { id: 5348, name: "Big Ribbon [1]", from: [socket:2244, npc id?], hide: false }
+  - { id: 5349, name: "Boy's Cap [1]", from: [socket:5016, npc id?], hide: false }
+  - { id: 5350, name: "Pirate Bandana [1]", from: [socket:2287, npc id?], hide: false }
+  - { id: 5351, name: "Sunflower [1]", from: [socket:2253, npc id?], hide: false }
+  - { id: 5374, name: Gigantic Majestic Goat, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5436, name: Bride's Corolla, from: [npc reward, npc id?], hide: false }
+  - { id: 5438, name: Cute Green Ribbon, from: [npc id?, npc reward], hide: false }
+  - { id: 5439, name: Cute Red Ribbon, from: [npc id?, npc reward], hide: false }
+  - { id: 5440, name: Cute Blue Ribbon, from: [npc id?, npc reward], hide: false }
+  - { id: 5441, name: Cute White Ribbon, from: [npc id?, npc reward], hide: false }
+  - { id: 5446, name: "Catfoot Hairpin [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 5668, name: Weird Pumpkin Hat, from: [npc reward, npc id?], hide: false }
+  # Head_Top+Mid+Low
+  - { id: 5167, name: "Munak Hat [1]", from: [box:EASTER_SCROLL, socket:2264, npc id?, npc reward, npc mention], hide: false }
+  - { id: 5168, name: "Bongun Hat [1]", from: [box:EASTER_SCROLL, socket:5046, npc id?, npc reward, npc mention], hide: false }
+  # Head_Mid
+  - { id: 2203, name: Glasses, from: [box:BLUEBOX, box:VIOLETBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2205, name: Diver Goggles, from: [box:BLUEBOX, box:VIOLETBOX, shop, npc id?], hide: false }
+  - { id: 2212, name: Eye Patch, from: [box:BLUEBOX, box:VIOLETBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 2239, name: Monocle, from: [box:BLUEBOX, box:VIOLETBOX, npc id?, shop], hide: false }
+  - { id: 2242, name: Purple Glasses, from: [box:BLUEBOX, box:VIOLETBOX, shop], hide: false }
+  - { id: 2243, name: Geek Glasses, from: [box:BLUEBOX, box:VIOLETBOX, npc id?, shop, npc mention], hide: false }
+  - { id: 2260, name: Mini Glasses, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2295, name: Blinker, from: [box:BLUEBOX, box:GIFTBOXCHINA, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 5006, name: Machoman's Glasses, from: [box:BLUEBOX, box:VIOLETBOX, npc id?, npc reward, npc mention], hide: false }
+  - { id: 5040, name: Blush, from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 5043, name: Opera Phantom Mask, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5068, name: Evil Wing Ears, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5074, name: Angel Wing Ears, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5175, name: Censor Bar, from: [box:BLUEBOX, npc reward, npc id?], hide: false }
+  # Head_Mid+Head_Top
+  - { id: 5091, name: Decorative Golden Bell, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5092, name: Coif, from: [shop, npc id?], hide: false }
+  - { id: 5094, name: Helmet of Orc Hero, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 5121, name: Zealotus Mask, from: [box:MASK, npc reward, npc id?], hide: false }
+  - { id: 5243, name: "Shafka [1]", from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 5353, name: "Hat of the Sun God [1]", from: [npc reward, npc mention, npc id?], hide: false }
+  # Head_Low
+  - { id: 2218, name: Flu Mask, from: [box:BLUEBOX, box:VIOLETBOX, shop], hide: false }
+  - { id: 5004, name: Oxygen Mask, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 5054, name: Assassin Mask, from: [npc reward, npc id?], hide: false }
+  - { id: 5107, name: Crunch Toast, from: [npc reward, npc id?], hide: false }
+  - { id: 5110, name: Baby Pacifier, from: [npc reward, npc id?], hide: false }
+  - { id: 5305, name: Pirate Dagger, from: [box:CHERISH_BOX_ORI, npc reward, npc mention, npc id?], hide: false }
+  # Head_Low+Head_Mid
+  - { id: 2278, name: Mr. Smile, from: [box:BLUEBOX, box:MASK, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2281, name: Opera Masque, from: [box:MASK, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2292, name: Welding Mask, from: [box:MASK, npc reward, npc mention, npc id?], hide: false }
+  - { id: 5086, name: Alarm Mask, from: [box:MASK, npc reward, npc mention, npc id?], hide: false }
+  # Head_Low+Head_Top
+  - { id: 5166, name: "Sphinx Hat [1]", from: [socket:5053, npc id?, npc reward, npc mention], hide: false }
+  # Armor
+  - { id: 2307, name: Mantle, from: [box:BLUEBOX, npc mention, npc id?, shop, npc reward], hide: false }
+  - { id: 2309, name: Coat, from: [box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 2314, name: Chain Mail, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 2321, name: Silk Robe, from: [box:BLUEBOX, npc id?, shop, npc reward, npc mention], hide: false }
+  - { id: 2323, name: Scapulare, from: [box:BLUEBOX, shop, npc mention, npc id?], hide: false }
+  - { id: 2325, name: Saint's Robe, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 2328, name: Wooden Mail, from: [box:BLUEBOX, npc reward, npc mention, npc id?, shop], hide: false }
+  - { id: 2330, name: Tights, from: [box:BLUEBOX, npc mention, npc id?, shop], hide: false }
+  - { id: 2332, name: Silver Robe, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 2335, name: Thief Clothes, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 2340, name: "Novice Breastplate [1]", from: [box:BLUEBOX, box:VIOLETBOX, npc id?, shop], hide: false }
+  - { id: 2341, name: Legion Plate Armor, from: [box:BLUEBOX, npc id?, shop], hide: false }
+  - { id: 2352, name: Tattered Novice Ninja Suit, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2359, name: "Ninja Suit [1]", from: [socket:2337, npc id?, npc reward, npc mention], hide: false }
+  - { id: 2360, name: "Robe of Cast [1]", from: [socket:2343, npc id?], hide: false }
+  - { id: 2371, name: "Pantie [1]", from: [socket:2339, npc id?], hide: false }
+  - { id: 2372, name: "Mage Coat [1]", from: [socket:2334, npc id?], hide: false }
+  - { id: 2373, name: "Holy Robe [1]", from: [socket:2327, npc id?], hide: false }
+  # Garment
+  - { id: 2501, name: Hood, from: [box:BLUEBOX, npc mention, npc reward, npc id?, shop], hide: false }
+  - { id: 2503, name: Muffler, from: [box:BLUEBOX, npc mention, shop, npc id?, npc reward], hide: false }
+  - { id: 2510, name: Somber Novice Hood, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2512, name: "Novice Manteau [1]", from: [box:BLUEBOX, shop], hide: false }
+  - { id: 2523, name: "Undershirt [1]", from: [socket:2522, npc id?], hide: false }
+  - { id: 2525, name: "Ancient Cape [1]", from: [socket:2507, npc id?], hide: false }
+  # Shoes
+  - { id: 2401, name: Sandals, from: [box:BLUEBOX, npc id?, npc mention, shop], hide: false }
+  - { id: 2403, name: Shoes, from: [box:BLUEBOX, npc mention, npc reward, npc id?, shop], hide: false }
+  - { id: 2410, name: Sleipnir, from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 2411, name: Greaves, from: [box:BLUEBOX, box:VIOLETBOX, npc mention, shop, npc id?], hide: false }
+  - { id: 2414, name: Novice Slippers, from: [box:BLUEBOX, box:VIOLETBOX, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2416, name: "Novice Shoes [1]", from: [box:BLUEBOX, shop], hide: false }
+  - { id: 2429, name: Iron Boots, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 2430, name: Iron Boots, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 2432, name: "High Heels [1]", from: [socket:2409, npc id?], hide: false }
+  # Both_Accessory
+  - { id: 2628, name: "Novice Armlet [1]", from: [box:ACCESORY, box:BLUEBOX, box:VIOLETBOX, shop], hide: false }
+  - { id: 2629, name: Megingjard, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 2630, name: Brisingamen, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 2634, name: Wedding Ring, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 2635, name: Wedding Ring, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 2642, name: Serin's Gold Ring, from: [npc reward, npc mention, npc id?], hide: false }
+  - { id: 2643, name: Serin's Gold Ring, from: [npc id?, npc mention, npc reward], hide: false }
+  - { id: 2644, name: The Sign, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 2657, name: Laboratory Permit, from: [npc mention, npc id?, npc reward], hide: false }
+  - { id: 2658, name: "Nile Rose [1]", from: [box:ACCESORY, npc reward, npc mention, npc id?], hide: false }
+  - { id: 2671, name: "Bow Thimble [1]", from: [box:ACCESORY, socket:2619, npc id?, npc reward, npc mention], hide: false }
+  - { id: 2707, name: GUSLI, from: [npc mention, npc reward, npc id?], hide: false }
+  - { id: 2715, name: "Skull Ring [1]", from: [socket:2609, npc id?], hide: false }
+  - { id: 2730, name: "Seal of Continental Guard [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 2731, name: "Rune Spellstone [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 2732, name: "Death Loop [1]", from: [npc reward, npc id?], hide: false }
+  - { id: 2782, name: Ring of the Ancient Wise King, from: [npc id?, npc reward, npc mention], hide: false }
+  - { id: 2784, name: Christmas Musicbox, from: [npc reward, npc id?], hide: false }
+
+# No source in rAthena pre-renewal: not dropped, sold, crafted, given by an NPC or in a box; hidden: 851 items
+noSource:
+  # Weapon
+  - { id: 1103, name: Sword, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 1106, name: Falchion, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 1109, name: Blade, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 1112, name: Rapier, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 1115, name: "Scimitar [3]", type: 1hSword, from: [npc id?], hide: true }
+  - { id: 1118, name: Katana, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1121, name: Tsurugi, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 1153, name: Slayer, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1156, name: Bastard Sword, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1159, name: Two-Handed Sword, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1161, name: Balmung, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1173, name: Muramasa, type: 2hSword, hide: true }
+  - { id: 1174, name: Executioner, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1177, name: Muramash, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1183, name: Brave Assaulter's Katzbalger, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1184, name: Valorous Assaulter's Katzbalger, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1187, name: Glorious Claymore, type: 2hSword, from: [npc mention, npc id?], hide: true }
+  - { id: 1190, name: Claymore, type: 2hSword, from: [npc id?], hide: true }
+  - { id: 1203, name: Knife, type: Dagger, from: [npc id?], hide: true }
+  - { id: 1209, name: Main Gauche, type: Dagger, from: [npc id?], hide: true }
+  - { id: 1212, name: Dirk, type: Dagger, from: [npc id?], hide: true }
+  - { id: 1215, name: Dagger, type: Dagger, from: [npc id?], hide: true }
+  - { id: 1218, name: Stiletto, type: Dagger, hide: true }
+  - { id: 1221, name: Gladius, type: Dagger, hide: true }
+  - { id: 1240, name: Princess Knife, type: Dagger, from: [npc id?], hide: true }
+  - { id: 1244, name: Holy Dagger, type: Dagger, from: [npc id?], hide: true }
+  - { id: 1267, name: Infiltrator, type: Katar, from: [npc id?], hide: true }
+  - { id: 1272, name: Scratcher, type: Katar, from: [npc id?], hide: true }
+  - { id: 1273, name: Refined Bloody Roar, type: Katar, from: [npc id?], hide: true }
+  - { id: 1274, name: Refined Unholy Touch, type: Katar, from: [npc id?], hide: true }
+  - { id: 1279, name: Brave Carnage Katar, type: Katar, from: [npc id?], hide: true }
+  - { id: 1280, name: Valorous Carnage Katar, type: Katar, from: [npc id?], hide: true }
+  - { id: 1281, name: Glorious Bloody Roar, type: Katar, from: [npc mention, npc id?], hide: true }
+  - { id: 1282, name: Glorious Jamadhar, type: Katar, from: [npc mention, npc id?], hide: true }
+  - { id: 1283, name: Katar Of Speed, type: Katar, from: [npc id?], hide: true }
+  - { id: 1286, name: Jamadhar, type: Katar, from: [npc id?], hide: true }
+  - { id: 1303, name: Axe, type: 1hAxe, from: [npc id?], hide: true }
+  - { id: 1305, name: Cleaver, type: 1hAxe, from: [npc id?, npc mention], hide: true }
+  - { id: 1308, name: Golden Axe, type: 1hAxe, from: [npc id?], hide: true }
+  - { id: 1310, name: Glorious Cleaver, type: 1hAxe, from: [npc mention, npc id?], hide: true }
+  - { id: 1312, name: Orcish Axe, type: 1hAxe, from: [npc id?], hide: true }
+  - { id: 1313, name: Tourist Axe, type: 1hAxe, from: [npc id?], hide: true }
+  - { id: 1314, name: Tomahawk, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1315, name: Light Epsilon, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1353, name: Battle Axe, type: 2hAxe, hide: true }
+  - { id: 1356, name: Hammer, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1359, name: Buster, type: 2hAxe, hide: true }
+  - { id: 1362, name: Two-Handed Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1372, name: Light Epsilon, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1373, name: Refined Bloody Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1374, name: Tomahawk, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1378, name: Refined Great Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1379, name: Valorous Insane Battle Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1380, name: Brave Insane Battle Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1381, name: "Novice Battle Axe [3]", type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1382, name: Glorious Two-Handed Axe, type: 2hAxe, from: [npc mention, npc id?], hide: true }
+  - { id: 1383, name: Celestial Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1386, name: Doom Slayer, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1388, name: Two-Handed Axe, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1389, name: Tomahawk, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1390, name: Light Epsilon, type: 2hAxe, from: [npc id?], hide: true }
+  - { id: 1403, name: Javelin, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1406, name: Spear, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1409, name: Pike, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1412, name: Lance, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1414, name: Gelerdria, type: 1hSpear, from: [npc mention, npc id?], hide: true }
+  - { id: 1419, name: Pole Axe, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1423, name: Pole XO, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1424, name: Refined Brocca, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1425, name: Assaulter Spear, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1426, name: Glorious Spear, type: 1hSpear, from: [npc mention, npc id?], hide: true }
+  - { id: 1427, name: Spear Of Excellent, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1430, name: Pike, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1431, name: Pole Axe, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1432, name: Pole Axe, type: 1hSpear, from: [npc id?], hide: true }
+  - { id: 1453, name: Guisarme, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1456, name: Glaive, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1459, name: Partizan, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1462, name: Trident, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1465, name: Halberd, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1467, name: Bill Guisarme, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1475, name: Equestrian's Spear, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1482, name: Assaulter Lance, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1486, name: Glorious Lance, type: 2hSpear, from: [npc mention, npc id?], hide: true }
+  - { id: 1487, name: Lance, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1488, name: Ahlspiess, type: 2hSpear, from: [npc id?], hide: true }
+  - { id: 1503, name: Club, type: Mace, from: [npc id?], hide: true }
+  - { id: 1506, name: Mace, type: Mace, from: [npc id?], hide: true }
+  - { id: 1509, name: "Smasher [3]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1512, name: "Flail [3]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1515, name: "Morning Star [2]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1518, name: "Sword Mace [1]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1521, name: "Chain [3]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1533, name: Warrior's Balmung, type: Mace, from: [npc id?], hide: true }
+  - { id: 1534, name: Wrench, type: Mace, from: [npc id?], hide: true }
+  - { id: 1535, name: "Hollgrehenn's Hammer [1]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1536, name: Good Morning Star, type: Mace, from: [npc id?], hide: true }
+  - { id: 1537, name: Refined Quadrille, type: Mace, from: [npc id?], hide: true }
+  - { id: 1542, name: Valorous Battlefield Morning Star, type: Mace, from: [npc id?], hide: true }
+  - { id: 1543, name: Brave Battlefield Morning Star, type: Mace, from: [npc id?], hide: true }
+  - { id: 1545, name: "Novice Mace [3]", type: Mace, from: [npc id?], hide: true }
+  - { id: 1546, name: Glorious Morning Star, type: Mace, from: [npc mention, npc id?], hide: true }
+  - { id: 1547, name: Mace Of Madness, type: Mace, from: [npc id?], hide: true }
+  - { id: 1549, name: Pile Bunker, type: Mace, from: [npc id?], hide: true }
+  - { id: 1562, name: "Battlefield Textbook [1]", type: Book, from: [npc id?], hide: true }
+  - { id: 1563, name: "Sage's Diary [2]", type: Book, from: [npc id?], hide: true }
+  - { id: 1566, name: Diary Of Great Basil, type: Book, from: [npc id?], hide: true }
+  - { id: 1567, name: Refined Hardcover Book, type: Book, from: [npc id?], hide: true }
+  - { id: 1574, name: Brave Battle Strategy Book, type: Book, from: [npc id?], hide: true }
+  - { id: 1575, name: Valorous Battle Strategy Book, type: Book, from: [npc id?], hide: true }
+  - { id: 1576, name: Glorious Tablet, type: Book, from: [npc mention, npc id?], hide: true }
+  - { id: 1577, name: Glorious Apocalypse, type: Book, from: [npc mention, npc id?], hide: true }
+  - { id: 1578, name: Book Of Prayer, type: Book, from: [npc id?], hide: true }
+  - { id: 1579, name: "Book of the Dead [2]", type: Book, from: [npc id?], hide: true }
+  - { id: 1580, name: Giant Encyclopedia, type: Book, from: [npc id?], hide: true }
+  - { id: 1581, name: "Diary Of Great Sage [2]", type: Book, from: [npc id?], hide: true }
+  - { id: 1582, name: "Diary Of Great Sage [2]", type: Book, from: [npc id?], hide: true }
+  - { id: 1599, name: Angra Manyu, type: Mace, from: [npc id?, npc mention], hide: true }
+  - { id: 1603, name: Rod, type: Staff, hide: true }
+  - { id: 1606, name: Wand, type: Staff, hide: true }
+  - { id: 1609, name: Staff, type: Staff, hide: true }
+  - { id: 1612, name: Arc Wand, type: Staff, from: [npc id?], hide: true }
+  - { id: 1623, name: Mighty Staff, type: Staff, from: [npc id?], hide: true }
+  - { id: 1627, name: Staffy, type: Staff, from: [npc id?], hide: true }
+  - { id: 1628, name: Refined Survivor's Rod, type: Staff, from: [npc id?], hide: true }
+  - { id: 1632, name: Warlock's Magic Wand, type: Staff, from: [npc id?], hide: true }
+  - { id: 1633, name: Warlock's Battle Wand, type: Staff, from: [npc id?], hide: true }
+  - { id: 1634, name: Strong Recovery Wand, type: Staff, from: [npc id?], hide: true }
+  - { id: 1635, name: Speedy Recovery Wand, type: Staff, from: [npc id?], hide: true }
+  - { id: 1638, name: Staff Of Healing, type: Staff, from: [npc id?], hide: true }
+  - { id: 1639, name: "Novice Rod [3]", type: Staff, from: [npc id?], hide: true }
+  - { id: 1640, name: Glorious Arc Wand, type: Staff, from: [npc mention, npc id?], hide: true }
+  - { id: 1641, name: Glorious Cure Wand, type: Staff, from: [npc mention, npc id?], hide: true }
+  - { id: 1642, name: Staff Of Darkness, type: Staff, from: [npc id?], hide: true }
+  - { id: 1703, name: Bow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1706, name: Composite Bow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1709, name: Great Bow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1712, name: Crossbow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1725, name: "Minstrel Bow [1]", type: Bow, from: [npc id?], hide: true }
+  - { id: 1728, name: Ballista, type: Bow, from: [npc id?], hide: true }
+  - { id: 1729, name: Rudra Bow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1735, name: Kkakkung, type: Bow, from: [npc id?], hide: true }
+  - { id: 1738, name: Valorous Battle CrossBow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1739, name: Brave Battle CrossBow, type: Bow, from: [npc id?], hide: true }
+  - { id: 1742, name: "Novice Composite Bow [3]", type: Bow, hide: true }
+  - { id: 1743, name: Glorious Hunter Bow, type: Bow, from: [npc mention, npc id?], hide: true }
+  - { id: 1744, name: Bow Of Evil, type: Bow, hide: true }
+  - { id: 1817, name: Kaiser Knuckle, type: Knuckle, hide: true }
+  - { id: 1823, name: Valorous Battle Fist, type: Knuckle, from: [npc id?], hide: true }
+  - { id: 1824, name: Brave Battle Fist, type: Knuckle, from: [npc id?], hide: true }
+  - { id: 1826, name: Glorious Claw, type: Knuckle, from: [npc mention, npc id?], hide: true }
+  - { id: 1827, name: Glorious Fist, type: Knuckle, from: [npc mention, npc id?], hide: true }
+  - { id: 1828, name: Monk Knuckle, type: Knuckle, hide: true }
+  - { id: 1829, name: Fist, type: Knuckle, from: [npc id?], hide: true }
+  - { id: 1921, name: Gun Moon Gom, type: Musical, from: [npc id?], hide: true }
+  - { id: 1923, name: Valorous Battlefield Guitar, type: Musical, from: [npc id?], hide: true }
+  - { id: 1924, name: Brave Battlefield Guitar, type: Musical, from: [npc id?], hide: true }
+  - { id: 1927, name: Glorious Guitar, type: Musical, from: [npc mention, npc id?], hide: true }
+  - { id: 1929, name: Guitar, type: Musical, from: [npc id?], hide: true }
+  - { id: 1975, name: Queen Is Whip, type: Whip, from: [npc id?], hide: true }
+  - { id: 1977, name: Valorous Battle Lariat, type: Whip, from: [npc id?], hide: true }
+  - { id: 1978, name: Brave Battle Lariat, type: Whip, from: [npc id?], hide: true }
+  - { id: 1981, name: Glorious Lariat, type: Whip, from: [npc mention, npc id?], hide: true }
+  - { id: 1982, name: Phenomena Whip, type: Whip, from: [npc id?], hide: true }
+  - { id: 1983, name: Rante Whip, type: Whip, from: [npc id?], hide: true }
+  - { id: 2002, name: Glorious Destruction Staff, type: 2hStaff, from: [npc mention, npc id?], hide: true }
+  - { id: 13005, name: "Angelic Wing Dagger [2]", type: Dagger, hide: true }
+  - { id: 13020, name: Warrior's Balmung, type: Dagger, hide: true }
+  - { id: 13021, name: Combat Knife, type: Dagger, hide: true }
+  - { id: 13022, name: Dagger of Counter, type: Dagger, hide: true }
+  - { id: 13023, name: Ashura, type: Dagger, hide: true }
+  - { id: 13024, name: Refined Swordbreaker, type: Dagger, from: [npc id?], hide: true }
+  - { id: 13025, name: Refined Mailbreaker, type: Dagger, hide: true }
+  - { id: 13026, name: Moonlight Dagger, type: Dagger, hide: true }
+  - { id: 13029, name: Prinsense Knife, type: Dagger, hide: true }
+  - { id: 13036, name: Brave Assassin's Damascus, type: Dagger, from: [npc id?], hide: true }
+  - { id: 13037, name: Valorous Assassin's Damascus, type: Dagger, from: [npc id?], hide: true }
+  - { id: 13040, name: "Novice Cutter [3]", type: Dagger, hide: true }
+  - { id: 13041, name: "Novice Main Gauche [3]", type: Dagger, hide: true }
+  - { id: 13042, name: Glorious Gladius, type: Dagger, from: [npc mention, npc id?], hide: true }
+  - { id: 13043, name: Fortune Sword, type: Dagger, hide: true }
+  - { id: 13044, name: Ice Pick, type: Dagger, hide: true }
+  - { id: 13045, name: Kamaitachi, type: Dagger, hide: true }
+  - { id: 13048, name: Damascus, type: Dagger, hide: true }
+  - { id: 13108, name: Soldier Revolver, type: Revolver, from: [npc id?], hide: true }
+  - { id: 13109, name: Wasteland Outlaw, type: Revolver, hide: true }
+  - { id: 13110, name: Glorious Pistol, type: Revolver, from: [npc mention, npc id?], hide: true }
+  - { id: 13112, name: Eden Revlover I, type: Revolver, hide: true }
+  - { id: 13113, name: Eden Revlover II, type: Revolver, hide: true }
+  - { id: 13166, name: "Jungle Carbine [1]", type: Rifle, hide: true }
+  - { id: 13171, name: Soldier Rifle, type: Rifle, from: [npc id?], hide: true }
+  - { id: 13172, name: Soldier Gatling Gun, type: Gatling, from: [npc id?], hide: true }
+  - { id: 13173, name: Soldier Shotgun, type: Shotgun, from: [npc id?], hide: true }
+  - { id: 13174, name: Soldier Grenade Launcher, type: Grenade, from: [npc id?], hide: true }
+  - { id: 13175, name: Lever Action Rifle, type: Rifle, hide: true }
+  - { id: 13176, name: Glorious Rifle, type: Rifle, from: [npc mention, npc id?], hide: true }
+  - { id: 13177, name: Glorious Gatling Gun, type: Gatling, from: [npc mention, npc id?], hide: true }
+  - { id: 13178, name: Glorious Shotgun, type: Shotgun, from: [npc mention, npc id?], hide: true }
+  - { id: 13179, name: Glorious Grenade Launcher, type: Grenade, from: [npc mention, npc id?], hide: true }
+  - { id: 13305, name: Brave Huuma Front Shuriken, type: Huuma, from: [npc id?], hide: true }
+  - { id: 13306, name: Valorous Huuma Front Shuriken, type: Huuma, from: [npc id?], hide: true }
+  - { id: 13307, name: Glorious Shuriken, type: Huuma, from: [npc mention, npc id?], hide: true }
+  - { id: 13308, name: Huuma Blaze Shuriken, type: Huuma, hide: true }
+  - { id: 13309, name: Huuma Giant Wheel Shuriken, type: Huuma, hide: true }
+  - { id: 13401, name: Excalibur, type: 1hSword, hide: true }
+  - { id: 13402, name: Cutlus, type: 1hSword, hide: true }
+  - { id: 13403, name: Solar Sword, type: 1hSword, hide: true }
+  - { id: 13406, name: Edger, type: 1hSword, hide: true }
+  - { id: 13407, name: Refined Nagan, type: 1hSword, hide: true }
+  - { id: 13408, name: Refined Fireblend, type: 1hSword, hide: true }
+  - { id: 13409, name: Refined Immaterial Sword, type: 1hSword, hide: true }
+  - { id: 13410, name: Valorous Gladiator Blade, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 13411, name: Brave Gladiator Blade, type: 1hSword, from: [npc id?], hide: true }
+  - { id: 13415, name: "Novice Falchion [3]", type: 1hSword, hide: true }
+  - { id: 13416, name: Glorious Flamberge, type: 1hSword, from: [npc mention, npc id?], hide: true }
+  - { id: 13417, name: Glorious Rapier, type: 1hSword, from: [npc mention, npc id?], hide: true }
+  - { id: 13418, name: Glorious Holy Avenger, type: 1hSword, from: [npc mention, npc id?], hide: true }
+  - { id: 13419, name: Holy saber, type: 1hSword, hide: true }
+  - { id: 13420, name: "Honglyun's Sword [1]", type: 1hSword, hide: true }
+  - { id: 13422, name: Flamberge, type: 1hSword, hide: true }
+  - { id: 16002, name: Stunner, type: Mace, hide: true }
+  - { id: 16030, name: "Pile Bunker S [1]", type: Mace, hide: true }
+  - { id: 16031, name: Pile Bunker P, type: Mace, hide: true }
+  - { id: 16032, name: "Pile Bunker T [1]", type: Mace, hide: true }
+  - { id: 18100, name: Shooting Star, type: Bow, from: [npc id?], hide: true }
+  - { id: 18101, name: Rudra Bow, type: Bow, from: [npc id?], hide: true }
+  - { id: 18102, name: Rudra Bow, type: Bow, from: [npc id?], hide: true }
+  # Left_Hand
+  - { id: 2126, name: Guyak Shield, from: [npc id?], hide: true }
+  - { id: 2127, name: Secular Mission, from: [npc id?], hide: true }
+  - { id: 2132, name: Shell Of Resistance, from: [npc id?], hide: true }
+  - { id: 2136, name: Cracked Buckler, from: [npc id?], hide: true }
+  - { id: 2139, name: Flame Thrower, from: [npc id?], hide: true }
+  - { id: 2199, name: Ahura Mazdah, from: [npc id?, npc mention], hide: true }
+  # Head_Top
+  - { id: 5013, name: Lord Kaho's Horn, hide: true }
+  - { id: 5020, name: Kafra Band, hide: true }
+  - { id: 5044, name: Evil Wing Ears, hide: true }
+  - { id: 5056, name: Fruit of Love, hide: true }
+  - { id: 5100, name: Sales Banner, hide: true }
+  - { id: 5103, name: Sunflower Hairpin, hide: true }
+  - { id: 5106, name: "2nd Anniversary Hat", hide: true }
+  - { id: 5129, name: Bird Nest, hide: true }
+  - { id: 5132, name: Angeling Hat, hide: true }
+  - { id: 5133, name: Sheep Hat, hide: true }
+  - { id: 5144, name: Gambler Hat, hide: true }
+  - { id: 5145, name: Carnival Joker Jester, hide: true }
+  - { id: 5148, name: Phrygian Cap, hide: true }
+  - { id: 5149, name: Silver Tiara, from: [npc id?], hide: true }
+  - { id: 5150, name: Joker Jester, hide: true }
+  - { id: 5153, name: Angeling Hairpin, hide: true }
+  - { id: 5178, name: Candle, hide: true }
+  - { id: 5179, name: Golden Tiara, hide: true }
+  - { id: 5180, name: France Holiday Hat, hide: true }
+  - { id: 5184, name: Captain's Hat, hide: true }
+  - { id: 5188, name: Wandering Minstrel Hat, hide: true }
+  - { id: 5190, name: "Independence Memorial Hat [1]", hide: true }
+  - { id: 5191, name: "Black Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5192, name: "Yellow Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5193, name: "Green Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5194, name: "Pink Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5195, name: "Red Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5196, name: "Orange Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5197, name: "White Ribbon [1]", from: [npc id?], hide: true }
+  - { id: 5198, name: Drooping Bunny, hide: true }
+  - { id: 5199, name: Baseball Cap, hide: true }
+  - { id: 5200, name: Coppola, hide: true }
+  - { id: 5201, name: Party Hat, hide: true }
+  - { id: 5207, name: Angel Blessing, hide: true }
+  - { id: 5209, name: Love Dad Cap, hide: true }
+  - { id: 5210, name: Flapping Angel Wing, hide: true }
+  - { id: 5215, name: Evolved Angel Wing, hide: true }
+  - { id: 5216, name: Evolved Evil Wing, hide: true }
+  - { id: 5217, name: Evolved Majestic Goat, from: [npc id?], hide: true }
+  - { id: 5218, name: Evolved Bunny Band, hide: true }
+  - { id: 5219, name: Evolved Drooping Cat, hide: true }
+  - { id: 5222, name: Evolved Blue Fish, hide: true }
+  - { id: 5226, name: Mini Propeller, hide: true }
+  - { id: 5227, name: Red Deviruchi Hat, from: [npc id?], hide: true }
+  - { id: 5228, name: Gray Deviruchi Hat, from: [npc id?], hide: true }
+  - { id: 5229, name: Brown Deviruchi Hat, from: [npc id?], hide: true }
+  - { id: 5230, name: Gray Drooping Cat, from: [npc id?], hide: true }
+  - { id: 5231, name: Brown Drooping Cat, from: [npc id?], hide: true }
+  - { id: 5232, name: Pink Drooping Cat, from: [npc id?], hide: true }
+  - { id: 5233, name: Blue Drooping Cat, from: [npc id?], hide: true }
+  - { id: 5234, name: Yellow Drooping Cat, from: [npc id?], hide: true }
+  - { id: 5235, name: Brown Beanie, from: [npc id?], hide: true }
+  - { id: 5236, name: Blue Beanie, from: [npc id?], hide: true }
+  - { id: 5237, name: Pink Beanie, from: [npc id?], hide: true }
+  - { id: 5238, name: Red Mage Hat, from: [npc id?], hide: true }
+  - { id: 5239, name: Gray Mage Hat, from: [npc id?], hide: true }
+  - { id: 5240, name: Brown Mage Hat, from: [npc id?], hide: true }
+  - { id: 5241, name: Blue Mage Hat, from: [npc id?], hide: true }
+  - { id: 5242, name: Yellow Mage Hat, from: [npc id?], hide: true }
+  - { id: 5246, name: Angelic Helm, hide: true }
+  - { id: 5247, name: Satanic Helm, hide: true }
+  - { id: 5252, name: Drooping Ninetail, hide: true }
+  - { id: 5253, name: "Lif Doll Hat [1]", hide: true }
+  - { id: 5254, name: "Deviling Hat [1]", hide: true }
+  - { id: 5255, name: Triple Poring Hat, hide: true }
+  - { id: 5257, name: Soul Ring, hide: true }
+  - { id: 5264, name: Australian Flag Hat, hide: true }
+  - { id: 5265, name: Apple of Archer, hide: true }
+  - { id: 5267, name: Sakkat, hide: true }
+  - { id: 5268, name: Grand Circlet, hide: true }
+  - { id: 5269, name: Flapping Angel Wing, hide: true }
+  - { id: 5277, name: Yellow Bandana, hide: true }
+  - { id: 5278, name: Yellow Ribbon, hide: true }
+  - { id: 5279, name: Refined Drooping Cat, hide: true }
+  - { id: 5280, name: Baphomet Horns, hide: true }
+  - { id: 5281, name: Refined Deviruchi Hat, hide: true }
+  - { id: 5282, name: "Europe Baseball Cap [1]", hide: true }
+  - { id: 5284, name: "Water Lily Crown [1]", hide: true }
+  - { id: 5285, name: "Vane Hairpin [1]", hide: true }
+  - { id: 5286, name: Pecopeco Hairband, hide: true }
+  - { id: 5287, name: "Vacation Hat [1]", hide: true }
+  - { id: 5290, name: Drooping Bunny, hide: true }
+  - { id: 5292, name: Dragon Skull, hide: true }
+  - { id: 5300, name: Bullock Helm, hide: true }
+  - { id: 5301, name: Victory Hairband, hide: true }
+  - { id: 5303, name: Flower Crown, hide: true }
+  - { id: 5306, name: Freya's Crown, hide: true }
+  - { id: 5307, name: Carmen Miranda's Hat, hide: true }
+  - { id: 5308, name: "Brazil National Flag Hat [1]", hide: true }
+  - { id: 5310, name: "Shining Electric Bulb Hairband [1]", hide: true }
+  - { id: 5311, name: "Large Hisbiscus [1]", hide: true }
+  - { id: 5312, name: "Ayothaya King's Hat [1]", hide: true }
+  - { id: 5316, name: Umbrella Hat, hide: true }
+  - { id: 5317, name: Fisherman's Hat, hide: true }
+  - { id: 5318, name: Poring Party Hat, hide: true }
+  - { id: 5319, name: Hello Mother Hat, hide: true }
+  - { id: 5320, name: Champion Wreath, hide: true }
+  - { id: 5321, name: Bandana Merah Putih, hide: true }
+  - { id: 5322, name: Kerchief, from: [npc mention], hide: true }
+  - { id: 5323, name: Misstrance Crown, hide: true }
+  - { id: 5324, name: Little Angel Doll, hide: true }
+  - { id: 5330, name: kRO Drooping Kitty C, hide: true }
+  - { id: 5331, name: Corsair C, hide: true }
+  - { id: 5334, name: Flapping Angeling, hide: true }
+  - { id: 5335, name: Jumping Poring, hide: true }
+  - { id: 5336, name: Guildsman Recruiter Hat, hide: true }
+  - { id: 5337, name: Party Recruiter Hat, hide: true }
+  - { id: 5338, name: Bf Recruiter Hat, hide: true }
+  - { id: 5339, name: Friend Recruiter Hat, hide: true }
+  - { id: 5340, name: "Defolty Doll Hat [1]", hide: true }
+  - { id: 5341, name: "Glaris Doll Hat [1]", hide: true }
+  - { id: 5342, name: "Sorin Doll Hat [1]", hide: true }
+  - { id: 5343, name: "Telling Doll Hat [1]", hide: true }
+  - { id: 5344, name: "Bennit Doll Hat [1]", hide: true }
+  - { id: 5345, name: "W Doll Hat [1]", hide: true }
+  - { id: 5346, name: Gf Recruiter Hat, hide: true }
+  - { id: 5352, name: Poporing Cap, hide: true }
+  - { id: 5354, name: Muslim Hat M, hide: true }
+  - { id: 5355, name: Selendang, hide: true }
+  - { id: 5356, name: Festival Pumpkin Hat, hide: true }
+  - { id: 5359, name: "Ship Captain Hat [1]", hide: true }
+  - { id: 5363, name: "Helm Of Abyss [1]", hide: true }
+  - { id: 5364, name: "Evil Snake Lord Hat [1]", hide: true }
+  - { id: 5365, name: "Magnolia Hat [1]", hide: true }
+  - { id: 5366, name: Love Dad Bandana, hide: true }
+  - { id: 5368, name: White Wing, hide: true }
+  - { id: 5369, name: Dark Wing, hide: true }
+  - { id: 5370, name: Orchid Hairband, hide: true }
+  - { id: 5376, name: "Flying Evil Wing [1]", hide: true }
+  - { id: 5378, name: Bunny Top Hat, hide: true }
+  - { id: 5379, name: "Tam [1]", hide: true }
+  - { id: 5380, name: Fish Head Hat, hide: true }
+  - { id: 5381, name: "Santa Poring Hat [1]", hide: true }
+  - { id: 5382, name: "Bell Ribbon [1]", hide: true }
+  - { id: 5383, name: "Hunter's Cap [1]", hide: true }
+  - { id: 5384, name: "Twin Pompom By JB [1]", hide: true }
+  - { id: 5385, name: Yoyo Hat, hide: true }
+  - { id: 5386, name: Ayam, hide: true }
+  - { id: 5387, name: "Neko Mimi Kafra [1]", hide: true }
+  - { id: 5388, name: "Snake Head Hat [1]", hide: true }
+  - { id: 5390, name: Frozen Twin Pompom, hide: true }
+  - { id: 5392, name: "Luoyang NewYear Hat [1]", hide: true }
+  - { id: 5393, name: Love Valentine's Hat, hide: true }
+  - { id: 5395, name: "Striped Hat [1]", hide: true }
+  - { id: 5396, name: "Jasper Crest [1]", hide: true }
+  - { id: 5404, name: "Blue Ribbon [1]", hide: true }
+  - { id: 5406, name: Academy Freshman Hat, hide: true }
+  - { id: 5407, name: "Academy Completion Hat [1]", hide: true }
+  - { id: 5408, name: Old Bandana, hide: true }
+  - { id: 5409, name: "Purple Cowboy Hat [1]", hide: true }
+  - { id: 5411, name: White Snake Hat, hide: true }
+  - { id: 5413, name: Pop Corn Hat, hide: true }
+  - { id: 5414, name: Camp Fire Hat, hide: true }
+  - { id: 5415, name: Poring Cake Hat, hide: true }
+  - { id: 5417, name: "Crown Parrots [1]", hide: true }
+  - { id: 5418, name: "Legionnaire Hat [1]", hide: true }
+  - { id: 5422, name: Linguistic Book Hat, hide: true }
+  - { id: 5423, name: I Love China, hide: true }
+  - { id: 5424, name: "Fanta Orange Can Hat [1]", hide: true }
+  - { id: 5425, name: "Fanta Grape Can Hat [1]", hide: true }
+  - { id: 5426, name: "Karada Meguricha Hat [1]", hide: true }
+  - { id: 5427, name: "Black Tea Kochakaden Hat [1]", hide: true }
+  - { id: 5429, name: "Bogy Cap [1]", from: [npc id?], hide: true }
+  - { id: 5430, name: Torch Cap, hide: true }
+  - { id: 5432, name: bRO 4th Anniversary Hat, hide: true }
+  - { id: 5433, name: Golden Laurel, hide: true }
+  - { id: 5435, name: "Red Minstrel Hat [1]", hide: true }
+  - { id: 5437, name: "Fairy Flower [1]", hide: true }
+  - { id: 5442, name: "Necktie [1]", from: [npc mention], hide: true }
+  - { id: 5443, name: "Statue Of Baby Angel [1]", hide: true }
+  - { id: 5444, name: Hair Brush, hide: true }
+  - { id: 5447, name: Frog Hat, hide: true }
+  - { id: 5450, name: Solar Hat, hide: true }
+  - { id: 5451, name: "RWC 2008 Dragon Helm Gold [1]", hide: true }
+  - { id: 5452, name: "RWC 2008 Dragon Helm Silver [1]", hide: true }
+  - { id: 5453, name: "RWC 2008 Dragon Helm Copper [1]", hide: true }
+  - { id: 5457, name: "Moon Rabbit Hat [1]", hide: true }
+  - { id: 5458, name: Pinwheel Hat, hide: true }
+  - { id: 5459, name: Drooping Bunny, hide: true }
+  - { id: 5460, name: Evolved Dragon Skull Hat, hide: true }
+  - { id: 5477, name: "Brazilian Flag Hat [1]", hide: true }
+  - { id: 5478, name: Classic Hat, hide: true }
+  - { id: 5479, name: Shaman's Hair Decoration, hide: true }
+  - { id: 5480, name: Bijofnil Wings, hide: true }
+  - { id: 5481, name: "Hermode Cap [1]", hide: true }
+  - { id: 5486, name: Anniversary Hat, hide: true }
+  - { id: 5487, name: Poring Cake Hat, hide: true }
+  - { id: 5488, name: Twin Santa Hat, hide: true }
+  - { id: 5489, name: Love Daddy Hat, hide: true }
+  - { id: 5492, name: Student Cap, hide: true }
+  - { id: 5493, name: Ulle's Cap, hide: true }
+  - { id: 5495, name: "Power Of Thor [1]", hide: true }
+  - { id: 5496, name: Dice Hat, hide: true }
+  - { id: 5497, name: "King Tiger Doll Hat [1]", hide: true }
+  - { id: 5499, name: Pizza Hat, hide: true }
+  - { id: 5500, name: Icecream Hat, from: [npc id?], hide: true }
+  - { id: 5501, name: Pirate's Pride, hide: true }
+  - { id: 5506, name: Blue Night Cap, hide: true }
+  - { id: 5507, name: Pink Night Cap, hide: true }
+  - { id: 5508, name: Shark Hat, hide: true }
+  - { id: 5509, name: Sting hat, hide: true }
+  - { id: 5510, name: Shower Cap, hide: true }
+  - { id: 5512, name: Aquarius Diadem, hide: true }
+  - { id: 5513, name: Aquarius Crown, hide: true }
+  - { id: 5514, name: Pisces Diadem, hide: true }
+  - { id: 5515, name: Pisces Crown, hide: true }
+  - { id: 5518, name: Gigantic Majestic Goat, hide: true }
+  - { id: 5519, name: "Peacock Feather [1]", hide: true }
+  - { id: 5522, name: "Fanta Zero Lemon Hat [1]", hide: true }
+  - { id: 5523, name: "Sakura Mist Hat [1]", hide: true }
+  - { id: 5524, name: "Sakura Milk Tea Hat [1]", hide: true }
+  - { id: 5525, name: "Flower Hat [1]", hide: true }
+  - { id: 5526, name: Tanigumi Girl Doll, hide: true }
+  - { id: 5527, name: Lunatic Hat, hide: true }
+  - { id: 5528, name: "Frog King Hat [1]", hide: true }
+  - { id: 5530, name: "Raven Cap [1]", hide: true }
+  - { id: 5531, name: "Baby Dragon Hat [1]", hide: true }
+  - { id: 5535, name: Side Cap, hide: true }
+  - { id: 5540, name: Freyja SCirclet7, hide: true }
+  - { id: 5541, name: Freyja SCirclet30, hide: true }
+  - { id: 5542, name: Freyja SCirclet60, hide: true }
+  - { id: 5543, name: Freyja SCirclet90, hide: true }
+  - { id: 5544, name: Time Keeper Hat, hide: true }
+  - { id: 5545, name: Aries Diadem, hide: true }
+  - { id: 5546, name: Aries Crown, hide: true }
+  - { id: 5547, name: "RJC Katusa Flower [1]", hide: true }
+  - { id: 5549, name: Taurus Diadem, hide: true }
+  - { id: 5550, name: Taurus Crown, hide: true }
+  - { id: 5552, name: Festival Grand Circlet, hide: true }
+  - { id: 5553, name: Festival Bunny Band, hide: true }
+  - { id: 5554, name: Octopus Hat, hide: true }
+  - { id: 5555, name: Leaf Cat Hat, hide: true }
+  - { id: 5557, name: "Wild Rose Hat [1]", hide: true }
+  - { id: 5558, name: "Luxury Hat [1]", hide: true }
+  - { id: 5559, name: Piece Of White Cloth, hide: true }
+  - { id: 5560, name: Bullock Helm, hide: true }
+  - { id: 5567, name: "Bright Fury [1]", hide: true }
+  - { id: 5569, name: Gemini Diadem, hide: true }
+  - { id: 5570, name: Gemini Crown, hide: true }
+  - { id: 5572, name: "Savage Babe Hat [1]", hide: true }
+  - { id: 5573, name: "Dokebi Horn [1]", hide: true }
+  - { id: 5575, name: "Rice Ball Hat [1]", hide: true }
+  - { id: 5578, name: Voyage_Hat, hide: true }
+  - { id: 5581, name: Cancer Diadem, hide: true }
+  - { id: 5582, name: Cancer Crown, hide: true }
+  - { id: 5583, name: Eden Team Hat, hide: true }
+  - { id: 5584, name: Majestic Evil Horns, hide: true }
+  - { id: 5586, name: "Mosquito Coil [1]", hide: true }
+  - { id: 5587, name: Mosquito Coil, hide: true }
+  - { id: 5590, name: Poring Cake Hat, hide: true }
+  - { id: 5600, name: Brazil Twin Ribbon, hide: true }
+  - { id: 5603, name: "RTC First Place [1]", hide: true }
+  - { id: 5604, name: "RTC Second Place [1]", hide: true }
+  - { id: 5605, name: "RTC Third Place [1]", from: [npc id?], hide: true }
+  - { id: 5658, name: Imp Hat, hide: true }
+  - { id: 5659, name: Sleeper Hat, hide: true }
+  - { id: 5660, name: Gryphon Hat, hide: true }
+  - { id: 5665, name: "Shaman Hat [1]", hide: true }
+  - { id: 5666, name: "Golden Crown [1]", hide: true }
+  - { id: 5671, name: "Drooping Morocc Minion [1]", hide: true }
+  - { id: 5681, name: Green Ribbon, hide: true }
+  - { id: 5682, name: "Triangle Rune Cap [1]", hide: true }
+  - { id: 5683, name: Baphomet Horns, hide: true }
+  - { id: 5684, name: Ornate Crown, hide: true }
+  - { id: 5685, name: Army Cap, hide: true }
+  - { id: 5686, name: Nice Hat Feather, hide: true }
+  - { id: 5687, name: Orc Helm, hide: true }
+  - { id: 5690, name: "Red Wing Hat [1]", hide: true }
+  - { id: 5691, name: Sailor's Bandana, hide: true }
+  - { id: 5692, name: Sea Cat Hat, hide: true }
+  - { id: 5738, name: "Snowman Hat [1]", hide: true }
+  - { id: 5741, name: Eternal Egg Shell, hide: true }
+  - { id: 5742, name: Rudolph Santa Hat, hide: true }
+  - { id: 5770, name: "Splash Hat [1]", hide: true }
+  - { id: 5771, name: "Family Hat [1]", hide: true }
+  - { id: 5781, name: "Persika [1]", hide: true }
+  - { id: 5792, name: Fish Pin, hide: true }
+  - { id: 5801, name: Red Tailed Ribbon, hide: true }
+  - { id: 5802, name: "Upgraded Elephant Hat [1]", hide: true }
+  - { id: 5803, name: Love Flower Hat, hide: true }
+  - { id: 5805, name: Victorious Coronet, hide: true }
+  - { id: 5806, name: Poet Natalie's Hat, hide: true }
+  - { id: 5807, name: October Fest Cap, hide: true }
+  - { id: 5809, name: Boom Boom Hat, hide: true }
+  - { id: 5810, name: Ph.D Hat V, hide: true }
+  - { id: 5812, name: Hat Of Expert, hide: true }
+  - { id: 5815, name: Classic Hat, hide: true }
+  - { id: 5816, name: Purple Cowboy Hat, hide: true }
+  - { id: 5818, name: Carnival Hat, hide: true }
+  - { id: 5819, name: Carnival Circlet, hide: true }
+  - { id: 5821, name: Gold Tulip Hairpin, hide: true }
+  - { id: 5822, name: Love Chick Hat, hide: true }
+  - { id: 5824, name: "Fools Day Hat [1]", hide: true }
+  - { id: 5826, name: Valkyrie Helmet, hide: true }
+  - { id: 5827, name: Book File Hat, hide: true }
+  - { id: 5856, name: "Passion FB Hat [1]", hide: true }
+  - { id: 5857, name: "Cool FB Hat [1]", hide: true }
+  - { id: 5858, name: "Victory FB Hat [1]", hide: true }
+  - { id: 5859, name: "Glory FB Hat [1]", hide: true }
+  - { id: 18539, name: "Skull Cap [1]", hide: true }
+  - { id: 18595, name: "Horn of Ancient [1]", hide: true }
+  - { id: 18596, name: Sprout Hat, hide: true }
+  - { id: 18597, name: "Mercury Riser [1]", hide: true }
+  - { id: 18600, name: Cat Ear Beret, hide: true }
+  - { id: 18612, name: "White Musang Hat [1]", hide: true }
+  - { id: 18613, name: "Black Musang Hat [1]", hide: true }
+  - { id: 18656, name: Witch's Pumpkin Hat, hide: true }
+  # Head_Top+Mid+Low
+  - { id: 5131, name: Close Helmet, hide: true }
+  - { id: 5263, name: Pagdayaw, hide: true }
+  - { id: 5294, name: Whisper Mask, hide: true }
+  - { id: 5309, name: Wool Mask, hide: true }
+  - { id: 5400, name: Fox Hat, hide: true }
+  - { id: 5410, name: Brown Paperbag Hat, hide: true }
+  - { id: 5420, name: Mask Of Ifrit, hide: true }
+  - { id: 5428, name: RWC Anniversary Bread Envelope, hide: true }
+  - { id: 5448, name: "Soloplay Box1 [1]", hide: true }
+  - { id: 5449, name: "Soloplay Box2 [1]", hide: true }
+  - { id: 5461, name: Evolved Whisper Mask, hide: true }
+  - { id: 5482, name: Dark Knight Mask, hide: true }
+  - { id: 5485, name: Tiger Face, hide: true }
+  - { id: 5539, name: "Jaguar Hat [1]", hide: true }
+  - { id: 5556, name: Seal Hat, hide: true }
+  - { id: 5577, name: Dark Knight Mask, hide: true }
+  - { id: 18506, name: "Hattah Black [1]", hide: true }
+  # Head_Mid
+  - { id: 2204, name: "Glasses [1]", from: [npc id?], hide: true }
+  - { id: 2686, name: Elven Ears, hide: true }
+  - { id: 5101, name: Takius's Blindfold, hide: true }
+  - { id: 5102, name: Blank Eyes, hide: true }
+  - { id: 5135, name: Cyclop's Eye, hide: true }
+  - { id: 5154, name: Father's Sunglasses, hide: true }
+  - { id: 5221, name: Evolved Pair of Red Ribbon, hide: true }
+  - { id: 5244, name: Elven Blindfold, hide: true }
+  - { id: 5245, name: Elven Sunglasses, hide: true }
+  - { id: 5248, name: Robotic Blindfold, hide: true }
+  - { id: 5249, name: Human Blindfold, hide: true }
+  - { id: 5250, name: Robotic Ears, from: [npc id?], hide: true }
+  - { id: 5251, name: Round Ears, hide: true }
+  - { id: 5288, name: Red Glasses, hide: true }
+  - { id: 5315, name: Observer, hide: true }
+  - { id: 5325, name: Robo Eye, hide: true }
+  - { id: 5326, name: Masquerade C, hide: true }
+  - { id: 5328, name: Evil Wing Ears C, hide: true }
+  - { id: 5329, name: Dark Blindfold C, hide: true }
+  - { id: 5389, name: Angel Spirit, hide: true }
+  - { id: 5397, name: Scuba Gear, hide: true }
+  - { id: 5421, name: Ears Of Ifrit, hide: true }
+  - { id: 5517, name: Hawk Eyes, hide: true }
+  - { id: 5592, name: Sigrun's Wings, hide: true }
+  - { id: 5664, name: Filir's Pinions, hide: true }
+  - { id: 5786, name: Ancient Elven Ear, hide: true }
+  - { id: 5788, name: "3D Glasses", hide: true }
+  - { id: 5793, name: Ribbon Of Life, hide: true }
+  - { id: 5794, name: "3D Glasses", hide: true }
+  - { id: 5800, name: Blush of Groom, hide: true }
+  - { id: 5804, name: Pirate Eye Bandage, hide: true }
+  - { id: 18503, name: Small Devil Horns, hide: true }
+  - { id: 18507, name: "Elven Ears [1]", hide: true }
+  - { id: 18620, name: Heart Eyepatch, hide: true }
+  # Head_Mid+Head_Top
+  - { id: 5098, name: Tiger Mask, from: [npc id?], hide: true }
+  - { id: 5130, name: Lion Mask, from: [npc id?], hide: true }
+  - { id: 5151, name: "Note Headphones [1]", hide: true }
+  - { id: 5169, name: "Bride Mask [1]", from: [npc mention, npc id?], hide: true }
+  - { id: 5177, name: "Mythical Lion Mask [1]", from: [npc mention, npc id?], hide: true }
+  - { id: 5205, name: Emperor's Laurel Crown, hide: true }
+  - { id: 5214, name: Moonlight Flower Hat, hide: true }
+  - { id: 5223, name: Evolved Big Golden Bell, hide: true }
+  - { id: 5224, name: Evolved Orc Hero Helm, hide: true }
+  - { id: 5258, name: "Afro Wig [1]", hide: true }
+  - { id: 5273, name: Happy Wig, from: [npc id?], hide: true }
+  - { id: 5274, name: Shiny Wig, from: [npc id?], hide: true }
+  - { id: 5275, name: Marvelous Wig, from: [npc id?], hide: true }
+  - { id: 5276, name: Fantastic Wig, from: [npc id?], hide: true }
+  - { id: 5295, name: Golden Bandana, hide: true }
+  - { id: 5313, name: "Diadem [1]", hide: true }
+  - { id: 5327, name: Refined Helmet of Orc Hero, hide: true }
+  - { id: 5371, name: Judge Hat, hide: true }
+  - { id: 5373, name: "Dark Randgris Helm [1]", from: [npc id?], hide: true }
+  - { id: 5375, name: "Orc Hero Headdress [1]", hide: true }
+  - { id: 5476, name: Grand Peco Hairband, hide: true }
+  - { id: 5498, name: Wandering Wolf Helm, hide: true }
+  - { id: 5502, name: Necromancer's Hood, hide: true }
+  - { id: 5504, name: Wedding Weil, hide: true }
+  - { id: 5505, name: Asara Fairy Hat, hide: true }
+  - { id: 5511, name: "Samambaia [1]", from: [npc id?], hide: true }
+  - { id: 5520, name: "Rabbit Earplugs [1]", hide: true }
+  - { id: 5529, name: "Satanic Bone Helm [1]", hide: true }
+  - { id: 5538, name: "Tucan Hat [1]", hide: true }
+  - { id: 5562, name: "Luxurious Wedding Veil [1]", hide: true }
+  - { id: 5564, name: "Crown of Deceit [1]", hide: true }
+  - { id: 5568, name: "Rabbit Bonnet [1]", hide: true }
+  - { id: 5579, name: "Wanderer's Sakkat [1]", hide: true }
+  - { id: 5585, name: "Rune Cloth Circlet [1]", hide: true }
+  - { id: 5593, name: "Rabbit Bonnet [1]", hide: true }
+  - { id: 5667, name: "Skull Hood [1]", hide: true }
+  - { id: 5851, name: Summer Knight, hide: true }
+  # Head_Low
+  - { id: 2219, name: Flu Mask, hide: true }
+  - { id: 2237, name: Bandit Beard, hide: true }
+  - { id: 2240, name: Beard, hide: true }
+  - { id: 2687, name: Steel Flower, hide: true }
+  - { id: 5051, name: Pussy Cat Bell, hide: true }
+  - { id: 5155, name: Father's White Moustache, hide: true }
+  - { id: 5156, name: Father's Mask, hide: true }
+  - { id: 5204, name: Rudolph's Nose, hide: true }
+  - { id: 5206, name: Romantic White Flower, hide: true }
+  - { id: 5220, name: Evolved Pipe, hide: true }
+  - { id: 5361, name: Gangster Scarf, hide: true }
+  - { id: 5362, name: Ninja Scroll, hide: true }
+  - { id: 5377, name: Gentleman's Pipe, hide: true }
+  - { id: 5391, name: Toast, hide: true }
+  - { id: 5394, name: Bubblegum, hide: true }
+  - { id: 5403, name: Fish In Mouth, hide: true }
+  - { id: 5412, name: Sweet Candy, hide: true }
+  - { id: 5419, name: Leaves Of Grass, hide: true }
+  - { id: 5445, name: Candy Cane In Mouth, hide: true }
+  - { id: 5462, name: Spiked Scarf, hide: true }
+  - { id: 5463, name: Rainbow Scarf, hide: true }
+  - { id: 5521, name: Angry Mouth, hide: true }
+  - { id: 5532, name: Pirate Dagger, hide: true }
+  - { id: 5536, name: Spare Card, hide: true }
+  - { id: 5548, name: Scarlet Rose, hide: true }
+  - { id: 5574, name: Well-Chewed Pencil, hide: true }
+  - { id: 5594, name: Donut In Mouth, hide: true }
+  - { id: 5596, name: "4Leaf Clover In Mouth", hide: true }
+  - { id: 5597, name: Bubble Gum In Mouth, hide: true }
+  - { id: 5775, name: Choco Donut In Mouth, hide: true }
+  - { id: 5796, name: Cheer Scarf, hide: true }
+  - { id: 5797, name: Cheer Scarf2, hide: true }
+  - { id: 5798, name: Cheer Scarf3, hide: true }
+  - { id: 5799, name: Cheer Scarf4, hide: true }
+  - { id: 5811, name: Santa's Beard, hide: true }
+  - { id: 5846, name: Buzzy Ball Gum, hide: true }
+  - { id: 18500, name: Cheer Scarf6, hide: true }
+  - { id: 18501, name: Cheer Scarf8, hide: true }
+  - { id: 18502, name: Cheer Scarf10, hide: true }
+  - { id: 18505, name: "Umbala Spirit [1]", hide: true }
+  # Head_Low+Head_Mid
+  - { id: 5203, name: Smiling Mask, from: [npc id?], hide: true }
+  - { id: 5314, name: Hockey Mask, hide: true }
+  - { id: 5483, name: Odin Mask, hide: true }
+  - { id: 5565, name: Dragon Arhat Mask, hide: true }
+  - { id: 5566, name: Tiger Arhat Mask, hide: true }
+  # Head_Low+Head_Top
+  - { id: 5494, name: Sphinx Hat, hide: true }
+  # Armor
+  - { id: 2356, name: "Blessed Holy Robe [1]", hide: true }
+  - { id: 2358, name: Angel's Dress, hide: true }
+  - { id: 2368, name: Golden Armor, from: [npc id?], hide: true }
+  - { id: 2369, name: Freyja Overcoat, hide: true }
+  - { id: 2370, name: Used Mage Coat, hide: true }
+  - { id: 2376, name: "Assaulter Plate [1]", from: [npc id?], hide: true }
+  - { id: 2377, name: "Elite Engineer Armor [1]", from: [npc id?], hide: true }
+  - { id: 2378, name: "Assassin Robe [1]", from: [npc id?], hide: true }
+  - { id: 2379, name: "Warlock's Battle Robe [1]", from: [npc id?], hide: true }
+  - { id: 2380, name: "Medic's Robe [1]", from: [npc id?], hide: true }
+  - { id: 2381, name: "Elite Archer Suit [1]", from: [npc id?], hide: true }
+  - { id: 2382, name: "Elite Shooter Suit [1]", from: [npc id?], hide: true }
+  - { id: 2383, name: Brynhild, from: [npc mention, npc id?], hide: true }
+  - { id: 2384, name: Spiritual Tunic, hide: true }
+  - { id: 2385, name: Recuperative Armor, hide: true }
+  - { id: 2392, name: Old Green Pantie, from: [npc id?], hide: true }
+  - { id: 2393, name: "Novice Adventurer's Suit [1]", from: [npc id?], hide: true }
+  - { id: 2394, name: Glorious Suit, from: [npc mention, npc id?], hide: true }
+  - { id: 2395, name: Glorious Popularized Suit, from: [npc mention, npc id?], hide: true }
+  - { id: 2396, name: Glorious Mass-Production Suit, from: [npc mention, npc id?], hide: true }
+  - { id: 2397, name: Incredible Event Resignation Coat, hide: true }
+  - { id: 15001, name: Odin's Blessing, hide: true }
+  # Garment
+  - { id: 2511, name: Skeleton Manteau, hide: true }
+  - { id: 2526, name: Coat of Dragon Scale, hide: true }
+  - { id: 2533, name: Freyja Cape, hide: true }
+  - { id: 2534, name: Ruffler, hide: true }
+  - { id: 2535, name: Cloak Of Survival, hide: true }
+  - { id: 2538, name: "Captain's Manteau [1]", from: [npc id?], hide: true }
+  - { id: 2539, name: "Commander's Manteau [1]", from: [npc id?], hide: true }
+  - { id: 2540, name: "Sheriff's Manteau [1]", from: [npc id?], hide: true }
+  - { id: 2541, name: Asprika, from: [npc mention, npc id?], hide: true }
+  - { id: 2543, name: Sylphid Manteau, hide: true }
+  - { id: 2546, name: "Beach Manteau [1]", hide: true }
+  - { id: 2547, name: Cheap Undershirt, hide: true }
+  - { id: 2549, name: Glorious Muffler, from: [npc mention, npc id?], hide: true }
+  - { id: 2550, name: Fisher's Muffler, from: [npc mention, npc id?], hide: true }
+  # Shoes
+  - { id: 2413, name: Safety Boots, hide: true }
+  - { id: 2415, name: "Bunny Slipper [1]", hide: true }
+  - { id: 2427, name: Golden Shoes, hide: true }
+  - { id: 2428, name: Freyja Boots, hide: true }
+  - { id: 2431, name: Valley Shoes, hide: true }
+  - { id: 2435, name: "Battle Greaves [1]", from: [npc id?], hide: true }
+  - { id: 2436, name: "Combat Boots [1]", from: [npc id?], hide: true }
+  - { id: 2437, name: "Battle Boots [1]", from: [npc id?], hide: true }
+  - { id: 2438, name: Paw Of Cat, hide: true }
+  - { id: 2439, name: Refresh Shoes, hide: true }
+  - { id: 2441, name: Beach Sandals, hide: true }
+  - { id: 2442, name: Red Stocking Boots, hide: true }
+  - { id: 2443, name: Fisher's Boots, from: [npc mention, npc id?], hide: true }
+  - { id: 2444, name: Glorious Shoes, from: [npc mention, npc id?], hide: true }
+  - { id: 2445, name: Glorious Popularized Shoes, from: [npc mention, npc id?], hide: true }
+  - { id: 2446, name: Glorious Mass-Production Shoes, from: [npc mention, npc id?], hide: true }
+  - { id: 2447, name: Army Boots, hide: true }
+  - { id: 2448, name: Air Boss, hide: true }
+  # Both_Accessory
+  - { id: 2631, name: Celebration Ring, hide: true }
+  - { id: 2636, name: Gold Christmas Ring, hide: true }
+  - { id: 2637, name: Silver Christmas Ring, hide: true }
+  - { id: 2638, name: Sacred Incense, hide: true }
+  - { id: 2639, name: Occult Incense, hide: true }
+  - { id: 2640, name: Kafra Ring, hide: true }
+  - { id: 2641, name: Fashion Hip Sack, hide: true }
+  - { id: 2645, name: Moonlight Ring, hide: true }
+  - { id: 2646, name: Bunch of Carnations, from: [npc id?], hide: true }
+  - { id: 2647, name: "Nile Rose [1]", hide: true }
+  - { id: 2653, name: Sacrifice Ring, hide: true }
+  - { id: 2663, name: Gauntlet of Hit, hide: true }
+  - { id: 2664, name: Belcarf, hide: true }
+  - { id: 2665, name: Exorcising Ring, hide: true }
+  - { id: 2666, name: Lantern of Hope, hide: true }
+  - { id: 2667, name: Renown Archer's Gloves, hide: true }
+  - { id: 2668, name: Woman Glory, hide: true }
+  - { id: 2669, name: "RJC Necklace [1]", hide: true }
+  - { id: 2670, name: Ring of Longing, hide: true }
+  - { id: 2672, name: "3rd Anniversary Celebration Ring", hide: true }
+  - { id: 2673, name: Warrior's Shining Ring, hide: true }
+  - { id: 2674, name: Ring of Honor, hide: true }
+  - { id: 2675, name: Lord Ring, hide: true }
+  - { id: 2676, name: Hunter's Earring, hide: true }
+  - { id: 2681, name: Republic Anniversary Ring, hide: true }
+  - { id: 2682, name: Ring of Water, hide: true }
+  - { id: 2683, name: Ring of Fire, hide: true }
+  - { id: 2684, name: Ring of Wind, hide: true }
+  - { id: 2685, name: Ring of Earth, hide: true }
+  - { id: 2688, name: Critical Ring, hide: true }
+  - { id: 2689, name: Earring, hide: true }
+  - { id: 2690, name: Ring, hide: true }
+  - { id: 2691, name: Necklace, hide: true }
+  - { id: 2692, name: Glove, hide: true }
+  - { id: 2693, name: Brooch, from: [npc id?], hide: true }
+  - { id: 2694, name: Rosary, hide: true }
+  - { id: 2695, name: Safety Ring, hide: true }
+  - { id: 2696, name: Vesper Core 01, hide: true }
+  - { id: 2697, name: Vesper Core 02, hide: true }
+  - { id: 2698, name: Vesper Core 03, hide: true }
+  - { id: 2699, name: Vesper Core 04, hide: true }
+  - { id: 2704, name: Golden Accessories, hide: true }
+  - { id: 2705, name: Golden Accessories, hide: true }
+  - { id: 2706, name: Arrest Handcuffs, hide: true }
+  - { id: 2708, name: Chinese Handicraft, hide: true }
+  - { id: 2709, name: "5th Anniversary Coin", hide: true }
+  - { id: 2710, name: Bloody Iron Ball, hide: true }
+  - { id: 2711, name: Spiritual Ring, hide: true }
+  - { id: 2713, name: Certificate, hide: true }
+  - { id: 2714, name: "Marvelous Pendant [1]", hide: true }
+  - { id: 2720, name: Medal of Honor, from: [npc id?], hide: true }
+  - { id: 2721, name: Medal of Honor, from: [npc id?], hide: true }
+  - { id: 2722, name: Medal of Honor, from: [npc id?], hide: true }
+  - { id: 2723, name: Medal of Honor, from: [npc id?], hide: true }
+  - { id: 2724, name: Medal of Honor, from: [npc id?], hide: true }
+  - { id: 2725, name: Medal of Honor, from: [npc id?], hide: true }
+  - { id: 2733, name: Sheriff Badge, from: [npc id?], hide: true }
+  - { id: 2734, name: Directive, hide: true }
+  - { id: 2735, name: Directive, hide: true }
+  - { id: 2736, name: Navel Ring, hide: true }
+  - { id: 2737, name: Foot Ring, hide: true }
+  - { id: 2738, name: Shiny Coin, hide: true }
+  - { id: 2739, name: Ordinary Coin, hide: true }
+  - { id: 2740, name: Rusty Coin, hide: true }
+  - { id: 2741, name: All In One Ring, from: [npc id?], hide: true }
+  - { id: 2751, name: Academy Of Badge, hide: true }
+  - { id: 2752, name: Praccsinos, hide: true }
+  - { id: 2753, name: Beholder Ring, hide: true }
+  - { id: 2754, name: Hallow Ring, hide: true }
+  - { id: 2755, name: Clamorous Ring, hide: true }
+  - { id: 2756, name: Chemical Ring, hide: true }
+  - { id: 2757, name: Insecticide Ring, hide: true }
+  - { id: 2758, name: Fischer Ring, hide: true }
+  - { id: 2759, name: Decussate Ring, hide: true }
+  - { id: 2760, name: Bloody Ring, hide: true }
+  - { id: 2761, name: Satanic Ring, hide: true }
+  - { id: 2762, name: Dragon Ring, hide: true }
+  - { id: 2764, name: Small Fishing Rod, from: [npc mention, npc id?], hide: true }
+  - { id: 2765, name: Novice Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2766, name: Swordman Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2767, name: Acolyte Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2768, name: Mage Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2769, name: Archer Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2770, name: Thief Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2771, name: Merchant Figure, from: [npc id?, npc mention], hide: true }
+  - { id: 2772, name: Glorious Ring, from: [npc mention, npc id?], hide: true }
+  - { id: 2773, name: Glorious Mass-Production Ring, from: [npc mention, npc id?], hide: true }
+  - { id: 2774, name: Glorious Popularized Ring, from: [npc mention, npc id?], hide: true }
+  - { id: 2775, name: Lure, from: [npc mention, npc id?], hide: true }
+  - { id: 2776, name: Adventurer's Trusty Towel, hide: true }
+  - { id: 2777, name: "Shaman Ring [1]", hide: true }
+  - { id: 2778, name: Shaman Earrings, hide: true }
+  - { id: 2779, name: Dark Knight Belt, hide: true }
+  - { id: 2780, name: Dark Knight Glove, hide: true }
+  - { id: 2781, name: "Aumdura's Benefit [1]", hide: true }
+  - { id: 2786, name: Spiritual Ring, hide: true }
+  - { id: 2791, name: "Fresh Fish [1]", hide: true }
+  - { id: 2794, name: "Magic Stone Ring [1]", hide: true }
+  - { id: 2795, name: Green Apple Ring, hide: true }
+  - { id: 2796, name: Rocks, hide: true }
+  - { id: 2797, name: Rocks, hide: true }
+  - { id: 2798, name: Will Of Exhausted Angel, hide: true }
+  - { id: 2799, name: "Kuirpenring [1]", hide: true }
+  - { id: 2800, name: "Accelerator [1]", from: [npc id?], hide: true }
+  - { id: 2801, name: "Hovering Booster [1]", hide: true }
+  - { id: 2802, name: "Suicidal Device [1]", hide: true }
+  - { id: 2803, name: "Shape Shifter [1]", hide: true }
+  - { id: 2804, name: "Cooling Device [1]", hide: true }
+  - { id: 2805, name: "Magnetic Field Generator [1]", hide: true }
+  - { id: 2806, name: "Barrier Builder [1]", hide: true }
+  - { id: 2807, name: "Repair Kit [1]", hide: true }
+  - { id: 2808, name: "Camouflague Generator [1]", hide: true }
+  - { id: 2809, name: "High Quality Cooler [1]", hide: true }
+  - { id: 2810, name: "Special Cooler [1]", hide: true }
+  - { id: 2819, name: Swordsman Manual, hide: true }
+  - { id: 2820, name: Thief Manual, hide: true }
+  - { id: 2821, name: Acolyte Manual, hide: true }
+  - { id: 2822, name: Archer Manual, hide: true }
+  - { id: 2823, name: Merchant Manual, hide: true }
+  - { id: 2824, name: Mage Manual, hide: true }
+  - { id: 5817, name: Valentine Pledge, hide: true }
+  - { id: 5828, name: Honor Gold Ring, hide: true }
+  - { id: 5844, name: Loyal Ring3, hide: true }
+
+# Not dropped, and the only rAthena sources do not exist on ccRO; hidden: 30 items
+otherSource:
+  # Weapon
+  - { id: 1719, name: Roguemaster's Bow, type: Bow, from: [box:GIFTBOXCHINA, npc id?], hide: true }
+  # Head_Top
+  - { id: 5099, name: Neko Mimi, from: [box:REDBOX], hide: true }
+  - { id: 5139, name: Hibiscus, from: [box:REDBOX, box:REDBOX_2], hide: true }
+  - { id: 5140, name: "Charming Ribbon [1]", from: [box:REDBOX, box:REDBOX_2], hide: true }
+  - { id: 5182, name: Puppy Hat, from: [box:GREENBOX, box:REDBOX], hide: true }
+  - { id: 5183, name: Bird Nest Hat, from: [box:REDBOX], hide: true }
+  - { id: 5185, name: "Laurel Wreath [1]", from: [box:REDBOX], hide: true }
+  - { id: 5186, name: Geographer Band, from: [box:REDBOX], hide: true }
+  - { id: 5187, name: "Twin Ribbon [1]", from: [box:REDBOX], hide: true }
+  - { id: 5212, name: "Satellite Hairband [1]", from: [box:CHERISH_BOX_ORI], hide: true }
+  - { id: 5213, name: Sheila Hairnet, from: [box:MASQUERADE_2], hide: true }
+  - { id: 5256, name: "Valkyrie Feather Band [1]", from: [box:CHERISH_BOX_ORI], hide: true }
+  - { id: 5260, name: Cookie Hat, from: [box:YELLOWBOX], hide: true }
+  - { id: 5261, name: Silver Tiara, from: [box:YELLOWBOX], hide: true }
+  - { id: 5262, name: Golden Tiara, from: [box:YELLOWBOX], hide: true }
+  - { id: 5296, name: "Drooping Nine Tail [1]", from: [box:MASQUERADE], hide: true }
+  - { id: 5297, name: "Soul Wing [1]", from: [box:MASQUERADE], hide: true }
+  - { id: 5454, name: "Puppy Hat [1]", from: [box:CHERISH_BOX], hide: true }
+  - { id: 5456, name: "Summer Hat [1]", from: [box:CHERISH_BOX], hide: true }
+  # Head_Top+Mid+Low
+  - { id: 5143, name: "Kabuki Mask [1]", from: [box:REDBOX, npc id?], hide: true }
+  - { id: 5299, name: "Pagdayaw [1]", from: [box:MASQUERADE], hide: true }
+  - { id: 5304, name: "Cap Of Blindness [1]", from: [box:MASQUERADE_2], hide: true }
+  # Head_Mid+Head_Top
+  - { id: 5152, name: Chinese Crown, from: [box:REDBOX], hide: true }
+  - { id: 5181, name: "Helm of Darkness [1]", from: [box:REDBOX], hide: true }
+  - { id: 5271, name: "Phoenix Crown [1]", from: [box:OLDGIFTBOX], hide: true }
+  - { id: 5298, name: "Dokebi's Wig [1]", from: [box:MASQUERADE], hide: true }
+  # Head_Low+Head_Mid
+  - { id: 5176, name: Hahoe Mask, from: [box:MASK, npc mention, npc id?], hide: true }
+  - { id: 5272, name: Tongue Mask, from: [box:OLDGIFTBOX], hide: true }
+  - { id: 5332, name: Loki Mask, from: [box:CHERISH_BOX_ORI], hide: true }
+  # Both_Accessory
+  - { id: 2712, name: Ragnarok Limited Edition, from: [box:CHERISH_BOX_ORI], hide: true }
