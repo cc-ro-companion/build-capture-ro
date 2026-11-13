@@ -217,7 +217,7 @@ ccRO.
    twice changes only `generatedAt`; editing an override without
    regenerating fails `pnpm test` (tried once, reverted); verification
    passes.
-8. [ ] Footer: show the data version from `src/data` in the app footer;
+8. [x] Footer: show the data version from `src/data` in the app footer;
    component test. Check: verification passes; the built `dist` contains
    the label.
 
@@ -245,4 +245,7 @@ ccRO.
   `data-overrides/*.yml` only, so README edits need no regeneration; a second
   test catches hand-edited generated files) · regenerating twice changed only
   `generatedAt`; appending a line to `items.yml` failed `pnpm test` with "Run
-  `pnpm data`…", reverted; check/lint/test (72)/build pass · next commit
+  `pnpm data`…", reverted; check/lint/test (72)/build pass · 52b4820
+- 2026-11-13 · 8 footer · check/lint/test (73)/build pass; `dist` JS
+  contains "ccRO 2026-11" and no item/monster data (bundle +0.45 kB) · next
+  commit

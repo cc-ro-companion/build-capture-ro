@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { appVersion } from './version';
+  import { appVersion, dataVersion } from './version';
 
   const regions = [
     { id: 'build', title: 'Build', hint: 'Character, equipment, skills and buffs.' },
@@ -32,6 +32,7 @@
     <p>
       Based on <a href="https://github.com/rathena/rathena">rAthena</a>. Licensed under GPL-3.0.
     </p>
+    <p class="data-version">{dataVersion}</p>
   </footer>
 </div>
 
