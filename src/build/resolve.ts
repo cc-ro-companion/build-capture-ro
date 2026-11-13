@@ -1,0 +1,113 @@
+// Lookup of builds' ids in the game data, and conversion of a build into the
+// engine's inputs.
+import {
+  items as allItems,
+  jobsData,
+  monsters as allMonsters,
+  namesEn,
+  tables as allTables,
+} from '../data';
+import type { Item, Job, Monster, NamesFile, TablesFile } from '../data/types';
+import type { CharacterInput } from '../engine/stats';
+import type { Build } from './model';
+
+export interface GameData {
+  jobs: ReadonlyMap<number, Job>;
+  /** Job ids in display order. */
+  jobOrder: readonly number[];
+  items: ReadonlyMap<number, Item>;
+  /** Weapons in id order, for search. */
+  weapons: readonly Item[];
+  monsters: ReadonlyMap<number, Monster>;
+  monsterList: readonly Monster[];
+  /** Index = base level − 1; total stat points. */
+  statPoints: readonly number[];
+  tables: TablesFile;
+  names: NamesFile;
+}
+
+export interface GameDataSource {
+  jobs: readonly Job[];
+  items: readonly Item[];
+  monsters: readonly Monster[];
+  statPoints: readonly number[];
+  tables: TablesFile;
+  names: NamesFile;
+}
+
+export function createGameData(source: GameDataSource): GameData {
+  const byId = <T extends { id: number }>(records: readonly T[]) =>
+    new Map(records.map((record) => [record.id, record]));
+  const ascending = <T extends { id: number }>(records: readonly T[]) =>
+    [...records].sort((a, b) => a.id - b.id);
+  return {
+    jobs: byId(source.jobs),
+    jobOrder: source.jobs.map((job) => job.id),
+    items: byId(source.items),
+    weapons: ascending(source.items.filter((item) => item.type === 'weapon')),
+    monsters: byId(source.monsters),
+    monsterList: ascending(source.monsters),
+    statPoints: source.statPoints,
+    tables: source.tables,
+    names: source.names,
+  };
+}
+
+/** The game data shipped with the app. */
+export const gameData: GameData = createGameData({
+  jobs: jobsData.jobs,
+  items: allItems,
+  monsters: allMonsters,
+  statPoints: jobsData.statPoints,
+  tables: allTables,
+  names: namesEn,
+});
+
+export function jobName(data: GameData, jobId: number): string {
+  return data.names.jobs[jobId] ?? data.jobs.get(jobId)?.key ?? `Job ${jobId}`;
+}
+
+export function itemName(data: GameData, itemId: number): string {
+  return data.names.items[itemId] ?? data.items.get(itemId)?.aegisName ?? `Item ${itemId}`;
+}
+
+export function monsterName(data: GameData, monsterId: number): string {
+  return (
+    data.names.monsters[monsterId] ??
+    data.monsters.get(monsterId)?.aegisName ??
+    `Monster ${monsterId}`
+  );
+}
+
+/** Whether the job can wear the item at the base level (job list and level limits). */
+export function canEquip(item: Item, jobId: number, baseLevel: number): boolean {
+  if (!item.jobs.includes(jobId)) return false;
+  if (baseLevel < item.equipLevelMin) return false;
+  return item.equipLevelMax === 0 || baseLevel <= item.equipLevelMax;
+}
+
+export interface ResolvedBuild {
+  character: CharacterInput;
+  monster: Monster | null;
+}
+
+/**
+ * Engine inputs for a normalized build. Ids that do not resolve (which
+ * normalize already removed) fall back to bare hands and no target.
+ */
+export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
+  const job = data.jobs.get(build.job);
+  if (!job) throw new Error(`Unknown job id ${build.job}; normalize the build first.`);
+  const weapon = build.weapon === null ? null : (data.items.get(build.weapon) ?? null);
+  const monster = build.monster === null ? null : (data.monsters.get(build.monster) ?? null);
+  return {
+    character: {
+      job,
+      baseLevel: build.baseLevel,
+      jobLevel: build.jobLevel,
+      baseStats: { ...build.stats },
+      weapon,
+    },
+    monster,
+  };
+}

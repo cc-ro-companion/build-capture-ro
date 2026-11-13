@@ -1,0 +1,55 @@
+// Weapon and monster search: case-insensitive substring over the English
+// name, the aegis name and the id.
+import type { Item, Monster } from '../data/types';
+import { canEquip, itemName, monsterName, type GameData } from './resolve';
+
+export const MAX_RESULTS = 50;
+
+export interface SearchResult<T> {
+  /** At most MAX_RESULTS matches, in id order. */
+  matches: T[];
+  /** Number of all matches, to tell the user when the list is cut. */
+  total: number;
+}
+
+function matcher(query: string): (id: number, aegisName: string, name: string) => boolean {
+  const needle = query.trim().toLowerCase();
+  if (needle === '') return () => true;
+  return (id, aegisName, name) =>
+    String(id).includes(needle) ||
+    aegisName.toLowerCase().includes(needle) ||
+    name.toLowerCase().includes(needle);
+}
+
+function collect<T>(records: readonly T[], accept: (record: T) => boolean): SearchResult<T> {
+  const matches: T[] = [];
+  let total = 0;
+  for (const record of records) {
+    if (!accept(record)) continue;
+    total++;
+    if (matches.length < MAX_RESULTS) matches.push(record);
+  }
+  return { matches, total };
+}
+
+/** Weapons the job can equip at the base level that match the query. */
+export function searchWeapons(
+  query: string,
+  jobId: number,
+  baseLevel: number,
+  data: GameData,
+): SearchResult<Item> {
+  const matches = matcher(query);
+  return collect(
+    data.weapons,
+    (item) =>
+      canEquip(item, jobId, baseLevel) && matches(item.id, item.aegisName, itemName(data, item.id)),
+  );
+}
+
+export function searchMonsters(query: string, data: GameData): SearchResult<Monster> {
+  const matches = matcher(query);
+  return collect(data.monsterList, (monster) =>
+    matches(monster.id, monster.aegisName, monsterName(data, monster.id)),
+  );
+}

@@ -210,7 +210,7 @@ and hand the numbers over for fixtures.
 4. [x] Engine auto attack: `autoAttack.ts` (normal and crit damage with
    exact average, hit and crit chance, DPS). Check: unit tests incl. brute
    force average; verification passes.
-5. [ ] Build model: `model.ts`, `resolve.ts`, `search.ts` with normalize
+5. [x] Build model: `model.ts`, `resolve.ts`, `search.ts` with normalize
    warnings. Check: unit tests; verification passes.
 6. [ ] Share code and storage: `shareCode.ts`, `storage.ts`. Check:
    round-trip, hint, corrupt code and storage tests; verification passes.
@@ -237,3 +237,4 @@ and hand the numbers over for fixtures.
 - 2026-11-13 · 1 housekeeping: phase 2 ticked and logged in the master plan, base-file open item settled (verified: the five `db/` base files only hold imports), share code question marked decided · lint passes · 43c3609
 - 2026-11-13 · 2 engine stats: config, total stats, point cost/budget (99 → 628 points, level 1 budget 48) · check/lint/test (87)/build pass · f22b12d
 - 2026-11-13 · 3 engine status window: base ATK (STR/DEX main), HIT, FLEE, perfect dodge, CRIT incl. katar doubling, amotion/ASPD with config cap; status window ASPD truncated (to confirm in validation) · check/lint/test (99)/build pass · 5ed84bd
+- 2026-11-13 · 4 engine auto attack: pre-renewal base damage (DEX minimum × weapon level, `rnd()%(max−min)+min` so normal hits never roll the full ATK, bow arrow path, gun crits melee-like), size, hard/soft DEF, min 1, Neutral element, katar 1% off-hand hit, exact average by enumeration, hit/crit chance, DPS · check/lint/test (120)/build pass · 7d19263
