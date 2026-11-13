@@ -203,7 +203,7 @@ and hand the numbers over for fixtures.
    bodies and only import `db/pre-re`, so only `size_fix.yml` needed the
    base merge. Mark the share code open question as decided (this plan).
    Check: lint passes.
-2. [ ] Engine stats: `config.ts`, `stats.ts` (total stats, point cost,
+2. [x] Engine stats: `config.ts`, `stats.ts` (total stats, point cost,
    budget). Check: unit tests; verification passes.
 3. [ ] Engine status window: `status.ts` (ATK, HIT, FLEE, CRIT, ASPD incl.
    cap). Check: unit tests; verification passes.
@@ -234,3 +234,4 @@ and hand the numbers over for fixtures.
 
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
+- 2026-11-13 · 1 housekeeping: phase 2 ticked and logged in the master plan, base-file open item settled (verified: the five `db/` base files only hold imports), share code question marked decided · lint passes · 43c3609
