@@ -65,7 +65,7 @@ on, a validation session against the training dummy.
 1. [x] **Foundation.** Project scaffold, license (GPL-3.0, rAthena credit,
    disclaimer), CI (type check, lint, tests, build), GitHub Pages deploy with
    an "unfinished" banner, empty app shell with the layout above.
-2. [ ] **Data pipeline, first cut.** Read `db/pre-re` from the local
+2. [x] **Data pipeline, first cut.** Read `db/pre-re` from the local
    rAthena checkout (how CI gets the data is decided here). Generate typed
    JSON for what the slice needs: jobs (stat bonuses, base ASPD, weapon
    types), items (weapons first), monsters, size and element tables. Define
@@ -129,10 +129,11 @@ compares against ccRO's training dummy, and the results become fixtures that
 maintainer's step.
 
 ## Open questions
-- How CI and the Pages deploy get the rAthena data, since the checkout is
-  local: commit the generated JSON, or have the workflow clone rAthena at
-  the recorded commit. Phase 2.
-- Share code format (compression, encoding, URL fragment length). Phase 3.
+- ~~How CI and the Pages deploy get the rAthena data.~~ Decided in phase 2:
+  the generator runs locally and the generated JSON is committed.
+- ~~Share code format.~~ Decided in phase 3: versioned build JSON,
+  `deflate-raw` via `CompressionStream`, base64url, in the URL fragment
+  `#b=<code>` (see [phase-3-auto-attack-plan.md](phase-3-auto-attack-plan.md)).
 - Script conversion approach: parse rAthena scripts automatically, convert
   by hand, or a mix. Phase 4.
 - Format of the hand-entered ccRO data (runes, card system, costumes) and
@@ -144,3 +145,4 @@ maintainer's step.
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · Phase 1 Foundation · verification passes; deployed to GitHub Pages and confirmed by the maintainer; plan archived at [plans/archive/phase-1-foundation-plan.md](plans/archive/phase-1-foundation-plan.md) · 3ba8b26
+- 2026-11-13 · Phase 2 Data pipeline · verification passes; plan archived at [plans/archive/phase-2-data-pipeline-plan.md](plans/archive/phase-2-data-pipeline-plan.md). Its open item is settled: the other `db/` base files (`job_stats.yml`, `statpoint.yml`, `attr_fix.yml`, `mob_db.yml`, `item_db.yml`) have empty bodies and only import `db/pre-re`, so only `size_fix.yml` needed the base merge · 0ba2d1c
