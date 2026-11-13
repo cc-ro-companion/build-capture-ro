@@ -118,16 +118,7 @@
         { "str": 1, "agi": 1, "vit": 1, "int": 1, "dex": 1, "luk": 1 },
         { "str": 1, "agi": 1, "vit": 1, "int": 1, "dex": 1, "luk": 1 }
       ],
-      "baseAspd": {
-        "Fist": 500,
-        "Dagger": 650,
-        "1hSword": 700,
-        "1hAxe": 800,
-        "Mace": 700,
-        "2hMace": 700,
-        "Staff": 650,
-        "2hStaff": 650
-      }
+      "baseAspd": { "Fist": 500, "Dagger": 650, "1hSword": 700, "1hAxe": 800, "Mace": 700, "2hMace": 700, "Staff": 650, "2hStaff": 650 }
     },
     {
       "id": 1,
@@ -186,18 +177,7 @@
         { "str": 6, "agi": 2, "vit": 4, "int": 0, "dex": 3, "luk": 2 },
         { "str": 7, "agi": 2, "vit": 4, "int": 0, "dex": 3, "luk": 2 }
       ],
-      "baseAspd": {
-        "Fist": 400,
-        "Dagger": 500,
-        "1hSword": 550,
-        "2hSword": 600,
-        "1hSpear": 650,
-        "2hSpear": 700,
-        "1hAxe": 700,
-        "2hAxe": 750,
-        "Mace": 650,
-        "2hMace": 700
-      }
+      "baseAspd": { "Fist": 400, "Dagger": 500, "1hSword": 550, "2hSword": 600, "1hSpear": 650, "2hSpear": 700, "1hAxe": 700, "2hAxe": 750, "Mace": 650, "2hMace": 700 }
     },
     {
       "id": 2,
@@ -433,15 +413,7 @@
         { "str": 5, "agi": 1, "vit": 4, "int": 1, "dex": 4, "luk": 2 },
         { "str": 5, "agi": 1, "vit": 4, "int": 1, "dex": 5, "luk": 2 }
       ],
-      "baseAspd": {
-        "Fist": 400,
-        "Dagger": 600,
-        "1hSword": 700,
-        "1hAxe": 700,
-        "2hAxe": 750,
-        "Mace": 700,
-        "2hMace": 700
-      }
+      "baseAspd": { "Fist": 400, "Dagger": 600, "1hSword": 700, "1hAxe": 700, "2hAxe": 750, "Mace": 700, "2hMace": 700 }
     },
     {
       "id": 6,
@@ -559,18 +531,7 @@
         { "str": 8, "agi": 2, "vit": 10, "int": 0, "dex": 6, "luk": 4 },
         { "str": 8, "agi": 2, "vit": 10, "int": 0, "dex": 6, "luk": 4 }
       ],
-      "baseAspd": {
-        "Fist": 400,
-        "Dagger": 500,
-        "1hSword": 500,
-        "2hSword": 550,
-        "1hSpear": 600,
-        "2hSpear": 600,
-        "1hAxe": 700,
-        "2hAxe": 700,
-        "Mace": 650,
-        "2hMace": 700
-      }
+      "baseAspd": { "Fist": 400, "Dagger": 500, "1hSword": 500, "2hSword": 550, "1hSpear": 600, "2hSpear": 600, "1hAxe": 700, "2hAxe": 700, "Mace": 650, "2hMace": 700 }
     },
     {
       "id": 8,
@@ -747,15 +708,7 @@
         { "str": 6, "agi": 2, "vit": 6, "int": 2, "dex": 12, "luk": 2 },
         { "str": 6, "agi": 2, "vit": 6, "int": 2, "dex": 12, "luk": 2 }
       ],
-      "baseAspd": {
-        "Fist": 400,
-        "Dagger": 600,
-        "1hSword": 650,
-        "1hAxe": 650,
-        "2hAxe": 650,
-        "Mace": 675,
-        "2hMace": 675
-      }
+      "baseAspd": { "Fist": 400, "Dagger": 600, "1hSword": 650, "1hAxe": 650, "2hAxe": 650, "Mace": 675, "2hMace": 675 }
     },
     {
       "id": 11,
@@ -932,18 +885,7 @@
         { "str": 7, "agi": 2, "vit": 6, "int": 6, "dex": 3, "luk": 5 },
         { "str": 7, "agi": 2, "vit": 7, "int": 6, "dex": 3, "luk": 5 }
       ],
-      "baseAspd": {
-        "Fist": 400,
-        "Dagger": 500,
-        "1hSword": 500,
-        "2hSword": 550,
-        "1hSpear": 600,
-        "2hSpear": 600,
-        "1hAxe": 700,
-        "2hAxe": 700,
-        "Mace": 650,
-        "2hMace": 700
-      }
+      "baseAspd": { "Fist": 400, "Dagger": 500, "1hSword": 500, "2hSword": 550, "1hSpear": 600, "2hSpear": 600, "1hAxe": 700, "2hAxe": 700, "Mace": 650, "2hMace": 700 }
     },
     {
       "id": 15,
@@ -1179,15 +1121,7 @@
         { "str": 5, "agi": 5, "vit": 3, "int": 7, "dex": 9, "luk": 0 },
         { "str": 5, "agi": 6, "vit": 3, "int": 7, "dex": 9, "luk": 0 }
       ],
-      "baseAspd": {
-        "Fist": 400,
-        "Dagger": 550,
-        "1hSword": 575,
-        "1hAxe": 675,
-        "2hAxe": 700,
-        "Mace": 650,
-        "2hMace": 650
-      }
+      "baseAspd": { "Fist": 400, "Dagger": 550, "1hSword": 575, "1hAxe": 675, "2hAxe": 700, "Mace": 650, "2hMace": 650 }
     },
     {
       "id": 19,
@@ -1413,16 +1347,7 @@
         { "str": 5, "agi": 5, "vit": 5, "int": 5, "dex": 5, "luk": 5 },
         { "str": 5, "agi": 5, "vit": 5, "int": 5, "dex": 5, "luk": 5 }
       ],
-      "baseAspd": {
-        "Fist": 500,
-        "Dagger": 650,
-        "1hSword": 700,
-        "1hAxe": 800,
-        "Mace": 700,
-        "2hMace": 700,
-        "Staff": 650,
-        "2hStaff": 650
-      }
+      "baseAspd": { "Fist": 500, "Dagger": 650, "1hSword": 700, "1hAxe": 800, "Mace": 700, "2hMace": 700, "Staff": 650, "2hStaff": 650 }
     },
     {
       "id": 24,
@@ -1501,14 +1426,7 @@
         { "str": 4, "agi": 1, "vit": 1, "int": 2, "dex": 9, "luk": 7 },
         { "str": 4, "agi": 1, "vit": 1, "int": 2, "dex": 9, "luk": 7 }
       ],
-      "baseAspd": {
-        "Fist": 500,
-        "Revolver": 700,
-        "Rifle": 750,
-        "Gatling": 700,
-        "Shotgun": 1500,
-        "Grenade": 1500
-      }
+      "baseAspd": { "Fist": 500, "Revolver": 700, "Rifle": 750, "Gatling": 700, "Shotgun": 1500, "Grenade": 1500 }
     },
     {
       "id": 25,

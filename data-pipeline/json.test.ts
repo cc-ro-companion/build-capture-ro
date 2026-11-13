@@ -9,7 +9,7 @@ describe('formatJson', () => {
   });
 
   it('breaks nested and long values over several lines', () => {
-    const long = Array.from({ length: 40 }, (_, index) => index);
+    const long = Array.from({ length: 60 }, (_, index) => index);
     const text = formatJson({ nested: [{ id: 1 }], long });
     expect(text).toContain('"nested": [\n    { "id": 1 }\n  ]');
     expect(text).toContain('"long": [\n    0,\n    1,');

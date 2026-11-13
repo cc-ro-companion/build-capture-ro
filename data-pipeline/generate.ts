@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { generateItems } from './items.ts';
 import { generateJobs } from './jobs.ts';
 import { formatJson } from './json.ts';
 import { loadMeta, loadOverrideFile } from './overrides.ts';
@@ -36,10 +37,13 @@ function main(): void {
 
   const jobs = generateJobs(rathenaDir, overrides.jobs);
   console.log(`Jobs: ${jobs.data.jobs.length}`);
+  const items = generateItems(rathenaDir, overrides.items);
+  console.log(`Equipment: ${items.data.length}`);
 
   mkdirSync(outputDir, { recursive: true });
   writeOutput('jobs.json', jobs.data);
-  writeOutput('names.en.json', { jobs: jobs.names });
+  writeOutput('items.json', items.data);
+  writeOutput('names.en.json', { items: items.names, jobs: jobs.names });
 }
 
 try {

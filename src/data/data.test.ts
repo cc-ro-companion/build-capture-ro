@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import items from './generated/items.json';
 import jobsData from './generated/jobs.json';
 import names from './generated/names.en.json';
 
@@ -31,6 +32,45 @@ describe('generated jobs', () => {
     for (const job of jobsData.jobs) {
       expect(job.bonusStats).toHaveLength(job.maxJobLevel);
       expect(names.jobs[String(job.id) as keyof typeof names.jobs]).toBeTruthy();
+    }
+  });
+});
+
+describe('generated equipment', () => {
+  const byId = (id: number) => items.find((item) => item.id === id);
+
+  it('gives Sword (1101) attack 25, weapon level 1 and 3 slots', () => {
+    expect(byId(1101)).toMatchObject({ attack: 25, weaponLevel: 1, slots: 3 });
+  });
+
+  it('contains no pet eggs or pet armor', () => {
+    expect(byId(9001)).toBeUndefined(); // Poring Egg
+    expect(byId(10001)).toBeUndefined(); // Skull Helm (pet armor)
+    expect(new Set(items.map((item) => item.type))).toEqual(new Set(['weapon', 'armor']));
+  });
+
+  it('lets every supported job equip at least one weapon', () => {
+    for (const job of jobsData.jobs) {
+      const usable = items.some((item) => item.type === 'weapon' && item.jobs.includes(job.id));
+      expect(usable, job.key).toBe(true);
+    }
+  });
+
+  it('lists only supported job ids on items', () => {
+    const supported = new Set(jobsData.jobs.map((job) => job.id));
+    for (const item of items) {
+      expect(
+        item.jobs.every((id) => supported.has(id)),
+        `item ${item.id}`,
+      ).toBe(true);
+    }
+  });
+
+  it('is sorted by id and has a name for every item', () => {
+    const ids = items.map((item) => item.id);
+    expect(ids).toEqual([...ids].sort((a, b) => a - b));
+    for (const id of ids) {
+      expect(names.items[String(id) as keyof typeof names.items], `item ${id}`).toBeTruthy();
     }
   });
 });

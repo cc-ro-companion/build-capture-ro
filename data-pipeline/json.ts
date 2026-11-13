@@ -1,5 +1,6 @@
 const INDENT = '  ';
-const MAX_INLINE_WIDTH = 100;
+// Wide enough for an item's list of all 26 job ids on one line.
+const MAX_INLINE_WIDTH = 160;
 
 function isPrimitive(value: unknown): boolean {
   return value === null || typeof value !== 'object';

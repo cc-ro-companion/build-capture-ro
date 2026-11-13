@@ -204,7 +204,7 @@ ccRO.
    rAthena's `e_job`, name spelling map, bonus stats, base ASPD, max levels,
    stat point table) writing `jobs.json` and the job part of
    `names.en.json`. Check: job spot checks pass; verification passes.
-4. [ ] Equipment: `items.ts` writing `items.json` and item names, with job
+4. [x] Equipment: `items.ts` writing `items.json` and item names, with job
    resolution and the class filter. Check: item spot checks and the job id
    check pass; verification passes.
 5. [ ] Monsters: `monsters.ts` writing `monsters.json` and monster names.
@@ -230,4 +230,8 @@ ccRO.
   job list is fixed) · check/lint/test (23)/build pass · 801b4b1
 - 2026-11-13 · 3 jobs (ids verified against `enum e_job` on every run; added
   `json.ts` for compact one-line rows; `src/data/generated/` in
-  `.prettierignore` already) · check/lint/test (37)/build pass · next commit
+  `.prettierignore` already) · check/lint/test (37)/build pass · d8aec8d
+- 2026-11-13 · 4 equipment, 1762 items (also drops costume-only items and
+  items no supported job can use; Taekwon's only weapons are the four
+  all-jobs items without a `Jobs` field, e.g. 1161 Balmung) ·
+  check/lint/test (52)/build pass · next commit
