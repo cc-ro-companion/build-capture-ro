@@ -1,0 +1,36 @@
+name: Verify
+description: Install dependencies, then type check, lint, test and build into dist/.
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v7
+      with:
+        node-version-file: .nvmrc
+
+    # Node 25 and later no longer bundle corepack; .nvmrc pins a version that does.
+    - name: Enable corepack
+      shell: bash
+      run: |
+        corepack enable
+        echo "COREPACK_ENABLE_DOWNLOAD_PROMPT=0" >> "$GITHUB_ENV"
+
+    - name: Install
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
+    - name: Type check
+      shell: bash
+      run: pnpm check
+
+    - name: Lint
+      shell: bash
+      run: pnpm lint
+
+    - name: Test
+      shell: bash
+      run: pnpm test
+
+    - name: Build
+      shell: bash
+      run: pnpm build

@@ -36,7 +36,7 @@ and has the directory layout from the parent plan in place. No game logic.
 4. [x] License and docs: `LICENSE` (GPL-3.0 full text), `README.md` with
    purpose, disclaimer, "based on rAthena" credit, development commands.
    Check: verification passes.
-5. [ ] CI and deploy: `.github/workflows/ci.yml` (check, lint, test, build
+5. [x] CI and deploy: `.github/workflows/ci.yml` (check, lint, test, build
    on push and PR) and `.github/workflows/deploy.yml` (same checks, then
    upload `dist` and deploy to Pages, on push to `main` and manual
    trigger). Check: verification passes; workflow YAML parses. Running the
@@ -56,4 +56,5 @@ corepack pnpm check && corepack pnpm lint && corepack pnpm test && corepack pnpm
 - 2026-11-13 · 1 Scaffold · check, lint, test (1/1), build pass · 2268225
 - 2026-11-13 · 2 Layout · verification passes; engine import probe gave 3 lint errors as intended, probe removed · 5616c9d
 - 2026-11-13 · 3 App shell · verification passes, tests 4/4 (3 component tests) · ccbb3e7
-- 2026-11-13 · 4 License and docs · verification passes; LICENSE md5 d32239bc… (canonical GPL-3.0) · (this commit)
+- 2026-11-13 · 4 License and docs · verification passes; LICENSE md5 d32239bc… (canonical GPL-3.0) · 7e67126
+- 2026-11-13 · 5 CI and deploy · verification passes; workflow YAML parsed and structure asserted; frozen-lockfile install OK; dist uses ./assets paths; workflows not run (no remote) · (this commit)
