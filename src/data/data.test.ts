@@ -3,6 +3,7 @@ import items from './generated/items.json';
 import jobsData from './generated/jobs.json';
 import monsters from './generated/monsters.json';
 import names from './generated/names.en.json';
+import tables from './generated/tables.json';
 
 describe('generated jobs', () => {
   const byKey = (key: string) => jobsData.jobs.find((job) => job.key === key);
@@ -94,6 +95,31 @@ describe('generated monsters', () => {
         names.monsters[String(id) as keyof typeof names.monsters],
         `monster ${id}`,
       ).toBeTruthy();
+    }
+  });
+});
+
+describe('generated tables', () => {
+  it('gives Knuckle 50 % against large monsters', () => {
+    expect(tables.sizeModifier.Knuckle.large).toBe(50);
+  });
+
+  it('gives water attacking fire at element level 1 150 %', () => {
+    expect(tables.elementModifier[0]?.Water.Fire).toBe(150);
+  });
+
+  it('has a size modifier for every weapon type that jobs and items use', () => {
+    const used = new Set([
+      ...jobsData.jobs.flatMap((job) => Object.keys(job.baseAspd)),
+      ...items.flatMap((item) => (item.weaponType === undefined ? [] : [item.weaponType])),
+    ]);
+    for (const weaponType of used)
+      expect(tables.sizeModifier, weaponType).toHaveProperty(weaponType);
+  });
+
+  it('has an element modifier row for every monster element', () => {
+    for (const element of new Set(monsters.map((monster) => monster.element))) {
+      expect(tables.elementModifier[0], element).toHaveProperty(element);
     }
   });
 });

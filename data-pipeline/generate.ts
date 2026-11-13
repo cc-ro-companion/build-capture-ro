@@ -6,6 +6,7 @@ import { formatJson } from './json.ts';
 import { generateMonsters } from './monsters.ts';
 import { loadMeta, loadOverrideFile } from './overrides.ts';
 import { readRathenaSource, resolveRathenaDir } from './rathena.ts';
+import { generateTables } from './tables.ts';
 
 const repoRoot = path.resolve(import.meta.dirname, '..');
 const overridesDir = path.join(repoRoot, 'data-overrides');
@@ -42,11 +43,13 @@ function main(): void {
   console.log(`Equipment: ${items.data.length}`);
   const monsters = generateMonsters(rathenaDir, overrides.monsters);
   console.log(`Monsters: ${monsters.data.length}`);
+  const tables = generateTables(rathenaDir);
 
   mkdirSync(outputDir, { recursive: true });
   writeOutput('jobs.json', jobs.data);
   writeOutput('items.json', items.data);
   writeOutput('monsters.json', monsters.data);
+  writeOutput('tables.json', tables);
   writeOutput('names.en.json', {
     items: items.names,
     monsters: monsters.names,

@@ -1,5 +1,6 @@
 import { applyOverrides, MONSTER_SCHEMA, type OverrideFile } from './overrides.ts';
 import { enabledKeys, loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
+import { ELEMENTS } from './tables.ts';
 
 export type Size = 'small' | 'medium' | 'large';
 export type MonsterClass = 'normal' | 'boss' | 'guardian' | 'battlefield';
@@ -59,18 +60,7 @@ const RACES = new Set([
   'Angel',
   'Dragon',
 ]);
-const ELEMENTS = new Set([
-  'Neutral',
-  'Water',
-  'Earth',
-  'Fire',
-  'Wind',
-  'Poison',
-  'Holy',
-  'Dark',
-  'Ghost',
-  'Undead',
-]);
+const ELEMENT_NAMES = new Set<string>(ELEMENTS);
 
 function where(record: YamlMap): string {
   return `monster ${String(record.Id)}`;
@@ -125,7 +115,7 @@ export function convertMonster(record: YamlMap): MonsterRecord {
     size: enumField(record, 'Size', 'Small', SIZES),
     race: nameField(record, 'Race', 'Formless', RACES),
     raceGroups: enabledKeys(record.RaceGroups),
-    element: nameField(record, 'Element', 'Neutral', ELEMENTS),
+    element: nameField(record, 'Element', 'Neutral', ELEMENT_NAMES),
     elementLevel: numberField(record, 'ElementLevel', 1),
     class: enumField(record, 'Class', 'Normal', CLASSES),
     modes: enabledKeys(record.Modes),

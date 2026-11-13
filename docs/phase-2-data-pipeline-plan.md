@@ -209,7 +209,7 @@ ccRO.
    check pass; verification passes.
 5. [x] Monsters: `monsters.ts` writing `monsters.json` and monster names.
    Check: monster spot checks pass; verification passes.
-6. [ ] Tables: `tables.ts` writing `tables.json` (size and element
+6. [x] Tables: `tables.ts` writing `tables.json` (size and element
    modifiers). Check: table spot checks pass; verification passes.
 7. [ ] Data version and typed access: `hash.ts`, `meta.json`,
    `src/data/types.ts`, `src/data/index.ts`, staleness test,
@@ -236,4 +236,7 @@ ccRO.
   all-jobs items without a `Jobs` field, e.g. 1161 Balmung) ·
   check/lint/test (52)/build pass · 020d81d
 - 2026-11-13 · 5 monsters, 1004 (`class` also has `battlefield`, used by 7
-  rAthena monsters) · check/lint/test (57)/build pass · next commit
+  rAthena monsters) · check/lint/test (57)/build pass · 6ebe23e
+- 2026-11-13 · 6 tables (`elementModifier` is an array, index = element
+  level - 1, like the other level tables) · check/lint/test (65)/build pass ·
+  next commit
