@@ -12,6 +12,7 @@ import { BUILD_VERSION, normalizeBuild, type Build } from './model';
 import type { GameData } from './resolve';
 
 const FORMAT_VERSION = 1;
+const MAX_PLAUSIBLE_FORMAT = 63;
 
 const TAG_END = 0;
 const FIELD_TAGS = {
@@ -184,7 +185,9 @@ function readCode(code: string): DecodedCode | { error: string } {
   try {
     const format = reader.byte();
     if (format !== FORMAT_VERSION) {
-      return format > FORMAT_VERSION
+      // Random input usually starts with a large byte; only small numbers are
+      // plausible future format versions worth telling the user about.
+      return format > FORMAT_VERSION && format <= MAX_PLAUSIBLE_FORMAT
         ? { error: 'The share code was made with a newer version of the planner.' }
         : { error: 'The share code is not valid.' };
     }

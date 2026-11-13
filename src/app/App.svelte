@@ -1,11 +1,42 @@
 <script lang="ts">
+  import { gameData } from '../build/resolve';
+  import { shareCodeFromFragment } from '../build/shareCode';
+  import { browserStorage } from '../build/storage';
+  import { dataMeta } from '../data';
+  import { rAthenaDefaults } from '../engine/config';
+  import { BuildState } from './build.svelte';
+  import BuildPanel from './BuildPanel.svelte';
+  import ResultsPanel from './ResultsPanel.svelte';
+  import ShareBar from './ShareBar.svelte';
+  import TargetPanel from './TargetPanel.svelte';
   import { appVersion, dataVersion } from './version';
 
-  const regions = [
-    { id: 'build', title: 'Build', hint: 'Character, equipment, skills and buffs.' },
-    { id: 'target', title: 'Target', hint: 'Monster and its debuffs.' },
-    { id: 'results', title: 'Results', hint: 'Damage dealt and taken, ASPD, DPS.' },
-  ];
+  const sharedCode = shareCodeFromFragment(window.location.hash);
+
+  const buildState = new BuildState({
+    data: gameData,
+    config: rAthenaDefaults,
+    version: { hash: dataMeta.hash, label: dataMeta.label },
+    storage: browserStorage(),
+    sharedCode,
+    confirmReplace: (message) => window.confirm(message),
+  });
+
+  // The link has been read; drop the fragment so a reload shows the saved
+  // build instead of asking again.
+  if (sharedCode !== null) {
+    window.history.replaceState(
+      window.history.state,
+      '',
+      window.location.pathname + window.location.search,
+    );
+  }
+
+  const pageUrl = window.location.href.split('#')[0] ?? '';
+
+  $effect(() => {
+    buildState.save();
+  });
 </script>
 
 <div class="shell">
@@ -18,13 +49,21 @@
     <span class="version">v{appVersion}</span>
   </header>
 
+  <ShareBar planner={buildState} {pageUrl} />
+
   <main class="main">
-    {#each regions as region (region.id)}
-      <section class="region" aria-labelledby="region-{region.id}">
-        <h2 id="region-{region.id}">{region.title}</h2>
-        <p class="placeholder">{region.hint}</p>
-      </section>
-    {/each}
+    <section class="region" aria-labelledby="region-build">
+      <h2 id="region-build">Build</h2>
+      <BuildPanel planner={buildState} />
+    </section>
+    <section class="region" aria-labelledby="region-target">
+      <h2 id="region-target">Target</h2>
+      <TargetPanel planner={buildState} />
+    </section>
+    <section class="region" aria-labelledby="region-results">
+      <h2 id="region-results">Results</h2>
+      <ResultsPanel planner={buildState} />
+    </section>
   </main>
 
   <footer class="footer">
@@ -46,6 +85,8 @@
     --color-banner-bg: #fff4d6;
     --color-banner-text: #6b4e00;
     --color-link: #1f5fbf;
+    --color-error: #b3261e;
+    --color-highlight: #e6eefb;
     color-scheme: light dark;
   }
 
@@ -59,6 +100,8 @@
       --color-banner-bg: #3a3014;
       --color-banner-text: #f2d98a;
       --color-link: #7fb0ff;
+      --color-error: #ff8a80;
+      --color-highlight: #26354d;
     }
   }
 
@@ -108,6 +151,12 @@
     padding: 12px 16px;
   }
 
+  @media (max-width: 900px) {
+    .main {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .region {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -118,11 +167,6 @@
   .region h2 {
     margin: 0 0 8px;
     font-size: 15px;
-  }
-
-  .placeholder {
-    margin: 0;
-    color: var(--color-muted);
   }
 
   .footer {

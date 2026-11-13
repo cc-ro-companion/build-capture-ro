@@ -215,7 +215,7 @@ and hand the numbers over for fixtures.
    warnings. Check: unit tests; verification passes.
 6. [x] Share code and storage: `shareCode.ts`, `storage.ts`. Check:
    round-trip, hint, corrupt code and storage tests; verification passes.
-7. [ ] UI: build state, Build/Target/Results panels, share bar, link
+7. [x] UI: build state, Build/Target/Results panels, share bar, link
    opening with confirm. Check: component tests; verification passes; the
    built app renders a result for a sample build.
 8. [ ] Fixture runner: `tests/fixtures/fixtures.test.ts` and the format,
@@ -241,3 +241,4 @@ and hand the numbers over for fixtures.
 - 2026-11-13 · 4 engine auto attack: pre-renewal base damage (DEX minimum × weapon level, `rnd()%(max−min)+min` so normal hits never roll the full ATK, bow arrow path, gun crits melee-like), size, hard/soft DEF, min 1, Neutral element, katar 1% off-hand hit, exact average by enumeration, hit/crit chance, DPS · check/lint/test (120)/build pass · 7d19263
 - 2026-11-13 · 5 build model: normalize (unknown ids dropped, levels/stats clamped, unequippable weapon dropped, each with a warning), resolve, weapon/monster search · check/lint/test (141)/build pass · c0dc1ab
 - 2026-11-13 · plan change agreed with the maintainer: the plan's deflated-JSON share code measured ~174 characters (link ~228, over the 200 limit). The share code is now an opaque binary format (link ~110), and storage keeps readable JSON (build + `d` + `l`) that users may edit; phase 10 import accepts both
+- 2026-11-13 · 6 share code and storage: binary code (typical link ~110 chars), readable JSON storage with `d`/`l`, hint, corrupt-code and throwing-storage tests · check/lint/test (159)/build pass · ae9166b
