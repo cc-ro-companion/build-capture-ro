@@ -57,6 +57,8 @@ export interface Item {
   jobs: number[];
   /** Only present when restricted. */
   gender?: 'male' | 'female';
+  /** Not obtainable on ccRO (data-overrides/hidden-items.yml); left out of search by default. */
+  hidden?: true;
 }
 
 export type Size = 'small' | 'medium' | 'large';

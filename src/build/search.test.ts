@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { canEquip, gameData } from './resolve';
+import type { Item } from '../data/types';
+import { canEquip, createGameData, gameData } from './resolve';
 import { MAX_RESULTS, searchMonsters, searchWeapons } from './search';
 
 const SWORDMAN = 1;
@@ -12,7 +13,9 @@ describe('searchWeapons (shipped data)', () => {
       [SWORDMAN, 99],
       [MAGE, 50],
     ] as const) {
-      const all = gameData.weapons.filter((item) => canEquip(item, jobId, baseLevel));
+      const all = gameData.weapons.filter(
+        (item) => !item.hidden && canEquip(item, jobId, baseLevel),
+      );
       const result = searchWeapons('', jobId, baseLevel, gameData);
       expect(result.total).toBe(all.length);
       for (const item of result.matches) {
@@ -42,6 +45,29 @@ describe('searchWeapons (shipped data)', () => {
     const result = searchWeapons('', SWORDMAN, 99, gameData);
     expect(result.matches).toHaveLength(MAX_RESULTS);
     expect(result.total).toBeGreaterThan(MAX_RESULTS);
+  });
+});
+
+describe('searchWeapons hidden items', () => {
+  const visible = gameData.items.get(1101) as Item;
+  const data = createGameData({
+    jobs: [...gameData.jobs.values()],
+    items: [visible, { ...visible, id: 1102, aegisName: 'Hidden_Sword', hidden: true }],
+    monsters: [],
+    statPoints: gameData.statPoints,
+    tables: gameData.tables,
+    names: { items: {}, monsters: {}, jobs: {} },
+  });
+  const ids = (showHidden: boolean) =>
+    searchWeapons('', SWORDMAN, 99, data, { showHidden }).matches.map((item) => item.id);
+
+  it('leaves hidden items out unless asked for them', () => {
+    expect(ids(false)).toEqual([1101]);
+    expect(ids(true)).toEqual([1101, 1102]);
+  });
+
+  it('marks shipped items from hidden-items.yml as hidden', () => {
+    expect(gameData.weapons.some((item) => item.hidden)).toBe(true);
   });
 });
 

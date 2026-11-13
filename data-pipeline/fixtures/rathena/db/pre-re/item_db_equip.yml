@@ -1,0 +1,18 @@
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 1101
+    AegisName: Sword
+    Name: Sword
+    Type: Weapon
+    SubType: 1hSword
+    Locations:
+      Right_Hand: true
+  - Id: 2301
+    AegisName: Cotton_Shirt
+    Name: Cotton Shirt
+    Type: Armor
+    Locations:
+      Armor: true

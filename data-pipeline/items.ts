@@ -181,9 +181,15 @@ export function effectiveGender(record: YamlMap): Item['gender'] {
   }
 }
 
+/**
+ * Converts every equipment record. Ids in `hidden` get `hidden: true`; a
+ * hidden id that is not generated equipment is an error, so a typo in
+ * hidden-items.yml cannot silently hide nothing.
+ */
 export function generateItems(
   rathenaDir: string,
   overrides: OverrideFile,
+  hidden: ReadonlySet<number> = new Set(),
 ): { data: Item[]; names: Record<number, string> } {
   const records = loadDb(rathenaDir, `${PRE_RE_DIR}/item_db.yml`, (importPath) =>
     importPath.endsWith('/item_db_equip.yml'),
@@ -194,9 +200,14 @@ export function generateItems(
   for (const record of merged) {
     const item = convertItem(record);
     if (item === undefined) continue;
+    if (hidden.has(item.id)) item.hidden = true;
     items.push(item);
     names[item.id] = stringField(record, 'Name');
   }
   items.sort((a, b) => a.id - b.id);
+  const unknown = [...hidden].filter((id) => names[id] === undefined);
+  if (unknown.length > 0) {
+    throw new Error(`hidden-items.yml: no such equipment: ${unknown.join(', ')}.`);
+  }
   return { data: items, names };
 }

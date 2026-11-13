@@ -1,0 +1,7 @@
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Footer:
+  Imports:
+    - Path: db/pre-re/item_db_equip.yml

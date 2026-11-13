@@ -32,18 +32,26 @@ function collect<T>(records: readonly T[], accept: (record: T) => boolean): Sear
   return { matches, total };
 }
 
+export interface ItemSearchOptions {
+  /** Also offer items marked hidden (not obtainable on ccRO). */
+  showHidden?: boolean;
+}
+
 /** Weapons the job can equip at the base level that match the query. */
 export function searchWeapons(
   query: string,
   jobId: number,
   baseLevel: number,
   data: GameData,
+  options: ItemSearchOptions = {},
 ): SearchResult<Item> {
   const matches = matcher(query);
   return collect(
     data.weapons,
     (item) =>
-      canEquip(item, jobId, baseLevel) && matches(item.id, item.aegisName, itemName(data, item.id)),
+      (options.showHidden === true || item.hidden !== true) &&
+      canEquip(item, jobId, baseLevel) &&
+      matches(item.id, item.aegisName, itemName(data, item.id)),
   );
 }
 

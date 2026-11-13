@@ -9,12 +9,15 @@
   let { planner }: { planner: BuildState } = $props();
 
   let weaponQuery = $state('');
+  let showHidden = $state(false);
 
   const job = $derived(planner.resolved.character.job);
   const bonus = $derived(jobBonus(job, planner.build.jobLevel));
   const pointsLeft = $derived(planner.pointsBudget - planner.pointsSpent);
   const weapons = $derived(
-    searchWeapons(weaponQuery, planner.build.job, planner.build.baseLevel, planner.data),
+    searchWeapons(weaponQuery, planner.build.job, planner.build.baseLevel, planner.data, {
+      showHidden,
+    }),
   );
   const weapon = $derived(planner.resolved.character.weapon);
   const rangedWeapon = $derived(usesArrowPath(weapon?.weaponType ?? ''));
@@ -108,6 +111,10 @@
       aria-label="Search weapon"
       bind:value={weaponQuery}
     />
+    <label class="toggle">
+      <input type="checkbox" bind:checked={showHidden} />
+      Show hidden items
+    </label>
     <ul class="results" aria-label="Weapon results">
       <li>
         <button type="button" onclick={() => planner.setWeapon(null)}>No weapon</button>
@@ -188,6 +195,14 @@
   .note {
     margin: 4px 0;
     color: var(--color-muted);
+    font-size: 12px;
+  }
+
+  .toggle {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-top: 4px;
     font-size: 12px;
   }
 

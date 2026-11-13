@@ -1,5 +1,6 @@
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { allowsNormalClass, convertItem, resolveItemJobs } from './items.ts';
+import { allowsNormalClass, convertItem, generateItems, resolveItemJobs } from './items.ts';
 import { SUPPORTED_JOBS } from './jobs.ts';
 
 const allJobIds = SUPPORTED_JOBS.map((job) => job.id);
@@ -111,5 +112,22 @@ describe('convertItem', () => {
     expect(convertItem({ ...weapon, Classes: { Upper: true } })).toBeUndefined();
     expect(convertItem({ ...weapon, Locations: { Costume_Head_Top: true } })).toBeUndefined();
     expect(convertItem({ ...weapon, Jobs: { Summoner: true } })).toBeUndefined();
+  });
+});
+
+describe('generateItems', () => {
+  const fixtureRathena = path.join(import.meta.dirname, 'fixtures', 'rathena');
+  const noOverrides = { name: 'items.yml', body: [], remove: [] };
+
+  it('marks hidden ids and leaves the others unmarked', () => {
+    const { data } = generateItems(fixtureRathena, noOverrides, new Set([2301]));
+    expect(data.find((item) => item.id === 2301)?.hidden).toBe(true);
+    expect(data.find((item) => item.id === 1101)).not.toHaveProperty('hidden');
+  });
+
+  it('rejects a hidden id that is not generated equipment', () => {
+    expect(() => generateItems(fixtureRathena, noOverrides, new Set([1101, 9999]))).toThrow(
+      'hidden-items.yml: no such equipment: 9999.',
+    );
   });
 });

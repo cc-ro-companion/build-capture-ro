@@ -2,6 +2,7 @@ import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { DataMeta, NamesFile } from '../src/data/types.ts';
 import { hashData, hashOverrides, META_FILE } from './hash.ts';
+import { loadHiddenItems } from './hiddenItems.ts';
 import { generateItems } from './items.ts';
 import { generateJobs } from './jobs.ts';
 import { formatJson } from './json.ts';
@@ -41,8 +42,9 @@ function main(): void {
 
   const jobs = generateJobs(rathenaDir, overrides.jobs);
   console.log(`Jobs: ${jobs.data.jobs.length}`);
-  const items = generateItems(rathenaDir, overrides.items);
-  console.log(`Equipment: ${items.data.length}`);
+  const hidden = loadHiddenItems(path.join(overridesDir, 'hidden-items.yml'));
+  const items = generateItems(rathenaDir, overrides.items, hidden);
+  console.log(`Equipment: ${items.data.length} (${hidden.size} hidden)`);
   const monsters = generateMonsters(rathenaDir, overrides.monsters);
   console.log(`Monsters: ${monsters.data.length}`);
   const tables = generateTables(rathenaDir);

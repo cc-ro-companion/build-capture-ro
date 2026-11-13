@@ -22,6 +22,13 @@ Rules:
 | `items.yml` | `item_db_equip.yml` | `Id` |
 | `monsters.yml` | `mob_db.yml` | `Id` |
 | `jobs.yml` | `job_stats.yml`, `job_aspd.yml`, `job_exp.yml` | `Job` |
+| `hidden-items.yml` | generated equipment | `id` |
+
+`hidden-items.yml` has its own format: review groups, each a list of
+`{ id, name, hide, reason }` entries, one per line. Items with `hide: true`
+are not obtainable on ccRO; they stay in the data, so builds that use them
+keep loading, but search leaves them out unless "show hidden items" is
+ticked. `pnpm data` stops if a hidden id is not generated equipment.
 
 `meta.yml` holds the data label shown in the app footer:
 ```yaml
