@@ -21,6 +21,20 @@ describe('parseJobEnum', () => {
     ]);
   });
 
+  it('ignores comments and fails on a member it cannot read', () => {
+    const commented = `enum e_job {
+      JOB_NOVICE, // first
+      //JOB_REMOVED,
+      /* JOB_ALSO_REMOVED, */
+      JOB_SWORDMAN
+    };`;
+    expect([...parseJobEnum(commented)]).toEqual([
+      ['JOB_NOVICE', 0],
+      ['JOB_SWORDMAN', 1],
+    ]);
+    expect(() => parseJobEnum('enum e_job { JOB_A = JOB_B, };')).toThrow(/cannot parse/);
+  });
+
   it('rejects a supported job whose id differs from rAthena', () => {
     expect(() => checkJobIds(new Map([['JOB_NOVICE', 1]]))).toThrow(/Job Novice: id 0/);
   });
@@ -37,6 +51,14 @@ describe('expandJobGroups', () => {
   it('gives every supported job one record and maps spelling variants to one key', () => {
     const superNovice = records.find((record) => record.Job === 'Super_Novice');
     expect(superNovice).toEqual({ Job: 'Super_Novice', BaseASPD: { Fist: 500 }, MaxJobLevel: 99 });
+  });
+
+  it('merges map fields key by key when a job is in several groups', () => {
+    const [novice] = expandJobGroups([
+      { Jobs: { Novice: true, Baby: true }, BaseASPD: { Fist: 500, Dagger: 650 } },
+      { Jobs: { Novice: true }, BaseASPD: { Dagger: 600 } },
+    ]);
+    expect(novice?.BaseASPD).toEqual({ Fist: 500, Dagger: 600 });
   });
 
   it('ignores unsupported jobs and disabled entries', () => {

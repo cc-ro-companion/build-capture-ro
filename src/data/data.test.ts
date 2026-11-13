@@ -18,7 +18,9 @@ describe('data version', () => {
   });
 
   it('matches the generated files (fails if one was edited by hand)', () => {
-    const files = readdirSync(generatedDir).filter((name) => name !== META_FILE);
+    const files = readdirSync(generatedDir).filter(
+      (name) => name.endsWith('.json') && name !== META_FILE,
+    );
     const texts = Object.fromEntries(
       files.map((name) => [name, readFileSync(path.join(generatedDir, name), 'utf8')]),
     );

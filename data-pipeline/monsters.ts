@@ -5,6 +5,9 @@ import type { Monster, MonsterClass, Size } from '../src/data/types.ts';
 
 // rAthena's DEFAULT_WALK_SPEED in src/common/mmo.hpp.
 const DEFAULT_WALK_SPEED = 150;
+// rAthena's MAX_ASPD_NOPC in src/map/status.hpp, the default for both
+// AttackDelay and AttackMotion.
+const MAX_ASPD_NOPC = 100;
 
 const SIZES: Record<string, Size> = { Small: 'small', Medium: 'medium', Large: 'large' };
 const CLASSES: Record<string, MonsterClass> = {
@@ -85,8 +88,8 @@ export function convertMonster(record: YamlMap): Monster {
     class: enumField(record, 'Class', 'Normal', CLASSES),
     modes: enabledKeys(record.Modes),
     attackRange: numberField(record, 'AttackRange', 0),
-    attackDelay: numberField(record, 'AttackDelay', 0),
-    attackMotion: numberField(record, 'AttackMotion', 0),
+    attackDelay: numberField(record, 'AttackDelay', MAX_ASPD_NOPC),
+    attackMotion: numberField(record, 'AttackMotion', MAX_ASPD_NOPC),
     damageMotion: numberField(record, 'DamageMotion', 0),
     walkSpeed: numberField(record, 'WalkSpeed', DEFAULT_WALK_SPEED),
   };
@@ -99,6 +102,11 @@ export function generateMonsters(
   const records = loadDb(rathenaDir, `${PRE_RE_DIR}/mob_db.yml`).body;
   const merged = applyOverrides(records, overrides, MONSTER_SCHEMA);
   const monsters = merged.map(convertMonster).sort((a, b) => a.id - b.id);
-  const names = Object.fromEntries(merged.map((record) => [record.Id, String(record.Name)]));
+  const names = Object.fromEntries(
+    merged.map((record) => {
+      if (typeof record.Name !== 'string') throw new Error(`${where(record)}: missing Name.`);
+      return [record.Id, record.Name];
+    }),
+  );
   return { data: monsters, names };
 }

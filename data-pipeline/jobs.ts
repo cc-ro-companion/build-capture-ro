@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { applyOverrides, JOB_SCHEMA, type OverrideFile } from './overrides.ts';
 import type { BonusStats, Job, JobsFile } from '../src/data/types.ts';
-import { loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
+import { JOB_ENUM_FILE, loadDb, PRE_RE_DIR, type YamlMap } from './rathena.ts';
 
 export interface SupportedJob {
   /** rAthena `e_job` value. */
@@ -59,9 +59,18 @@ export function parseJobEnum(source: string): Map<string, number> {
   const start = source.indexOf('enum e_job {');
   const end = source.indexOf('};', start);
   if (start === -1 || end === -1) throw new Error('mmo.hpp: enum e_job not found.');
+  const body = source
+    .slice(start + 'enum e_job {'.length, end)
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\/\/.*$/gm, '');
   const values = new Map<string, number>();
   let next = 0;
-  for (const match of source.slice(start, end).matchAll(/\b(JOB_\w+)\s*(?:=\s*(\d+))?\s*,/g)) {
+  for (const member of body.split(',')) {
+    const text = member.trim();
+    if (text === '') continue;
+    const match = /^(JOB_\w+)(?:\s*=\s*(\d+))?$/.exec(text);
+    // An unparseable member would silently shift every implicit value after it.
+    if (match === null) throw new Error(`mmo.hpp: cannot parse e_job member "${text}".`);
     const [, name = '', explicit] = match;
     const value = explicit === undefined ? next : Number(explicit);
     values.set(name, value);
@@ -98,10 +107,28 @@ export function expandJobGroups(groups: readonly YamlMap[]): YamlMap[] {
       if (enabled !== true) continue;
       const key = JOB_FILE_ALIASES[rawName] ?? rawName;
       if (!supportedKeys.has(key)) continue;
-      Object.assign(records.get(key) as YamlMap, fields);
+      mergeGroupFields(records.get(key) as YamlMap, fields);
     }
   }
   return [...records.values()];
+}
+
+/**
+ * Adds a group's fields to a job like rAthena does when a job is in several
+ * groups: maps (e.g. `BaseASPD`) merge key by key, per-level lists (e.g.
+ * `BonusStats`) append so later levels win, scalars replace.
+ */
+function mergeGroupFields(record: YamlMap, fields: YamlMap): void {
+  for (const [field, value] of Object.entries(fields)) {
+    const current = record[field];
+    if (isPlainMap(current) && isPlainMap(value)) record[field] = { ...current, ...value };
+    else if (Array.isArray(current) && Array.isArray(value)) record[field] = [...current, ...value];
+    else record[field] = value;
+  }
+}
+
+function isPlainMap(value: unknown): value is YamlMap {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 function requireNumber(record: YamlMap, field: string): number {
@@ -162,7 +189,7 @@ export function generateJobs(
   rathenaDir: string,
   overrides: OverrideFile,
 ): { data: JobsFile; names: Record<number, string> } {
-  checkJobIds(parseJobEnum(readFileSync(path.join(rathenaDir, 'src/common/mmo.hpp'), 'utf8')));
+  checkJobIds(parseJobEnum(readFileSync(path.join(rathenaDir, JOB_ENUM_FILE), 'utf8')));
   const groups = JOB_FILES.flatMap((file) => loadDb(rathenaDir, `${PRE_RE_DIR}/${file}`).body);
   const records = applyOverrides(expandJobGroups(groups), overrides, JOB_SCHEMA);
   const jobs = records.map(convertJob).sort((a, b) => a.id - b.id);

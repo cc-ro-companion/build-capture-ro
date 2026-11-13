@@ -15,6 +15,12 @@ describe('formatJson', () => {
     expect(text).toContain('"long": [\n    0,\n    1,');
   });
 
+  it('leaves out undefined object values like JSON.stringify, and rejects undefined elsewhere', () => {
+    expect(formatJson({ a: 1, b: undefined })).toBe('{ "a": 1 }\n');
+    expect(formatJson({ nested: [{ b: undefined }] })).toBe('{\n  "nested": [\n    {}\n  ]\n}\n');
+    expect(() => formatJson([1, undefined])).toThrow(/undefined/);
+  });
+
   it('round-trips through JSON.parse, including strings with commas and quotes', () => {
     const value = { names: { '1': 'Sword, "Old",2' }, flags: [true, null, -1.5] };
     expect(JSON.parse(formatJson(value))).toEqual(value);

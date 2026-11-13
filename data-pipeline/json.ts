@@ -10,16 +10,26 @@ function isFlat(value: object): boolean {
   return Object.values(value).every(isPrimitive);
 }
 
+// Drops undefined-valued keys, as JSON.stringify does.
+function definedEntries(value: object): [string, unknown][] {
+  return Object.entries(value).filter(([, item]) => item !== undefined);
+}
+
+function renderPrimitive(value: unknown): string {
+  if (value === undefined) throw new Error('formatJson: undefined is not valid JSON.');
+  return JSON.stringify(value);
+}
+
 function renderInline(value: object): string {
-  if (Array.isArray(value)) return `[${value.map((item) => JSON.stringify(item)).join(', ')}]`;
-  const entries = Object.entries(value).map(
-    ([key, item]) => `${JSON.stringify(key)}: ${JSON.stringify(item)}`,
+  if (Array.isArray(value)) return `[${value.map(renderPrimitive).join(', ')}]`;
+  const entries = definedEntries(value).map(
+    ([key, item]) => `${JSON.stringify(key)}: ${renderPrimitive(item)}`,
   );
-  return `{ ${entries.join(', ')} }`;
+  return entries.length === 0 ? '{}' : `{ ${entries.join(', ')} }`;
 }
 
 function render(value: unknown, depth: number): string {
-  if (isPrimitive(value)) return JSON.stringify(value);
+  if (isPrimitive(value)) return renderPrimitive(value);
   if (isFlat(value as object)) {
     const inline = renderInline(value as object);
     if (depth * INDENT.length + inline.length <= MAX_INLINE_WIDTH) return inline;
@@ -30,7 +40,7 @@ function render(value: unknown, depth: number): string {
     if (value.length === 0) return '[]';
     return `[\n${value.map((item) => pad + render(item, depth + 1)).join(',\n')}\n${closePad}]`;
   }
-  const entries = Object.entries(value as Record<string, unknown>);
+  const entries = definedEntries(value as object);
   if (entries.length === 0) return '{}';
   const lines = entries.map(
     ([key, item]) => `${pad}${JSON.stringify(key)}: ${render(item, depth + 1)}`,

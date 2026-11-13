@@ -70,6 +70,13 @@ describe('applyOverrides', () => {
     );
   });
 
+  it('rejects a scalar where a map field is expected', () => {
+    const overrides = { name: 'items.yml', body: [{ Id: 1101, Flags: true }], remove: [] };
+    expect(() => applyOverrides(baseItems, overrides, ITEM_SCHEMA)).toThrow(
+      'items.yml: Id 1101: field "Flags" must be a map.',
+    );
+  });
+
   it('rejects a new entry missing a required field', () => {
     expect(() => apply('missing_required.yml')).toThrow(
       'missing_required.yml: Id 990002: new entry is missing required field(s) Name.',

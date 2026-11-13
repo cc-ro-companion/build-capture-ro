@@ -87,6 +87,24 @@ describe('convertItem', () => {
     expect(armor).not.toHaveProperty('weaponLevel');
   });
 
+  it('forces rAthena gender rules and drops the opposite-sex job of Bard/Dancer', () => {
+    const bardDancer = { Jobs: { BardDancer: true } };
+    const whip = convertItem({ ...weapon, ...bardDancer, SubType: 'Whip' });
+    expect(whip).toMatchObject({ gender: 'female', jobs: [20] });
+    const instrument = convertItem({ ...weapon, ...bardDancer, SubType: 'Musical' });
+    expect(instrument).toMatchObject({ gender: 'male', jobs: [19] });
+    const brideRing = convertItem({
+      ...weapon,
+      Id: 2635,
+      Type: 'Armor',
+      Jobs: { All: true },
+      Locations: { Both_Accessory: true },
+    });
+    expect(brideRing?.gender).toBe('female');
+    expect(brideRing?.jobs).not.toContain(19);
+    expect(brideRing?.jobs).toContain(20);
+  });
+
   it('drops pet equipment, rebirth-only items, costumes and items no supported job can use', () => {
     expect(convertItem({ ...weapon, Type: 'Petarmor' })).toBeUndefined();
     expect(convertItem({ ...weapon, Type: 'Petegg' })).toBeUndefined();

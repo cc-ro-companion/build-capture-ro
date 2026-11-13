@@ -54,6 +54,11 @@ const CLASS_NAMES = new Set([
 ]);
 
 const COSTUME_LOCATION = /^Costume_/;
+// rAthena's WEDDING_RING_M / WEDDING_RING_F in src/common/mmo.hpp.
+const GROOM_RING_ID = 2634;
+const BRIDE_RING_ID = 2635;
+const BARD_ID = jobIdByKey.get('Bard') as number;
+const DANCER_ID = jobIdByKey.get('Dancer') as number;
 
 function where(record: YamlMap): string {
   return `item ${String(record.Id)}`;
@@ -124,7 +129,12 @@ export function convertItem(record: YamlMap): Item | undefined {
   if (!allowsNormalClass(record)) return undefined;
   const locations = enabledKeys(record.Locations);
   if (!locations.some((location) => !COSTUME_LOCATION.test(location))) return undefined;
-  const jobs = resolveItemJobs(record);
+  const gender = effectiveGender(record);
+  // Bard is always male and Dancer always female, so a gender-restricted
+  // item is unusable by the other one even though rAthena's BardDancer flag
+  // covers both.
+  const excludedJob = gender === 'male' ? DANCER_ID : gender === 'female' ? BARD_ID : undefined;
+  const jobs = resolveItemJobs(record).filter((id) => id !== excludedJob);
   if (jobs.length === 0) return undefined;
 
   const isWeapon = rawType === 'Weapon';
@@ -144,19 +154,28 @@ export function convertItem(record: YamlMap): Item | undefined {
     refineable: record.Refineable === true,
     locations,
     jobs,
-    ...genderField(record),
+    ...(gender === undefined ? {} : { gender }),
   };
 }
 
-function genderField(record: YamlMap): Pick<Item, 'gender'> {
+/**
+ * The gender restriction rAthena enforces (`ItemDatabase::defaultGender`):
+ * the wedding rings and all musical instruments and whips are forced,
+ * whatever the db says.
+ */
+export function effectiveGender(record: YamlMap): Item['gender'] {
+  if (record.Id === GROOM_RING_ID) return 'male';
+  if (record.Id === BRIDE_RING_ID) return 'female';
+  if (record.Type === 'Weapon' && record.SubType === 'Musical') return 'male';
+  if (record.Type === 'Weapon' && record.SubType === 'Whip') return 'female';
   switch (record.Gender) {
     case undefined:
     case 'Both':
-      return {};
+      return undefined;
     case 'Male':
-      return { gender: 'male' };
+      return 'male';
     case 'Female':
-      return { gender: 'female' };
+      return 'female';
     default:
       throw new Error(`${where(record)}: unknown Gender "${String(record.Gender)}".`);
   }

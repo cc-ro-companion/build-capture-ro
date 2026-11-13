@@ -7389,7 +7389,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7406,7 +7406,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7423,7 +7423,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7440,7 +7440,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7457,7 +7457,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7474,7 +7474,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7491,7 +7491,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7508,7 +7508,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7525,7 +7525,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7542,7 +7542,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7559,7 +7559,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7576,7 +7576,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7593,7 +7593,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7610,7 +7610,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7627,7 +7627,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7644,7 +7644,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7661,7 +7661,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7678,7 +7678,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7695,7 +7695,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7712,7 +7712,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7729,7 +7729,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7746,7 +7746,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7763,7 +7763,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7780,7 +7780,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [19],
     "gender": "male"
   },
   {
@@ -7797,7 +7797,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7814,7 +7814,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7831,7 +7831,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7848,7 +7848,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7865,7 +7865,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7882,7 +7882,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7899,7 +7899,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7916,7 +7916,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7933,7 +7933,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7950,7 +7950,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7967,7 +7967,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -7984,7 +7984,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8001,7 +8001,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8018,7 +8018,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8035,7 +8035,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8052,7 +8052,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8069,7 +8069,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8086,7 +8086,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8103,7 +8103,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8120,7 +8120,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8137,7 +8137,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8154,7 +8154,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8171,7 +8171,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8188,7 +8188,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8205,7 +8205,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8222,7 +8222,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8239,7 +8239,7 @@
     "equipLevelMax": 0,
     "refineable": true,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8256,7 +8256,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -8273,7 +8273,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Right_Hand"],
-    "jobs": [19, 20],
+    "jobs": [20],
     "gender": "female"
   },
   {
@@ -12772,7 +12772,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Both_Accessory"],
-    "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
+    "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 23, 24, 25, 4046, 4047, 4049],
     "gender": "male"
   },
   {
@@ -12787,7 +12787,7 @@
     "equipLevelMax": 0,
     "refineable": false,
     "locations": ["Both_Accessory"],
-    "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
+    "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 20, 23, 24, 25, 4046, 4047, 4049],
     "gender": "female"
   },
   {

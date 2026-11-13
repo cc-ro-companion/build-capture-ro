@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { DataMeta, NamesFile } from '../src/data/types.ts';
 import { hashData, hashOverrides, META_FILE } from './hash.ts';
@@ -66,6 +66,13 @@ function main(): void {
   };
 
   mkdirSync(outputDir, { recursive: true });
+  // A leftover file from a renamed output would break the data hash test.
+  for (const fileName of readdirSync(outputDir)) {
+    if (fileName.endsWith('.json') && fileName !== META_FILE && !(fileName in dataFiles)) {
+      rmSync(path.join(outputDir, fileName));
+      console.log(`  removed stale src/data/generated/${fileName}`);
+    }
+  }
   for (const [fileName, text] of Object.entries(dataFiles)) writeOutput(fileName, text);
   writeOutput(META_FILE, formatJson(dataMeta));
   console.log(`Data version: ${dataMeta.label} (${dataMeta.hash})`);

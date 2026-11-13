@@ -20,7 +20,11 @@ export interface Job {
   maxJobLevel: number;
   /** Index = job level - 1; cumulative bonus up to and including that level. */
   bonusStats: BonusStats[];
-  /** Weapon type → base attack delay; lists exactly the weapon types the job can use. */
+  /**
+   * Weapon type → base attack delay, as rAthena's job_aspd.yml lists it.
+   * rAthena uses 2000 for unlisted types, which some items' `jobs` still allow
+   * (e.g. 1161 Balmung, which every job can equip).
+   */
   baseAspd: Record<string, number>;
 }
 
@@ -44,7 +48,7 @@ export interface Item {
   /** Weapons only. */
   weaponLevel?: number;
   equipLevelMin: number;
-  /** 0 means no upper limit, as in rAthena. */
+  /** 0 means no upper limit (rAthena treats it like the maximum level). */
   equipLevelMax: number;
   refineable: boolean;
   /** rAthena location names, e.g. `Right_Hand`, `Head_Top`. */

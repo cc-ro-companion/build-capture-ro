@@ -248,9 +248,9 @@ function checkFields(patch: YamlMap, shape: RecordShape, where: string): void {
   for (const [field, value] of Object.entries(patch)) {
     const fieldShape = shape.fields[field];
     if (fieldShape === undefined) throw new OverrideError(`${where}: unknown field "${field}".`);
-    if (typeof fieldShape === 'object' && isMap(value)) {
-      checkFields(value, fieldShape, `${where}.${field}`);
-    }
+    if (fieldShape === 'value') continue;
+    if (!isMap(value)) throw new OverrideError(`${where}: field "${field}" must be a map.`);
+    if (typeof fieldShape === 'object') checkFields(value, fieldShape, `${where}.${field}`);
   }
 }
 

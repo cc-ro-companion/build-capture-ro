@@ -26,8 +26,8 @@ describe('convertMonster', () => {
       class: 'normal',
       modes: [],
       attackRange: 0,
-      attackDelay: 0,
-      attackMotion: 0,
+      attackDelay: 100,
+      attackMotion: 100,
       damageMotion: 0,
       walkSpeed: 150,
     });
