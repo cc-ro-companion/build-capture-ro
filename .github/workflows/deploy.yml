@@ -3,6 +3,20 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    # Only files that shape the published dist/ trigger a deploy. Tests, the data
+    # pipeline and lint config are verified by CI on branches; generated data
+    # lands in src/ and is covered there.
+    paths:
+      - 'src/**'
+      - 'index.html'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.nvmrc'
+      - 'vite.config.ts'
+      - 'svelte.config.js'
+      - 'tsconfig.json'
+      - '.github/workflows/deploy.yml'
+      - '.github/actions/verify/**'
   workflow_dispatch:
 
 permissions:
