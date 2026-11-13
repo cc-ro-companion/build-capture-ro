@@ -1,0 +1,15 @@
+Header:
+  Type: TEST_DB
+  Version: 1
+
+Body:
+  - Id: 1
+    Name: Main
+
+Footer:
+  Imports:
+    - Path: db/pre-re/first.yml
+    - Path: db/pre-re/renewal_only.yml
+      Mode: Renewal
+    - Path: db/pre-re/second.yml
+      Mode: Prerenewal

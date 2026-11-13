@@ -1,0 +1,11 @@
+Header:
+  Type: TEST_DB
+  Version: 1
+
+Body:
+  - Id: 2
+    Name: First
+
+Footer:
+  Imports:
+    - Path: db/pre-re/nested.yml
