@@ -4,3 +4,5 @@ pnpm-lock.yaml
 LICENSE
 # Markdown is wrapped by hand; Prettier would widen tables and re-indent lists.
 *.md
+# Written by the data generator, which owns its formatting.
+src/data/generated/

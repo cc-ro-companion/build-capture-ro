@@ -1,9 +1,18 @@
+import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { generateJobs } from './jobs.ts';
+import { formatJson } from './json.ts';
 import { loadMeta, loadOverrideFile } from './overrides.ts';
 import { readRathenaSource, resolveRathenaDir } from './rathena.ts';
 
 const repoRoot = path.resolve(import.meta.dirname, '..');
 const overridesDir = path.join(repoRoot, 'data-overrides');
+const outputDir = path.join(repoRoot, 'src', 'data', 'generated');
+
+function writeOutput(fileName: string, value: unknown): void {
+  writeFileSync(path.join(outputDir, fileName), formatJson(value));
+  console.log(`  wrote src/data/generated/${fileName}`);
+}
 
 function main(): void {
   const rathenaDir = resolveRathenaDir(process.argv.slice(2), process.env, repoRoot);
@@ -24,6 +33,13 @@ function main(): void {
   for (const file of Object.values(overrides)) {
     console.log(`  ${file.name}: ${file.body.length} patched, ${file.remove.length} removed`);
   }
+
+  const jobs = generateJobs(rathenaDir, overrides.jobs);
+  console.log(`Jobs: ${jobs.data.jobs.length}`);
+
+  mkdirSync(outputDir, { recursive: true });
+  writeOutput('jobs.json', jobs.data);
+  writeOutput('names.en.json', { jobs: jobs.names });
 }
 
 try {

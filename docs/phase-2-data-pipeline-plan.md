@@ -200,7 +200,7 @@ ccRO.
    files (`meta.yml` with a label, empty `jobs.yml`, `items.yml`,
    `monsters.yml`), format documented in `data-overrides/README.md`.
    Check: one unit test per rule; verification passes.
-3. [ ] Jobs: `jobs.ts` (supported job table with ids checked against
+3. [x] Jobs: `jobs.ts` (supported job table with ids checked against
    rAthena's `e_job`, name spelling map, bonus stats, base ASPD, max levels,
    stat point table) writing `jobs.json` and the job part of
    `names.en.json`. Check: job spot checks pass; verification passes.
@@ -227,4 +227,7 @@ ccRO.
   `"node"` to `types`, plus `erasableSyntaxOnly`) · check/lint/test (12)/build
   pass, `pnpm data` prints commit 7f080871 · 9f42941
 - 2026-11-13 · 2 override layer (jobs: patch only, no add/remove, since the
-  job list is fixed) · check/lint/test (23)/build pass · next commit
+  job list is fixed) · check/lint/test (23)/build pass · 801b4b1
+- 2026-11-13 · 3 jobs (ids verified against `enum e_job` on every run; added
+  `json.ts` for compact one-line rows; `src/data/generated/` in
+  `.prettierignore` already) · check/lint/test (37)/build pass · next commit
