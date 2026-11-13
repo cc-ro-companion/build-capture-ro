@@ -205,7 +205,7 @@ and hand the numbers over for fixtures.
    Check: lint passes.
 2. [x] Engine stats: `config.ts`, `stats.ts` (total stats, point cost,
    budget). Check: unit tests; verification passes.
-3. [ ] Engine status window: `status.ts` (ATK, HIT, FLEE, CRIT, ASPD incl.
+3. [x] Engine status window: `status.ts` (ATK, HIT, FLEE, CRIT, ASPD incl.
    cap). Check: unit tests; verification passes.
 4. [ ] Engine auto attack: `autoAttack.ts` (normal and crit damage with
    exact average, hit and crit chance, DPS). Check: unit tests incl. brute
@@ -235,3 +235,4 @@ and hand the numbers over for fixtures.
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · 1 housekeeping: phase 2 ticked and logged in the master plan, base-file open item settled (verified: the five `db/` base files only hold imports), share code question marked decided · lint passes · 43c3609
+- 2026-11-13 · 2 engine stats: config, total stats, point cost/budget (99 → 628 points, level 1 budget 48) · check/lint/test (87)/build pass · f22b12d
