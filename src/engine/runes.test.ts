@@ -181,6 +181,18 @@ describe('rune sets', () => {
     ).toBe(flee([]));
   });
 
+  it('changes auto attack (a set bAddRace)', () => {
+    const raceOwner = testRune({
+      id: 39105,
+      sets: [{ requires: [39331], effects: [bonus('bAddRace', RC_PLANT, 15)] }],
+    });
+    const runes = (list: (typeof soldier)[]) =>
+      gearCharacter([{ slot: 'rightHand', item: sword, refine: 0, runes: list }]).bonuses;
+    const poring = targetKeys(testMonster());
+    expect(attackerCardFix(runes([raceOwner, soldier]), poring, false)).toBe(1150);
+    expect(attackerCardFix(runes([raceOwner]), poring, false)).toBe(1000);
+  });
+
   it('applies once even with the owner rune twice', () => {
     const equipment: EquippedItem[] = [
       { slot: 'rightHand', item: sword, refine: 0, runes: [owner, owner, soldier] },
