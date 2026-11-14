@@ -23,7 +23,7 @@
 //   varint    label length, then the label as UTF-8
 import type { EngineConfig } from '../engine/config';
 import { DUMMY_ELEMENTS, DUMMY_NUMBERS, DUMMY_RACES, DUMMY_SIZES } from './dummy';
-import { SLOTS } from './equipment';
+import { MAX_RUNES, SLOTS } from './equipment';
 import { BUILD_VERSION, normalizeBuild, type Build, type Target } from './model';
 import type { GameData } from './resolve';
 
@@ -51,8 +51,6 @@ const TAG_RUNES = 15;
 const TAG_INVENTORY = 16;
 /** Rune ids are client ids 39xxx; storing the offset saves a byte per rune. */
 const RUNE_ID_BASE = 39000;
-/** rAthena MAX_SLOTS; a longer rune list cannot come from a valid build. */
-const MAX_RUNES_PER_ITEM = 4;
 type Field = keyof typeof FIELD_TAGS;
 const FIELD_BY_TAG = new Map(
   Object.entries(FIELD_TAGS).map(([field, tag]) => [tag as number, field as Field]),
@@ -278,7 +276,7 @@ function readCode(code: string): DecodedCode | { error: string } {
     const inventory: { item: number; refine: number; runes?: number[] }[] = [];
     const readRunes = (): number[] => {
       const count = reader.varint();
-      if (count > MAX_RUNES_PER_ITEM) throw new CorruptCode('holds too many runes for one item');
+      if (count > MAX_RUNES) throw new CorruptCode('holds too many runes for one item');
       return Array.from({ length: count }, () => reader.varint() + RUNE_ID_BASE);
     };
     let weaponSeen = false;

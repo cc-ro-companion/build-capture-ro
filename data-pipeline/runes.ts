@@ -7,8 +7,8 @@ import { parseScript } from './script/parser.ts';
 
 /** Marks client text the draft tool could not map; see data-pipeline/tools/draft-runes.ts. */
 export const TODO_MARKER = '# TODO:';
-const RUNE_ID_MIN = 39000;
-const RUNE_ID_MAX = 39999;
+export const RUNE_ID_MIN = 39000;
+export const RUNE_ID_MAX = 39999;
 const LOCATIONS: readonly RuneLocation[] = [
   'Weapon',
   'Shield',
@@ -57,7 +57,9 @@ function list(value: unknown, where: string): unknown[] {
 function convertSet(value: unknown, reviewed: boolean, where: string): RuneSet {
   if (!isMap(value)) throw new OverrideError(`${where}: must be a map.`);
   const requires = list(value.Requires, `${where}: Requires`);
-  if (requires.length === 0 || !requires.every((id) => Number.isInteger(id))) {
+  // A draft whose set runes the tool could not name has none yet.
+  const empty = requires.length === 0 && reviewed;
+  if (empty || !requires.every((id) => Number.isInteger(id))) {
     throw new OverrideError(`${where}: Requires must list rune ids.`);
   }
   return { requires: requires as number[], effects: runeScript(value.Script, reviewed, where) };

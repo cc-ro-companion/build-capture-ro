@@ -128,7 +128,7 @@ results become fixtures that `pnpm test` then guards.
    and 16. Check: tests including a recorded 4a code.
 7. [x] **UI.** Rune slots and rune search, draft badge, set/combo/album
    notes, inventory panel. Check: component tests, `pnpm build`.
-8. [ ] **Review.** Run `/code-review` on the phase diff, fix findings, run
+8. [x] **Review.** Run `/code-review` on the phase diff, fix findings, run
    the full verification.
 9. [ ] **Validation session.** The maintainer records the characters listed
    under Decisions; fixtures added; deviations fixed or recorded as

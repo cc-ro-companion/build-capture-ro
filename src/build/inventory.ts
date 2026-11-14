@@ -1,9 +1,16 @@
 // The build's inventory: configured items (refine, runes) kept for quick
 // swapping. Storing and equipping copy the item, so the inventory and the
 // equipped gear never share an entry.
-import { fitsSlot, SLOTS, withEquipped, type EquippedRef, type Slot } from './equipment';
+import {
+  fitsSlot,
+  jobCanUseSlot,
+  SLOTS,
+  withEquipped,
+  type EquippedRef,
+  type Slot,
+} from './equipment';
 import { MAX_INVENTORY, type Build } from './model';
-import type { GameData } from './resolve';
+import { jobCanEquip, type GameData } from './resolve';
 
 export type InventoryResult = { build: Build } | { error: string };
 
@@ -21,10 +28,14 @@ export function storeEquipped(build: Build, slot: Slot): InventoryResult {
   return { build: { ...build, inventory: [...build.inventory, copyRef(entry)] } };
 }
 
-/** Slots the inventory item can be equipped into, in slot order. */
-export function slotsFor(ref: EquippedRef, data: GameData): Slot[] {
+/**
+ * Slots the job can equip the inventory item into, in slot order: the slots
+ * the equipment picker would offer it for (none if the job cannot wear it).
+ */
+export function slotsFor(ref: EquippedRef, jobId: number, data: GameData): Slot[] {
   const item = data.items.get(ref.item);
-  return item ? SLOTS.filter((slot) => fitsSlot(item, slot)) : [];
+  if (!item || !jobCanEquip(item, jobId)) return [];
+  return SLOTS.filter((slot) => fitsSlot(item, slot) && jobCanUseSlot(item, slot, jobId));
 }
 
 /**
@@ -39,7 +50,8 @@ export function equipFromInventory(
 ): InventoryResult {
   const ref = build.inventory[index];
   if (!ref) return { error: 'No such inventory item.' };
-  if (!slotsFor(ref, data).includes(slot)) return { error: 'The item does not go there.' };
+  if (!slotsFor(ref, build.job, data).includes(slot))
+    return { error: 'The item does not go there.' };
   return {
     build: { ...build, equipment: withEquipped(build.equipment, slot, copyRef(ref), data) },
   };

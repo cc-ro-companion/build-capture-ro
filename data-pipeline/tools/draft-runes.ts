@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { RuneLocation } from '../../src/data/types.ts';
 import { loadDb, PRE_RE_DIR, resolveRathenaDir } from '../rathena.ts';
-import { TODO_MARKER } from '../runes.ts';
+import { RUNE_ID_MAX, RUNE_ID_MIN, TODO_MARKER } from '../runes.ts';
 
 export interface ClientLine {
   text: string;
@@ -41,7 +41,7 @@ export interface DraftAlbum {
 export interface DraftRune {
   id: number;
   name: string;
-  location: RuneLocation | undefined;
+  location: RuneLocation;
   script: string[];
   sets: DraftSet[];
   album: DraftAlbum[];
@@ -56,8 +56,8 @@ export interface DraftContext {
 }
 
 export const TODO_PREFIX = `${TODO_MARKER} `;
-const RUNE_ID_MIN = 39000;
-const RUNE_ID_MAX = 39999;
+/** A statement kept for the reviewer only; TODO lines are never applied. */
+const asTodo = (line: string) => (line.startsWith(TODO_PREFIX) ? line : `${TODO_PREFIX}${line}`);
 const GREY = '^808080';
 
 const LOCATIONS: Record<string, RuneLocation> = {
@@ -662,7 +662,10 @@ export function draftRune(rune: ClientRune, context: DraftContext): DraftRune {
         else requires.push(id);
       }
       const todos = unknown.map((name) => `${TODO_PREFIX}unknown rune "${name} Rune" in this set`);
-      sets.push({ requires, names: header.names, script: [...todos, ...mapped] });
+      // With a rune missing from Requires the set would apply too early, so
+      // its effects wait for review as well.
+      const effects = unknown.length > 0 ? mapped.map(asTodo) : mapped;
+      sets.push({ requires, names: header.names, script: [...todos, ...effects] });
     } else if (header.kind === 'album') {
       album.push({
         requires: header.requires,
@@ -671,13 +674,13 @@ export function draftRune(rune: ClientRune, context: DraftContext): DraftRune {
         script: mapped,
       });
     } else {
-      script.push(
-        `${TODO_PREFIX}condition [${header.text}]`,
-        ...mapped.map((statement) => `  ${statement}`),
-      );
+      // Without its condition a statement would apply to everyone, so the
+      // whole section stays TODO until the reviewer writes the condition.
+      script.push(`${TODO_PREFIX}condition [${header.text}]`, ...mapped.map(asTodo));
     }
   }
-  if (location === undefined) script.unshift(`${TODO_PREFIX}no "Compound on" location`);
+  // runes.yml needs a Location even for drafts; every client rune has one.
+  if (location === undefined) throw new Error(`Rune ${rune.id}: no "Compound on" line.`);
   return { id: rune.id, name: rune.name, location, script, sets, album, source };
 }
 
@@ -720,7 +723,7 @@ export function renderRunesYaml(drafts: readonly DraftRune[], sourceLabel: strin
     for (const line of draft.source) out.push(`  #   ${line.grey ? '(grey) ' : ''}${line.text}`);
     out.push(`  - Id: ${draft.id}`);
     out.push(`    Name: ${quote(draft.name)}`);
-    out.push(`    Location: ${draft.location ?? "''"}`);
+    out.push(`    Location: ${draft.location}`);
     out.push('    Reviewed: false');
     out.push(...renderScript(draft.script, '    '));
     if (draft.sets.length > 0) {

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
+import { parseRunes } from '../runes.ts';
 import { parseScript } from '../script/parser.ts';
 import {
   buildContext,
@@ -207,7 +208,7 @@ describe('draftRune', () => {
         names: ['Assaulter', 'Seal'],
         script: [
           '# TODO: unknown rune "Seal Rune" in this set',
-          'bonus3 bAutoSpell,"BS_WEAPONPERFECT",1,3;',
+          '# TODO: bonus3 bAutoSpell,"BS_WEAPONPERFECT",1,3;',
         ],
       },
     ]);
@@ -254,6 +255,44 @@ describe('renderRunesYaml', () => {
   });
 
   it('counts TODO lines across scripts, sets and album', () => {
-    expect(countTodos(drafts)).toBe(2);
+    expect(countTodos(drafts)).toBe(3);
+  });
+});
+
+describe('draft safety', () => {
+  const rune = (lines: string[]) => ({
+    id: 39999,
+    name: 'Test Rune',
+    lines: [...lines, 'Compound on: Weapon'].map((text) => ({ text, grey: false })),
+  });
+
+  it('keeps every line under an unknown condition as TODO, so none applies', () => {
+    const draft = draftRune(rune(['[When worn by a Rebirth class]', 'ATK + 20']), context);
+    expect(draft.script).toEqual([
+      '# TODO: condition [When worn by a Rebirth class]',
+      '# TODO: bonus bBaseAtk,20;',
+    ]);
+  });
+
+  it('writes a set with no known rune as an empty Requires the pipeline accepts in a draft', () => {
+    const draft = draftRune(rune(['[+ Foo & Bar Rune]', 'STR + 1']), context);
+    expect(draft.sets).toEqual([
+      {
+        requires: [],
+        names: ['Foo', 'Bar'],
+        script: [
+          '# TODO: unknown rune "Foo Rune" in this set',
+          '# TODO: unknown rune "Bar Rune" in this set',
+          '# TODO: bonus bStr,1;',
+        ],
+      },
+    ]);
+    const parsed = parseRunes(renderRunesYaml([draft], 'x.lua'), 'runes.yml');
+    expect(parsed.data[0]!.sets).toEqual([{ requires: [], effects: [] }]);
+  });
+
+  it('stops on a rune without a "Compound on" line', () => {
+    const noLocation = { id: 39998, name: 'Odd Rune', lines: [{ text: 'STR + 1', grey: false }] };
+    expect(() => draftRune(noLocation, context)).toThrow('Rune 39998: no "Compound on" line.');
   });
 });

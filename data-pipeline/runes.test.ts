@@ -110,3 +110,25 @@ describe('parseRunes', () => {
     expect(() => parseRunes(TWO_RUNES.replace(from, to), 'runes.yml')).toThrow(message);
   });
 });
+
+describe('parseRunes: empty set Requires', () => {
+  const withEmptySet = (reviewed: boolean) =>
+    yaml(
+      'Runes:',
+      '  - Id: 39200',
+      '    Name: Draft Rune',
+      '    Location: Armor',
+      `    Reviewed: ${reviewed}`,
+      '    Sets:',
+      '      - Requires: []',
+      '        Script: |',
+      '          # TODO: STR + 1',
+    );
+
+  it('accepts it in a draft and rejects it once reviewed', () => {
+    expect(parseRunes(withEmptySet(false), 'r.yml').data[0]!.sets).toEqual([
+      { requires: [], effects: [] },
+    ]);
+    expect(() => parseRunes(withEmptySet(true), 'r.yml')).toThrow('Requires must list rune ids.');
+  });
+});

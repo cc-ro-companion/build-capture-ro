@@ -29,7 +29,7 @@
             {/if}
           </span>
           <span class="actions">
-            {#each slotsFor(ref, planner.data) as slot (slot)}
+            {#each slotsFor(ref, planner.build.job, planner.data) as slot (slot)}
               <button
                 type="button"
                 aria-label="Equip {name} ({index + 1}) in {SLOT_LABELS[slot]}"

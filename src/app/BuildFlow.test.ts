@@ -520,6 +520,16 @@ describe('runes, combos and inventory', () => {
     expect(screen.getByTestId('runes-rightHand').textContent).not.toContain('Andre Larva');
   });
 
+  it('keeps runes and refine when the equipped item is picked again', async () => {
+    openWith({
+      ...assassin,
+      equipment: { rightHand: { item: 1201, refine: 7, runes: [39101] } },
+    });
+    await pick('Right hand results', 'Search right hand', '1201', /Knife/);
+    expect(screen.getByTestId('runes-rightHand').textContent).toContain('Anacondaq Rune');
+    expect(screen.getByLabelText<HTMLInputElement>('Right hand refine').value).toBe('7');
+  });
+
   it('stops offering runes once the item’s slots are full', async () => {
     openWith({
       ...assassin,

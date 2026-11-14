@@ -154,7 +154,7 @@ describe('inventory', () => {
 
   it('equips into any slot the item fits, replacing what it overlaps', () => {
     const build: Build = { ...assassin, inventory: [{ item: CUTTER, refine: 3 }] };
-    expect(slotsFor(build.inventory[0]!, gameData)).toEqual(['rightHand', 'leftHand']);
+    expect(slotsFor(build.inventory[0]!, build.job, gameData)).toEqual(['rightHand', 'leftHand']);
     const left = equipFromInventory(build, 0, 'leftHand', gameData);
     if ('error' in left) throw new Error(left.error);
     expect(left.build.equipment.leftHand).toEqual({ item: CUTTER, refine: 3 });
@@ -217,5 +217,22 @@ describe('inventory', () => {
     const { build, warnings } = normalize(phase4a);
     expect(warnings).toEqual([]);
     expect(build.inventory).toEqual([]);
+  });
+});
+
+describe('inventory slots follow the job', () => {
+  it('offers a dagger the left hand for an Assassin only', () => {
+    const dagger = { item: CUTTER, refine: 0 };
+    expect(slotsFor(dagger, 12, gameData)).toEqual(['rightHand', 'leftHand']);
+    expect(slotsFor(dagger, 7, gameData)).toEqual(['rightHand']);
+    const knight: Build = { ...assassin, job: 7, inventory: [dagger] };
+    expect(equipFromInventory(knight, 0, 'leftHand', gameData)).toEqual({
+      error: 'The item does not go there.',
+    });
+  });
+
+  it('offers no slot for an item the job cannot wear', () => {
+    // Jur (1250) is a katar, for Assassins only.
+    expect(slotsFor({ item: 1250, refine: 0 }, 7, gameData)).toEqual([]);
   });
 });

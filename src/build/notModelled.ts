@@ -3,13 +3,7 @@
 // compute yet. Shown next to the item and counted in the results, so no number
 // looks complete when it is not. Active rune sets and combos are listed apart,
 // with their own notes, and card album effects as waiting for phase 8.
-import {
-  autoBonusLabel,
-  notModelledLabels,
-  skillLabel,
-  type ScriptOrigin,
-  type Sourced,
-} from '../engine/bonuses';
+import { autoBonusLabel, notModelledLabels, skillLabel, type Sourced } from '../engine/bonuses';
 import { activeCombos, type Slot } from '../engine/gear';
 import { itemName, runeName, type GameData, type ResolvedBuild } from './resolve';
 
@@ -81,8 +75,6 @@ export interface GroupNote {
   labels: string[];
 }
 
-const sameOrigin = (a: ScriptOrigin, b: ScriptOrigin) => JSON.stringify(a) === JSON.stringify(b);
-
 /**
  * The rune sets and combos that apply, in the order their scripts ran, and
  * combos that apply but whose script could not be read (they have no run).
@@ -97,7 +89,8 @@ export function groupNotes(resolved: ResolvedBuild, data: GameData): GroupNote[]
       origin.kind === 'runeSet'
         ? `${runeName(data, origin.runeId)} with ${origin.requires.map((id) => runeName(data, id)).join(', ')}`
         : origin.items.map((id) => itemName(data, id)).join(' + ');
-    const labels = labelsOf(bonuses, (record) => sameOrigin(record.origin, origin));
+    // The records of one script run share its origin object (buildCharacter).
+    const labels = labelsOf(bonuses, (record) => record.origin === origin);
     notes.push({ kind: origin.kind, name, labels });
   }
   const unread = data.combos.filter((combo) => combo.effects === null);

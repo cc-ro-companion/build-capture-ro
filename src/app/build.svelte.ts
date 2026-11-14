@@ -108,6 +108,7 @@ export class BuildState {
 
   private apply(restored: Exclude<RestoreResult, { error: string }>): void {
     this.build = restored.build;
+    this.inventoryMessage = null;
     this.warnings = restored.warnings;
     this.dataHint = restored.dataHint;
   }
@@ -140,6 +141,8 @@ export class BuildState {
     if (itemId !== null) {
       const item = this.data.items.get(itemId);
       if (!item || !fitsSlot(item, slot)) return;
+      // Picking the item already there keeps its refine and runes.
+      if (this.build.equipment[slot]?.item === itemId) return;
     }
     const entry = itemId === null ? null : { item: itemId, refine: 0 };
     this.update({
@@ -252,5 +255,6 @@ export class BuildState {
     if ('error' in result) return;
     this.build = result.build;
     this.warnings = [];
+    this.inventoryMessage = null;
   }
 }
