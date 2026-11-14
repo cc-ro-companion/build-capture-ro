@@ -6,6 +6,10 @@ vanilla card scripts (`db/pre-re/item_db_etc.yml`) and combos
 (`db/pre-re/item_combos.yml`). Item ids were checked against the client's
 `itemInfo_orig.lua`. Nothing was looked up on ratemyserver.
 
+**Status (2026-11-14):** S1, S2 and all ✓ rows are applied in `runes.yml`;
+47 TODO lines remain (the ? rows and the comment-only ones). The last step
+waits until the ? rows are decided. S1 covers 11 runes, not 12.
+
 Markers: **✓** = the client text maps cleanly (usually to the vanilla card
 script). **?** = needs your decision (there is a question). **–** = no rAthena
 bonus exists; keep it as a comment.
@@ -190,6 +194,44 @@ TODO-free before `Reviewed: true`.
 | 39352 Enchanted Peach Tree | Heal +10% when self-healing | nearest is `bonus2 bSkillHeal,"AL_HEAL",10;`, which also counts healing others. Comment or approximation? ? |
 | 39267 Argiope | Poison React SP −30%, triggers on misses | `bonus2 bSkillUseSPrate,"AS_POISONREACT",30;` plus a comment for "on misses" |
 | 39140 Familiar, 39175 Metaller, 39189 Plankton, 39196 Savage Babe, 39204 Snake, 39325 Sandman, 39437 Gazeti | status duration and resistance tweaks, sleep, Stone Curse area, "multiple Gazeti runes stack" | ccRO mechanics with no rAthena bonus: comment (D1). Gazeti: runes already stack in the engine, so a comment is enough |
+
+## Sidewinder: how rAthena handles double attack
+
+Source: rAthena `src/map` (pre-renewal), read locally.
+
+- **The roll** (`battle.cpp:4311`, `battle_calc_multi_attack`, normal attacks
+  only): chance `max(5 × TF_DOUBLE level, bonus.double_rate)`. On a hit the
+  attack lands 2 hits (`div_ = 2`), gets HIT + TF_DOUBLE level, and cannot
+  crit.
+- **Which weapons:** a *learned* TF_DOUBLE needs a dagger. A *granted* one
+  (`skill "TF_DOUBLE",1;` from a card or item, flag above PERMANENT) works with
+  any weapon except bare hands. That is why a vanilla Sidewinder Card in a
+  katar double attacks. `bDoubleRate` / `bDoubleAddRate` also work with any
+  weapon.
+- **Learned plus granted:** `skill` takes the max level (`pc.cpp:5466`), it
+  does not add. A side effect: a Thief with Double Attack Lv 10 who also
+  wears the card gets 50% on *any* weapon, katar included, because the skill
+  now counts as granted.
+- **Katar off-hand hit** (`battle.cpp:5034`): every katar normal attack adds
+  a second hit of damage × (1 + 2 × TF_DOUBLE level) / 100. A granted Lv 1
+  raises it from 1% to 3%. It is independent of the double attack roll, so
+  both can happen on the same attack.
+- **bDoubleRate** keeps only the highest value; **bDoubleAddRate** adds to it.
+  No vanilla item uses either; every double attack item uses
+  `skill "TF_DOUBLE",n`.
+
+**Recommendation for 39200 Sidewinder Rune:**
+- Base: `skill "TF_DOUBLE",1;`, as the vanilla card. It works on a katar,
+  as you see in game, and it also raises the katar off-hand hit to 3%.
+  `bDoubleRate,5` would give the same 5% but leave the off-hand hit at 1%.
+- Album "+25% if on a dagger": `bonus bDoubleAddRate,25;` (adds, so 30% in
+  total) behind a dagger check. rAthena would write the check as
+  `getiteminfo(getequipid(EQI_HAND_R), ITEMINFO_VIEW) == W_DAGGER`, which is
+  outside the planner's script subset; phase 8 needs a way to say it.
+- Engine follow-up (when skills are modelled): the planner does not compute
+  double attack yet, and it computes the katar off-hand hit with
+  TF_DOUBLE Lv 0 (`autoAttack.ts:437`). It should read the granted level, and
+  expected damage gets a factor of about 1 + chance for normal attacks.
 
 ## Suggested order
 

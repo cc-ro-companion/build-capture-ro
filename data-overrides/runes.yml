@@ -78,9 +78,6 @@ Runes:
     Script: |
       bonus bCritAtkRate,10;
       bonus2 bCriticalAddRace,RC_DemiHuman,7;
-      if (BaseClass == Job_Swordman) {
-        # TODO: Red, Yellow and White Potions restore 50% more HP
-      }
     Sets:
       - Requires: [39331, 39531, 39394, 39441] # Solider, Permeter, Freezer, Heater
         Script: |
@@ -88,7 +85,12 @@ Runes:
           bonus bHPrecovRate,50;
           bonus bMaxHPrate,20;
           bonus bStr,10;
-          # TODO: Add a 5% chance of gaining 'Red Potion' item each time a monster is killed
+          bonus2 bAddMonsterDropItem,501,500;
+          if (BaseClass == Job_Swordman) {
+            bonus2 bAddItemHealRate,501,50;
+            bonus2 bAddItemHealRate,503,50;
+            bonus2 bAddItemHealRate,504,50;
+          }
     Album:
       - Requires: ['Mobster Card']
         RightHandOnly: true
@@ -255,7 +257,7 @@ Runes:
     Location: Weapon
     Reviewed: false
     Script: |
-      # TODO: Increase Critical Rate + 15 damage with Long Range Physical attack
+      bonus bCriticalLong,15;
     Album:
       - Requires: ['Mobster Card']
         RightHandOnly: true
@@ -591,7 +593,8 @@ Runes:
     Album:
       - Requires: ['Laurell Weinder Card']
         Script: |
-          # TODO: Damage + 15% with Frost Diver, and + 22% with Frost Nova
+          bonus2 bSkillAtk,"MG_FROSTDIVER",15;
+          bonus2 bSkillAtk,"WZ_FROSTNOVA",22;
       - Requires: ['Beholder Card']
         RightHandOnly: true
         Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
@@ -795,7 +798,10 @@ Runes:
       - Requires: ['Red Ferus Card']
         RightHandOnly: true
         Script: |
-          # TODO: Damage + 15% with Fire Ball, and + 10% with Fire Wall, Fire Pillar and Sightrasher
+          bonus2 bSkillAtk,"MG_FIREBALL",15;
+          bonus2 bSkillAtk,"MG_FIREWALL",10;
+          bonus2 bSkillAtk,"WZ_FIREPILLAR",10;
+          bonus2 bSkillAtk,"WZ_SIGHTRASHER",10;
       - Requires: ['Beholder Card']
         RightHandOnly: true
         Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
@@ -977,9 +983,6 @@ Runes:
     Script: |
       bonus bCritAtkRate,20;
       bonus bSPDrainValue,-1;
-      if (BaseClass == Job_Thief) {
-        bonus bNoGemStone;
-      }
     Sets:
       - Requires: [39255, 39415, 39475, 39494] # Wanderer, Wild Rose, Shinobi, Zhu Po Long
         Script: |
@@ -989,6 +992,9 @@ Runes:
           bonus bAspdRate,5;
           bonus bSpeedRate,5;
           bonus bSPDrainValue,1;
+          if (BaseClass == Job_Thief) {
+            bonus bNoGemStone;
+          }
     Album:
       - Requires: ['Wormtail Card']
         Script: |
@@ -1063,7 +1069,8 @@ Runes:
     Location: Garment
     Reviewed: false
     Script: |
-      # TODO: AGI + 3, Critical Rate + 1%
+      bonus bAgi,3;
+      bonus bCritical,1;
 
   # 39222 Choco Rune
   #   Perfect Dodge + 5
@@ -1145,7 +1152,8 @@ Runes:
     Reviewed: false
     Script: |
       bonus bLuk,-5;
-      # TODO: Increase LUK and Critical Rate + 1% per Refine Level of the equipment this card is compounded on
+      bonus bLuk,getrefine();
+      bonus bCritical,getrefine();
 
   # 39232 Harpy Rune
   #   Add a 15% resistance against Neutral Property attacks.
@@ -1398,8 +1406,7 @@ Runes:
     Location: Garment
     Reviewed: false
     Script: |
-      bonus3 bAutoSpellWhenHit,"WZ_QUAGMIRE",1,50;
-      # TODO: If the user has mastered the skill at Level 5, it will cast Level 5 Quagmire
+      bonus4 bAutoSpellWhenHit,"WZ_QUAGMIRE",1+4*(getskilllv("WZ_QUAGMIRE") == 5),50,0;
 
   # 39249 Raydric Rune
   #   Add a 20% resistance against Neutral Property attacks.
@@ -1514,8 +1521,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      bonus3 bAutoSpellWhenHit,"AC_CONCENTRATION",1,30;
-      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Attention Concentrate
+      bonus3 bAutoSpellWhenHit,"AC_CONCENTRATION",1+9*(getskilllv("AC_CONCENTRATION") == 10),30;
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -1544,9 +1550,6 @@ Runes:
     Script: |
       bonus bBaseAtk,10;
       bonus bCastrate,20;
-      if (BaseJob == Job_Crusader) {
-        bonus bDefEle,Ele_Holy;
-      }
     Sets:
       - Requires: [39531, 39394, 39441] # Permeter, Freezer, Heater
         Script: |
@@ -1555,6 +1558,9 @@ Runes:
           bonus bDef,2;
           bonus bSPrecovRate,10;
           bonus bCastrate,-10;
+          if (BaseJob == Job_Crusader) {
+            bonus bDefEle,Ele_Holy;
+          }
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -1623,11 +1629,11 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Add a 6% chance of auto casting 'Silence' on an enemy when the user receives Physical Damage
+      bonus2 bAddEffWhenHit,Eff_Silence,600;
     Album:
       - Requires: ['Brilight Card']
         Script: |
-          # TODO: Chance increased to 12%
+          bonus2 bAddEffWhenHit,Eff_Silence,600;
 
   # 39273 Byorgue Rune
   #   (grey) [+Giant Hornet Card]
@@ -1660,8 +1666,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      bonus3 bAutoSpellWhenHit,"CR_AUTOGUARD",3,30;
-      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Auto Guard
+      bonus3 bAutoSpellWhenHit,"CR_AUTOGUARD",3+7*(getskilllv("CR_AUTOGUARD") == 10),30;
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -1705,7 +1710,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Add a 6% chance of auto casting 'Stone Curse' on an enemy when the user receives Physical Damage
+      bonus2 bAddEffWhenHit,Eff_Stone,600;
     Album:
       - Requires: ['Dark Frame Card']
         Script: |
@@ -1721,11 +1726,11 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Add a 6% chance of auto casting 'Sleep' on an enemy when the user receives Physical Damage
+      bonus2 bAddEffWhenHit,Eff_Sleep,600;
     Album:
       - Requires: ['Demon Pungus Card']
         Script: |
-          # TODO: Chance increased to 12%
+          bonus2 bAddEffWhenHit,Eff_Sleep,600;
 
   # 39284 Dokebi Rune
   #   Enchant Armors with the Wind Property.
@@ -1755,7 +1760,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Reduces natural SP recovery by 100%
+      bonus bSPrecovRate,-100;
       bonus bSPGainValue,10;
       # TODO: Drain 100 SP as the armor is unequipped
 
@@ -1802,21 +1807,19 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      bonus3 bAutoSpellWhenHit,"AL_BLESSING",2,30;
-      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Blessing
-      if (BaseClass == Job_Acolyte) {
-        bonus2 bSubRace,RC_Demon,30;
-        bonus2 bSubRace,RC_Undead,30;
-        bonus2 bExpAddRace,RC_Demon,5;
-        bonus2 bExpAddRace,RC_Undead,5;
-      }
+      bonus3 bAutoSpellWhenHit,"AL_BLESSING",2+8*(getskilllv("AL_BLESSING") == 10),30;
     Sets:
-      - Requires: [39533, 39352, 39429] # Rideword, Enchanted Peach Tree, Cookie, Seal
+      - Requires: [39533, 39352, 39429, 39143] # Rideword, Enchanted Peach Tree, Cookie, Seal
         Script: |
-          # TODO: unknown rune "Seal Rune" in this set
           bonus bVit,10;
           bonus bCastrate,-10;
           bonus bUseSPrate,-10;
+          if (BaseClass == Job_Acolyte) {
+            bonus2 bSubRace,RC_Demon,30;
+            bonus2 bSubRace,RC_Undead,30;
+            bonus2 bExpAddRace,RC_Demon,5;
+            bonus2 bExpAddRace,RC_Undead,5;
+          }
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -1836,7 +1839,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Add a 6% chance of auto casting 'Poison' on an enemy when the user receives Physical Damage
+      bonus2 bAddEffWhenHit,Eff_Poison,600;
     Album:
       - Requires: ['Giant Spider Card']
         Script: |
@@ -1852,7 +1855,10 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: If the card is compounded on an armor that is refined to +5 or below, DEF +2 and MDEF +5
+      if (getrefine() <= 5) {
+        bonus bDef,2;
+        bonus bMdef,5;
+      }
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -1868,7 +1874,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Add a 6% chance of auto casting 'Blind' on an enemy when the user receives Physical Damage
+      bonus2 bAddEffWhenHit,Eff_Blind,600;
     Album:
       - Requires: ['Kraben Card']
         Script: |
@@ -1895,17 +1901,19 @@ Runes:
     Reviewed: false
     Script: |
       bonus3 bAutoSpellWhenHit,"AL_HEAL",3,50;
-      if (BaseClass == Job_Mage) {
-        bonus bMatkRate,3;
-        bonus bCastrate,-15;
-      }
     Sets:
       - Requires: [39369, 39408, 39505, 39232, 39426] # Parasite, Miyabi Doll, Evil Nymph, Harpy, Bloody Butterfly
         Script: |
           bonus bDef,5;
           bonus bMdef,5;
           bonus bMaxHP,500;
-          # TODO: Inflict 10% more damage with Fire, Cold and Lightning Bolt skill
+          bonus2 bSkillAtk,"MG_FIREBOLT",10;
+          bonus2 bSkillAtk,"MG_COLDBOLT",10;
+          bonus2 bSkillAtk,"MG_LIGHTNINGBOLT",10;
+          if (BaseClass == Job_Mage) {
+            bonus bMatkRate,3;
+            bonus bCastrate,-15;
+          }
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -1925,11 +1933,11 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Add a 6% chance of auto casting Stun on an enemy when the user receives Physical Damage
+      bonus2 bAddEffWhenHit,Eff_Stun,600;
     Album:
       - Requires: ['Majoruros Card']
         Script: |
-          # TODO: Chance increased to 12%
+          bonus2 bAddEffWhenHit,Eff_Stun,600;
 
   # 39305 Marc Rune
   #   Gain immunity to the Freeze status.
@@ -2058,7 +2066,7 @@ Runes:
     Location: Armor
     Reviewed: false
     Script: |
-      # TODO: Reduces natural HP recovery by 100%
+      bonus bHPrecovRate,-100;
       bonus bHPGainValue,100;
 
   # 39331 Solider Rune
@@ -2169,19 +2177,18 @@ Runes:
     Script: |
       bonus bBaseAtk,5;
       bonus bInt,1;
-      if (BaseJob == Job_Monk) {
-        bonus bUseSPrate,-10;
-        bonus bNoCastCancel;
-      }
     Sets:
-      - Requires: [39533, 39429] # Rideword, Cookie, Seal
+      - Requires: [39533, 39429, 39143] # Rideword, Cookie, Seal
         Script: |
-          # TODO: unknown rune "Seal Rune" in this set
           bonus bBaseAtk,25;
           bonus bStr,3;
           bonus bMaxSP,80;
           bonus3 bAutoSpell,"AL_CRUCIS",5,10;
           bonus2 bSkillAtk,"MO_EXTREMITYFIST",10;
+          if (BaseJob == Job_Monk) {
+            bonus bUseSPrate,-10;
+            bonus bNoCastCancel;
+          }
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -2225,17 +2232,18 @@ Runes:
     Script: |
       bonus bMaxHP,500;
       bonus bHPrecovRate,10;
-      if (BaseJob == Job_Sage) {
-        bonus bMagicDamageReturn,20;
-        # TODO: Add a 1% chance of gaining 'Red Gemstone' or 'Yellow Gemstone' item each time a monster is killed
-        bonus bCastrate,-20;
-      }
     Sets:
       - Requires: [39408, 39505, 39232, 39426] # Miyabi Doll, Evil Nymph, Harpy, Bloody Butterfly
         Script: |
           bonus bInt,3;
           bonus2 bSkillAtk,"WZ_HEAVENDRIVE",10;
           bonus2 bSkillAtk,"MG_THUNDERSTORM",10;
+          if (BaseJob == Job_Sage) {
+            bonus bMagicDamageReturn,20;
+            bonus2 bAddMonsterDropItem,716,100;
+            bonus2 bAddMonsterDropItem,715,100;
+            bonus bCastrate,-20;
+          }
     Album:
       - Requires: ['Shell Fish Card']
         Script: |
@@ -2271,7 +2279,7 @@ Runes:
     Sets:
       - Requires: [39178] # Mummy
         Script: |
-          # TODO: Perfect Hit (which never miss its target) + 20
+          bonus bPerfectHitAddRate,20;
 
   # 39346 Andre Egg Rune
   #   Maximum HP + 5%
@@ -2332,8 +2340,7 @@ Runes:
     Location: Shield
     Reviewed: false
     Script: |
-      bonus3 bAutoSpell,"AL_HEAL",1,20;
-      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Heal
+      bonus3 bAutoSpell,"AL_HEAL",1+9*(getskilllv("AL_HEAL") == 10),20;
     Album:
       - Requires: ['Enchanted Peach Tree Card']
         Script: |
@@ -2695,7 +2702,9 @@ Runes:
     Location: Footgear
     Reviewed: false
     Script: |
-      # TODO: If refine level of compounded footgear is +5 or lower, MDEF +7
+      if (getrefine() <= 5) {
+        bonus bMdef,7;
+      }
     Album:
       - Requires: ['Megalith Card']
         Script: |
@@ -2721,17 +2730,17 @@ Runes:
     Script: |
       bonus bHPrecovRate,10;
       bonus bSPrecovRate,10;
-      if (BaseClass == Job_Archer) {
-        bonus2 bExpAddRace,RC_Brute,5;
-        # TODO: Add a chance of auto casting 'Coma' on Brute monster when attacking
-      }
     Sets:
       - Requires: [39120, 39263, 39419, 39226] # Cruiser, Anolian, Alligator, Dragon Tail
         Script: |
           bonus bLongAtkRate,20;
           bonus bAgi,5;
           bonus bDex,3;
-          # TODO: Perfect Hit (which never miss its target) + 20%
+          bonus bPerfectHitAddRate,20;
+          if (BaseClass == Job_Archer) {
+            bonus2 bExpAddRace,RC_Brute,5;
+            # TODO: Add a chance of auto casting 'Coma' on Brute monster when attacking
+          }
     Album:
       - Requires: ['Wormtail Card']
         Script: |
@@ -2923,7 +2932,7 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Every time you kill an Insect monster, there is a 1% chance of gaining a 'Box of Thunder'
+      bonus3 bAddMonsterDropItem,12028,RC_Insect,100;
 
   # 39437 Gazeti Rune
   #   Add a 5% chance of auto casting Level 2 Cold Bolt on the enemy when attacking.
@@ -2953,14 +2962,11 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,2;
-      if (BaseClass == Job_Acolyte) {
-        # TODO: The chance is increased to 2%
-      }
+      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,2+18*(BaseClass == Job_Acolyte);
     Album:
       - Requires: ['Greatest General Card']
         Script: |
-          # TODO: Triples the chance
+          bonus3 bAutoSpell,"MO_CALLSPIRITS",5,4+36*(BaseClass == Job_Acolyte);
 
   # 39439 Gremlin Rune
   #   Add a chance of gaining 'Bomber Steak' each time a Brute monster is killed.
@@ -3008,8 +3014,8 @@ Runes:
     Reviewed: false
     Script: |
       bonus bHit,1;
-      # TODO: Increases recovery rate of Meat by 100%
-      # TODO: Has a 1% chance to cause Bleeding status on an enemy when dealing short ranged physical attack
+      bonus2 bAddItemHealRate,517,100;
+      bonus3 bAddEff,Eff_Bleeding,100,ATF_SHORT;
 
   # 39446 Hylozoist Rune
   #   Add a chance of transforming a monster while fighting.
@@ -3029,16 +3035,16 @@ Runes:
     Reviewed: false
     Script: |
       # TODO: Add a chance of transforming a monster while fighting
-      if (BaseClass == Job_Merchant) {
-        # TODO: Add a chance of gaining 'Old Purple Box' each time a monster is killed
-        bonus bMagicDamageReturn,20;
-      }
     Sets:
       - Requires: [39411, 39217, 39528, 39269] # Raggler, Zipper Bear, Myst Case, Baby Leopard
         Script: |
           bonus bSPDrainValue,2;
           bonus2 bSkillAtk,"MC_MAMMONITE",20;
           bonus bLuk,10;
+          if (BaseClass == Job_Merchant) {
+            # TODO: Add a chance of gaining 'Old Purple Box' each time a monster is killed
+            bonus bMagicDamageReturn,20;
+          }
     Album:
       - Requires: ['Wormtail Card']
         Script: |
@@ -3055,11 +3061,12 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Reduce Casting Time of Fire Bolt by 25%. Inflict 25% more damage with Fire Bolt
+      bonus2 bSkillAtk,"MG_FIREBOLT",25;
+      bonus2 bCastrate,"MG_FIREBOLT",-25;
     Album:
       - Requires: ['Imp Card']
         Script: |
-          # TODO: Damage + 25% with Flaming Petals
+          bonus2 bSkillAtk,"NJ_KOUENKA",25;
 
   # 39451 Kobold Rune
   #   CRIT + 4
@@ -3136,7 +3143,7 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Every time you kill a DemiHuman monster, there is a 1% chance of gaining a 'Box of Panting'
+      bonus3 bAddMonsterDropItem,12034,RC_DemiHuman,100;
 
   # 39462 Owl Baron Rune
   #   Add a 3% chance of auto casting Level 1 Lex Aeterna on an enemy when attacking.
@@ -3164,7 +3171,7 @@ Runes:
       - Requires: [39462] # Owl Baron
         Script: |
           bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",5,20;
-          # TODO: Chance of auto casting Impositio Manus increased to 1.0%
+          bonus3 bAutoSpell,"PR_IMPOSITIO",3,7;
 
   # 39464 Phen Rune
   #   Skill casting can not be interrupted.
@@ -3212,7 +3219,7 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Every time you kill a Demon monster, there is a 1% chance of gaining a 'Box of Resentment'
+      bonus3 bAddMonsterDropItem,12030,RC_Demon,100;
 
   # 39475 Shinobi Rune
   #   AGI + 1
@@ -3245,11 +3252,12 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Reduce Casting Time of Cold Bolt by 25%. Inflict 25% more damage with Cold Bolt
+      bonus2 bSkillAtk,"MG_COLDBOLT",25;
+      bonus2 bCastrate,"MG_COLDBOLT",-25;
     Album:
       - Requires: ['Siroma Card']
         Script: |
-          # TODO: Damage + 25% with Freezing Spear
+          bonus2 bSkillAtk,"NJ_HYOUSENSOU",25;
 
   # 39477 Sleeper Rune
   #   Every time you kill a Fish monster, there is a 1% chance of gaining a 'Box of Drowsiness'.
@@ -3259,7 +3267,7 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Every time you kill a Fish monster, there is a 1% chance of gaining a 'Box of Drowsiness'
+      bonus3 bAddMonsterDropItem,12031,RC_Fish,100;
 
   # 39479 Snowier Rune
   #   Add a low chance of gaining Ice Cream when a monster gets killed.
@@ -3271,7 +3279,7 @@ Runes:
     Reviewed: false
     Script: |
       # TODO: Add a low chance of gaining Ice Cream when a monster gets killed
-      # TODO: Ice Cream recovery rate + 100%
+      bonus2 bAddItemHealRate,536,100;
 
   # 39480 Spore Rune
   #   VIT + 2
@@ -3291,7 +3299,8 @@ Runes:
     Location: Accessory
     Reviewed: false
     Script: |
-      # TODO: Enables use of Level 1 Pick Stone and Level 1 Throw Stone
+      skill "TF_PICKSTONE",1;
+      skill "TF_THROWSTONE",1;
 
   # 39488 Wickebine Tres Rune
   #   Add a 5% chance of auto casting Level 1 Strip Armor on the enemy when attacking.
@@ -3312,17 +3321,19 @@ Runes:
     Reviewed: false
     Script: |
       bonus3 bAutoSpell,"RG_STRIPARMOR",1,50;
-      if (BaseJob == Job_Rogue) {
-        # TODO: Disables the Auto-Intimidate ability of the Wanderer Card
-        bonus bUseSPrate,-20;
-      }
     Sets:
       - Requires: [39535, 39255, 39415, 39475] # Stainer, Wanderer, Wild Rose, Shinobi
         Script: |
           bonus bStr,6;
           bonus bAgi,4;
           bonus2 bSkillAtk,"RG_BACKSTAP",10;
-          # TODO: Add a 5% chance of auto casting Level 5 Strip Armor on the enemy when attacking if the user has mastered the skill at Level 5
+          if (getskilllv("RG_STRIPARMOR") == 5) {
+            bonus3 bAutoSpell,"RG_STRIPARMOR",5,50;
+          }
+          if (BaseJob == Job_Rogue) {
+            # TODO: Disables the Auto-Intimidate ability of the Wanderer Card
+            bonus bUseSPrate,-20;
+          }
     Album:
       - Requires: ['Wormtail Card']
         Script: |
@@ -3522,10 +3533,6 @@ Runes:
     Reviewed: false
     Script: |
       bonus bLuk,2;
-      if (BaseJob == Job_Alchemist) {
-        bonus3 bAutoSpell,"BS_ADRENALINE",1,10;
-        # TODO: Add a chance of gaining 'Glistening Coat' or 'Stem' each time a monster is killed
-      }
     Sets:
       - Requires: [39411, 39217, 39458, 39269] # Raggler, Zipper Bear, Muka, Baby Leopard
         Script: |
@@ -3534,6 +3541,10 @@ Runes:
           bonus bMaxSPrate,7;
           bonus2 bSkillAtk,"MC_MAMMONITE",20;
           bonus bSPDrainValue,1;
+          if (BaseJob == Job_Alchemist) {
+            bonus3 bAutoSpell,"BS_ADRENALINE",1,10;
+            # TODO: Add a chance of gaining 'Glistening Coat' or 'Stem' each time a monster is killed
+          }
     Album:
       - Requires: ['Wormtail Card']
         Script: |
@@ -3584,7 +3595,7 @@ Runes:
     Location: Headgear
     Reviewed: false
     Script: |
-      # TODO: Reduce Casting Time by 1% per Refine Level of the equipment this card is compunded on
+      bonus bCastrate,-getrefine();
       if (getrefine() >= 9) {
         bonus bMatkRate,2;
       }

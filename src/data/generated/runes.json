@@ -100,19 +100,6 @@
           { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
           { "k": "num", "v": 7 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_SWORDMAN", "v": 1 }
-          ]
-        },
-        "then": [],
-        "else": []
       }
     ],
     "sets": [
@@ -148,6 +135,52 @@
             "args": [
               { "k": "num", "v": 10 }
             ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddMonsterDropItem",
+            "args": [
+              { "k": "num", "v": 501 },
+              { "k": "num", "v": 500 }
+            ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_SWORDMAN", "v": 1 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bAddItemHealRate",
+                "args": [
+                  { "k": "num", "v": 501 },
+                  { "k": "num", "v": 50 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bAddItemHealRate",
+                "args": [
+                  { "k": "num", "v": 503 },
+                  { "k": "num", "v": 50 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bAddItemHealRate",
+                "args": [
+                  { "k": "num", "v": 504 },
+                  { "k": "num", "v": 50 }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -491,7 +524,15 @@
   {
     "id": 39133,
     "location": "Weapon",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCriticalLong",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
@@ -1146,7 +1187,24 @@
       {
         "requires": ["Laurell Weinder Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_FROSTDIVER" },
+              { "k": "num", "v": 15 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "WZ_FROSTNOVA" },
+              { "k": "num", "v": 22 }
+            ]
+          }
+        ]
       },
       {
         "requires": ["Beholder Card"],
@@ -1518,7 +1576,40 @@
       {
         "requires": ["Red Ferus Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_FIREBALL" },
+              { "k": "num", "v": 15 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_FIREWALL" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "WZ_FIREPILLAR" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "WZ_SIGHTRASHER" },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
       },
       {
         "requires": ["Beholder Card"],
@@ -1819,25 +1910,6 @@
             ]
           }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_THIEF", "v": 6 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bNoGemStone",
-            "args": []
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -1878,6 +1950,25 @@
             "args": [
               { "k": "num", "v": 1 }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_THIEF", "v": 6 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bNoGemStone",
+                "args": []
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -2115,7 +2206,22 @@
   {
     "id": 39221,
     "location": "Garment",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -2331,6 +2437,28 @@
             "args": [
               { "k": "num", "v": 5 }
             ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          {
+            "k": "call",
+            "fn": "getrefine",
+            "args": []
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          {
+            "k": "call",
+            "fn": "getrefine",
+            "args": []
           }
         ]
       }
@@ -2902,8 +3030,36 @@
         "name": "bAutoSpellWhenHit",
         "args": [
           { "k": "str", "v": "WZ_QUAGMIRE" },
-          { "k": "num", "v": 1 },
-          { "k": "num", "v": 50 }
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 1 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  { "k": "num", "v": 4 },
+                  {
+                    "k": "op",
+                    "op": "==",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getskilllv",
+                        "args": [
+                          { "k": "str", "v": "WZ_QUAGMIRE" }
+                        ]
+                      },
+                      { "k": "num", "v": 5 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          { "k": "num", "v": 50 },
+          { "k": "num", "v": 0 }
         ]
       }
     ],
@@ -3176,7 +3332,34 @@
         "name": "bAutoSpellWhenHit",
         "args": [
           { "k": "str", "v": "AC_CONCENTRATION" },
-          { "k": "num", "v": 1 },
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 1 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  { "k": "num", "v": 9 },
+                  {
+                    "k": "op",
+                    "op": "==",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getskilllv",
+                        "args": [
+                          { "k": "str", "v": "AC_CONCENTRATION" }
+                        ]
+                      },
+                      { "k": "num", "v": 10 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
           { "k": "num", "v": 30 }
         ]
       }
@@ -3216,27 +3399,6 @@
         "args": [
           { "k": "num", "v": 20 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseJob" },
-            { "k": "const", "name": "JOB_CRUSADER", "v": 14 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bDefEle",
-            "args": [
-              { "k": "const", "name": "ELE_HOLY", "v": 6 }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -3283,6 +3445,27 @@
                 ]
               }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_CRUSADER", "v": 14 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bDefEle",
+                "args": [
+                  { "k": "const", "name": "ELE_HOLY", "v": 6 }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -3421,13 +3604,31 @@
   {
     "id": 39272,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 600 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
         "requires": ["Brilight Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddEffWhenHit",
+            "args": [
+              { "k": "const", "name": "Eff_Silence", "v": 6 },
+              { "k": "num", "v": 600 }
+            ]
+          }
+        ]
       }
     ],
     "reviewed": false
@@ -3492,7 +3693,34 @@
         "name": "bAutoSpellWhenHit",
         "args": [
           { "k": "str", "v": "CR_AUTOGUARD" },
-          { "k": "num", "v": 3 },
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 3 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  { "k": "num", "v": 7 },
+                  {
+                    "k": "op",
+                    "op": "==",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getskilllv",
+                        "args": [
+                          { "k": "str", "v": "CR_AUTOGUARD" }
+                        ]
+                      },
+                      { "k": "num", "v": 10 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
           { "k": "num", "v": 30 }
         ]
       }
@@ -3589,7 +3817,16 @@
   {
     "id": 39279,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Stone", "v": 11 },
+          { "k": "num", "v": 600 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
@@ -3603,13 +3840,31 @@
   {
     "id": 39280,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Sleep", "v": 3 },
+          { "k": "num", "v": 600 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
         "requires": ["Demon Pungus Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddEffWhenHit",
+            "args": [
+              { "k": "const", "name": "Eff_Sleep", "v": 3 },
+              { "k": "num", "v": 600 }
+            ]
+          }
+        ]
       }
     ],
     "reviewed": false
@@ -3655,6 +3910,19 @@
     "id": 39285,
     "location": "Armor",
     "effects": [
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ]
+      },
       {
         "k": "bonus",
         "name": "bSPGainValue",
@@ -3742,60 +4010,41 @@
         "name": "bAutoSpellWhenHit",
         "args": [
           { "k": "str", "v": "AL_BLESSING" },
-          { "k": "num", "v": 2 },
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 2 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  { "k": "num", "v": 8 },
+                  {
+                    "k": "op",
+                    "op": "==",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getskilllv",
+                        "args": [
+                          { "k": "str", "v": "AL_BLESSING" }
+                        ]
+                      },
+                      { "k": "num", "v": 10 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
           { "k": "num", "v": 30 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bSubRace",
-            "args": [
-              { "k": "const", "name": "RC_DEMON", "v": 6 },
-              { "k": "num", "v": 30 }
-            ]
-          },
-          {
-            "k": "bonus",
-            "name": "bSubRace",
-            "args": [
-              { "k": "const", "name": "RC_UNDEAD", "v": 1 },
-              { "k": "num", "v": 30 }
-            ]
-          },
-          {
-            "k": "bonus",
-            "name": "bExpAddRace",
-            "args": [
-              { "k": "const", "name": "RC_DEMON", "v": 6 },
-              { "k": "num", "v": 5 }
-            ]
-          },
-          {
-            "k": "bonus",
-            "name": "bExpAddRace",
-            "args": [
-              { "k": "const", "name": "RC_UNDEAD", "v": 1 },
-              { "k": "num", "v": 5 }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
       {
-        "requires": [39533, 39352, 39429],
+        "requires": [39533, 39352, 39429, 39143],
         "effects": [
           {
             "k": "bonus",
@@ -3829,6 +4078,52 @@
                 ]
               }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bSubRace",
+                "args": [
+                  { "k": "const", "name": "RC_DEMON", "v": 6 },
+                  { "k": "num", "v": 30 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bSubRace",
+                "args": [
+                  { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+                  { "k": "num", "v": 30 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bExpAddRace",
+                "args": [
+                  { "k": "const", "name": "RC_DEMON", "v": 6 },
+                  { "k": "num", "v": 5 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bExpAddRace",
+                "args": [
+                  { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -3873,7 +4168,16 @@
   {
     "id": 39293,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Poison", "v": 4 },
+          { "k": "num", "v": 600 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
@@ -3887,7 +4191,40 @@
   {
     "id": 39295,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "<=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bDef",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
     "sets": [],
     "album": [
       {
@@ -3909,7 +4246,16 @@
   {
     "id": 39301,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 600 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
@@ -3932,40 +4278,6 @@
           { "k": "num", "v": 3 },
           { "k": "num", "v": 50 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_MAGE", "v": 2 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bMatkRate",
-            "args": [
-              { "k": "num", "v": 3 }
-            ]
-          },
-          {
-            "k": "bonus",
-            "name": "bCastrate",
-            "args": [
-              {
-                "k": "op",
-                "op": "-",
-                "args": [
-                  { "k": "num", "v": 15 }
-                ]
-              }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -3992,6 +4304,64 @@
             "args": [
               { "k": "num", "v": 500 }
             ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_FIREBOLT" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_COLDBOLT" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_LIGHTNINGBOLT" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_MAGE", "v": 2 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bMatkRate",
+                "args": [
+                  { "k": "num", "v": 3 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bCastrate",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      { "k": "num", "v": 15 }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -4036,13 +4406,31 @@
   {
     "id": 39304,
     "location": "Armor",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 600 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
         "requires": ["Majoruros Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddEffWhenHit",
+            "args": [
+              { "k": "const", "name": "Eff_Stun", "v": 2 },
+              { "k": "num", "v": 600 }
+            ]
+          }
+        ]
       }
     ],
     "reviewed": false
@@ -4320,6 +4708,19 @@
     "effects": [
       {
         "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
         "name": "bHPGainValue",
         "args": [
           { "k": "num", "v": 100 }
@@ -4557,43 +4958,11 @@
         "args": [
           { "k": "num", "v": 1 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseJob" },
-            { "k": "const", "name": "JOB_MONK", "v": 15 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bUseSPrate",
-            "args": [
-              {
-                "k": "op",
-                "op": "-",
-                "args": [
-                  { "k": "num", "v": 10 }
-                ]
-              }
-            ]
-          },
-          {
-            "k": "bonus",
-            "name": "bNoCastCancel",
-            "args": []
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
       {
-        "requires": [39533, 39429],
+        "requires": [39533, 39429, 39143],
         "effects": [
           {
             "k": "bonus",
@@ -4632,6 +5001,38 @@
               { "k": "str", "v": "MO_EXTREMITYFIST" },
               { "k": "num", "v": 10 }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_MONK", "v": 15 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bUseSPrate",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      { "k": "num", "v": 10 }
+                    ]
+                  }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bNoCastCancel",
+                "args": []
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -4713,40 +5114,6 @@
         "args": [
           { "k": "num", "v": 10 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseJob" },
-            { "k": "const", "name": "JOB_SAGE", "v": 16 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bMagicDamageReturn",
-            "args": [
-              { "k": "num", "v": 20 }
-            ]
-          },
-          {
-            "k": "bonus",
-            "name": "bCastrate",
-            "args": [
-              {
-                "k": "op",
-                "op": "-",
-                "args": [
-                  { "k": "num", "v": 20 }
-                ]
-              }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -4775,6 +5142,56 @@
               { "k": "str", "v": "MG_THUNDERSTORM" },
               { "k": "num", "v": 10 }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_SAGE", "v": 16 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bMagicDamageReturn",
+                "args": [
+                  { "k": "num", "v": 20 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bAddMonsterDropItem",
+                "args": [
+                  { "k": "num", "v": 716 },
+                  { "k": "num", "v": 100 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bAddMonsterDropItem",
+                "args": [
+                  { "k": "num", "v": 715 },
+                  { "k": "num", "v": 100 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bCastrate",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      { "k": "num", "v": 20 }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -4864,7 +5281,15 @@
     "sets": [
       {
         "requires": [39178],
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bPerfectHitAddRate",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
       }
     ],
     "album": [],
@@ -4976,7 +5401,34 @@
         "name": "bAutoSpell",
         "args": [
           { "k": "str", "v": "AL_HEAL" },
-          { "k": "num", "v": 1 },
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 1 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  { "k": "num", "v": 9 },
+                  {
+                    "k": "op",
+                    "op": "==",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getskilllv",
+                        "args": [
+                          { "k": "str", "v": "AL_HEAL" }
+                        ]
+                      },
+                      { "k": "num", "v": 10 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
           { "k": "num", "v": 20 }
         ]
       }
@@ -5766,7 +6218,33 @@
   {
     "id": 39405,
     "location": "Footgear",
-    "effects": [],
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "<=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 7 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
     "sets": [],
     "album": [
       {
@@ -5802,28 +6280,6 @@
         "args": [
           { "k": "num", "v": 10 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_ARCHER", "v": 3 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bExpAddRace",
-            "args": [
-              { "k": "const", "name": "RC_BRUTE", "v": 2 },
-              { "k": "num", "v": 5 }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -5850,6 +6306,35 @@
             "args": [
               { "k": "num", "v": 3 }
             ]
+          },
+          {
+            "k": "bonus",
+            "name": "bPerfectHitAddRate",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_ARCHER", "v": 3 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bExpAddRace",
+                "args": [
+                  { "k": "const", "name": "RC_BRUTE", "v": 2 },
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -6200,7 +6685,17 @@
   {
     "id": 39436,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12028 },
+          { "k": "const", "name": "RC_INSECT", "v": 4 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -6239,21 +6734,29 @@
         "args": [
           { "k": "str", "v": "MO_CALLSPIRITS" },
           { "k": "num", "v": 5 },
-          { "k": "num", "v": 2 }
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 2 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  { "k": "num", "v": 18 },
+                  {
+                    "k": "op",
+                    "op": "==",
+                    "args": [
+                      { "k": "ref", "name": "BaseClass" },
+                      { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
-          ]
-        },
-        "then": [],
-        "else": []
       }
     ],
     "sets": [],
@@ -6261,7 +6764,38 @@
       {
         "requires": ["Greatest General Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpell",
+            "args": [
+              { "k": "str", "v": "MO_CALLSPIRITS" },
+              { "k": "num", "v": 5 },
+              {
+                "k": "op",
+                "op": "+",
+                "args": [
+                  { "k": "num", "v": 4 },
+                  {
+                    "k": "op",
+                    "op": "*",
+                    "args": [
+                      { "k": "num", "v": 36 },
+                      {
+                        "k": "op",
+                        "op": "==",
+                        "args": [
+                          { "k": "ref", "name": "BaseClass" },
+                          { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ],
     "reviewed": false
@@ -6329,6 +6863,23 @@
         "args": [
           { "k": "num", "v": 1 }
         ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddItemHealRate",
+        "args": [
+          { "k": "num", "v": 517 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Bleeding", "v": 9 },
+          { "k": "num", "v": 100 },
+          { "k": "const", "name": "ATF_SHORT", "v": 4 }
+        ]
       }
     ],
     "sets": [],
@@ -6338,29 +6889,7 @@
   {
     "id": 39446,
     "location": "Accessory",
-    "effects": [
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseClass" },
-            { "k": "const", "name": "JOB_MERCHANT", "v": 5 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bMagicDamageReturn",
-            "args": [
-              { "k": "num", "v": 20 }
-            ]
-          }
-        ],
-        "else": []
-      }
-    ],
+    "effects": [],
     "sets": [
       {
         "requires": [39411, 39217, 39528, 39269],
@@ -6386,6 +6915,27 @@
             "args": [
               { "k": "num", "v": 10 }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_MERCHANT", "v": 5 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bMagicDamageReturn",
+                "args": [
+                  { "k": "num", "v": 20 }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -6417,13 +6967,45 @@
   {
     "id": 39448,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_FIREBOLT" },
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "str", "v": "MG_FIREBOLT" },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
         "requires": ["Imp Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "NJ_KOUENKA" },
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
       }
     ],
     "reviewed": false
@@ -6567,7 +7149,17 @@
   {
     "id": 39460,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12034 },
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -6615,6 +7207,15 @@
               { "k": "str", "v": "MG_LIGHTNINGBOLT" },
               { "k": "num", "v": 5 },
               { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAutoSpell",
+            "args": [
+              { "k": "str", "v": "PR_IMPOSITIO" },
+              { "k": "num", "v": 3 },
+              { "k": "num", "v": 7 }
             ]
           }
         ]
@@ -6727,7 +7328,17 @@
   {
     "id": 39472,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12030 },
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -6767,13 +7378,45 @@
   {
     "id": 39476,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_COLDBOLT" },
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "str", "v": "MG_COLDBOLT" },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      }
+    ],
     "sets": [],
     "album": [
       {
         "requires": ["Siroma Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "NJ_HYOUSENSOU" },
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
       }
     ],
     "reviewed": false
@@ -6781,7 +7424,17 @@
   {
     "id": 39477,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12031 },
+          { "k": "const", "name": "RC_FISH", "v": 5 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -6789,7 +7442,16 @@
   {
     "id": 39479,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddItemHealRate",
+        "args": [
+          { "k": "num", "v": 536 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -6813,7 +7475,18 @@
   {
     "id": 39482,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_PICKSTONE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_THROWSTONE" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "sets": [],
     "album": [],
     "reviewed": false
@@ -6830,33 +7503,6 @@
           { "k": "num", "v": 1 },
           { "k": "num", "v": 50 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseJob" },
-            { "k": "const", "name": "JOB_ROGUE", "v": 17 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bUseSPrate",
-            "args": [
-              {
-                "k": "op",
-                "op": "-",
-                "args": [
-                  { "k": "num", "v": 20 }
-                ]
-              }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -6884,6 +7530,62 @@
               { "k": "str", "v": "RG_BACKSTAP" },
               { "k": "num", "v": 10 }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                {
+                  "k": "call",
+                  "fn": "getskilllv",
+                  "args": [
+                    { "k": "str", "v": "RG_STRIPARMOR" }
+                  ]
+                },
+                { "k": "num", "v": 5 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bAutoSpell",
+                "args": [
+                  { "k": "str", "v": "RG_STRIPARMOR" },
+                  { "k": "num", "v": 5 },
+                  { "k": "num", "v": 50 }
+                ]
+              }
+            ],
+            "else": []
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_ROGUE", "v": 17 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bUseSPrate",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      { "k": "num", "v": 20 }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -7366,29 +8068,6 @@
         "args": [
           { "k": "num", "v": 2 }
         ]
-      },
-      {
-        "k": "if",
-        "cond": {
-          "k": "op",
-          "op": "==",
-          "args": [
-            { "k": "ref", "name": "BaseJob" },
-            { "k": "const", "name": "JOB_ALCHEMIST", "v": 18 }
-          ]
-        },
-        "then": [
-          {
-            "k": "bonus",
-            "name": "bAutoSpell",
-            "args": [
-              { "k": "str", "v": "BS_ADRENALINE" },
-              { "k": "num", "v": 1 },
-              { "k": "num", "v": 10 }
-            ]
-          }
-        ],
-        "else": []
       }
     ],
     "sets": [
@@ -7430,6 +8109,29 @@
             "args": [
               { "k": "num", "v": 1 }
             ]
+          },
+          {
+            "k": "if",
+            "cond": {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_ALCHEMIST", "v": 18 }
+              ]
+            },
+            "then": [
+              {
+                "k": "bonus",
+                "name": "bAutoSpell",
+                "args": [
+                  { "k": "str", "v": "BS_ADRENALINE" },
+                  { "k": "num", "v": 1 },
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ],
+            "else": []
           }
         ]
       }
@@ -7540,6 +8242,23 @@
     "id": 39517,
     "location": "Headgear",
     "effects": [
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              {
+                "k": "call",
+                "fn": "getrefine",
+                "args": []
+              }
+            ]
+          }
+        ]
+      },
       {
         "k": "if",
         "cond": {
