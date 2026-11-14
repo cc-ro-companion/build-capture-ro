@@ -3,7 +3,7 @@
 // `bonus` commands collected as calls. Arithmetic follows script.cpp op_2num
 // (integer, truncating division); a runtime error ends the script, keeping
 // the bonuses collected so far, as rAthena's `st->state = END` does.
-import type { BonusStats, ScriptExpr, ScriptStmt } from '../data/types';
+import type { AutobonusCommand, BonusStats, ScriptExpr, ScriptStmt } from '../data/types';
 
 export type BonusArg = number | string;
 
@@ -12,6 +12,31 @@ export interface BonusCall {
   name: string;
   /** Evaluated values; the arity is `args.length`. */
   args: BonusArg[];
+}
+
+/** `skill` in an item script: a skill the item grants while worn. */
+export interface GrantedSkill {
+  /** Skill name (e.g. `MG_COLDBOLT`) or id, as the script gives it. */
+  skill: BonusArg;
+  level: number;
+}
+
+/**
+ * `autobonus`…`autobonus3`: rate, duration and trigger evaluated when the
+ * item is equipped, as rAthena's pc_autobonus stores them; `bonus` runs only
+ * when it triggers.
+ */
+export interface AutoBonus {
+  command: AutobonusCommand;
+  bonus: readonly ScriptStmt[];
+  /** Chance per 1000. */
+  rate: number;
+  /** Milliseconds. */
+  duration: number;
+  /** `BF_*` filter (autobonus, autobonus2); 0 when absent. */
+  flag: number;
+  /** Triggering skill (autobonus3). */
+  skill?: BonusArg;
 }
 
 export interface EffectContext {
@@ -32,6 +57,8 @@ export interface EffectContext {
 
 export interface EffectResult {
   calls: BonusCall[];
+  skills: GrantedSkill[];
+  autoBonuses: AutoBonus[];
   /** Why the script stopped early, if it did. */
   error?: string;
 }
@@ -170,6 +197,8 @@ function binary(operator: string, left: BonusArg, right: BonusArg): BonusArg {
 class Evaluator {
   private readonly variables = new Map<string, BonusArg>();
   readonly calls: BonusCall[] = [];
+  readonly skills: GrantedSkill[] = [];
+  readonly autoBonuses: AutoBonus[] = [];
   private readonly context: EffectContext;
 
   constructor(context: EffectContext) {
@@ -191,6 +220,27 @@ class Evaluator {
         case 'if':
           this.run(truthy(this.value(statement.cond)) ? statement.then : statement.else);
           break;
+        case 'skill':
+          this.skills.push({
+            skill: this.value(statement.skill),
+            level: asNumber(this.value(statement.level), 'skill level'),
+          });
+          break;
+        case 'autobonus': {
+          const autoBonus: AutoBonus = {
+            command: statement.command,
+            bonus: statement.bonus,
+            rate: asNumber(this.value(statement.rate), statement.command),
+            duration: asNumber(this.value(statement.duration), statement.command),
+            flag:
+              statement.flag === undefined
+                ? 0
+                : asNumber(this.value(statement.flag), statement.command),
+          };
+          if (statement.skill !== undefined) autoBonus.skill = this.value(statement.skill);
+          this.autoBonuses.push(autoBonus);
+          break;
+        }
       }
     }
   }
@@ -277,9 +327,14 @@ export function evaluateEffects(
   const evaluator = new Evaluator(context);
   try {
     evaluator.run(effects);
-    return { calls: evaluator.calls };
+    return { calls: evaluator.calls, skills: evaluator.skills, autoBonuses: evaluator.autoBonuses };
   } catch (error) {
     if (!(error instanceof ScriptEnd)) throw error;
-    return { calls: evaluator.calls, error: error.message };
+    return {
+      calls: evaluator.calls,
+      skills: evaluator.skills,
+      autoBonuses: evaluator.autoBonuses,
+      error: error.message,
+    };
   }
 }

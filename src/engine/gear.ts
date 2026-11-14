@@ -2,7 +2,13 @@
 // script evaluated for the build, collected into a BonusSet in the order
 // rAthena's status_calc_pc runs them, plus equipment DEF and refine ATK.
 import type { BonusStats, Item, Job, RefineTables } from '../data/types';
-import { BonusSet, type BonusSource, type SourcedBonusCall } from './bonuses';
+import {
+  BonusSet,
+  type BonusSource,
+  type SourcedAutoBonus,
+  type SourcedBonusCall,
+  type SourcedSkill,
+} from './bonuses';
 import { evaluateEffects } from './effects';
 import { armorRefineDef, weaponRefine } from './equipment';
 import type { CharacterInput } from './stats';
@@ -92,6 +98,8 @@ export function buildCharacter(
     equipment.filter((equipped) => equipped.slot === slot),
   );
   const calls: SourcedBonusCall[] = [];
+  const skills: SourcedSkill[] = [];
+  const autoBonuses: SourcedAutoBonus[] = [];
   for (const { slot, item, refine } of ordered) {
     if (item.effects === null) continue;
     const result = evaluateEffects(item.effects, {
@@ -104,8 +112,12 @@ export function buildCharacter(
     });
     const source = bonusSource(slot, item);
     for (const call of result.calls) calls.push({ ...call, itemId: item.id, source });
+    for (const skill of result.skills) skills.push({ ...skill, itemId: item.id });
+    for (const autoBonus of result.autoBonuses) {
+      autoBonuses.push({ ...autoBonus, itemId: item.id, source });
+    }
   }
-  const bonuses = new BonusSet(calls);
+  const bonuses = new BonusSet(calls, skills, autoBonuses);
   const rightHand = equipment.find((equipped) => equipped.slot === 'rightHand');
   const weapon = rightHand?.item.type === 'weapon' ? rightHand.item : null;
   // A weapon in the left hand is `lhw` (status_calc_pc: EQI_HAND_L equipped

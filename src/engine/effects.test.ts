@@ -50,7 +50,49 @@ describe('evaluateEffects', () => {
         { name: 'bUnbreakableWeapon', args: [] },
         { name: 'bSkillAtk', args: ['A', 5] },
       ],
+      skills: [],
+      autoBonuses: [],
     });
+  });
+
+  it('collects granted skills and autobonuses with evaluated values, inside taken branches only', () => {
+    const inner = [bonus('bBaseAtk', num(50))];
+    const result = evaluateEffects(
+      [
+        { k: 'skill', skill: str('MG_COLDBOLT'), level: op('+', num(1), num(2)) },
+        {
+          k: 'if',
+          cond: op('>=', call('getrefine'), num(7)),
+          then: [
+            {
+              k: 'autobonus',
+              command: 'autobonus',
+              bonus: inner,
+              rate: op('*', call('getrefine'), num(2)),
+              duration: num(5000),
+              flag: num(1),
+            },
+          ],
+          else: [{ k: 'skill', skill: num(5), level: num(1) }],
+        },
+        {
+          k: 'autobonus',
+          command: 'autobonus3',
+          bonus: [],
+          rate: num(100),
+          duration: num(3000),
+          skill: str('AL_HEAL'),
+        },
+      ],
+      context({ refine: 7 }),
+    );
+    expect(result.skills).toEqual([{ skill: 'MG_COLDBOLT', level: 3 }]);
+    expect(result.autoBonuses).toEqual([
+      { command: 'autobonus', bonus: inner, rate: 14, duration: 5000, flag: 1 },
+      { command: 'autobonus3', bonus: [], rate: 100, duration: 3000, flag: 0, skill: 'AL_HEAL' },
+    ]);
+    // The bonus script runs only when the autobonus triggers, so it adds no calls now.
+    expect(result.calls).toEqual([]);
   });
 
   it('does integer arithmetic like op_2num: division and modulo truncate toward zero', () => {
@@ -83,7 +125,12 @@ describe('evaluateEffects', () => {
       [bonus('bAgi', num(1)), bonus('bStr', op('&&', num(0), divideByZero)), bonus('bVit', num(1))],
       context(),
     );
-    expect(result).toEqual({ calls: [{ name: 'bAgi', args: [1] }], error: 'division by zero' });
+    expect(result).toEqual({
+      calls: [{ name: 'bAgi', args: [1] }],
+      skills: [],
+      autoBonuses: [],
+      error: 'division by zero',
+    });
     expect(
       evaluateEffects([bonus('bStr', op('?:', num(1), num(2), divideByZero))], context()).error,
     ).toBe('division by zero');

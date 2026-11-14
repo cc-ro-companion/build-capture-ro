@@ -227,11 +227,11 @@ describe('equipment panel', () => {
     );
     render(App);
     expect(screen.getByTestId('note-headMid').textContent).toBe('Not modelled: status resistance.');
-    expect(screen.getByTestId('note-rightHand').textContent).toMatch(
-      /Script not read \(command "skill"\)/,
+    expect(screen.getByTestId('note-rightHand').textContent).toBe(
+      'Not modelled: status chance on attack, status chance on self when attacking, autocast on attack, grants skill MG_COLDBOLT Lv 3.',
     );
     expect(screen.getByTestId('not-modelled-summary').textContent).toMatch(
-      /^2 equipment effects not modelled/,
+      /^5 equipment effects not modelled/,
     );
   });
 

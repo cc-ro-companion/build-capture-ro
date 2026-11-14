@@ -17,11 +17,40 @@ describe('notModelledNotes (shipped data)', () => {
     expect(noteText(notes.headMid!)).toBe('Not modelled: status resistance.');
   });
 
-  it('reports an unsupported script as one effect: Ice Falchion (1131)', () => {
+  it('lists a granted skill: Ice Falchion (1131), whose weapon element now applies', () => {
     const notes = notesFor({ rightHand: { item: 1131, refine: 0 } });
-    expect(notes.rightHand).toEqual({ unsupported: 'command "skill"', labels: [] });
-    expect(noteText(notes.rightHand!)).toBe(
-      'Script not read (command "skill"); none of its effects are applied.',
+    expect(notes.rightHand?.labels).toEqual([
+      'status chance on attack',
+      'status chance on self when attacking',
+      'autocast on attack',
+      'grants skill MG_COLDBOLT Lv 3',
+    ]);
+    const resolved = resolveBuild(
+      { ...defaultBuild(), job: SWORDMAN, equipment: { rightHand: { item: 1131, refine: 0 } } },
+      gameData,
+    );
+    expect(resolved.character.bonuses.last('bAtkEle')).toBeDefined();
+  });
+
+  it('lists an autobonus: Nemesis (1541)', () => {
+    const notes = notesFor({ rightHand: { item: 1541, refine: 0 } });
+    expect(notes.rightHand?.labels).toContain('temporary bonus on attack');
+  });
+
+  it('reports an unsupported script as one effect', () => {
+    const shirt = gameData.items.get(2301) as Item;
+    const data = createGameData({
+      jobs: [...gameData.jobs.values()],
+      items: [{ ...shirt, effects: null, unsupported: 'command "callfunc"' }],
+      monsters: [],
+      statPoints: gameData.statPoints,
+      tables: gameData.tables,
+      names: { items: {}, monsters: {}, jobs: {} },
+    });
+    const notes = notesFor({ armor: { item: 2301, refine: 0 } }, data);
+    expect(notes.armor).toEqual({ unsupported: 'command "callfunc"', labels: [] });
+    expect(noteText(notes.armor!)).toBe(
+      'Script not read (command "callfunc"); none of its effects are applied.',
     );
     expect(notModelledCount(notes)).toBe(1);
   });
@@ -37,7 +66,8 @@ describe('notModelledNotes (shipped data)', () => {
       accessoryLeft: { item: 2601, refine: 0 },
     });
     expect(Object.keys(notes).sort()).toEqual(['headMid', 'rightHand']);
-    expect(notModelledCount(notes)).toBe(2);
+    // Sunglasses: 1, Ice Falchion: 4.
+    expect(notModelledCount(notes)).toBe(5);
   });
 });
 

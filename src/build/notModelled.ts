@@ -2,14 +2,17 @@
 // subset, or bonuses it parses and stores but does not compute yet. Shown next
 // to the item and counted in the results, so no number looks complete when it
 // is not.
-import { notModelledLabels } from '../engine/bonuses';
+import { autoBonusLabel, notModelledLabels, skillLabel } from '../engine/bonuses';
 import type { Slot } from '../engine/gear';
 import type { ResolvedBuild } from './resolve';
 
 export interface NotModelledNote {
   /** Set when the item's script could not be read, e.g. `command "autobonus"`. */
   unsupported?: string;
-  /** Labels of the item's active bonuses the engine does not compute. */
+  /**
+   * Labels of the item's active bonuses the engine does not compute, then of
+   * its granted skills and autobonuses.
+   */
   labels: string[];
 }
 
@@ -30,8 +33,15 @@ export function notModelledNotes(resolved: ResolvedBuild): Partial<Record<Slot, 
       notes[slot] = { unsupported: item.unsupported ?? 'unknown script', labels: [] };
       continue;
     }
-    const calls = resolved.character.bonuses.calls.filter((call) => call.itemId === item.id);
-    const labels = notModelledLabels(calls);
+    const { bonuses } = resolved.character;
+    const ofItem = <T extends { itemId: number }>(records: readonly T[]) =>
+      records.filter((record) => record.itemId === item.id);
+    const labels = notModelledLabels(ofItem(bonuses.calls));
+    const extra = [
+      ...ofItem(bonuses.skills).map(skillLabel),
+      ...ofItem(bonuses.autoBonuses).map(autoBonusLabel),
+    ];
+    for (const label of extra) if (!labels.includes(label)) labels.push(label);
     if (labels.length > 0) notes[slot] = { labels };
   }
   return notes;

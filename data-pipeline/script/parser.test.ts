@@ -23,6 +23,7 @@ function unsupported(source: string): Extract<ParseResult, { ok: false }> {
 }
 
 const num = (v: number): ScriptExpr => ({ k: 'num', v });
+const str = (v: string): ScriptExpr => ({ k: 'str', v });
 const op = (operator: string, ...args: ScriptExpr[]): ScriptExpr => ({
   k: 'op',
   op: operator,
@@ -137,14 +138,75 @@ describe('parseScript statements', () => {
   });
 
   it('rejects other commands and names the offending statement', () => {
-    const result = unsupported('bonus bStr,1;\nskill "TF_DOUBLE",5;\nbonus bAgi,1;');
+    const result = unsupported('bonus bStr,1;\nsc_start SC_X,1000,1;\nbonus bAgi,1;');
     expect(result).toEqual({
       ok: false,
-      reason: 'command "skill"',
-      statement: 'skill "TF_DOUBLE",5;',
+      reason: 'command "sc_start"',
+      statement: 'sc_start SC_X,1000,1;',
     });
-    expect(unsupported('autobonus "{}",1,1;').reason).toBe('command "autobonus"');
     expect(unsupported('Callfunc "F_X";').reason).toBe('command "callfunc"');
+  });
+
+  it('parses skill with a name or id, a level expression and an optional flag', () => {
+    expect(effects('skill "TF_DOUBLE",5;')).toEqual([
+      { k: 'skill', skill: str('TF_DOUBLE'), level: num(5) },
+    ]);
+    expect(effects('Skill 51,getrefine(),1;')).toEqual([
+      { k: 'skill', skill: num(51), level: refine, flag: num(1) },
+    ]);
+    expect(unsupported('skill .@s,1;').reason).toBe('skill with a computed skill');
+    expect(unsupported('skill "TF_DOUBLE";').reason).toBe('syntax');
+  });
+
+  it('parses autobonus with its bonus script, flag and other script', () => {
+    expect(
+      effects(
+        'autobonus "{ bonus bBaseAtk,50; }",10+getrefine(),20000,BF_WEAPON,"{ specialeffect2 EF_X; }";',
+      ),
+    ).toEqual([
+      {
+        k: 'autobonus',
+        command: 'autobonus',
+        bonus: [{ k: 'bonus', name: 'bBaseAtk', args: [num(50)] }],
+        rate: { k: 'op', op: '+', args: [num(10), refine] },
+        duration: num(20000),
+        flag: { k: 'const', name: 'BF_WEAPON', v: expect.any(Number) },
+        onStart: '{ specialeffect2 EF_X; }',
+      },
+    ]);
+    expect(effects('autobonus2 "{ bonus bNoMagicDamage,100; }",10,2000;')).toMatchObject([
+      { k: 'autobonus', command: 'autobonus2', rate: num(10), duration: num(2000) },
+    ]);
+  });
+
+  it('parses autobonus3 with its triggering skill', () => {
+    expect(
+      effects(
+        'autobonus3 "{ bonus bHealPower,20; }",100,3000,"AL_HEAL","{ specialeffect2 EF_HEAL3; }";',
+      ),
+    ).toMatchObject([
+      {
+        k: 'autobonus',
+        command: 'autobonus3',
+        skill: str('AL_HEAL'),
+        onStart: '{ specialeffect2 EF_HEAL3; }',
+      },
+    ]);
+    expect(effects('autobonus3 "{ }",20,1000,"AL_HEAL";')).toMatchObject([{ bonus: [] }]);
+    expect(unsupported('autobonus3 "{ }",20,1000;').reason).toBe('syntax');
+  });
+
+  it('reads escaped quotes in an autobonus bonus script', () => {
+    expect(
+      effects(String.raw`autobonus "{ bonus2 bCastrate,\"MO_EXTREMITYFIST\",-100; }",50,6000;`),
+    ).toMatchObject([{ bonus: [{ name: 'bCastrate', args: [str('MO_EXTREMITYFIST'), {}] }] }]);
+  });
+
+  it('marks an autobonus unsupported when its bonus script is', () => {
+    expect(unsupported('autobonus "{ sc_start SC_WINDWEAPON,180000,1; }",3,180000;').reason).toBe(
+      'autobonus bonus: command "sc_start"',
+    );
+    expect(unsupported('autobonus 5,1,1;').reason).toBe('autobonus without a bonus script');
   });
 
   it('reports syntax errors as unsupported instead of throwing', () => {
@@ -436,13 +498,22 @@ if (getrefine()>6) {
     ).toHaveLength(3);
   });
 
+  it('1133: weapon element and a granted skill', () => {
+    expect(effects('bonus bAtkEle,Ele_Fire;\nskill "MG_FIREBOLT",3;\n')).toMatchObject([
+      { k: 'bonus', name: 'bAtkEle' },
+      { k: 'skill', skill: str('MG_FIREBOLT'), level: num(3) },
+    ]);
+  });
+
+  it('1281: autobonus on attack', () => {
+    expect(
+      effects(
+        'autobonus "{ bonus bAspdRate,100; }",70,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";\n',
+      ),
+    ).toMatchObject([{ k: 'autobonus', bonus: [{ name: 'bAspdRate' }], rate: num(70) }]);
+  });
+
   it.each([
-    [1133, 'bonus bAtkEle,Ele_Fire;\nskill "MG_FIREBOLT",3;\n', 'command "skill"'],
-    [
-      1281,
-      'autobonus "{ bonus bAspdRate,100; }",70,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";\n',
-      'command "autobonus"',
-    ],
     [
       2132,
       'bonus2 bSubEle,Ele_All,20;\nif (vip_status(VIP_STATUS_ACTIVE)) {\n   bonus bAllStats,1;\n}\n',

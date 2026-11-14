@@ -1,7 +1,8 @@
 // Bonus calls from equipped items' scripts, summed the way rAthena's
 // pc_bonus…pc_bonus5 store them, plus which bonuses the engine computes and
 // plain-word labels for the ones it does not.
-import type { BonusArg, BonusCall } from './effects';
+import type { AutobonusCommand } from '../data/types';
+import type { AutoBonus, BonusArg, BonusCall, GrantedSkill } from './effects';
 
 /**
  * Where a bonus came from, as rAthena's `sd->state.lr_flag` while the item's
@@ -16,18 +17,38 @@ export interface SourcedBonusCall extends BonusCall {
   source: BonusSource;
 }
 
+export interface SourcedSkill extends GrantedSkill {
+  itemId: number;
+}
+
+export interface SourcedAutoBonus extends AutoBonus {
+  itemId: number;
+  source: BonusSource;
+}
+
 const ALL_SOURCES: readonly BonusSource[] = ['none', 'shield', 'leftWeapon'];
 
 function sameArgs(args: readonly BonusArg[], keys: readonly BonusArg[]): boolean {
   return keys.every((key, index) => args[index] === key);
 }
 
-/** The bonus calls of every equipped item, with lookups by name, key values and source. */
+/**
+ * The bonus calls of every equipped item, with lookups by name, key values
+ * and source, plus the granted skills and autobonuses (stored, not computed).
+ */
 export class BonusSet {
   readonly calls: readonly SourcedBonusCall[];
+  readonly skills: readonly SourcedSkill[];
+  readonly autoBonuses: readonly SourcedAutoBonus[];
 
-  constructor(calls: readonly SourcedBonusCall[]) {
+  constructor(
+    calls: readonly SourcedBonusCall[],
+    skills: readonly SourcedSkill[] = [],
+    autoBonuses: readonly SourcedAutoBonus[] = [],
+  ) {
     this.calls = calls;
+    this.skills = skills;
+    this.autoBonuses = autoBonuses;
   }
 
   /**
@@ -258,10 +279,27 @@ export const BONUS_LABELS: Readonly<Record<string, string>> = {
   bAddMonsterDropItem: 'extra drops',
   bAddMonsterIdDropItem: 'extra drops from a monster',
   bGetZenyNum: 'zeny on kill',
+  bNoGemStone: 'no gemstone cost',
+  bNoWalkDelay: 'no flinch when hit',
 };
 
 export function bonusLabel(name: string): string {
   return BONUS_LABELS[name] ?? name;
+}
+
+const AUTOBONUS_LABELS: Readonly<Record<AutobonusCommand, string>> = {
+  autobonus: 'temporary bonus on attack',
+  autobonus2: 'temporary bonus when hit',
+  autobonus3: 'temporary bonus on skill use',
+};
+
+/** A granted skill in words, e.g. `grants skill MG_COLDBOLT Lv 3` (skill names come with phase 5). */
+export function skillLabel(skill: GrantedSkill): string {
+  return `grants skill ${String(skill.skill)} Lv ${skill.level}`;
+}
+
+export function autoBonusLabel(autoBonus: Pick<AutoBonus, 'command'>): string {
+  return AUTOBONUS_LABELS[autoBonus.command];
 }
 
 /** Labels of the calls the engine does not compute, each once, in call order. */

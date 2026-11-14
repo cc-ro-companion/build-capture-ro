@@ -3,7 +3,13 @@
 // the whole script unsupported, with a reason and the offending statement.
 // Grammar and precedence follow rAthena's src/map/script.cpp (parse_line,
 // parse_syntax, parse_subexpr).
-import type { ScriptExpr, ScriptFunction, ScriptRef, ScriptStmt } from '../../src/data/types.ts';
+import type {
+  AutobonusCommand,
+  ScriptExpr,
+  ScriptFunction,
+  ScriptRef,
+  ScriptStmt,
+} from '../../src/data/types.ts';
 import { BONUS_NAMES, SCRIPT_CONSTANTS } from './constants.ts';
 import { tokenize, type Token } from './lexer.ts';
 
@@ -70,6 +76,8 @@ const BINARY_PRECEDENCE: Record<string, number> = {
   '/': 10,
   '%': 10,
 };
+const AUTOBONUS_COMMANDS: readonly AutobonusCommand[] = ['autobonus', 'autobonus2', 'autobonus3'];
+
 const TERNARY_PRECEDENCE = 0;
 const UNARY_PRECEDENCE = 11;
 
@@ -146,6 +154,9 @@ class Parser {
     }
     if (token.kind === 'ident' && token.text === 'if') return [this.parseIf()];
     if (token.kind === 'ident' && lower(token.text) in BONUS_COMMANDS) return [this.parseBonus()];
+    if (token.kind === 'ident' && lower(token.text) === 'skill') return [this.parseSkill()];
+    const autobonus = AUTOBONUS_COMMANDS.find((command) => command === lower(token.text));
+    if (token.kind === 'ident' && autobonus !== undefined) return [this.parseAutobonus(autobonus)];
     if (token.kind === 'var') return [this.parseAssignment()];
     if (token.kind === 'ident') throw new Unsupported(`command "${lower(token.text)}"`);
     throw new Unsupported(token.kind === 'unknown' ? 'syntax: unknown character' : 'syntax');
@@ -182,6 +193,68 @@ class Parser {
       throw new Unsupported(`${command} with ${args.length} values`);
     }
     return { k: 'bonus', name, args };
+  }
+
+  /** `skill <id or "name">,<level>{,<flag>};` */
+  private parseSkill(): ScriptStmt {
+    this.next();
+    const skill = this.parseSkillRef('skill');
+    this.expect(',');
+    const level = this.parseExpression();
+    let flag: ScriptExpr | undefined;
+    if (this.isPunct(',')) {
+      this.next();
+      flag = this.parseExpression();
+    }
+    this.expect(';');
+    return flag === undefined ? { k: 'skill', skill, level } : { k: 'skill', skill, level, flag };
+  }
+
+  /**
+   * `autobonus "<bonus script>",<rate>,<duration>{,<flag>{,"<other script>"}};`,
+   * the same for autobonus2, and autobonus3 with a skill in place of the
+   * flag. The bonus script must parse too; the other script is kept as text.
+   */
+  private parseAutobonus(command: AutobonusCommand): ScriptStmt {
+    this.next();
+    const scriptToken = this.next();
+    if (scriptToken.kind !== 'str') throw new Unsupported(`${command} without a bonus script`);
+    const inner = parseScript(scriptToken.value as string);
+    if (!inner.ok) throw new Unsupported(`${command} bonus: ${inner.reason}`);
+    this.expect(',');
+    const rate = this.parseExpression();
+    this.expect(',');
+    const duration = this.parseExpression();
+    const statement: Extract<ScriptStmt, { k: 'autobonus' }> = {
+      k: 'autobonus',
+      command,
+      bonus: inner.effects,
+      rate,
+      duration,
+    };
+    if (command === 'autobonus3') {
+      this.expect(',');
+      statement.skill = this.parseSkillRef(command);
+    } else if (this.isPunct(',')) {
+      this.next();
+      statement.flag = this.parseExpression();
+    }
+    if (this.isPunct(',')) {
+      this.next();
+      const other = this.next();
+      if (other.kind !== 'str') throw new Unsupported(`${command} with a non-text other script`);
+      statement.onStart = other.value as string;
+    }
+    this.expect(';');
+    return statement;
+  }
+
+  /** A skill given by name or id, as `skill` and `autobonus3` take it. */
+  private parseSkillRef(command: string): ScriptExpr {
+    const skill = this.parseExpression();
+    if (skill.k !== 'str' && skill.k !== 'num')
+      throw new Unsupported(`${command} with a computed skill`);
+    return skill;
   }
 
   private parseAssignment(): ScriptStmt {

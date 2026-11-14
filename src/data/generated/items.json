@@ -536,8 +536,29 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
   },
   {
     "id": 1131,
@@ -554,8 +575,45 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Freeze", "v": 1 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEff2",
+        "args": [
+          { "k": "const", "name": "Eff_Freeze", "v": 1 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_COLDBOLT" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_COLDBOLT" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ]
   },
   {
     "id": 1132,
@@ -606,8 +664,29 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_FIREBOLT" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_FIREBOLT" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ]
   },
   {
     "id": 1134,
@@ -657,8 +736,27 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_BASH" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ]
   },
   {
     "id": 1136,
@@ -4813,8 +4911,188 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [12],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 70 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 70 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 8 }
+          ]
+        },
+        "then": [
+          {
+            "k": "autobonus",
+            "command": "autobonus",
+            "bonus": [
+              {
+                "k": "bonus",
+                "name": "bAspdRate",
+                "args": [
+                  { "k": "num", "v": 100 }
+                ]
+              }
+            ],
+            "rate": { "k": "num", "v": 70 },
+            "duration": { "k": "num", "v": 3000 },
+            "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+            "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -4832,8 +5110,188 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [12],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 70 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 70 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCriticalAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCriticalAddRace",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 8 }
+          ]
+        },
+        "then": [
+          {
+            "k": "autobonus",
+            "command": "autobonus",
+            "bonus": [
+              {
+                "k": "bonus",
+                "name": "bAspdRate",
+                "args": [
+                  { "k": "num", "v": 100 }
+                ]
+              }
+            ],
+            "rate": { "k": "num", "v": 70 },
+            "duration": { "k": "num", "v": 3000 },
+            "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+            "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -5771,8 +6229,28 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [1, 5, 7, 10, 14, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
   },
   {
     "id": 1367,
@@ -5844,8 +6322,20 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [1, 5, 7, 10, 14, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "ITM_TOMAHAWK" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ]
   },
   {
     "id": 1369,
@@ -6088,8 +6578,42 @@
     "refineable": false,
     "locations": ["Both_Hand"],
     "jobs": [1, 5, 7, 10, 14, 18],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -6147,8 +6671,20 @@
     "refineable": false,
     "locations": ["Both_Hand"],
     "jobs": [1, 5, 7, 10, 14, 18],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "ITM_TOMAHAWK" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -6278,8 +6814,53 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [1, 5, 7, 10, 14, 18],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 55 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 55 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBreakArmorRate",
+            "args": [
+              { "k": "num", "v": 10000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 20 },
+        "duration": { "k": "num", "v": 3000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -8399,8 +8980,37 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [1, 7, 14],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_SOULSTRIKE" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_BOSS", "v": 1 },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
   },
   {
     "id": 1471,
@@ -9878,8 +10488,45 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [4, 8, 15],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "PR_TURNUNDEAD" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "PR_TURNUNDEAD" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPDrainValueRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPGainRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
   },
   {
     "id": 1529,
@@ -10337,8 +10984,45 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [4, 8, 15],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "PR_TURNUNDEAD" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "PR_TURNUNDEAD" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPDrainValueRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPGainRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
   },
   {
     "id": 1541,
@@ -10355,8 +11039,68 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [4, 8, 15],
-    "effects": null,
-    "unsupported": "command \"autobonus\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "AL_CRUCIS" },
+          {
+            "k": "op",
+            "op": "+",
+            "args": [
+              { "k": "num", "v": 1 },
+              {
+                "k": "call",
+                "fn": "getrefine",
+                "args": []
+              }
+            ]
+          },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 50 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 20000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_BLOODDRAIN; }"
+      }
+    ]
   },
   {
     "id": 1542,
@@ -10443,8 +11187,61 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [0, 1, 4, 5, 7, 8, 10, 14, 15, 18, 23],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 75 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 75 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bAddEff",
+            "args": [
+              { "k": "const", "name": "Eff_Stun", "v": 2 },
+              { "k": "num", "v": 5000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 6000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      }
+    ],
     "hidden": true
   },
   {
@@ -11854,8 +12651,195 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [8, 16, 4047],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 80 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 80 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 8 }
+          ]
+        },
+        "then": [
+          {
+            "k": "autobonus",
+            "command": "autobonus",
+            "bonus": [
+              {
+                "k": "bonus",
+                "name": "bBaseAtk",
+                "args": [
+                  { "k": "num", "v": 200 }
+                ]
+              }
+            ],
+            "rate": { "k": "num", "v": 30 },
+            "duration": { "k": "num", "v": 3000 },
+            "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+            "onStart": "{ specialeffect2 EF_BASH3D; }"
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -12282,8 +13266,87 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAllStats",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 3800 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 200 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHPDrainRate",
+        "args": [
+          { "k": "num", "v": 1000 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPDrainRate",
+        "args": [
+          { "k": "num", "v": 1000 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 200 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_STORMGUST" },
+        "level": { "k": "num", "v": 10 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_METEOR" },
+        "level": { "k": "num", "v": 10 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_VERMILION" },
+        "level": { "k": "num", "v": 10 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "GM_SANDMAN" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -13258,8 +14321,55 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [2, 9, 16, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bSPRegenRate",
+            "args": [
+              { "k": "num", "v": 100 },
+              { "k": "num", "v": 2000 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPRegenRate",
+            "args": [
+              { "k": "num", "v": 50 },
+              { "k": "num", "v": 2000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "const", "name": "BF_MAGIC", "v": 2 },
+        "onStart": "{ specialeffect2 EF_HEAL; }"
+      }
+    ]
   },
   {
     "id": 1631,
@@ -14514,8 +15624,72 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [3, 11, 17, 19, 20],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_CURE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Poison", "v": 4 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Curse", "v": 5 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Confusion", "v": 7 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 5000 }
+        ]
+      }
+    ]
   },
   {
     "id": 1721,
@@ -14768,8 +15942,32 @@
     "refineable": false,
     "locations": ["Both_Hand"],
     "jobs": [3, 11, 17, 19, 20],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_CURE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -15987,8 +17185,81 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [8, 15],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "str", "v": "MO_EXTREMITYFIST" },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              { "k": "str", "v": "MO_EXTREMITYFIST" },
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 100 }
+                ]
+              }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 50 },
+        "duration": { "k": "num", "v": 6000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_SUFFRAGIUM; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -16742,8 +18013,43 @@
     "locations": ["Right_Hand"],
     "jobs": [19],
     "gender": "male",
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_JUPITEL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "WZ_JUPITEL" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ]
   },
   {
     "id": 1914,
@@ -19401,8 +20707,94 @@
     "refineable": false,
     "locations": ["Left_Hand"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAllStats",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 99 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableShield",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bShortWeaponDamageReturn",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "CR_FULLPROTECTION" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_ESTIMATION" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "ST_FULLSTRIP" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "HW_MAGICPOWER" },
+        "level": { "k": "num", "v": 10 }
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 200 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bNoGemStone",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bNoWalkDelay",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -25446,8 +26838,41 @@
     "refineable": false,
     "locations": ["Garment"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_ALL", "v": 10 },
+          { "k": "num", "v": 30 },
+          { "k": "const", "name": "BF_WEAPON", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_TELEPORT" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableGarment",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -26405,8 +27830,23 @@
     "locations": ["Both_Accessory"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 23, 24, 25, 4046, 4047, 4049],
     "gender": "male",
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WE_MALE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WE_FEMALE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WE_CALLPARTNER" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ]
   },
   {
     "id": 2635,
@@ -26422,8 +27862,23 @@
     "locations": ["Both_Accessory"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 20, 23, 24, 25, 4046, 4047, 4049],
     "gender": "female",
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WE_MALE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WE_FEMALE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WE_CALLPARTNER" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ]
   },
   {
     "id": 2636,
@@ -29173,8 +30628,37 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAllStats",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bNoCastCancel",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_TELEPORT" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -30110,8 +31594,25 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "num", "v": 0 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      }
+    ],
     "hidden": true
   },
   {
@@ -30218,8 +31719,13 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "ALL_WEWISH" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ]
   },
   {
     "id": 2786,
@@ -30750,8 +32256,30 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 23],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_BASH" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_PROVOKE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_MAGNUM" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -30767,8 +32295,35 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 23],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_STEAL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_HIDING" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_POISON" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -30784,8 +32339,30 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 23],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_INCAGI" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_BLESSING" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -30801,8 +32378,25 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 23],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AC_OWL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AC_CONCENTRATION" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -30818,8 +32412,35 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 23],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MC_DISCOUNT" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MC_OVERCHARGE" },
+        "level": { "k": "num", "v": 10 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MC_IDENTIFY" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MC_MAMMONITE" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -30835,8 +32456,35 @@
     "refineable": false,
     "locations": ["Both_Accessory"],
     "jobs": [0, 23],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_SRECOVERY" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_COLDBOLT" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_FIREWALL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_FIREBOLT" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -34132,8 +35780,28 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_BRUTE", "v": 2 },
+          { "k": "num", "v": 7 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_WATERBALL" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -36063,8 +37731,27 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_RUWACH" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -37650,8 +39337,29 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "WZ_WATERBALL" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HOLYWATER" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ]
   },
   {
     "id": 5260,
@@ -38266,8 +39974,27 @@
     "refineable": true,
     "locations": ["Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_HIDING" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -38283,8 +40010,27 @@
     "refineable": true,
     "locations": ["Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_HIDING" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -38300,8 +40046,27 @@
     "refineable": true,
     "locations": ["Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_HIDING" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -38317,8 +40082,27 @@
     "refineable": true,
     "locations": ["Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_HIDING" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -38513,8 +40297,50 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 2 }
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
   },
   {
     "id": 5284,
@@ -39305,8 +41131,13 @@
     "refineable": true,
     "locations": ["Head_Low", "Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "RG_GRAFFITI" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -39322,8 +41153,21 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_DARK", "v": 7 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_SIGHT" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -39480,8 +41324,13 @@
     "refineable": false,
     "locations": ["Head_Mid"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_ESTIMATION" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -39990,8 +41839,44 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_LIGHTNINGBOLT" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "MG_THUNDERSTORM" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 30 },
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ]
   },
   {
     "id": 5334,
@@ -40226,8 +42111,48 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 50 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 20 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "num", "v": 0 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      }
+    ],
     "hidden": true
   },
   {
@@ -40299,8 +42224,48 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 20 },
+        "duration": { "k": "num", "v": 30000 },
+        "flag": { "k": "num", "v": 0 },
+        "onStart": "{ specialeffect2 EF_HASTEUP; }"
+      }
+    ],
     "hidden": true
   },
   {
@@ -40799,8 +42764,34 @@
     "refineable": false,
     "locations": ["Head_Low"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_ROGUE", "v": 17 }
+          ]
+        },
+        "then": [
+          {
+            "k": "skill",
+            "skill": { "k": "str", "v": "RG_GANGSTER" },
+            "level": { "k": "num", "v": 1 }
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -40931,8 +42922,21 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "HT_FLASHER" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -41495,8 +43499,20 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_ANGELUS" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -41568,8 +43584,29 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_ESTIMATION" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "AL_INCAGI" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 500 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -41585,8 +43622,13 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_HIDING" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -41665,8 +43707,13 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 5 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -42492,8 +44539,25 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee2",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_RECOVERY" },
+        "level": { "k": "num", "v": 3 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_SRECOVERY" },
+        "level": { "k": "num", "v": 3 }
+      }
+    ]
   },
   {
     "id": 5417,
@@ -42620,8 +44684,74 @@
     "refineable": false,
     "locations": ["Head_Low", "Head_Mid", "Head_Top"],
     "jobs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_SIGHT" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "WZ_METEOR" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_FIREBOLT" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -42953,8 +45083,21 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_FIREBOLT" },
+        "level": { "k": "num", "v": 5 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -43680,8 +45823,65 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 3000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_ENHANCE; }"
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bIgnoreMdefClassRate",
+            "args": [
+              { "k": "const", "name": "CLASS_NORMAL", "v": 0 },
+              { "k": "num", "v": 100 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreMdefClassRate",
+            "args": [
+              { "k": "const", "name": "CLASS_BOSS", "v": 1 },
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 3000 },
+        "flag": { "k": "const", "name": "BF_MAGIC", "v": 2 },
+        "onStart": "{ specialeffect2 EF_MAGICALATTHIT; }"
+      }
+    ],
     "hidden": true
   },
   {
@@ -44087,8 +46287,20 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "PR_MAGNIFICAT" },
+        "level": { "k": "num", "v": 3 }
+      }
+    ]
   },
   {
     "id": 5476,
@@ -44148,8 +46360,13 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_BASH" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -44851,8 +47068,13 @@
     "refineable": false,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_PROVOKE" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -44868,8 +47090,20 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_FROSTDIVER" },
+        "level": { "k": "num", "v": 3 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -45048,8 +47282,27 @@
     "refineable": true,
     "locations": ["Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "DC_DONTFORGETME" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -45975,8 +48228,28 @@
     "refineable": true,
     "locations": ["Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_FROSTNOVA" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -46008,8 +48281,20 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 5 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -46214,8 +48499,20 @@
     "refineable": true,
     "locations": ["Head_Low", "Head_Mid", "Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MC_LOUD" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "hidden": true
   },
   {
@@ -49227,7 +51524,7 @@
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
     "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "unsupported": "autobonus bonus: command \"sc_start\"",
     "hidden": true
   },
   {
@@ -51573,8 +53870,109 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [0, 1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 23, 25, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 75 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 75 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bDefRatioAtkClass",
+            "args": [
+              { "k": "const", "name": "CLASS_ALL", "v": 6 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 6000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_HASTEUP; }"
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "||",
+          "args": [
+            {
+              "k": "op",
+              "op": "||",
+              "args": [
+                {
+                  "k": "op",
+                  "op": "==",
+                  "args": [
+                    { "k": "ref", "name": "Class" },
+                    { "k": "const", "name": "JOB_NINJA", "v": 25 }
+                  ]
+                },
+                {
+                  "k": "op",
+                  "op": "==",
+                  "args": [
+                    { "k": "ref", "name": "Class" },
+                    { "k": "const", "name": "JOB_ROGUE", "v": 17 }
+                  ]
+                }
+              ]
+            },
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "Class" },
+                { "k": "const", "name": "JOB_STALKER", "v": 4018 }
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMatkRate",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -52228,8 +54626,82 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [24],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 55 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 55 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 3000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -53440,8 +55912,77 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [24],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 35 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 35 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 80 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPLossRate",
+            "args": [
+              { "k": "num", "v": 120 },
+              { "k": "num", "v": 1000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 6000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_BASH3D; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -53459,8 +56000,84 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [24],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSplashRange",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 55 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 55 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 80 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPLossRate",
+            "args": [
+              { "k": "num", "v": 100 },
+              { "k": "num", "v": 1000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 30 },
+        "duration": { "k": "num", "v": 6000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_BASH3D; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -53478,8 +56095,77 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [24],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 35 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 35 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPLossRate",
+            "args": [
+              { "k": "num", "v": 120 },
+              { "k": "num", "v": 1000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 30 },
+        "duration": { "k": "num", "v": 9000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_BASH3D; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -54187,8 +56873,224 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [24],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 35 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 35 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "GS_TRIPLEACTION" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 4 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 8 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "GS_GROUNDDRIFT" },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "getrefine",
+                    "args": []
+                  },
+                  { "k": "num", "v": 2 }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddEffOnSkill",
+            "args": [
+              { "k": "str", "v": "GS_SPREADATTACK" },
+              { "k": "const", "name": "Eff_Stun", "v": 2 },
+              { "k": "num", "v": 2000 }
+            ]
+          },
+          {
+            "k": "autobonus",
+            "command": "autobonus",
+            "bonus": [
+              {
+                "k": "bonus",
+                "name": "bAspdRate",
+                "args": [
+                  { "k": "num", "v": 20 }
+                ]
+              }
+            ],
+            "rate": { "k": "num", "v": 200 },
+            "duration": { "k": "num", "v": 20000 },
+            "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+            "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -54482,8 +57384,69 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [25],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "NJ_HUUMA" },
+              { "k": "num", "v": 100 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "NJ_ISSEN" },
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 50 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{specialeffect2 EF_POTION_BERSERK; }"
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -54501,8 +57464,223 @@
     "refineable": true,
     "locations": ["Both_Hand"],
     "jobs": [25],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 95 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bIgnoreDefRaceRate",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "NJ_HUUMA" },
+              { "k": "num", "v": 100 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "NJ_ISSEN" },
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 50 },
+        "duration": { "k": "num", "v": 10000 }
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 3 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 3 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              {
+                "k": "op",
+                "op": "*",
+                "args": [
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 3 }
+                    ]
+                  },
+                  {
+                    "k": "op",
+                    "op": "-",
+                    "args": [
+                      {
+                        "k": "call",
+                        "fn": "getrefine",
+                        "args": []
+                      },
+                      { "k": "num", "v": 3 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bIgnoreDefRaceRate",
+            "args": [
+              { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 8 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpellOnSkill",
+            "args": [
+              { "k": "str", "v": "NJ_ISSEN" },
+              { "k": "str", "v": "AL_HEAL" },
+              { "k": "num", "v": 10 },
+              { "k": "num", "v": 1000 },
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAutoSpellOnSkill",
+            "args": [
+              { "k": "str", "v": "NJ_HUUMA" },
+              { "k": "str", "v": "NPC_CRITICALWOUND" },
+              { "k": "num", "v": 2 },
+              { "k": "num", "v": 200 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
     "hidden": true
   },
   {
@@ -54585,8 +57763,27 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\""
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_BASH" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ]
   },
   {
     "id": 13401,
@@ -54643,8 +57840,27 @@
     "refineable": false,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "SM_BASH" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -54731,8 +57947,29 @@
     "refineable": false,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 40 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 40 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -54750,8 +57987,36 @@
     "refineable": false,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "MG_FIREBOLT" },
+        "level": { "k": "num", "v": 5 }
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_FIREBOLT" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -55716,8 +58981,72 @@
     "refineable": false,
     "locations": ["Both_Hand"],
     "jobs": [3, 6, 11, 17, 19, 20],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_CURE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Poison", "v": 4 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Curse", "v": 5 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Confusion", "v": 7 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 5000 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -55735,8 +59064,72 @@
     "refineable": false,
     "locations": ["Both_Hand"],
     "jobs": [3, 6, 11, 17, 19, 20],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAtkEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_CURE" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "AL_HEAL" },
+        "level": { "k": "num", "v": 1 }
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Poison", "v": 4 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Curse", "v": 5 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Confusion", "v": 7 },
+          { "k": "num", "v": 5000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 5000 }
+        ]
+      }
+    ],
     "hidden": true
   },
   {
@@ -55976,8 +59369,25 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"autobonus\"",
+    "effects": [
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 5 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "num", "v": 0 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      }
+    ],
     "hidden": true
   },
   {
@@ -55993,8 +59403,13 @@
     "refineable": true,
     "locations": ["Head_Top"],
     "jobs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "command \"skill\"",
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_HEAVENDRIVE" },
+        "level": { "k": "num", "v": 3 }
+      }
+    ],
     "hidden": true
   },
   {

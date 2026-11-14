@@ -68,7 +68,33 @@ export type ScriptStmt =
   /** `bonus`…`bonus5`: the arity is `args.length` (a flag bonus like `bUnbreakableWeapon` has none). */
   | { k: 'bonus'; name: string; args: ScriptExpr[] }
   | { k: 'if'; cond: ScriptExpr; then: ScriptStmt[]; else: ScriptStmt[] }
-  | { k: 'set'; name: string; value: ScriptExpr };
+  | { k: 'set'; name: string; value: ScriptExpr }
+  /**
+   * `skill "NAME",level{,flag};`: the item grants a skill while worn. Parsed
+   * and stored; nothing computes it yet.
+   */
+  | { k: 'skill'; skill: ScriptExpr; level: ScriptExpr; flag?: ScriptExpr }
+  /**
+   * `autobonus` (on attack), `autobonus2` (when hit), `autobonus3` (on using
+   * `skill`): `bonus` applies for `duration` ms with chance `rate` / 1000.
+   * `bonus` is the parsed bonus script; `onStart`, which rAthena runs when
+   * the bonus triggers (mostly visual effects), is kept as written. Parsed
+   * and stored; nothing computes it yet.
+   */
+  | {
+      k: 'autobonus';
+      command: AutobonusCommand;
+      bonus: ScriptStmt[];
+      rate: ScriptExpr;
+      duration: ScriptExpr;
+      /** `BF_*` attack-type filter (autobonus, autobonus2). */
+      flag?: ScriptExpr;
+      /** Triggering skill name or id (autobonus3). */
+      skill?: ScriptExpr;
+      onStart?: string;
+    };
+
+export type AutobonusCommand = 'autobonus' | 'autobonus2' | 'autobonus3';
 
 export interface Item {
   /** rAthena item id; stable, used in share codes. */

@@ -80,9 +80,9 @@ describe('convertItem', () => {
     expect(convertItem({ ...weapon, Script: 'bonus bStr,1;\n' })?.effects).toEqual([
       { k: 'bonus', name: 'bStr', args: [{ k: 'num', v: 1 }] },
     ]);
-    const unsupported = convertItem({ ...weapon, Script: 'skill "TF_DOUBLE",5;' });
+    const unsupported = convertItem({ ...weapon, Script: 'callfunc "F_X";' });
     expect(unsupported?.effects).toBeNull();
-    expect(unsupported?.unsupported).toBe('command "skill"');
+    expect(unsupported?.unsupported).toBe('command "callfunc"');
   });
 
   it('records a gender restriction and leaves weapon fields off armor', () => {

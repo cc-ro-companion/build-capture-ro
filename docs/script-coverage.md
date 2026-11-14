@@ -6,15 +6,14 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 
 | Equipment with a script | Items | Parsed | Unsupported | Parsed |
 | --- | ---: | ---: | ---: | ---: |
-| All | 1267 | 1175 | 92 | 92.7 % |
-| Not hidden | 540 | 515 | 25 | 95.4 % |
+| All | 1267 | 1259 | 8 | 99.4 % |
+| Not hidden | 540 | 537 | 3 | 99.4 % |
 
 ## Unsupported by reason
 
 | Reason | Items |
 | --- | ---: |
-| command "skill" | 63 |
-| command "autobonus" | 22 |
+| autobonus bonus: command "sc_start" | 1 |
 | function "getequiprefinerycnt" | 1 |
 | function "gettime" | 1 |
 | function "strcharinfo" | 1 |
@@ -23,100 +22,11 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 | unknown name "IG_Ore" | 1 |
 | unknown name "IG_Potion" | 1 |
 
-### command "skill"
+### autobonus bonus: command "sc_start"
 
 | Id | Name | Hidden | Statement |
 | ---: | --- | --- | --- |
-| 1130 | Nagan |  | `skill "TF_DOUBLE",5;` |
-| 1131 | Ice Falchion |  | `skill "MG_COLDBOLT",3;` |
-| 1133 | Fireblend |  | `skill "MG_FIREBOLT",3;` |
-| 1135 | Cutlus |  | `skill "SM_BASH",5;` |
-| 1366 | Light Epsilon |  | `skill "AL_HEAL",3;` |
-| 1368 | Tomahawk |  | `skill "ITM_TOMAHAWK",1;` |
-| 1372 | Light Epsilon | yes | `skill "AL_HEAL",3;` |
-| 1374 | Tomahawk | yes | `skill "ITM_TOMAHAWK",1;` |
-| 1470 | Brionac |  | `skill "AL_HEAL",5;` |
-| 1528 | Grand Cross |  | `skill "PR_TURNUNDEAD",3;` |
-| 1540 | Grand Cross |  | `skill "PR_TURNUNDEAD",3;` |
-| 1599 | Angra Manyu | yes | `skill "WZ_STORMGUST",10;` |
-| 1720 | Rudra Bow |  | `skill "AL_CURE",1;` |
-| 1729 | Rudra Bow | yes | `skill "AL_CURE",1;` |
-| 1913 | Electric Guitar |  | `skill "WZ_JUPITEL",1;` |
-| 2199 | Ahura Mazdah | yes | `skill "CR_FULLPROTECTION",5;` |
-| 2541 | Asprika | yes | `skill "AL_TELEPORT",1;` |
-| 2634 | Wedding Ring |  | `skill "WE_MALE",1;` |
-| 2635 | Wedding Ring |  | `skill "WE_MALE",1;` |
-| 2741 | All In One Ring | yes | `skill "AL_HEAL",1;` |
-| 2784 | Christmas Musicbox |  | `skill "ALL_WEWISH",1;` |
-| 2819 | Swordsman Manual | yes | `skill "SM_BASH",1;` |
-| 2820 | Thief Manual | yes | `skill "TF_DOUBLE",3;` |
-| 2821 | Acolyte Manual | yes | `skill "AL_HEAL",1;` |
-| 2822 | Archer Manual | yes | `skill "AC_OWL",1;` |
-| 2823 | Merchant Manual | yes | `skill "MC_DISCOUNT",1;` |
-| 2824 | Mage Manual | yes | `skill "MG_SRECOVERY",1;` |
-| 5146 | Elephant Hat | yes | `skill "WZ_WATERBALL",1;` |
-| 5212 | Satellite Hairband | yes | `skill "AL_RUWACH",1;` |
-| 5259 | Elephant Hat |  | `skill "AL_HOLYWATER",1;` |
-| 5273 | Happy Wig | yes | `skill "TF_HIDING",1;` |
-| 5274 | Shiny Wig | yes | `skill "TF_HIDING",1;` |
-| 5275 | Marvelous Wig | yes | `skill "TF_HIDING",1;` |
-| 5276 | Fantastic Wig | yes | `skill "TF_HIDING",1;` |
-| 5283 | Chick Hat |  | `skill "TF_DOUBLE",2;` |
-| 5309 | Wool Mask | yes | `skill "RG_GRAFFITI",1;` |
-| 5310 | Shining Electric Bulb Hairband | yes | `skill "MG_SIGHT",1;` |
-| 5315 | Observer | yes | `skill "WZ_ESTIMATION",1;` |
-| 5333 | Radio Antenna |  | `skill "MG_LIGHTNINGBOLT",1;` |
-| 5361 | Gangster Scarf | yes | `skill "RG_GANGSTER",1;` |
-| 5365 | Magnolia Hat | yes | `skill "HT_FLASHER",1;` |
-| 5382 | Bell Ribbon | yes | `skill "AL_ANGELUS",1;` |
-| 5384 | Twin Pompom By JB | yes | `skill "WZ_ESTIMATION",1;` |
-| 5385 | Yoyo Hat | yes | `skill "TF_HIDING", 1;` |
-| 5388 | Snake Head Hat | yes | `skill "TF_DOUBLE",5;` |
-| 5416 | Beer Hat |  | `skill "SM_RECOVERY",3;` |
-| 5420 | Mask Of Ifrit | yes | `skill "MG_SIGHT",1;` |
-| 5430 | Torch Cap | yes | `skill "MG_FIREBOLT",5;` |
-| 5464 | Zaha Doll Hat |  | `skill "PR_MAGNIFICAT", 3;` |
-| 5477 | Brazilian Flag Hat | yes | `skill "SM_BASH", 1;` |
-| 5499 | Pizza Hat | yes | `skill "SM_PROVOKE", 1;` |
-| 5500 | Icecream Hat | yes | `skill "MG_FROSTDIVER",3;` |
-| 5505 | Asara Fairy Hat | yes | `skill "DC_DONTFORGETME",1;` |
-| 5529 | Satanic Bone Helm | yes | `skill "WZ_FROSTNOVA",1;` |
-| 5531 | Baby Dragon Hat | yes | `skill "TF_DOUBLE",5;` |
-| 5539 | Jaguar Hat | yes | `skill "MC_LOUD", 1;` |
-| 13400 | Cutlus |  | `skill "SM_BASH",5;` |
-| 13402 | Cutlus | yes | `skill "SM_BASH",5;` |
-| 13407 | Refined Nagan | yes | `skill "TF_DOUBLE",5;` |
-| 13408 | Refined Fireblend | yes | `skill "MG_FIREBOLT",5;` |
-| 18101 | Rudra Bow | yes | `skill "AL_CURE",1;` |
-| 18102 | Rudra Bow | yes | `skill "AL_CURE",1;` |
-| 18596 | Sprout Hat | yes | `skill "WZ_HEAVENDRIVE",3;` |
-
-### command "autobonus"
-
-| Id | Name | Hidden | Statement |
-| ---: | --- | --- | --- |
-| 1281 | Glorious Bloody Roar | yes | `autobonus "{ bonus bAspdRate,100; }",70,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";` |
-| 1282 | Glorious Jamadhar | yes | `autobonus "{ bonus bAspdRate,100; }",70,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";` |
-| 1380 | Brave Insane Battle Axe | yes | `autobonus "{ bonus bBreakArmorRate,10000; }",20,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSER...` |
-| 1541 | Nemesis |  | `autobonus "{ bonus bBaseAtk,50; }",10,20000,BF_WEAPON,"{ specialeffect2 EF_BLOODDRAIN; }";` |
-| 1543 | Brave Battlefield Morning Star | yes | `autobonus "{ bonus2 bAddEff,Eff_Stun,5000; }",10,6000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSE...` |
-| 1576 | Glorious Tablet | yes | `autobonus "{ bonus bBaseAtk,200; }",30,3000,BF_WEAPON,"{ specialeffect2 EF_BASH3D; }";` |
-| 1630 | Release of Wish |  | `autobonus "{ bonus2 bSPRegenRate,100,2000; bonus2 bHPRegenRate,50,2000; }",10,10000,BF_MAGIC,"{ s...` |
-| 1824 | Brave Battle Fist | yes | `autobonus "{ bonus2 bCastrate,\"MO_EXTREMITYFIST\",-100; }",50,6000,BF_WEAPON,"{ specialeffect2 E...` |
-| 2780 | Dark Knight Glove | yes | `autobonus "{ bonus bAspdRate,2; }",10,10000,0,"{ specialeffect2 EF_POTION_BERSERK; }";` |
-| 5342 | Sorin Doll Hat | yes | `autobonus "{ bonus bBaseAtk,50; }",20,10000,0,"{ specialeffect2 EF_POTION_BERSERK; }";` |
-| 5344 | Bennit Doll Hat | yes | `autobonus "{ bonus bAspdRate,5; }",20,30000,0,"{ specialeffect2 EF_HASTEUP; }";` |
-| 5454 | Puppy Hat | yes | `autobonus "{ bonus bCritical,100; }",10,3000,BF_WEAPON,"{ specialeffect2 EF_ENHANCE; }";` |
 | 5770 | Splash Hat | yes | `autobonus "{ sc_start SC_WINDWEAPON, 180000, 1; }", 3, 180000, BF_WEAPON, "{ specialeffect2 EF_EN...` |
-| 13037 | Valorous Assassin's Damascus | yes | `autobonus "{ bonus bDefRatioAtkClass,Class_All; }",10,6000,BF_WEAPON,"{ specialeffect2 EF_HASTEUP...` |
-| 13108 | Soldier Revolver | yes | `autobonus "{ bonus bAspdRate,100; }",10,3000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";` |
-| 13172 | Soldier Gatling Gun | yes | `autobonus "{ bonus bBaseAtk,80; bonus2 bHPLossRate,120,1000; }",10,6000,BF_WEAPON,"{ specialeffec...` |
-| 13173 | Soldier Shotgun | yes | `autobonus "{ bonus bBaseAtk,80; bonus2 bHPLossRate,100,1000; }",30,6000,BF_WEAPON,"{ specialeffec...` |
-| 13174 | Soldier Grenade Launcher | yes | `autobonus "{ bonus bBaseAtk,300; bonus2 bHPLossRate,120,1000; }",30,9000,BF_WEAPON,"{ specialeffe...` |
-| 13179 | Glorious Grenade Launcher | yes | `autobonus "{ bonus bAspdRate,20; }",200,20000,BF_WEAPON,"{ specialeffect2 EF_POTION_BERSERK; }";` |
-| 13306 | Valorous Huuma Front Shuriken | yes | `autobonus "{ bonus2 bSkillAtk,\"NJ_HUUMA\",100; bonus2 bSkillAtk,\"NJ_ISSEN\",100; }",50,10000,BF...` |
-| 13307 | Glorious Shuriken | yes | `autobonus "{ bonus2 bSkillAtk,\"NJ_HUUMA\",100; bonus2 bSkillAtk,\"NJ_ISSEN\",100; }",50,10000;` |
-| 18595 | Horn of Ancient | yes | `autobonus "{ bonus bBaseAtk,100; }",5,10000,0,"{ specialeffect2 EF_POTION_BERSERK; }";` |
 
 ### function "getequiprefinerycnt"
 
@@ -165,108 +75,111 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 By name and number of values; computed bonuses change the status window
 and auto attack, the others are stored and shown as "not modelled".
 
-36 of 113 bonuses are computed; 77 are stored only.
+36 of 116 bonuses are computed; 80 are stored only.
 
 | Bonus | Values | Items | Computed |
 | --- | ---: | ---: | --- |
-| `bMdef` | 1 | 207 | yes |
-| `bInt` | 1 | 171 | yes |
-| `bStr` | 1 | 130 | yes |
-| `bDex` | 1 | 126 | yes |
-| `bMatkRate` | 1 | 100 |  |
-| `bSubRace` | 2 | 93 |  |
-| `bAtkEle` | 1 | 89 | yes |
-| `bAddRace` | 2 | 86 | yes |
-| `bAgi` | 1 | 86 | yes |
-| `bLuk` | 1 | 78 | yes |
-| `bUnbreakableWeapon` | 0 | 75 |  |
-| `bSubEle` | 2 | 60 |  |
-| `bMaxHP` | 1 | 58 | yes |
-| `bAutoSpell` | 3 | 55 |  |
-| `bVit` | 1 | 55 | yes |
-| `bAspdRate` | 1 | 53 | yes |
-| `bMaxSP` | 1 | 52 | yes |
-| `bCritical` | 1 | 48 | yes |
-| `bResEff` | 2 | 46 |  |
-| `bAddEff` | 2 | 41 |  |
-| `bAllStats` | 1 | 41 | yes |
-| `bFlee` | 1 | 39 | yes |
-| `bHit` | 1 | 39 | yes |
-| `bAddClass` | 2 | 38 | yes |
-| `bIgnoreDefRaceRate` | 2 | 32 | yes |
-| `bBaseAtk` | 1 | 28 | yes |
-| `bMaxHPrate` | 1 | 24 | yes |
-| `bSkillAtk` | 2 | 24 |  |
-| `bDef` | 1 | 22 | yes |
-| `bAutoSpellWhenHit` | 3 | 20 |  |
-| `bCastrate` | 1 | 20 |  |
+| `bMdef` | 1 | 213 | yes |
+| `bInt` | 1 | 182 | yes |
+| `bStr` | 1 | 141 | yes |
+| `bDex` | 1 | 136 | yes |
+| `bAddRace` | 2 | 105 | yes |
+| `bAtkEle` | 1 | 105 | yes |
+| `bMatkRate` | 1 | 105 |  |
+| `bSubRace` | 2 | 98 |  |
+| `bUnbreakableWeapon` | 0 | 89 |  |
+| `bAgi` | 1 | 88 | yes |
+| `bLuk` | 1 | 81 | yes |
+| `bAutoSpell` | 3 | 66 |  |
+| `bSubEle` | 2 | 64 |  |
+| `bMaxHP` | 1 | 60 | yes |
+| `bMaxSP` | 1 | 60 | yes |
+| `bVit` | 1 | 59 | yes |
+| `bAspdRate` | 1 | 54 | yes |
+| `bResEff` | 2 | 50 |  |
+| `bCritical` | 1 | 49 | yes |
+| `bAllStats` | 1 | 44 | yes |
+| `bAddEff` | 2 | 42 |  |
+| `bFlee` | 1 | 41 | yes |
+| `bIgnoreDefRaceRate` | 2 | 41 | yes |
+| `bAddClass` | 2 | 40 | yes |
+| `bHit` | 1 | 40 | yes |
+| `bBaseAtk` | 1 | 30 | yes |
+| `bDef` | 1 | 29 | yes |
+| `bMaxHPrate` | 1 | 25 | yes |
+| `bSkillAtk` | 2 | 25 |  |
+| `bAutoSpellWhenHit` | 3 | 21 |  |
+| `bCastrate` | 1 | 21 |  |
 | `bIgnoreDefRace` | 1 | 20 | yes |
 | `bMaxSPrate` | 1 | 20 | yes |
-| `bFlee2` | 1 | 17 | yes |
+| `bFlee2` | 1 | 18 | yes |
 | `bSPrecovRate` | 1 | 16 |  |
 | `bAddEle` | 2 | 15 | yes |
 | `bAddMonsterDropItem` | 2 | 15 |  |
 | `bAddSize` | 2 | 15 | yes |
 | `bExpAddRace` | 2 | 14 |  |
 | `bUseSPrate` | 1 | 14 |  |
-| `bAutoSpellOnSkill` | 4 | 12 |  |
+| `bAutoSpellOnSkill` | 4 | 13 |  |
+| `bSpeedRate` | 1 | 13 |  |
 | `bUnbreakableHelm` | 0 | 12 |  |
+| `bHealPower` | 1 | 11 |  |
+| `bAddEff2` | 2 | 10 |  |
 | `bAddEff` | 3 | 9 |  |
-| `bAddEff2` | 2 | 9 |  |
+| `bAutoSpellWhenHit` | 4 | 9 |  |
 | `bBreakArmorRate` | 1 | 9 |  |
 | `bDelayrate` | 1 | 9 |  |
-| `bHealPower` | 1 | 9 |  |
 | `bHPrecovRate` | 1 | 9 |  |
-| `bAutoSpellWhenHit` | 4 | 8 |  |
 | `bDefEle` | 1 | 8 |  |
 | `bSPDrainValue` | 1 | 8 |  |
+| `bSplashRange` | 1 | 8 |  |
 | `bMagicAddRace` | 2 | 7 |  |
-| `bSpeedRate` | 1 | 7 |  |
-| `bSplashRange` | 1 | 7 |  |
 | `bAddMonsterDropItem` | 3 | 6 |  |
 | `bBreakWeaponRate` | 1 | 6 |  |
+| `bCastrate` | 2 | 6 |  |
 | `bComaRace` | 2 | 6 |  |
-| `bCastrate` | 2 | 5 |  |
+| `bCriticalAddRace` | 2 | 6 | yes |
 | `bCritAtkRate` | 1 | 5 | yes |
-| `bCriticalAddRace` | 2 | 5 | yes |
 | `bDef2Rate` | 1 | 5 |  |
 | `bDefRate` | 1 | 5 | yes |
+| `bHPDrainRate` | 2 | 5 |  |
 | `bIgnoreMdefRaceRate` | 2 | 5 |  |
 | `bLongAtkRate` | 1 | 5 | yes |
 | `bSubClass` | 2 | 5 |  |
 | `bAddDamageClass` | 2 | 4 |  |
 | `bAutoSpellWhenHit` | 5 | 4 |  |
-| `bHPDrainRate` | 2 | 4 |  |
 | `bIgnoreDefClass` | 1 | 4 | yes |
 | `bLongAtkDef` | 1 | 4 |  |
+| `bShortWeaponDamageReturn` | 1 | 4 |  |
+| `bSPGainRace` | 2 | 4 |  |
 | `bSPRegenRate` | 2 | 4 |  |
 | `bUnbreakableHelm` | 1 | 4 |  |
 | `bAddEffWhenHit` | 2 | 3 |  |
+| `bAutoSpellOnSkill` | 5 | 3 |  |
 | `bHPGainValue` | 1 | 3 |  |
-| `bShortWeaponDamageReturn` | 1 | 3 |  |
+| `bSPDrainRate` | 2 | 3 |  |
+| `bSPDrainValueRace` | 2 | 3 |  |
+| `bUnbreakableShield` | 0 | 3 |  |
 | `bAddDefMonster` | 2 | 2 |  |
+| `bAddEffOnSkill` | 3 | 2 |  |
 | `bAddItemHealRate` | 2 | 2 |  |
 | `bAddMonsterIdDropItem` | 3 | 2 |  |
 | `bAddRace2` | 2 | 2 | yes |
 | `bAddSkillBlow` | 2 | 2 |  |
 | `bAutoSpell` | 4 | 2 |  |
-| `bAutoSpellOnSkill` | 5 | 2 |  |
 | `bDefRatioAtkClass` | 1 | 2 | yes |
 | `bHPLossRate` | 2 | 2 |  |
 | `bHPRegenRate` | 2 | 2 |  |
 | `bMagicHPGainValue` | 1 | 2 |  |
 | `bMatk` | 1 | 2 |  |
+| `bNoCastCancel` | 0 | 2 |  |
 | `bNoKnockback` | 0 | 2 |  |
 | `bPerfectHitRate` | 1 | 2 | yes |
-| `bSPDrainRate` | 2 | 2 |  |
-| `bSPGainRace` | 2 | 2 |  |
 | `bSPGainValue` | 1 | 2 |  |
 | `bSPLossRate` | 2 | 2 |  |
 | `bSPVanishRate` | 2 | 2 |  |
 | `bSubSize` | 2 | 2 |  |
 | `bUnbreakableArmor` | 0 | 2 |  |
-| `bUnbreakableShield` | 0 | 2 |  |
-| `bAddEffOnSkill` | 3 | 1 |  |
+| `bUnbreakableGarment` | 0 | 2 |  |
 | `bAddItemHealRate` | 1 | 1 |  |
 | `bAspd` | 1 | 1 | yes |
 | `bClassChange` | 1 | 1 |  |
@@ -276,9 +189,19 @@ and auto attack, the others are stored and shown as "not modelled".
 | `bHealPower2` | 1 | 1 |  |
 | `bHitRate` | 1 | 1 | yes |
 | `bMagicSPGainValue` | 1 | 1 |  |
-| `bNoCastCancel` | 0 | 1 |  |
+| `bNoGemStone` | 0 | 1 |  |
 | `bNoRegen` | 1 | 1 |  |
-| `bSPDrainValueRace` | 2 | 1 |  |
+| `bNoWalkDelay` | 0 | 1 |  |
 | `bSpeedAddRate` | 1 | 1 |  |
+| `bSubEle` | 3 | 1 |  |
 | `bSubRace2` | 2 | 1 |  |
-| `bUnbreakableGarment` | 0 | 1 |  |
+
+## Commands stored only
+
+Granted skills and autobonuses are parsed and stored (an autobonus with
+its bonus script) but not computed; they show as "not modelled".
+
+| Command | Items |
+| --- | ---: |
+| `skill` | 63 |
+| `autobonus` | 21 |

@@ -23,6 +23,30 @@ function collectBonusKeys(statements: readonly ScriptStmt[], into: Set<string>):
   }
 }
 
+/** Collects the stored-only commands (`skill`, `autobonus`…) used, in both branches of each if. */
+function collectCommands(statements: readonly ScriptStmt[], into: Set<string>): void {
+  for (const statement of statements) {
+    if (statement.k === 'skill') into.add('skill');
+    else if (statement.k === 'autobonus') into.add(statement.command);
+    else if (statement.k === 'if') {
+      collectCommands(statement.then, into);
+      collectCommands(statement.else, into);
+    }
+  }
+}
+
+/** Number of items whose parsed effects use each stored-only command, most used first. */
+export function commandUsage(items: readonly Item[]): [string, number][] {
+  const counts = new Map<string, number>();
+  for (const item of items) {
+    if (item.effects === null) continue;
+    const commands = new Set<string>();
+    collectCommands(item.effects, commands);
+    for (const command of commands) counts.set(command, (counts.get(command) ?? 0) + 1);
+  }
+  return [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
 /** Number of items whose parsed effects use each bonus (`name/arity`), most used first. */
 export function bonusUsage(items: readonly Item[]): [string, number][] {
   const counts = new Map<string, number>();
@@ -109,6 +133,19 @@ export function coverageReport(
     const [name, arity] = key.split('/') as [string, string];
     const isComputed = COMPUTED_BONUSES.has(key) ? 'yes' : '';
     lines.push(`| \`${name}\` | ${arity} | ${count} | ${isComputed} |`);
+  }
+  lines.push(
+    '',
+    '## Commands stored only',
+    '',
+    'Granted skills and autobonuses are parsed and stored (an autobonus with',
+    'its bonus script) but not computed; they show as "not modelled".',
+    '',
+    '| Command | Items |',
+    '| --- | ---: |',
+  );
+  for (const [command, count] of commandUsage(items)) {
+    lines.push(`| \`${command}\` | ${count} |`);
   }
   return `${lines.join('\n')}\n`;
 }
