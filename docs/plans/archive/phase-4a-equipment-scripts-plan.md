@@ -1,10 +1,10 @@
 # Phase 4a: Equipment, refinement and item scripts — plan
 
-Status: approved
+Status: done
 
-Parent: [build-planner-plan.md](build-planner-plan.md), phase 4, first half.
-Follows phase 3 ([plans/archive/phase-3-auto-attack-plan.md](plans/archive/phase-3-auto-attack-plan.md)).
-Phase 4b ([phase-4b-runes-combos-inventory-plan.md](phase-4b-runes-combos-inventory-plan.md))
+Parent: [build-planner-plan.md](../../build-planner-plan.md), phase 4, first half.
+Follows phase 3 ([plans/archive/phase-3-auto-attack-plan.md](phase-3-auto-attack-plan.md)).
+Phase 4b ([phase-4b-runes-combos-inventory-plan.md](../../phase-4b-runes-combos-inventory-plan.md))
 builds on the effect model defined here.
 
 ## Goal

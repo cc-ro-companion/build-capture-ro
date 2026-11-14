@@ -3,7 +3,7 @@
 Status: draft
 
 Parent: [build-planner-plan.md](build-planner-plan.md), phase 4, second half.
-Needs phase 4a ([phase-4a-equipment-scripts-plan.md](phase-4a-equipment-scripts-plan.md)):
+Needs phase 4a ([phase-4a-equipment-scripts-plan.md](plans/archive/phase-4a-equipment-scripts-plan.md)):
 its script parser, effect AST, `BonusSet`, equipment slots and build model v2.
 
 ## Goal

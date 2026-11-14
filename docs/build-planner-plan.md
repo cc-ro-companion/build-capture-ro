@@ -140,7 +140,7 @@ maintainer's step.
 - ~~Script conversion approach.~~ Decided for phase 4: the pipeline parses
   a subset of rAthena script, unsupported scripts are rewritten by hand as
   overrides, and ccRO runes are written in rAthena script too. Phase 4 is
-  split into [4a](phase-4a-equipment-scripts-plan.md) (equipment,
+  split into [4a](plans/archive/phase-4a-equipment-scripts-plan.md) (equipment,
   refinement, script conversion) and [4b](phase-4b-runes-combos-inventory-plan.md)
   (runes, combos, inventory).
 - Format of the hand-entered ccRO data (runes, card system, costumes) and
