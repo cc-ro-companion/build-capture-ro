@@ -1,35 +1,33 @@
 <script lang="ts">
   import { coveredSlots, MAX_REFINE, SLOTS, type Slot } from '../build/equipment';
   import { noteText } from '../build/notModelled';
-  import { itemName, levelCanEquip } from '../build/resolve';
-  import { searchEquipment } from '../build/search';
-  import type { Item } from '../data/types';
+  import { itemName, levelCanEquip, runeName } from '../build/resolve';
+  import { searchEquipment, searchRunes } from '../build/search';
+  import type { Item, Rune } from '../data/types';
   import { usesArrowPath } from '../engine/status';
   import type { BuildState } from './build.svelte';
   import NumberInput from './NumberInput.svelte';
+  import { SLOT_LABELS } from './slots';
 
   let { planner }: { planner: BuildState } = $props();
 
-  const SLOT_LABELS: Record<Slot, string> = {
-    headTop: 'Upper headgear',
-    headMid: 'Middle headgear',
-    headLow: 'Lower headgear',
-    armor: 'Armor',
-    garment: 'Garment',
-    shoes: 'Shoes',
-    accessoryLeft: 'Left accessory',
-    accessoryRight: 'Right accessory',
-    rightHand: 'Right hand',
-    leftHand: 'Left hand',
-  };
-
   let activeSlot = $state<Slot>('rightHand');
+  /** Whether the picker offers items for the active slot or runes for its item. */
+  let picking = $state<'item' | 'rune'>('item');
   let query = $state('');
   let showHidden = $state(false);
 
   const activeLabel = $derived(SLOT_LABELS[activeSlot]);
   const results = $derived(
     searchEquipment(query, activeSlot, planner.build.job, planner.data, { showHidden }),
+  );
+  const activeEntry = $derived(planner.build.equipment[activeSlot]);
+  const activeItem = $derived(activeEntry ? planner.data.items.get(activeEntry.item) : undefined);
+  const runeResults = $derived(
+    activeItem ? searchRunes(query, activeSlot, activeItem, planner.data) : null,
+  );
+  const runesFull = $derived(
+    activeItem !== undefined && (activeEntry?.runes?.length ?? 0) >= activeItem.slots,
   );
   const weapon = $derived(planner.resolved.character.weapon);
   const rangedWeapon = $derived(usesArrowPath(weapon?.weaponType ?? ''));
@@ -48,9 +46,14 @@
     return null;
   }
 
-  function selectSlot(slot: Slot) {
-    if (slot !== activeSlot) query = '';
+  function selectSlot(slot: Slot, mode: 'item' | 'rune' = 'item') {
+    if (slot !== activeSlot || mode !== picking) query = '';
     activeSlot = slot;
+    picking = mode;
+  }
+
+  function describeRune(rune: Rune): string {
+    return `${rune.id} · ${rune.location}`;
   }
 
   function describe(item: Item): string {
@@ -84,9 +87,42 @@
           <td class="item">
             {#if entry}
               {itemName(planner.data, entry.item)} ({entry.item})
+              {#if item && (item.slots > 0 || entry.runes)}
+                <span class="runes" data-testid="runes-{slot}">
+                  {#each entry.runes ?? [] as runeId, index (index)}
+                    {@const rune = planner.data.runes.get(runeId)}
+                    <span class="rune">
+                      {runeName(planner.data, runeId)}
+                      {#if rune && !rune.reviewed}
+                        <span class="draft" title="Not yet checked against the game's item text"
+                          >draft</span
+                        >
+                      {/if}
+                      <button
+                        type="button"
+                        aria-label="Remove {runeName(planner.data, runeId)} from {SLOT_LABELS[
+                          slot
+                        ]}"
+                        onclick={() => planner.removeRune(slot, index)}>×</button
+                      >
+                    </span>
+                  {/each}
+                  {#if (entry.runes?.length ?? 0) < item.slots}
+                    <button
+                      type="button"
+                      class="add-rune"
+                      aria-label="Add rune to {SLOT_LABELS[slot]}"
+                      onclick={() => selectSlot(slot, 'rune')}>+ rune</button
+                    >
+                  {/if}
+                </span>
+              {/if}
               {#if note}
                 <span class="not-modelled" data-testid="note-{slot}">{noteText(note)}</span>
               {/if}
+              {#each planner.album[slot] ?? [] as line (line)}
+                <span class="not-modelled album">{line}: needs card album (phase 8)</span>
+              {/each}
             {:else if coveringEntry}
               <span class="covered">{itemName(planner.data, coveringEntry.item)} (also here)</span>
             {:else}
@@ -106,6 +142,16 @@
               />
             {/if}
           </td>
+          <td class="store">
+            {#if entry}
+              <button
+                type="button"
+                aria-label="Store {SLOT_LABELS[slot]} in inventory"
+                title="Keep a copy in the inventory"
+                onclick={() => planner.storeItem(slot)}>Store</button
+              >
+            {/if}
+          </td>
           <td class="remove">
             {#if entry || coveringEntry}
               <button
@@ -120,10 +166,24 @@
     </tbody>
   </table>
 
-  {#if planner.equipmentErrors.length > 0}
+  {#if planner.equipmentErrors.length + planner.runeErrors.length > 0}
     <ul class="errors" aria-label="Equipment errors">
-      {#each planner.equipmentErrors as error, index (index)}
+      {#each [...planner.equipmentErrors, ...planner.runeErrors] as error, index (index)}
         <li role="alert">{error}</li>
+      {/each}
+    </ul>
+  {/if}
+  {#if planner.groups.length > 0}
+    <h4>Rune sets and combos</h4>
+    <ul class="groups" aria-label="Active rune sets and combos">
+      {#each planner.groups as group, index (index)}
+        {@const text = noteText(group)}
+        <li>
+          {group.kind === 'runeSet' ? 'Rune set' : 'Combo'}: {group.name}
+          {#if text !== ''}
+            <span class="not-modelled">{text}</span>
+          {/if}
+        </li>
       {/each}
     </ul>
   {/if}
@@ -131,40 +191,83 @@
     <p class="note">Computed without ammunition (no arrow or bullet ATK); ammo comes later.</p>
   {/if}
 
-  <div class="picker">
-    <input
-      type="search"
-      placeholder="Search {activeLabel.toLowerCase()} by name or id"
-      aria-label="Search {activeLabel.toLowerCase()}"
-      bind:value={query}
-    />
-    <label class="toggle">
-      <input type="checkbox" bind:checked={showHidden} />
-      Show hidden items
-    </label>
-    <ul class="results" aria-label="{activeLabel} results">
-      {#each results.matches as item (item.id)}
-        <li>
-          <button
-            type="button"
-            class:active={item.id === planner.build.equipment[activeSlot]?.item}
-            class:level-blocked={!levelCanEquip(item, planner.build.baseLevel)}
-            onclick={() => planner.equip(activeSlot, item.id)}
-          >
-            {itemName(planner.data, item.id)}
-            <span class="meta">{describe(item)}</span>
-          </button>
-        </li>
-      {:else}
-        <li class="none">No items for this slot match.</li>
-      {/each}
-    </ul>
-    {#if results.total > results.matches.length}
-      <p class="note">
-        Showing {results.matches.length} of {results.total}; type to narrow the list.
-      </p>
-    {/if}
-  </div>
+  {#if picking === 'rune' && activeItem && runeResults}
+    <div class="picker">
+      <input
+        type="search"
+        placeholder="Search runes for {activeLabel.toLowerCase()} by name or id"
+        aria-label="Search runes for {activeLabel.toLowerCase()}"
+        bind:value={query}
+      />
+      {#if runesFull}
+        <p class="note">
+          {itemName(planner.data, activeItem.id)} has no free slot; remove a rune first.
+        </p>
+      {/if}
+      <ul class="results" aria-label="Runes for {activeLabel}">
+        {#each runeResults.matches as rune (rune.id)}
+          <li>
+            <button
+              type="button"
+              disabled={runesFull}
+              onclick={() => planner.addRune(activeSlot, rune.id)}
+            >
+              <span>
+                {runeName(planner.data, rune.id)}
+                {#if !rune.reviewed}<span class="draft">draft</span>{/if}
+              </span>
+              <span class="meta">{describeRune(rune)}</span>
+            </button>
+          </li>
+        {:else}
+          <li class="none">No runes for this item match.</li>
+        {/each}
+      </ul>
+      {#if runeResults.total > runeResults.matches.length}
+        <p class="note">
+          Showing {runeResults.matches.length} of {runeResults.total}; type to narrow the list.
+        </p>
+      {/if}
+      <button type="button" class="back" onclick={() => selectSlot(activeSlot)}
+        >Back to {activeLabel.toLowerCase()} items</button
+      >
+    </div>
+  {:else}
+    <div class="picker">
+      <input
+        type="search"
+        placeholder="Search {activeLabel.toLowerCase()} by name or id"
+        aria-label="Search {activeLabel.toLowerCase()}"
+        bind:value={query}
+      />
+      <label class="toggle">
+        <input type="checkbox" bind:checked={showHidden} />
+        Show hidden items
+      </label>
+      <ul class="results" aria-label="{activeLabel} results">
+        {#each results.matches as item (item.id)}
+          <li>
+            <button
+              type="button"
+              class:active={item.id === planner.build.equipment[activeSlot]?.item}
+              class:level-blocked={!levelCanEquip(item, planner.build.baseLevel)}
+              onclick={() => planner.equip(activeSlot, item.id)}
+            >
+              {itemName(planner.data, item.id)}
+              <span class="meta">{describe(item)}</span>
+            </button>
+          </li>
+        {:else}
+          <li class="none">No items for this slot match.</li>
+        {/each}
+      </ul>
+      {#if results.total > results.matches.length}
+        <p class="note">
+          Showing {results.matches.length} of {results.total}; type to narrow the list.
+        </p>
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -221,8 +324,51 @@
     font-size: 12px;
   }
 
-  .refine {
+  .refine,
+  .store {
     white-space: nowrap;
+  }
+
+  .runes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .rune {
+    padding: 0 4px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+  }
+
+  .rune button,
+  .add-rune,
+  .back,
+  .store button {
+    border: 0;
+    background: none;
+    color: var(--color-link);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .draft {
+    margin-left: 2px;
+    color: var(--color-error);
+    font-size: 11px;
+  }
+
+  h4 {
+    margin: 4px 0 0;
+    font-size: 13px;
+  }
+
+  .groups {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 12px;
   }
 
   .refine :global(input) {

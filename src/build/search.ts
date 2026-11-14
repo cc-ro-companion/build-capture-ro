@@ -1,8 +1,9 @@
 // Equipment and monster search: case-insensitive substring over the English
 // name, the aegis name and the id.
-import type { Item, Monster } from '../data/types';
+import type { Item, Monster, Rune } from '../data/types';
+import { runeFits } from '../engine/equipment';
 import { fitsSlot, jobCanUseSlot, type Slot } from './equipment';
-import { itemName, jobCanEquip, monsterName, type GameData } from './resolve';
+import { itemName, jobCanEquip, monsterName, runeName, type GameData } from './resolve';
 
 export const MAX_RESULTS = 50;
 
@@ -59,6 +60,23 @@ export function searchEquipment(
       jobCanEquip(item, jobId) &&
       jobCanUseSlot(item, slot, jobId) &&
       matches(item.id, item.aegisName, itemName(data, item.id)),
+  );
+}
+
+/**
+ * Runes that fit the item in `slot` and match the query, in id order. Drafts
+ * (not yet reviewed) are offered too; the panel marks them.
+ */
+export function searchRunes(
+  query: string,
+  slot: Slot,
+  item: Item,
+  data: GameData,
+): SearchResult<Rune> {
+  const matches = matcher(query);
+  return collect(
+    data.runeList,
+    (rune) => runeFits(rune.location, slot, item) && matches(rune.id, '', runeName(data, rune.id)),
   );
 }
 

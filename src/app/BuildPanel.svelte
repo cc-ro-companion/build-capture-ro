@@ -3,6 +3,7 @@
   import { jobBonus, statPointCost, STAT_NAMES, type StatName } from '../engine/stats';
   import type { BuildState } from './build.svelte';
   import EquipmentPanel from './EquipmentPanel.svelte';
+  import InventoryPanel from './InventoryPanel.svelte';
   import NumberInput from './NumberInput.svelte';
 
   let { planner }: { planner: BuildState } = $props();
@@ -87,6 +88,7 @@
   </p>
 
   <EquipmentPanel {planner} />
+  <InventoryPanel {planner} />
 </div>
 
 <style>

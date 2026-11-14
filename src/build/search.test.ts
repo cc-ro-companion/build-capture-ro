@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Item } from '../data/types';
 import { fitsSlot, SLOTS, type Slot } from './equipment';
 import { createGameData, gameData } from './resolve';
-import { MAX_RESULTS, searchEquipment, searchMonsters } from './search';
+import { MAX_RESULTS, searchEquipment, searchMonsters, searchRunes } from './search';
 
 const SWORDMAN = 1;
 const MAGE = 2;
@@ -117,5 +117,29 @@ describe('searchMonsters (shipped data)', () => {
     const result = searchMonsters('', gameData);
     expect(result.matches).toHaveLength(MAX_RESULTS);
     expect(result.total).toBe(gameData.monsterList.length);
+  });
+});
+
+describe('searchRunes (shipped data)', () => {
+  const knife = gameData.items.get(1201) as Item;
+  const guard = gameData.items.get(2101) as Item;
+
+  it('offers only runes whose location fits the item in the slot', () => {
+    const forKnife = searchRunes('', 'rightHand', knife, gameData);
+    expect(forKnife.total).toBe(
+      gameData.runeList.filter((rune) => rune.location === 'Weapon').length,
+    );
+    expect(forKnife.matches.every((rune) => rune.location === 'Weapon')).toBe(true);
+    const forShield = searchRunes('', 'leftHand', guard, gameData);
+    expect(forShield.matches.every((rune) => rune.location === 'Shield')).toBe(true);
+    expect(forShield.total).toBeGreaterThan(0);
+  });
+
+  it('matches name and id, and finds nothing for a rune of another location', () => {
+    expect(
+      searchRunes('anacondaq', 'rightHand', knife, gameData).matches.map((rune) => rune.id),
+    ).toEqual([39101]);
+    expect(searchRunes('39101', 'rightHand', knife, gameData).total).toBe(1);
+    expect(searchRunes('Alicel', 'rightHand', knife, gameData).total).toBe(0);
   });
 });

@@ -471,3 +471,110 @@ describe('saving and share links', () => {
     expect(link).toContain(`#b=${encodeShareCode(swordman, version)}`);
   });
 });
+
+describe('runes, combos and inventory', () => {
+  const assassin: Build = {
+    ...defaultBuild(),
+    job: 12,
+    baseLevel: 99,
+    jobLevel: 50,
+    stats: { str: 80, agi: 90, vit: 30, int: 1, dex: 40, luk: 10 },
+    equipment: { rightHand: { item: 1201, refine: 7 } },
+    target: { monster: 1002 },
+  };
+
+  function openWith(build: Build) {
+    saveBuild(build, version, localStorage);
+    render(App);
+  }
+
+  it('offers only fitting runes, adds one with its draft badge, and updates the numbers', async () => {
+    openWith(assassin);
+    await fireEvent.click(screen.getByRole('button', { name: 'Add rune to Right hand' }));
+    const search = screen.getByLabelText('Search runes for right hand');
+    const list = screen.getByRole('list', { name: 'Runes for Right hand' });
+    await fireEvent.input(search, { target: { value: 'Alicel' } });
+    // Alicel Rune goes into armor, so a knife is not offered it.
+    expect(within(list).queryByRole('button')).toBeNull();
+    await fireEvent.input(search, { target: { value: 'Andre Larva' } });
+    await fireEvent.click(within(list).getByRole('button', { name: /Andre Larva Rune/ }));
+
+    const runes = screen.getByTestId('runes-rightHand');
+    expect(runes.textContent).toContain('Andre Larva Rune');
+    expect(within(runes).getByText('draft')).toBeTruthy();
+    const withRune: Build = {
+      ...assassin,
+      equipment: { rightHand: { item: 1201, refine: 7, runes: [39103] } },
+    };
+    const status = statusWindow(resolveBuild(withRune, gameData).character, rAthenaDefaults);
+    expect(screen.getByTestId('status-sp').textContent).toBe(String(status.maxSp));
+    expect(
+      screen.getByText(
+        /Andre Larva Rune \+ Beholder Card \(right hand only\).*needs card album \(phase 8\)/,
+      ),
+    ).toBeTruthy();
+
+    await fireEvent.click(
+      screen.getByRole('button', { name: 'Remove Andre Larva Rune from Right hand' }),
+    );
+    expect(screen.getByTestId('runes-rightHand').textContent).not.toContain('Andre Larva');
+  });
+
+  it('stops offering runes once the item’s slots are full', async () => {
+    openWith({
+      ...assassin,
+      equipment: { rightHand: { item: 1201, refine: 7, runes: [39101, 39101, 39101] } },
+    });
+    expect(screen.queryByRole('button', { name: 'Add rune to Right hand' })).toBeNull();
+  });
+
+  it('shows a rune that does not fit as an error', () => {
+    openWith({
+      ...assassin,
+      equipment: { rightHand: { item: 1201, refine: 7, runes: [39259] } },
+    });
+    const errors = screen.getByRole('list', { name: 'Equipment errors' });
+    expect(errors.textContent).toContain('Alicel Rune goes into armor, not into Knife (1201).');
+  });
+
+  it('lists an active combo by name and applies it', () => {
+    const mage: Build = {
+      ...defaultBuild(),
+      job: 2,
+      baseLevel: 99,
+      jobLevel: 50,
+      equipment: { armor: { item: 2334, refine: 0 }, rightHand: { item: 1573, refine: 0 } },
+    };
+    openWith(mage);
+    const groups = screen.getByRole('list', { name: 'Active rune sets and combos' });
+    expect(groups.textContent).toContain('Combo: Ancient Magic + Mage Coat');
+    const status = statusWindow(resolveBuild(mage, gameData).character, rAthenaDefaults);
+    expect(screen.getByTestId('status-mdef').textContent).toBe(
+      `${status.mdef[0]} + ${status.mdef[1]}`,
+    );
+  });
+
+  it('stores an item with refine and runes and equips it back unchanged', async () => {
+    openWith({
+      ...assassin,
+      equipment: { rightHand: { item: 1201, refine: 7, runes: [39101, 39103] } },
+    });
+    await fireEvent.click(screen.getByRole('button', { name: 'Store Right hand in inventory' }));
+    const stored = screen.getByTestId('inventory-0');
+    expect(stored.textContent).toContain('+7 Knife (1201)');
+    expect(stored.textContent).toContain('Anacondaq Rune, Andre Larva Rune');
+
+    await fireEvent.click(screen.getByRole('button', { name: 'Remove Right hand' }));
+    expect(screen.getByTestId('slot-rightHand').textContent).toContain('Empty');
+    await fireEvent.click(screen.getByRole('button', { name: 'Equip Knife (1) in Right hand' }));
+    const slot = screen.getByTestId('slot-rightHand');
+    expect(slot.textContent).toContain('Knife (1201)');
+    expect(screen.getByTestId('runes-rightHand').textContent).toContain('Anacondaq Rune');
+    expect(screen.getByLabelText<HTMLInputElement>('Right hand refine').value).toBe('7');
+
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') as Build;
+    expect(saved.inventory).toEqual([{ item: 1201, refine: 7, runes: [39101, 39103] }]);
+    await fireEvent.click(screen.getByRole('button', { name: 'Remove Knife (1) from inventory' }));
+    expect(screen.queryByTestId('inventory-0')).toBeNull();
+  });
+});

@@ -6,7 +6,7 @@
 
   const status = $derived(planner.status);
   const result = $derived(planner.result);
-  const notModelled = $derived(notModelledCount(planner.notModelled));
+  const notModelled = $derived(notModelledCount(planner.notModelled, planner.groups));
   const summary = $derived(
     `${notModelled} ${notModelled === 1 ? 'equipment effect' : 'equipment effects'} not modelled; ` +
       'see the notes in the equipment list.',

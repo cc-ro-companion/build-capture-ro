@@ -2,8 +2,14 @@
 // notices from loading it, and everything the engine derives from it.
 import { defaultDummy, MAX_DUMMIES, type Dummy } from '../build/dummy';
 import { defaultBuild, normalizeBuild, sameBuild, type Build, type Target } from '../build/model';
-import { equipmentErrors, fitsSlot, withEquipped, type Slot } from '../build/equipment';
-import { notModelledNotes } from '../build/notModelled';
+import { equipmentErrors, fitsSlot, runeErrors, withEquipped, type Slot } from '../build/equipment';
+import {
+  equipFromInventory,
+  removeFromInventory,
+  storeEquipped,
+  type InventoryResult,
+} from '../build/inventory';
+import { albumNotes, groupNotes, notModelledNotes } from '../build/notModelled';
 import { resolveBuild, type GameData } from '../build/resolve';
 import {
   decodeShareCode,
@@ -14,6 +20,7 @@ import {
 import { keepUnreadableBuild, loadBuild, saveBuild, UNREADABLE_KEY } from '../build/storage';
 import { autoAttack } from '../engine/autoAttack';
 import type { EngineConfig } from '../engine/config';
+import { runeFits } from '../engine/equipment';
 import { statPointBudget, statPointsSpent, type StatName } from '../engine/stats';
 import { statusWindow } from '../engine/status';
 
@@ -53,8 +60,16 @@ export class BuildState {
   equipmentErrors = $derived.by(() =>
     equipmentErrors(this.build.equipment, this.build.job, this.build.baseLevel, this.data),
   );
-  /** Per slot, what the engine leaves out of the equipped item. */
+  /** Runes that do not fit their item or exceed its slots; kept in the build. */
+  runeErrors = $derived.by(() => runeErrors(this.build.equipment, this.data));
+  /** Per slot, what the engine leaves out of the equipped item and its runes. */
   notModelled = $derived.by(() => notModelledNotes(this.resolved));
+  /** Active rune sets and item combos, with what the engine leaves out of them. */
+  groups = $derived.by(() => groupNotes(this.resolved, this.data));
+  /** Per slot, card album effects of its runes (phase 8). */
+  album = $derived.by(() => albumNotes(this.resolved, this.data));
+  /** Why the last inventory action did nothing, if it did nothing. */
+  inventoryMessage = $state<string | null>(null);
   pointsSpent = $derived.by(() => statPointsSpent(this.build.stats));
   pointsBudget = $derived.by(() => statPointBudget(this.data.statPoints, this.build.baseLevel));
   shareCode = $derived.by(() => encodeShareCode(this.build, this.version));
@@ -140,6 +155,50 @@ export class BuildState {
       ...this.build,
       equipment: { ...this.build.equipment, [slot]: { ...entry, refine } },
     });
+  }
+
+  /** Adds a rune to the item in `slot` if it fits and a card slot is free. */
+  addRune(slot: Slot, runeId: number): void {
+    const entry = this.build.equipment[slot];
+    const item = entry && this.data.items.get(entry.item);
+    const rune = this.data.runes.get(runeId);
+    if (!entry || !item || !rune || !runeFits(rune.location, slot, item)) return;
+    const runes = entry.runes ?? [];
+    if (runes.length >= item.slots) return;
+    this.update({
+      ...this.build,
+      equipment: { ...this.build.equipment, [slot]: { ...entry, runes: [...runes, runeId] } },
+    });
+  }
+
+  removeRune(slot: Slot, index: number): void {
+    const entry = this.build.equipment[slot];
+    if (!entry?.runes) return;
+    const runes = entry.runes.filter((_, position) => position !== index);
+    const next = { item: entry.item, refine: entry.refine, ...(runes.length > 0 ? { runes } : {}) };
+    this.update({ ...this.build, equipment: { ...this.build.equipment, [slot]: next } });
+  }
+
+  storeItem(slot: Slot): void {
+    this.applyInventory(storeEquipped(this.build, slot));
+  }
+
+  equipFromInventory(index: number, slot: Slot): void {
+    this.applyInventory(equipFromInventory(this.build, index, slot, this.data));
+  }
+
+  removeInventoryItem(index: number): void {
+    this.inventoryMessage = null;
+    this.update(removeFromInventory(this.build, index));
+  }
+
+  private applyInventory(result: InventoryResult): void {
+    if ('error' in result) {
+      this.inventoryMessage = result.error;
+      return;
+    }
+    this.inventoryMessage = null;
+    this.update(result.build);
   }
 
   setMonster(monsterId: number): void {
