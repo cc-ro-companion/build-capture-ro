@@ -1,6 +1,6 @@
 # Phase 4b: Runes, combos and inventory — plan
 
-Status: draft
+Status: approved
 
 Parent: [build-planner-plan.md](build-planner-plan.md), phase 4, second half.
 Needs phase 4a ([phase-4a-equipment-scripts-plan.md](plans/archive/phase-4a-equipment-scripts-plan.md)):
@@ -110,7 +110,7 @@ The validation session at the training dummy is the maintainer's step; its
 results become fixtures that `pnpm test` then guards.
 
 ## Tasks
-1. [ ] **Draft tool.** `draft-runes.ts` with phrase mappings and TODO lines;
+1. [x] **Draft tool.** `draft-runes.ts` with phrase mappings and TODO lines;
    run it on the maintainer's client file and commit the draft
    `runes.yml`. Check: tool tests on sample client entries; report the
    TODO count in the progress log.

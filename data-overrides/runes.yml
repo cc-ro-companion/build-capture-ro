@@ -1,0 +1,3766 @@
+# ccRO runes. Drafted once by data-pipeline/tools/draft-runes.ts from itemInfo_orig.lua;
+# hand-maintained from then on. See data-overrides/README.md.
+#
+# Each entry: Id and Name (client), Location, Reviewed, Script (rAthena item
+# script, run in the context of the item the rune sits in), Sets (bonuses
+# that need other runes equipped too) and Album (card album effects, phase 8).
+# The comment above each entry is the client text it was drafted from.
+# `# TODO:` lines are client text the draft could not map; resolve them and
+# set Reviewed: true. The pipeline rejects a reviewed rune with a TODO left.
+Runes:
+  # 39101 Anacondaq Rune
+  #   Increase damage on Poison Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39101
+    Name: 'Anacondaq Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Poison,20;
+
+  # 39103 Andre Larva Rune
+  #   INT + 1
+  #   Maximum SP + 10
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39103
+    Name: 'Andre Larva Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bInt,1;
+      bonus bMaxSP,10;
+    Album:
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39104 Archer Skeleton Rune
+  #   Ranged Attack Damage + 10%.
+  #   (grey) [+Zipper Bear Card (Right-Hand only)]
+  #   Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+  #   Compound on: Weapon
+  - Id: 39104
+    Name: 'Archer Skeleton Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bLongAtkRate,10;
+    Album:
+      - Requires: ['Zipper Bear Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+
+  # 39105 Assaulter Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on DemiHuman monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   [+ Solider, Permeter, Freezer & Heater Rune]
+  #   Add a 0.3% chance of auto casting Level 1 Weapon Perfection on the enemy when attacking.
+  #   HP Recovery + 50%
+  #   Maximum HP + 20%
+  #   STR + 10
+  #   Add a 5% chance of gaining 'Red Potion' item each time a monster is killed.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Swordman Class]
+  #   Red, Yellow and White Potions restore 50% more HP.
+  #   Compound on: Weapon
+  - Id: 39105
+    Name: 'Assaulter Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_DemiHuman,7;
+      if (BaseClass == Job_Swordman) {
+        # TODO: Red, Yellow and White Potions restore 50% more HP
+      }
+    Sets:
+      - Requires: [39331, 39531, 39394, 39441] # Solider, Permeter, Freezer, Heater
+        Script: |
+          bonus3 bAutoSpell,"BS_WEAPONPERFECT",1,3;
+          bonus bHPrecovRate,50;
+          bonus bMaxHPrate,20;
+          bonus bStr,10;
+          # TODO: Add a 5% chance of gaining 'Red Potion' item each time a monster is killed
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39110 Bloody Knight Rune
+  #   Add a 2% chance of auto casting Level 1 Meteor Storm on the enemy when attacking.
+  #   Compound on: Weapon
+  - Id: 39110
+    Name: 'Bloody Knight Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"WZ_METEOR",1,20;
+
+  # 39111 Bloody Murderer Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Insect monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39111
+    Name: 'Bloody Murderer Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Insect,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39114 Caramel Rune
+  #   Increase damage on Insect monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39114
+    Name: 'Caramel Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Insect,20;
+
+  # 39116 Cecil Damon Rune
+  #   HIT - 30
+  #   Increases Attack Speed by 5%.
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39116
+    Name: 'Cecil Damon Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bHit,-30;
+      bonus bAspdRate,5;
+    Album:
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39120 Cruiser Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Brute monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39120
+    Name: 'Cruiser Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Brute,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39122 Death Word Rune
+  #   Inflict 5% more damage with Soul Strike, Napalm Beat.
+  #   -50 SP when unequipped.
+  #   (grey) [+Death Word Card (Right-Hand only)]
+  #   Damage + 15% with Napalm Beat
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39122
+    Name: 'Death Word Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bSkillAtk,"MG_SOULSTRIKE",5;
+      bonus2 bSkillAtk,"MG_NAPALMBEAT",5;
+      # TODO: -50 SP when unequipped
+    Album:
+      - Requires: ['Death Word Card']
+        RightHandOnly: true
+        Script: |
+          bonus2 bSkillAtk,"MG_NAPALMBEAT",15;
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39123 Desert Wolf Rune
+  #   Increase damage inflicted on Small size monster by 15%.
+  #   ATK + 5
+  #   Compound on: Weapon
+  - Id: 39123
+    Name: 'Desert Wolf Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddSize,Size_Small,15;
+      bonus bBaseAtk,5;
+
+  # 39129 Drainliar Rune
+  #   Increase damage on Water Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39129
+    Name: 'Drainliar Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Water,20;
+
+  # 39132 Drops Rune
+  #   DEX + 1
+  #   HIT + 3
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39132
+    Name: 'Drops Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bDex,1;
+      bonus bHit,3;
+    Album:
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39133 Drosera Rune
+  #   Increase Critical Rate + 15 damage with Long Range Physical attack.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39133
+    Name: 'Drosera Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      # TODO: Increase Critical Rate + 15 damage with Long Range Physical attack
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39134 Dullahan Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Dragon monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39134
+    Name: 'Dullahan Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Dragon,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39135 Earth Petite Rune
+  #   Increase damage on Dragon monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39135
+    Name: 'Earth Petite Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Dragon,20;
+
+  # 39138 Fabre Rune
+  #   VIT + 1
+  #   Maximum HP + 100
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39138
+    Name: 'Fabre Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bVit,1;
+      bonus bMaxHP,100;
+    Album:
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39140 Familiar Rune
+  #   Blind an enemy when you attack (Success Chance 5%).
+  #   ATK + 5
+  #   (grey) [+Familiar Card (Right-Hand only)]
+  #   + 10% of Blind status duration works vs MVPs. Against non-MVPs, Blind status that you deal reduce HIT and FLEE by an additional 5%
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39140
+    Name: 'Familiar Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEff,Eff_Blind,500;
+      bonus bBaseAtk,5;
+    Album:
+      - Requires: ['Familiar Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: + 10% of Blind status duration works vs MVPs. Against non-MVPs, Blind status that you deal reduce HIT and FLEE by an additional 5%
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39142 Flora Rune
+  #   Increase damage on Fish monster by 20%.
+  #   (grey) [+Flora Card (Right-Hand only)]
+  #   Damage (all types) + 20% vs race Fish
+  #   Compound on: Weapon
+  - Id: 39142
+    Name: 'Flora Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Fish,20;
+    Album:
+      - Requires: ['Flora Card']
+        RightHandOnly: true
+        Script: |
+          bonus2 bAddRace,RC_Fish,20;
+
+  # 39143 Fur Seal Rune
+  #   HIT + 10
+  #   Flee Rate + 3
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   [Acolyte Class]
+  #   Critical Rate + 9 on Demon and Undead monster.
+  #   Compound on: Weapon
+  - Id: 39143
+    Name: 'Fur Seal Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bHit,10;
+      bonus bFlee,3;
+      if (BaseClass == Job_Acolyte) {
+        bonus2 bCriticalAddRace,RC_Demon,9;
+        bonus2 bCriticalAddRace,RC_Undead,9;
+      }
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39145 Goblin Archer Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Undead monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39145
+    Name: 'Goblin Archer Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Undead,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39146 Goblin Rune
+  #   Increase damage on Brute monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39146
+    Name: 'Goblin Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Brute,20;
+
+  # 39148 Goblin Steamrider Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Formless monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39148
+    Name: 'Goblin Steamrider Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Formless,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39149 Golem Rune
+  #   Make a weapon indestructible (except in upgrade attempts).
+  #   ATK + 5
+  #   (grey) [+Zipper Bear Card (Right-Hand only)]
+  #   Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+  #   Compound on: Weapon
+  - Id: 39149
+    Name: 'Golem Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bUnbreakableWeapon;
+      bonus bBaseAtk,5;
+    Album:
+      - Requires: ['Zipper Bear Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+
+  # 39152 Hill Wind Rune
+  #   Inflict 5% more damage with Thunder Storm, Jupitel Thunder and Lord of Vermilion.
+  #   -50 SP when unequipped.
+  #   (grey) [+Hill Wind Card (Right-Hand only)]
+  #   Damage + 5% with Lightning Bolt and Lord of Vermillion
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39152
+    Name: 'Hill Wind Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bSkillAtk,"MG_THUNDERSTORM",5;
+      bonus2 bSkillAtk,"WZ_JUPITEL",5;
+      bonus2 bSkillAtk,"WZ_VERMILION",5;
+      # TODO: -50 SP when unequipped
+    Album:
+      - Requires: ['Hill Wind Card']
+        RightHandOnly: true
+        Script: |
+          bonus2 bSkillAtk,"MG_LIGHTNINGBOLT",5;
+          bonus2 bSkillAtk,"WZ_VERMILION",5;
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39153 Hillslion Rune
+  #   ATK + 25
+  #   (grey) [+Zipper Bear Card (Right-Hand only)]
+  #   Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+  #   Compound on: Weapon
+  - Id: 39153
+    Name: 'Hillslion Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,25;
+    Album:
+      - Requires: ['Zipper Bear Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+
+  # 39155 Howard Alt-Eisen Rune
+  #   HIT + 30
+  #   Decreases Attack Speed by 5%.
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   (grey) [+Zipper Bear Card (Right-Hand only)]
+  #   Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+  #   Compound on: Weapon
+  - Id: 39155
+    Name: 'Howard Alt-Eisen Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bHit,30;
+      bonus bAspdRate,-5;
+    Album:
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+      - Requires: ['Zipper Bear Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+
+  # 39156 Hunter Fly Rune
+  #   Enable a 3% chance of gaining 15% of the damage inflicted on an enemy as HP with each attack.
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39156
+    Name: 'Hunter Fly Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bHPDrainRate,30,15;
+    Album:
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39157 Hydra Rune
+  #   Increase damage on DemiHuman monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39157
+    Name: 'Hydra Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,20;
+
+  # 39159 Kaho Rune
+  #   Increase damage on Earth Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39159
+    Name: 'Kaho Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Earth,20;
+
+  # 39160 Kobold Archer Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Plant monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39160
+    Name: 'Kobold Archer Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Plant,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39163 Laurell Weinder Rune
+  #   Inflict 3% more damage with Frost Nova and Storm Gust.
+  #   -50 SP when unequipped.
+  #   (grey) [+Laurell Weinder Card]
+  #   Damage + 15% with Frost Diver, and + 22% with Frost Nova
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39163
+    Name: 'Laurell Weinder Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bSkillAtk,"WZ_FROSTNOVA",3;
+      bonus2 bSkillAtk,"WZ_STORMGUST",3;
+      # TODO: -50 SP when unequipped
+    Album:
+      - Requires: ['Laurell Weinder Card']
+        Script: |
+          # TODO: Damage + 15% with Frost Diver, and + 22% with Frost Nova
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39168 Magnolia Rune
+  #   Curse an enemy when you attack (Success Chance 5%).
+  #   ATK + 5
+  #   Compound on: Weapon
+  - Id: 39168
+    Name: 'Magnolia Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEff,Eff_Curse,500;
+      bonus bBaseAtk,5;
+
+  # 39169 Mandragora Rune
+  #   Increase damage on Wind Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39169
+    Name: 'Mandragora Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Wind,20;
+
+  # 39170 Mao Guai Rune
+  #   Increase damage on Ghost Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39170
+    Name: 'Mao Guai Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Ghost,20;
+
+  # 39175 Metaller Rune
+  #   Silence an enemy when you attack (Success Chance 5%).
+  #   ATK + 5
+  #   (grey) [+Metaller Card (Right-Hand only)]
+  #   Ignores + 7.5% of enemy's Resistance vs status Silence
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39175
+    Name: 'Metaller Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEff,Eff_Silence,500;
+      bonus bBaseAtk,5;
+    Album:
+      - Requires: ['Metaller Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Ignores + 7.5% of enemy's Resistance vs status Silence
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39176 Minorous Rune
+  #   Increase damage inflicted on Large size monster by 15%.
+  #   ATK + 5
+  #   Compound on: Weapon
+  - Id: 39176
+    Name: 'Minorous Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddSize,Size_Large,15;
+      bonus bBaseAtk,5;
+
+  # 39178 Mummy Rune
+  #   HIT + 20
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   (grey) [+Zipper Bear Card (Right-Hand only)]
+  #   Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+  #   Compound on: Weapon
+  - Id: 39178
+    Name: 'Mummy Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bHit,20;
+    Album:
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+      - Requires: ['Zipper Bear Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+
+  # 39183 Orc Skeleton Rune
+  #   Increase damage on Holy Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39183
+    Name: 'Orc Skeleton Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Holy,20;
+
+  # 39184 Panzer Goblin Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Demon monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39184
+    Name: 'Panzer Goblin Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Demon,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39185 Pecopeco Egg Rune
+  #   Increase damage on Formless monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39185
+    Name: 'Pecopeco Egg Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Formless,20;
+
+  # 39188 Pitman Rune
+  #   Inflict 5% more damage with Earth Spike and Heavens Drive.
+  #   -50 SP when unequipped.
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39188
+    Name: 'Pitman Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bSkillAtk,"WZ_EARTHSPIKE",5;
+      bonus2 bSkillAtk,"WZ_HEAVENDRIVE",5;
+      # TODO: -50 SP when unequipped
+    Album:
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39189 Plankton Rune
+  #   Inflict Sleep status when you attack (Success Chance 5%).
+  #   ATK + 5
+  #   (grey) [+Plankton Card (Right-Hand only)]
+  #   Adds 5% of initial sleep time where the effect is uninterruptible by damage.
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39189
+    Name: 'Plankton Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEff,Eff_Sleep,500;
+      bonus bBaseAtk,5;
+    Album:
+      - Requires: ['Plankton Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Adds 5% of initial sleep time where the effect is uninterruptible by damage
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39191 Red Ferus Rune
+  #   Inflict 5% more damage with Fire Pillar and Meteor Storm.
+  #   -50 SP when unequipped.
+  #   (grey) [+Red Ferus Card (Right-Hand only)]
+  #   Damage + 15% with Fire Ball, and + 10% with Fire Wall, Fire Pillar and Sightrasher
+  #   (grey) [+Beholder Card (Right-Hand only), except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Weapon
+  - Id: 39191
+    Name: 'Red Ferus Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bSkillAtk,"WZ_FIREPILLAR",5;
+      bonus2 bSkillAtk,"WZ_METEOR",5;
+      # TODO: -50 SP when unequipped
+    Album:
+      - Requires: ['Red Ferus Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 15% with Fire Ball, and + 10% with Fire Wall, Fire Pillar and Sightrasher
+      - Requires: ['Beholder Card']
+        RightHandOnly: true
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39193 Rotar Zairo Rune
+  #   Inflict 10% more damage with Critical attacks.
+  #   Critical Rate + 7 on Fish monster.
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39193
+    Name: 'Rotar Zairo Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,10;
+      bonus2 bCriticalAddRace,RC_Fish,7;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39195 Santa Poring Rune
+  #   Increase damage on Shadow Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39195
+    Name: 'Santa Poring Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Dark,20;
+
+  # 39196 Savage Babe Rune
+  #   Causes Stun effect to enemies by 5% chance.
+  #   (grey) [+Savage Babe Card (Right-Hand only)]
+  #   Duration + 10% with Stun status. This duration works against non-MVP Boss Monsters.
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39196
+    Name: 'Savage Babe Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEff,Eff_Stun,500;
+    Album:
+      - Requires: ['Savage Babe Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Duration + 10% with Stun status. This duration works against non-MVP Boss Monsters
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39197 Scorpion Rune
+  #   Increase damage on Plant monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39197
+    Name: 'Scorpion Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Plant,20;
+
+  # 39198 Scorpion King Rune
+  #   Increase damage on Undead monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39198
+    Name: 'Scorpion King Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Undead,20;
+
+  # 39200 Sidewinder Rune
+  #   Causes Double Attack by 5% chance.
+  #   (grey) [+Sidewinder Card (Right-Hand only)]
+  #   Adds chance to Double Attack: +25% if equipped on a dagger
+  #   Compound on: Weapon
+  - Id: 39200
+    Name: 'Sidewinder Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      # TODO: Causes Double Attack by 5% chance
+    Album:
+      - Requires: ['Sidewinder Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Adds chance to Double Attack: +25% if equipped on a dagger
+
+  # 39203 Skel Worker Rune
+  #   Increase damage inflicted on Medium size monster by 15%.
+  #   ATK + 5
+  #   Compound on: Weapon
+  - Id: 39203
+    Name: 'Skel Worker Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddSize,Size_Medium,15;
+      bonus bBaseAtk,5;
+
+  # 39204 Snake Rune
+  #   Poison an enemy when you attack (Success Chance 5%).
+  #   ATK + 5
+  #   (grey) [+Snake Card (Right-Hand only)]
+  #   Poison status that you deal ticks 50% faster
+  #   (grey) [+Hunter Fly Card (Right-Hand only)]
+  #   Attack Speed + 2%
+  #   Compound on: Weapon
+  - Id: 39204
+    Name: 'Snake Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEff,Eff_Poison,500;
+      bonus bBaseAtk,5;
+    Album:
+      - Requires: ['Snake Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Poison status that you deal ticks 50% faster
+      - Requires: ['Hunter Fly Card']
+        RightHandOnly: true
+        Script: |
+          bonus bAspdRate,2;
+
+  # 39206 Soldier Skeleton Rune
+  #   CRIT + 9
+  #   (grey) [+Mobster Card (Right-Hand only)]
+  #   CRIT + 3
+  #   Compound on: Weapon
+  - Id: 39206
+    Name: 'Soldier Skeleton Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritical,9;
+    Album:
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+
+  # 39209 Strouf Rune
+  #   Increase damage on Demon monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39209
+    Name: 'Strouf Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddRace,RC_Demon,20;
+
+  # 39211 The Paper Rune
+  #   Inflict 20% more damage with Critical attacks.
+  #   Drain 1 SP from its owner on each attack.
+  #   [+ Wanderer, Wild Rose, Shinobi & Zhu Po Long Rune]
+  #   AGI + 5
+  #   STR + 5
+  #   Intimidate Auto-Spell will not function.
+  #   Increases Attack Speed by 5%.
+  #   Movement Speed + 5%
+  #   Gain 1 SP every time when attacking.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Thief Class]
+  #   Allows its user to use certain skills without spending Gemstones.
+  #   Compound on: Weapon
+  - Id: 39211
+    Name: 'The Paper Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bCritAtkRate,20;
+      bonus bSPDrainValue,-1;
+      if (BaseClass == Job_Thief) {
+        bonus bNoGemStone;
+      }
+    Sets:
+      - Requires: [39255, 39415, 39475, 39494] # Wanderer, Wild Rose, Shinobi, Zhu Po Long
+        Script: |
+          bonus bAgi,5;
+          bonus bStr,5;
+          # TODO: Intimidate Auto-Spell will not function
+          bonus bAspdRate,5;
+          bonus bSpeedRate,5;
+          bonus bSPDrainValue,1;
+    Album:
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39214 Vadon Rune
+  #   Increase damage on Fire Property monster by 20%.
+  #   Compound on: Weapon
+  - Id: 39214
+    Name: 'Vadon Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus2 bAddEle,Ele_Fire,20;
+
+  # 39217 Zipper Bear Rune
+  #   ATK + 30
+  #   Drain 1 SP from its owner on each attack.
+  #   (grey) [+Zipper Bear Card (Right-Hand only)]
+  #   Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+  #   [Merchant Class]
+  #   Make a weapon indestructible (except in upgrade attempts).
+  #   Compound on: Weapon
+  - Id: 39217
+    Name: 'Zipper Bear Rune'
+    Location: Weapon
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,30;
+      bonus bSPDrainValue,-1;
+      if (BaseClass == Job_Merchant) {
+        bonus bUnbreakableWeapon;
+      }
+    Album:
+      - Requires: ['Zipper Bear Card']
+        RightHandOnly: true
+        Script: |
+          # TODO: Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike
+
+  # 39219 Aliot Rune
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [Swordman, Merchant, Thief Class]
+  #   STR + 2, Maximum HP + 5%
+  #   [Mage, Acolyte, Archer Class]
+  #   INT + 2, Maximum SP + 5%
+  #   Compound on: Garment
+  - Id: 39219
+    Name: 'Aliot Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      if (BaseClass == Job_Swordman || BaseClass == Job_Merchant || BaseClass == Job_Thief) {
+        bonus bStr,2;
+        bonus bMaxHPrate,5;
+      }
+      if (BaseClass == Job_Mage || BaseClass == Job_Acolyte || BaseClass == Job_Archer) {
+        bonus bInt,2;
+        bonus bMaxSPrate,5;
+      }
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39221 Bapho Jr. Rune
+  #   AGI + 3, Critical Rate + 1%
+  #   Compound on: Garment
+  - Id: 39221
+    Name: 'Bapho Jr. Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      # TODO: AGI + 3, Critical Rate + 1%
+
+  # 39222 Choco Rune
+  #   Perfect Dodge + 5
+  #   Flee Rate + 10
+  #   Compound on: Garment
+  - Id: 39222
+    Name: 'Choco Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bFlee2,5;
+      bonus bFlee,10;
+
+  # 39226 Dragon Tail Rune
+  #   AGI + 1
+  #   Flee Rate + 10
+  #   Inflict 5% more damage with Double Strafing and Arrow Shower.
+  #   Compound on: Garment
+  - Id: 39226
+    Name: 'Dragon Tail Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bAgi,1;
+      bonus bFlee,10;
+      bonus2 bSkillAtk,"AC_DOUBLE",5;
+      bonus2 bSkillAtk,"AC_SHOWER",5;
+
+  # 39227 Dustiness Rune
+  #   Add a 30% resistance against Wind Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Giant Hornet Card]
+  #   Flee Rate + 10
+  #   Compound on: Garment
+  - Id: 39227
+    Name: 'Dustiness Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Wind,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Giant Hornet Card']
+        Script: |
+          bonus bFlee,10;
+
+  # 39230 Giant Whisper Rune
+  #   Flee Rate + 10
+  #   [Base STR >= 80]
+  #   ATK + 20
+  #   [Base VIT >= 80]
+  #   Maximum HP + 3%
+  #   [Base LUK >= 80]
+  #   Critical Rate + 3
+  #   Compound on: Garment
+  - Id: 39230
+    Name: 'Giant Whisper Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bFlee,10;
+      if (readparam(bStr) >= 80) {
+        bonus bBaseAtk,20;
+      }
+      if (readparam(bVit) >= 80) {
+        bonus bMaxHPrate,3;
+      }
+      if (readparam(bLuk) >= 80) {
+        bonus bCritical,3;
+      }
+
+  # 39231 Green Maiden Rune
+  #   LUK - 5
+  #   Increase LUK and Critical Rate + 1% per Refine Level of the equipment this card is compounded on.
+  #   Compound on: Garment
+  - Id: 39231
+    Name: 'Green Maiden Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bLuk,-5;
+      # TODO: Increase LUK and Critical Rate + 1% per Refine Level of the equipment this card is compounded on
+
+  # 39232 Harpy Rune
+  #   Add a 15% resistance against Neutral Property attacks.
+  #   Inflict 5% more damage with Napalm Beat.
+  #   Compound on: Garment
+  - Id: 39232
+    Name: 'Harpy Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Neutral,15;
+      bonus2 bSkillAtk,"MG_NAPALMBEAT",5;
+
+  # 39233 Hode Rune
+  #   Add a 30% resistance against Earth Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Hode Card]
+  #   Add a 30% resistance against Earth Property attacks.
+  #   Flee Rate + 5
+  #   Compound on: Garment
+  - Id: 39233
+    Name: 'Hode Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Earth,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Hode Card']
+        Script: |
+          bonus2 bSubEle,Ele_Earth,30;
+          bonus bFlee,5;
+
+  # 39234 Isis Rune
+  #   Add a 30% resistance against Shadow Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Isis Card]
+  #   Add a 30% resistance against Shadow Property attacks.
+  #   Flee Rate + 5
+  #   Compound on: Garment
+  - Id: 39234
+    Name: 'Isis Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Dark,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Isis Card']
+        Script: |
+          bonus2 bSubEle,Ele_Dark,30;
+          bonus bFlee,5;
+
+  # 39235 Jakk Rune
+  #   Add a 30% resistance against Fire Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Giant Hornet Card]
+  #   Flee Rate + 10
+  #   Compound on: Garment
+  - Id: 39235
+    Name: 'Jakk Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Fire,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Giant Hornet Card']
+        Script: |
+          bonus bFlee,10;
+
+  # 39236 Kapha Rune
+  #   [When compounded into an item with refine rate of 0~5]
+  #   MDEF + 8
+  #   (grey) [+Kapha Card]
+  #   MDEF + 3
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Garment
+  - Id: 39236
+    Name: 'Kapha Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      if (getrefine() <= 5) {
+        bonus bMdef,8;
+      }
+    Album:
+      - Requires: ['Kapha Card']
+        Script: |
+          bonus bMdef,3;
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39237 Kasa Rune
+  #   Has a 5% chance of auto-casting Level 5 Fire Bolt or Level 5 Fire Ball on the enemy when attacking.
+  #   Compound on: Garment
+  - Id: 39237
+    Name: 'Kasa Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      # TODO: Has a 5% chance of auto-casting Level 5 Fire Bolt or Level 5 Fire Ball on the enemy when attacking
+
+  # 39239 Magmaring Rune
+  #   ATK + 5
+  #   Increase damage on Earth Property enemies by 10%.
+  #   Add a Critical Rate + 15 to the Brute monster.
+  #   Compound on: Garment
+  - Id: 39239
+    Name: 'Magmaring Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,5;
+      bonus2 bAddEle,Ele_Earth,10;
+      bonus2 bCriticalAddRace,RC_Brute,15;
+
+  # 39240 Marionette Rune
+  #   Add a 30% resistance against Ghost Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Marionette Card]
+  #   Add a 30% resistance against Ghost Property attacks.
+  #   Flee Rate + 5
+  #   Compound on: Garment
+  - Id: 39240
+    Name: 'Marionette Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Ghost,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Marionette Card']
+        Script: |
+          bonus2 bSubEle,Ele_Ghost,30;
+          bonus bFlee,5;
+
+  # 39241 Marse Rune
+  #   Add a 30% resistance against Water Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Giant Hornet Card]
+  #   Flee Rate + 10
+  #   Compound on: Garment
+  - Id: 39241
+    Name: 'Marse Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Water,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Giant Hornet Card']
+        Script: |
+          bonus bFlee,10;
+
+  # 39243 Myst Rune
+  #   Add a 30% resistance against Poison Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Myst Card]
+  #   Add a 30% resistance against Poison Property attacks.
+  #   Flee Rate + 5
+  #   Compound on: Garment
+  - Id: 39243
+    Name: 'Myst Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Poison,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Myst Card']
+        Script: |
+          bonus2 bSubEle,Ele_Poison,30;
+          bonus bFlee,5;
+
+  # 39244 Nine Tail Rune
+  #   AGI + 2
+  #   [Refine Rate +9 or higher]
+  #   Flee Rate + 20
+  #   Compound on: Garment
+  - Id: 39244
+    Name: 'Nine Tail Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bAgi,2;
+      if (getrefine() >= 9) {
+        bonus bFlee,20;
+      }
+
+  # 39245 Noxious Rune
+  #   Reduce damage from Long Range attacks by 10%.
+  #   10% Resistance to Neutral attacks.
+  #   Compound on: Garment
+  - Id: 39245
+    Name: 'Noxious Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bLongAtkDef,10;
+      bonus2 bSubEle,Ele_Neutral,10;
+
+  # 39246 Orc Baby Rune
+  #   Increase resistance to Neutral Property attacks by 10%.
+  #   Flee Rate + 10
+  #   [When compounded into an item with refine rate of +9 or higher]
+  #   Add a resistance against Neutral Property attacks by 5%.
+  #   Add a Flee Rate + 5
+  #   Compound on: Garment
+  - Id: 39246
+    Name: 'Orc Baby Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Neutral,10;
+      bonus bFlee,10;
+      if (getrefine() >= 9) {
+        bonus2 bSubEle,Ele_Neutral,5;
+        bonus bFlee,5;
+      }
+
+  # 39247 Orc Zombie Rune
+  #   Add a 30% resistance against Undead Property attacks.
+  #   Flee Rate + 5
+  #   (grey) [+Orc Zombie Card]
+  #   Add a 30% resistance against Undead Property attacks.
+  #   Flee Rate + 5
+  #   Compound on: Garment
+  - Id: 39247
+    Name: 'Orc Zombie Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Undead,30;
+      bonus bFlee,5;
+    Album:
+      - Requires: ['Orc Zombie Card']
+        Script: |
+          bonus2 bSubEle,Ele_Undead,30;
+          bonus bFlee,5;
+
+  # 39248 Punk Rune
+  #   Add a 5% chance of auto casting Level 1 Quagmire around the user when the user receives Physical Damage.
+  #   If the user has mastered the skill at Level 5, it will cast Level 5 Quagmire.
+  #   Compound on: Garment
+  - Id: 39248
+    Name: 'Punk Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"WZ_QUAGMIRE",1,50;
+      # TODO: If the user has mastered the skill at Level 5, it will cast Level 5 Quagmire
+
+  # 39249 Raydric Rune
+  #   Add a 20% resistance against Neutral Property attacks.
+  #   Compound on: Garment
+  - Id: 39249
+    Name: 'Raydric Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Neutral,20;
+
+  # 39251 Salamander Rune
+  #   Inflict 40% more damage with Fire Pillar and Meteor Storm.
+  #   Compound on: Garment
+  - Id: 39251
+    Name: 'Salamander Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus2 bSkillAtk,"WZ_FIREPILLAR",40;
+      bonus2 bSkillAtk,"WZ_METEOR",40;
+
+  # 39255 Wanderer Rune
+  #   Add a 2% chance of auto casting Level 1 Intimidate on an enemy when attacking.
+  #   [Thief Class]
+  #   Flee Rate + 20
+  #   Compound on: Garment
+  - Id: 39255
+    Name: 'Wanderer Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"RG_PLAGIARISM",1,20;
+      if (BaseClass == Job_Thief) {
+        bonus bFlee,20;
+      }
+
+  # 39256 Whisper Rune
+  #   Flee Rate + 20
+  #   Increase damage from Ghost Property attacks by 50%.
+  #   Compound on: Garment
+  - Id: 39256
+    Name: 'Whisper Rune'
+    Location: Garment
+    Reviewed: false
+    Script: |
+      bonus bFlee,20;
+      bonus2 bSubEle,Ele_Ghost,-50;
+
+  # 39258 Agav Rune
+  #   MATK + 5%, DEF - 10
+  #   [Mage Class]
+  #   Max SP + 100
+  #   Compound on: Armor
+  - Id: 39258
+    Name: 'Agav Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bMatkRate,5;
+      bonus bDef,-10;
+      if (BaseClass == Job_Mage) {
+        bonus bMaxSP,100;
+      }
+
+  # 39259 Alicel Rune
+  #   Flee Rate + 10
+  #   DEF - 5
+  #   (grey) [+Giant Hornet Card]
+  #   Flee Rate + 10
+  #   Compound on: Armor
+  - Id: 39259
+    Name: 'Alicel Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bFlee,10;
+      bonus bDef,-5;
+    Album:
+      - Requires: ['Giant Hornet Card']
+        Script: |
+          bonus bFlee,10;
+
+  # 39261 Ancient Mimic Rune
+  #   Every 18 Base LUK, you gain 1 AGI.
+  #   Compound on: Armor
+  - Id: 39261
+    Name: 'Ancient Mimic Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bAgi,readparam(bLuk)/18*1;
+
+  # 39262 Angeling Rune
+  #   Blesses an Armor with the Holy Property.
+  #   Compound on: Armor
+  - Id: 39262
+    Name: 'Angeling Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Holy;
+
+  # 39263 Anolian Rune
+  #   Add a 3% chance of auto casting Level 1 Attention Concentrate on the user when the user receives Physical Damage.
+  #   If the user has mastered the skill at Level 10, it will cast Level 10 Attention Concentrate.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39263
+    Name: 'Anolian Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"AC_CONCENTRATION",1,30;
+      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Attention Concentrate
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39266 Archdam Rune
+  #   ATK + 10
+  #   Increase Casting Time by 20%.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [+ Permeter, Freezer & Heater Rune]
+  #   INT + 1
+  #   STR + 1
+  #   DEF + 2
+  #   SP Recovery + 10%
+  #   Reduce Casting Time by 10%.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Crusader]
+  #   Blesses an Armor with the Holy Property.
+  #   Compound on: Armor
+  - Id: 39266
+    Name: 'Archdam Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,10;
+      bonus bCastrate,20;
+      if (BaseJob == Job_Crusader) {
+        bonus bDefEle,Ele_Holy;
+      }
+    Sets:
+      - Requires: [39531, 39394, 39441] # Permeter, Freezer, Heater
+        Script: |
+          bonus bInt,1;
+          bonus bStr,1;
+          bonus bDef,2;
+          bonus bSPrecovRate,10;
+          bonus bCastrate,-10;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39267 Argiope Rune
+  #   Enchant an Armor with the Poison Property.
+  #   DEF + 1
+  #   (grey) [+Argiope Card]
+  #   Poison React SP Cost -30% and triggers against missed attacks
+  #   Compound on: Armor
+  - Id: 39267
+    Name: 'Argiope Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Poison;
+      bonus bDef,1;
+    Album:
+      - Requires: ['Argiope Card']
+        Script: |
+          # TODO: Poison React SP Cost -30% and triggers against missed attacks
+
+  # 39269 Baby Leopard Rune
+  #   LUK + 3
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [Merchant Class]
+  #   Make an armor indestructible (except in upgrade attempts).
+  #   Compound on: Armor
+  - Id: 39269
+    Name: 'Baby Leopard Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bLuk,3;
+      if (BaseClass == Job_Merchant) {
+        bonus bUnbreakableArmor;
+      }
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39271 Bathory Rune
+  #   Enchant Armors with the Shadow Property.
+  #   Compound on: Armor
+  - Id: 39271
+    Name: 'Bathory Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Dark;
+
+  # 39272 Brilight Rune
+  #   Add a 6% chance of auto casting 'Silence' on an enemy when the user receives Physical Damage.
+  #   (grey) [+Brilight Card]
+  #   Chance increased to 12%
+  #   Compound on: Armor
+  - Id: 39272
+    Name: 'Brilight Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Add a 6% chance of auto casting 'Silence' on an enemy when the user receives Physical Damage
+    Album:
+      - Requires: ['Brilight Card']
+        Script: |
+          # TODO: Chance increased to 12%
+
+  # 39273 Byorgue Rune
+  #   (grey) [+Giant Hornet Card]
+  #   Flee Rate + 10
+  #   [Rogue]
+  #   ATK + 10%, MATK + 10%
+  #   Compound on: Armor
+  - Id: 39273
+    Name: 'Byorgue Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      if (BaseJob == Job_Rogue) {
+        bonus bAtkRate,10;
+        bonus bMatkRate,10;
+      }
+    Album:
+      - Requires: ['Giant Hornet Card']
+        Script: |
+          bonus bFlee,10;
+
+  # 39275 Clock Rune
+  #   Add a 3% chance of auto casting Level 3 Auto Guard on the user when the user receives Physical Damage.
+  #   If the user has mastered the skill at Level 10, it will cast Level 10 Auto Guard.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39275
+    Name: 'Clock Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"CR_AUTOGUARD",3,30;
+      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Auto Guard
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39276 Cornutus Rune
+  #   Make an armor indestructible (except in upgrade attempts).
+  #   DEF + 1
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39276
+    Name: 'Cornutus Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bUnbreakableArmor;
+      bonus bDef,1;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39278 Dame of Sentinel Rune
+  #   Every 18 Base VIT, you gain 1 DEX.
+  #   Compound on: Armor
+  - Id: 39278
+    Name: 'Dame of Sentinel Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDex,readparam(bVit)/18*1;
+
+  # 39279 Dark Frame Rune
+  #   Add a 6% chance of auto casting 'Stone Curse' on an enemy when the user receives Physical Damage.
+  #   (grey) [+Dark Frame Card]
+  #   Chance increased to 12%. Ignores 30% of enemy's resistance to Stone Curse. Stone Curse can affect MVPs, changing their property to Earth 1 (but no other effects).
+  #   Compound on: Armor
+  - Id: 39279
+    Name: 'Dark Frame Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Add a 6% chance of auto casting 'Stone Curse' on an enemy when the user receives Physical Damage
+    Album:
+      - Requires: ['Dark Frame Card']
+        Script: |
+          # TODO: Chance increased to 12%. Ignores 30% of enemy's resistance to Stone Curse. Stone Curse can affect MVPs, changing their property to Earth 1 (but no other effects)
+
+  # 39280 Demon Pungus Rune
+  #   Add a 6% chance of auto casting 'Sleep' on an enemy when the user receives Physical Damage.
+  #   (grey) [+Demon Pungus Card]
+  #   Chance increased to 12%
+  #   Compound on: Armor
+  - Id: 39280
+    Name: 'Demon Pungus Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Add a 6% chance of auto casting 'Sleep' on an enemy when the user receives Physical Damage
+    Album:
+      - Requires: ['Demon Pungus Card']
+        Script: |
+          # TODO: Chance increased to 12%
+
+  # 39284 Dokebi Rune
+  #   Enchant Armors with the Wind Property.
+  #   DEF + 1
+  #   (grey) [+Giant Hornet Card]
+  #   Flee Rate + 10
+  #   Compound on: Armor
+  - Id: 39284
+    Name: 'Dokebi Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Wind;
+      bonus bDef,1;
+    Album:
+      - Requires: ['Giant Hornet Card']
+        Script: |
+          bonus bFlee,10;
+
+  # 39285 Earth Deleter Rune
+  #   Reduces natural SP recovery by 100%.
+  #   Gain 10 SP each time an enemy is killed by a Physical Melee Damage.
+  #   Drain 100 SP as the armor is unequipped.
+  #   Compound on: Armor
+  - Id: 39285
+    Name: 'Earth Deleter Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Reduces natural SP recovery by 100%
+      bonus bSPGainValue,10;
+      # TODO: Drain 100 SP as the armor is unequipped
+
+  # 39287 Egnigem Cenia Rune
+  #   Every 18 Base INT, you gain 1 STR.
+  #   Compound on: Armor
+  - Id: 39287
+    Name: 'Egnigem Cenia Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bStr,readparam(bInt)/18*1;
+
+  # 39289 Evil Druid Rune
+  #   Enchant Armor with the Undead Property.
+  #   INT + 1, DEF + 1
+  #   Compound on: Armor
+  - Id: 39289
+    Name: 'Evil Druid Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Undead;
+      bonus bInt,1;
+      bonus bDef,1;
+
+  # 39291 Geographer Rune
+  #   Add a 3% chance of auto casting Level 2 Blessing on the user when the user receives Physical Damage.
+  #   If the user has mastered the skill at Level 10, it will cast Level 10 Blessing.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [+ Rideword, Enchanted Peach Tree, Cookie & Seal Rune]
+  #   VIT + 10
+  #   Reduce Casting Time by 10%.
+  #   Reduce 10% SP comsumption.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Acolyte Class]
+  #   Receive 30% less damage from Demon and Undead monster.
+  #   Receive 5% more Experience Points from Demon and Undead monsters.
+  #   Compound on: Armor
+  - Id: 39291
+    Name: 'Geographer Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"AL_BLESSING",2,30;
+      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Blessing
+      if (BaseClass == Job_Acolyte) {
+        bonus2 bSubRace,RC_Demon,30;
+        bonus2 bSubRace,RC_Undead,30;
+        bonus2 bExpAddRace,RC_Demon,5;
+        bonus2 bExpAddRace,RC_Undead,5;
+      }
+    Sets:
+      - Requires: [39533, 39352, 39429] # Rideword, Enchanted Peach Tree, Cookie, Seal
+        Script: |
+          # TODO: unknown rune "Seal Rune" in this set
+          bonus bVit,10;
+          bonus bCastrate,-10;
+          bonus bUseSPrate,-10;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39293 Giant Spider Rune
+  #   Add a 6% chance of auto casting 'Poison' on an enemy when the user receives Physical Damage.
+  #   (grey) [+Giant Spider Card]
+  #   Chance increased to 12%. Poison status that you deal ticks 200% faster.
+  #   Compound on: Armor
+  - Id: 39293
+    Name: 'Giant Spider Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Add a 6% chance of auto casting 'Poison' on an enemy when the user receives Physical Damage
+    Album:
+      - Requires: ['Giant Spider Card']
+        Script: |
+          # TODO: Chance increased to 12%. Poison status that you deal ticks 200% faster
+
+  # 39295 Goat Rune
+  #   If the card is compounded on an armor that is refined to +5 or below, DEF +2 and MDEF +5.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39295
+    Name: 'Goat Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: If the card is compounded on an armor that is refined to +5 or below, DEF +2 and MDEF +5
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39301 Kraben Rune
+  #   Add a 6% chance of auto casting 'Blind' on an enemy when the user receives Physical Damage.
+  #   (grey) [+Kraben Card]
+  #   Chance increased to 12%. Reapplying Blind refreshes its duration.
+  #   Compound on: Armor
+  - Id: 39301
+    Name: 'Kraben Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Add a 6% chance of auto casting 'Blind' on an enemy when the user receives Physical Damage
+    Album:
+      - Requires: ['Kraben Card']
+        Script: |
+          # TODO: Chance increased to 12%. Reapplying Blind refreshes its duration
+
+  # 39303 Loli Ruri Rune
+  #   Add a 5% chance of auto casting Level 3 Heal on the user when the user receives Physical Damage.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [+ Parasite, Miyabi Doll, Evil Nymph, Harpy & Bloody Butterfly Rune]
+  #   DEF + 5
+  #   MDEF + 5
+  #   Maximum HP + 500
+  #   Inflict 10% more damage with Fire, Cold and Lightning Bolt skill.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Mage Class]
+  #   MATK + 3%
+  #   Reduce Casting Time by 15%.
+  #   Compound on: Armor
+  - Id: 39303
+    Name: 'Loli Ruri Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"AL_HEAL",3,50;
+      if (BaseClass == Job_Mage) {
+        bonus bMatkRate,3;
+        bonus bCastrate,-15;
+      }
+    Sets:
+      - Requires: [39369, 39408, 39505, 39232, 39426] # Parasite, Miyabi Doll, Evil Nymph, Harpy, Bloody Butterfly
+        Script: |
+          bonus bDef,5;
+          bonus bMdef,5;
+          bonus bMaxHP,500;
+          # TODO: Inflict 10% more damage with Fire, Cold and Lightning Bolt skill
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39304 Majoruros Rune
+  #   Add a 6% chance of auto casting Stun on an enemy when the user receives Physical Damage.
+  #   (grey) [+Majoruros Card]
+  #   Chance increased to 12%
+  #   Compound on: Armor
+  - Id: 39304
+    Name: 'Majoruros Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Add a 6% chance of auto casting Stun on an enemy when the user receives Physical Damage
+    Album:
+      - Requires: ['Majoruros Card']
+        Script: |
+          # TODO: Chance increased to 12%
+
+  # 39305 Marc Rune
+  #   Gain immunity to the Freeze status.
+  #   Add a 5% resistance against Water Property attacks.
+  #   Compound on: Armor
+  - Id: 39305
+    Name: 'Marc Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Freeze,10000;
+      bonus2 bSubEle,Ele_Water,5;
+
+  # 39306 Mineral Rune
+  #   ATK - 25
+  #   DEF + 3
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39306
+    Name: 'Mineral Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,-25;
+      bonus bDef,3;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39307 Mistress of Shelter Rune
+  #   Every 18 Base STR, you gain 1 INT.
+  #   Compound on: Armor
+  - Id: 39307
+    Name: 'Mistress of Shelter Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bInt,readparam(bStr)/18*1;
+
+  # 39309 Obsidian Rune
+  #   Every 18 Base DEX, you gain 1 VIT.
+  #   Compound on: Armor
+  - Id: 39309
+    Name: 'Obsidian Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bVit,readparam(bDex)/18*1;
+
+  # 39311 Pasana Rune
+  #   Enchant Armors with the Fire Property.
+  #   DEF + 1
+  #   Compound on: Armor
+  - Id: 39311
+    Name: 'Pasana Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Fire;
+      bonus bDef,1;
+
+  # 39312 Peco Peco Rune
+  #   Maximum HP + 10%
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39312
+    Name: 'Peco Peco Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bMaxHPrate,10;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39316 Porcellio Rune
+  #   ATK + 25
+  #   DEF - 5
+  #   Compound on: Armor
+  - Id: 39316
+    Name: 'Porcellio Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,25;
+      bonus bDef,-5;
+
+  # 39318 Pupa Rune
+  #   Maximum HP + 700
+  #   Compound on: Armor
+  - Id: 39318
+    Name: 'Pupa Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bMaxHP,700;
+
+  # 39325 Sandman Rune
+  #   Enchant Armors with the Earth Property.
+  #   DEF + 1
+  #   (grey) [+Sandman Card]
+  #   Stone Curse has Success Chance + 20%, Range + 5 and affects a 3x3 area.
+  #   Compound on: Armor
+  - Id: 39325
+    Name: 'Sandman Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Earth;
+      bonus bDef,1;
+    Album:
+      - Requires: ['Sandman Card']
+        Script: |
+          # TODO: Stone Curse has Success Chance + 20%, Range + 5 and affects a 3x3 area
+
+  # 39330 Sky Deleter Rune
+  #   Reduces natural HP recovery by 100%.
+  #   Gain 100 HP each time an enemy is killed by a Physical Melee Damage.
+  #   Compound on: Armor
+  - Id: 39330
+    Name: 'Sky Deleter Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      # TODO: Reduces natural HP recovery by 100%
+      bonus bHPGainValue,100;
+
+  # 39331 Solider Rune
+  #   DEF + 2
+  #   MDEF + 2
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39331
+    Name: 'Solider Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDef,2;
+      bonus bMdef,2;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39332 Steel Chonchon Rune
+  #   DEF + 2
+  #   Add a 10% resistance against Wind Property attacks.
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39332
+    Name: 'Steel Chonchon Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDef,2;
+      bonus2 bSubEle,Ele_Wind,10;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39333 Succubus Rune
+  #   VIT -3
+  #   Maximum HP +1000
+  #   HP Recovery -20%
+  #   [+ Incubus Rune]
+  #   VIT +4
+  #   HP Recovery +30%
+  #   Compound on: Armor
+  - Id: 39333
+    Name: 'Succubus Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bVit,-3;
+      bonus bMaxHP,1000;
+      bonus bHPrecovRate,-20;
+    Sets:
+      - Requires: [39515] # Incubus
+        Script: |
+          bonus bVit,4;
+          bonus bHPrecovRate,30;
+
+  # 39334 Swordfish Rune
+  #   Enchant Armors with the Water Property.
+  #   DEF + 1
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Armor
+  - Id: 39334
+    Name: 'Swordfish Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bDefEle,Ele_Water;
+      bonus bDef,1;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39337 Venatu Rune
+  #   Every 18 Base AGI, you gain 1 LUK.
+  #   Compound on: Armor
+  - Id: 39337
+    Name: 'Venatu Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bLuk,readparam(bAgi)/18*1;
+
+  # 39339 Waste Stove Rune
+  #   ATK + 5, INT + 1
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [+ Rideword, Cookie & Seal Rune]
+  #   ATK + 25
+  #   STR + 3, Maximum SP + 80
+  #   Add a 1% chance of auto casting Level 5 Signum Crucis on the enemy when attacking.
+  #   Inflict 10% more damage with Asura Strike.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Monk]
+  #   Reduce SP Consumption of skills by 10%.
+  #   Spell casting can not be interrupted.
+  #   Compound on: Armor
+  - Id: 39339
+    Name: 'Waste Stove Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bBaseAtk,5;
+      bonus bInt,1;
+      if (BaseJob == Job_Monk) {
+        bonus bUseSPrate,-10;
+        bonus bNoCastCancel;
+      }
+    Sets:
+      - Requires: [39533, 39429] # Rideword, Cookie, Seal
+        Script: |
+          # TODO: unknown rune "Seal Rune" in this set
+          bonus bBaseAtk,25;
+          bonus bStr,3;
+          bonus bMaxSP,80;
+          bonus3 bAutoSpell,"AL_CRUCIS",5,10;
+          bonus2 bSkillAtk,"MO_EXTREMITYFIST",10;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39340 Wooden Golem Rune
+  #   HP Recovery + 30%
+  #   DEF + 1
+  #   Compound on: Armor
+  - Id: 39340
+    Name: 'Wooden Golem Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bHPrecovRate,30;
+      bonus bDef,1;
+
+  # 39342 Yellow Novus Rune
+  #   Maximum HP + 500
+  #   HP Recovery + 10%
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   [+ Miyabi Doll, Evil Nymph, Harpy & Bloody Butterfly Rune]
+  #   INT + 3
+  #   Inflict 10% more damage with Heaven's Drive and Thunder Storm.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Sage]
+  #   Reflect single target Magic back at the caster (Success Chance 20%).
+  #   Add a 1% chance of gaining 'Red Gemstone' or 'Yellow Gemstone' item each time a monster is killed.
+  #   Reduce Casting Time by 20%.
+  #   Compound on: Armor
+  - Id: 39342
+    Name: 'Yellow Novus Rune'
+    Location: Armor
+    Reviewed: false
+    Script: |
+      bonus bMaxHP,500;
+      bonus bHPrecovRate,10;
+      if (BaseJob == Job_Sage) {
+        bonus bMagicDamageReturn,20;
+        # TODO: Add a 1% chance of gaining 'Red Gemstone' or 'Yellow Gemstone' item each time a monster is killed
+        bonus bCastrate,-20;
+      }
+    Sets:
+      - Requires: [39408, 39505, 39232, 39426] # Miyabi Doll, Evil Nymph, Harpy, Bloody Butterfly
+        Script: |
+          bonus bInt,3;
+          bonus2 bSkillAtk,"WZ_HEAVENDRIVE",10;
+          bonus2 bSkillAtk,"MG_THUNDERSTORM",10;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39343 Alice Rune
+  #   Receive 40% less damage from Boss monster.
+  #   Receive 40% more damage from normal monster.
+  #   Compound on: Shield
+  - Id: 39343
+    Name: 'Alice Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubClass,Class_Boss,40;
+      bonus2 bSubClass,Class_Normal,-40;
+
+  # 39345 Ancient Mummy Rune
+  #   Add a 3% chance of auto casting Level 5 Signum Crucis when the user receives Physical Damage.
+  #   [+ Mummy Rune]
+  #   Perfect Hit (which never miss its target) + 20
+  #   Compound on: Shield
+  - Id: 39345
+    Name: 'Ancient Mummy Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"AL_CRUCIS",5,30;
+    Sets:
+      - Requires: [39178] # Mummy
+        Script: |
+          # TODO: Perfect Hit (which never miss its target) + 20
+
+  # 39346 Andre Egg Rune
+  #   Maximum HP + 5%
+  #   (grey) [+Shell Fish Card]
+  #   Maximum HP + 5%
+  #   Compound on: Shield
+  - Id: 39346
+    Name: 'Andre Egg Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bMaxHPrate,5;
+    Album:
+      - Requires: ['Shell Fish Card']
+        Script: |
+          bonus bMaxHPrate,5;
+
+  # 39347 Anubis Rune
+  #   Reduce damage from Angel monster by 30%.
+  #   Compound on: Shield
+  - Id: 39347
+    Name: 'Anubis Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Angel,30;
+
+  # 39350 Bigfoot Rune
+  #   Reduce damage from Insect monster by 30%.
+  #   Compound on: Shield
+  - Id: 39350
+    Name: 'Bigfoot Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Insect,30;
+
+  # 39351 Despero of Thanatos Rune
+  #   INT - 6
+  #   Increase INT by an amount equal to the refine rate of the equipment this card is compounded on.
+  #   Compound on: Shield
+  - Id: 39351
+    Name: 'Despero of Thanatos Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bInt,-6;
+      bonus bInt,getrefine();
+
+  # 39352 Enchanted Peach Tree Rune
+  #   Add a 2% chance of auto casting Level 1 Heal on the user when attacking.
+  #   If the user has mastered the skill at Level 10, it will cast Level 10 Heal.
+  #   (grey) [+Enchanted Peach Tree Card]
+  #   Heal Effectiveness +10% when self-healing
+  #   Compound on: Shield
+  - Id: 39352
+    Name: 'Enchanted Peach Tree Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"AL_HEAL",1,20;
+      # TODO: If the user has mastered the skill at Level 10, it will cast Level 10 Heal
+    Album:
+      - Requires: ['Enchanted Peach Tree Card']
+        Script: |
+          # TODO: Heal Effectiveness +10% when self-healing
+
+  # 39353 Executioner Rune
+  #   DEF + 1
+  #   Receive 25% less damage from Large size monster.
+  #   Compound on: Shield
+  - Id: 39353
+    Name: 'Executioner Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bDef,1;
+      bonus2 bSubSize,Size_Large,25;
+
+  # 39354 Flame Skull Rune
+  #   Add a 30% resistance against Stun, Curse, Blind, Stone Curse.
+  #   Add a chance of auto casting Stun, Curse, Blind, Stone Curse when the user receives Physical Damage.
+  #   Compound on: Shield
+  - Id: 39354
+    Name: 'Flame Skull Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Stun,3000;
+      bonus2 bResEff,Eff_Curse,3000;
+      bonus2 bResEff,Eff_Blind,3000;
+      bonus2 bResEff,Eff_Stone,3000;
+      # TODO: Add a chance of auto casting Stun, Curse, Blind, Stone Curse when the user receives Physical Damage
+
+  # 39357 Hodremlin Rune
+  #   Reduce damage from Small, Medium and Large size monsters by 15%.
+  #   Compound on: Shield
+  - Id: 39357
+    Name: 'Hodremlin Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubSize,Size_Small,15;
+      bonus2 bSubSize,Size_Medium,15;
+      bonus2 bSubSize,Size_Large,15;
+
+  # 39358 Horn Rune
+  #   Reduce damage from Long Range attacks by 35%.
+  #   Compound on: Shield
+  - Id: 39358
+    Name: 'Horn Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bLongAtkDef,35;
+
+  # 39359 Khalitzburg Rune
+  #   Reduce damage from Demon monster by 30%.
+  #   Compound on: Shield
+  - Id: 39359
+    Name: 'Khalitzburg Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Demon,30;
+
+  # 39361 Medusa Rune
+  #   Gain immunity to the Stone Curse status.
+  #   Reduce damage from Demon monster by 15%.
+  #   Compound on: Shield
+  - Id: 39361
+    Name: 'Medusa Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Stone,10000;
+      bonus2 bSubRace,RC_Demon,15;
+
+  # 39366 Mysteltainn Rune
+  #   DEF + 1
+  #   Receive 25% less damage from Small size monster.
+  #   Compound on: Shield
+  - Id: 39366
+    Name: 'Mysteltainn Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bDef,1;
+      bonus2 bSubSize,Size_Small,25;
+
+  # 39367 Ogretooth Rune
+  #   DEF + 1
+  #   Receive 25% less damage from Medium size monster.
+  #   Compound on: Shield
+  - Id: 39367
+    Name: 'Ogretooth Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bDef,1;
+      bonus2 bSubSize,Size_Medium,25;
+
+  # 39368 Orc Warrior Rune
+  #   Reduce damage from Brute monster by 30%.
+  #   Compound on: Shield
+  - Id: 39368
+    Name: 'Orc Warrior Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Brute,30;
+
+  # 39369 Parasite Rune
+  #   DEF + 1
+  #   Add a 5% resistance against Neutral Property attacks.
+  #   (grey) [+Parasite Card]
+  #   DEF + 1
+  #   Add a 5% resistance against Neutral Property attacks.
+  #   Compound on: Shield
+  - Id: 39369
+    Name: 'Parasite Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bDef,1;
+      bonus2 bSubEle,Ele_Neutral,5;
+    Album:
+      - Requires: ['Parasite Card']
+        Script: |
+          bonus bDef,1;
+          bonus2 bSubEle,Ele_Neutral,5;
+
+  # 39370 Penomena Rune
+  #   Reduce damage from Formless monster by 30%.
+  #   Compound on: Shield
+  - Id: 39370
+    Name: 'Penomena Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Formless,30;
+
+  # 39371 Rafflesia Rune
+  #   Reduce damage from Fish monster by 30%.
+  #   (grey) [+Rafflesia Card]
+  #   Reduce damage from Fish monster by 30%.
+  #   Compound on: Shield
+  - Id: 39371
+    Name: 'Rafflesia Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Fish,30;
+    Album:
+      - Requires: ['Rafflesia Card']
+        Script: |
+          bonus2 bSubRace,RC_Fish,30;
+
+  # 39373 Sky Petite Rune
+  #   Reduce damage from Dragon monster by 30%.
+  #   Compound on: Shield
+  - Id: 39373
+    Name: 'Sky Petite Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Dragon,30;
+
+  # 39374 Soldier Andre Rune
+  #   Reduce damage from Plant monster by 30%.
+  #   Compound on: Shield
+  - Id: 39374
+    Name: 'Soldier Andre Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Plant,30;
+
+  # 39376 Tamruan Rune
+  #   DEF + 2
+  #   Inflict 10% more damage with Shield Boomerang skill.
+  #   Compound on: Shield
+  - Id: 39376
+    Name: 'Tamruan Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus bDef,2;
+      bonus2 bSkillAtk,"CR_SHIELDBOOMERANG",10;
+
+  # 39377 Teddy Bear Rune
+  #   Reduce damage from Undead monster by 30%.
+  #   Compound on: Shield
+  - Id: 39377
+    Name: 'Teddy Bear Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_Undead,30;
+
+  # 39378 Thara Frog Rune
+  #   Reduce damage from DemiHuman monster by 30%.
+  #   Compound on: Shield
+  - Id: 39378
+    Name: 'Thara Frog Rune'
+    Location: Shield
+    Reviewed: false
+    Script: |
+      bonus2 bSubRace,RC_DemiHuman,30;
+
+  # 39381 Alarm Rune
+  #   Maximum HP + 300
+  #   VIT + 1
+  #   Add a 20% chance of auto casting Level 1 Sight around the user when the user receives Physical Damage.
+  #   Compound on: Shoes
+  - Id: 39381
+    Name: 'Alarm Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxHP,300;
+      bonus bVit,1;
+      bonus3 bAutoSpellWhenHit,"MG_SIGHT",1,200;
+
+  # 39386 Chonchon Rune
+  #   AGI + 1
+  #   Flee Rate + 2
+  #   Compound on: Shoes
+  - Id: 39386
+    Name: 'Chonchon Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bAgi,1;
+      bonus bFlee,2;
+
+  # 39390 Eggyra Rune
+  #   SP Recovery + 15%
+  #   Compound on: Shoes
+  - Id: 39390
+    Name: 'Eggyra Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bSPrecovRate,15;
+
+  # 39393 Firelock Soldier Rune
+  #   STR + 2
+  #   [Refine Rate +9 or higher]
+  #   Maximum HP and SP + 10%
+  #   Compound on: Shoes
+  - Id: 39393
+    Name: 'Firelock Soldier Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bStr,2;
+      if (getrefine() >= 9) {
+        bonus bMaxHPrate,10;
+        bonus bMaxSPrate,10;
+      }
+
+  # 39394 Freezer Rune
+  #   Maximum HP + 300
+  #   [When compounded into an item with refine rate of +9 or higher]
+  #   Inflict 10% more damage with Bash.
+  #   Compound on: Shoes
+  - Id: 39394
+    Name: 'Freezer Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxHP,300;
+      if (getrefine() >= 9) {
+        bonus2 bSkillAtk,"SM_BASH",10;
+      }
+
+  # 39397 Gold Acidus Rune
+  #   Maximum HP and SP + 4%
+  #   [When compounded into an item with refine rate of 0~4]
+  #   Additional Maximum HP and SP + 4%
+  #   HP and SP Recovery + 5%
+  #   Compound on: Shoes
+  - Id: 39397
+    Name: 'Gold Acidus Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxHPrate,4;
+      bonus bMaxSPrate,4;
+      if (getrefine() <= 4) {
+        bonus bMaxHPrate,4;
+        bonus bMaxSPrate,4;
+        bonus bHPrecovRate,5;
+        bonus bSPrecovRate,5;
+      }
+
+  # 39398 Green Ferus Rune
+  #   VIT + 1
+  #   Maximum HP + 10%
+  #   [+ Cruiser, Anolian, Alligator & Dragon Tail Rune]
+  #   DEX + 5
+  #   Inflict 10% more damage with Musical Strike and Throw Arrow.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   (grey) [+Zealotus Card]
+  #   Damage + 25% with Musical Strike and Throw Arrow
+  #   Compound on: Shoes
+  - Id: 39398
+    Name: 'Green Ferus Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bVit,1;
+      bonus bMaxHPrate,10;
+    Sets:
+      - Requires: [39120, 39263, 39419, 39226] # Cruiser, Anolian, Alligator, Dragon Tail
+        Script: |
+          bonus bDex,5;
+          bonus2 bSkillAtk,"BA_MUSICALSTRIKE",10;
+          bonus2 bSkillAtk,"DC_THROWARROW",10;
+    Album:
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+      - Requires: ['Zealotus Card']
+        Script: |
+          bonus2 bSkillAtk,"BA_MUSICALSTRIKE",25;
+          bonus2 bSkillAtk,"DC_THROWARROW",25;
+
+  # 39403 Male Thief Bug Rune
+  #   AGI + 2
+  #   Compound on: Shoes
+  - Id: 39403
+    Name: 'Male Thief Bug Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bAgi,2;
+
+  # 39404 Matyr Rune
+  #   Maximum HP + 10%
+  #   AGI + 1
+  #   Compound on: Shoes
+  - Id: 39404
+    Name: 'Matyr Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxHPrate,10;
+      bonus bAgi,1;
+
+  # 39405 Megalith Rune
+  #   If refine level of compounded footgear is +5 or lower, MDEF +7.
+  #   (grey) [+Megalith Card]
+  #   MDEF + 3
+  #   Compound on: Shoes
+  - Id: 39405
+    Name: 'Megalith Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      # TODO: If refine level of compounded footgear is +5 or lower, MDEF +7
+    Album:
+      - Requires: ['Megalith Card']
+        Script: |
+          bonus bMdef,3;
+
+  # 39406 Merman Rune
+  #   HP and SP Recovery + 10%
+  #   [+ Cruiser, Anolian, Alligator & Dragon Tail Rune]
+  #   Inflict 20% more damage with Long Range Physical attack.
+  #   AGI + 5
+  #   DEX + 3
+  #   Perfect Hit (which never miss its target) + 20%.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Archer Class]
+  #   Receive 5% more Experience Points from Brute monsters.
+  #   Add a chance of auto casting 'Coma' on Brute monster when attacking.
+  #   Compound on: Shoes
+  - Id: 39406
+    Name: 'Merman Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bHPrecovRate,10;
+      bonus bSPrecovRate,10;
+      if (BaseClass == Job_Archer) {
+        bonus2 bExpAddRace,RC_Brute,5;
+        # TODO: Add a chance of auto casting 'Coma' on Brute monster when attacking
+      }
+    Sets:
+      - Requires: [39120, 39263, 39419, 39226] # Cruiser, Anolian, Alligator, Dragon Tail
+        Script: |
+          bonus bLongAtkRate,20;
+          bonus bAgi,5;
+          bonus bDex,3;
+          # TODO: Perfect Hit (which never miss its target) + 20%
+    Album:
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39408 Miyabi Doll Rune
+  #   Maximum SP + 10%
+  #   Inflict 5% more damage with Frost Diver skill.
+  #   Compound on: Shoes
+  - Id: 39408
+    Name: 'Miyabi Doll Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxSPrate,10;
+      bonus2 bSkillAtk,"MG_FROSTDIVER",5;
+
+  # 39410 Odium of Thanatos Rune
+  #   AGI - 5
+  #   Increase AGI by an amount equal to the refine rate of the equipment this card is compounded on.
+  #   Compound on: Shoes
+  - Id: 39410
+    Name: 'Odium of Thanatos Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bAgi,-5;
+      bonus bAgi,getrefine();
+
+  # 39411 Raggler Rune
+  #   STR + 1
+  #   VIT + 1
+  #   Compound on: Shoes
+  - Id: 39411
+    Name: 'Raggler Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bStr,1;
+      bonus bVit,1;
+
+  # 39413 Sohee Rune
+  #   Maximum SP + 15%
+  #   SP Recovery + 3%
+  #   Compound on: Shoes
+  - Id: 39413
+    Name: 'Sohee Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxSPrate,15;
+      bonus bSPrecovRate,3;
+
+  # 39414 Verit Rune
+  #   Maximum HP and SP + 8%
+  #   Compound on: Shoes
+  - Id: 39414
+    Name: 'Verit Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bMaxHPrate,8;
+      bonus bMaxSPrate,8;
+
+  # 39415 Wild Rose Rune
+  #   AGI + 1
+  #   [Thief Class]
+  #   Perfect Dodge + 5
+  #   Compound on: Shoes
+  - Id: 39415
+    Name: 'Wild Rose Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bAgi,1;
+      if (BaseClass == Job_Thief) {
+        bonus bFlee2,5;
+      }
+
+  # 39416 Zombie Rune
+  #   HP Recovery + 20%
+  #   Compound on: Shoes
+  - Id: 39416
+    Name: 'Zombie Rune'
+    Location: Footgear
+    Reviewed: false
+    Script: |
+      bonus bHPrecovRate,20;
+
+  # 39419 Alligator Rune
+  #   Receive 5% less damage from Long Range Physical attack.
+  #   Compound on: Accessory
+  - Id: 39419
+    Name: 'Alligator Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bLongAtkDef,5;
+
+  # 39420 Anopheles Rune
+  #   Add a chance of gaining 'Tentacle and Cheese Gratin' each time an Insect monster is killed.
+  #   Compound on: Accessory
+  - Id: 39420
+    Name: 'Anopheles Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining 'Tentacle and Cheese Gratin' each time an Insect monster is killed
+
+  # 39421 Armeyer Dinze Rune
+  #   Add a chance of gaining 'Clam Soup' each time a Fish monster is killed.
+  #   Compound on: Accessory
+  - Id: 39421
+    Name: 'Armeyer Dinze Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining 'Clam Soup' each time a Fish monster is killed
+
+  # 39422 Baroness of Retribution Rune
+  #   Add a chance of gaining 'Fried Sweet Potato' each time an Angel monster is killed.
+  #   Compound on: Accessory
+  - Id: 39422
+    Name: 'Baroness of Retribution Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining 'Fried Sweet Potato' each time an Angel monster is killed
+
+  # 39426 Bloody Butterfly Rune
+  #   Spell casting can not be interrupted.
+  #   Increase Casting Time by 30%.
+  #   Inflict 5% more damage with Fire Wall.
+  #   (grey) [+Beholder Card, except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Accessory
+  - Id: 39426
+    Name: 'Bloody Butterfly Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bNoCastCancel;
+      bonus bCastrate,30;
+      bonus2 bSkillAtk,"MG_FIREWALL",5;
+    Album:
+      - Requires: ['Beholder Card']
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39429 Cookie Rune
+  #   LUK + 2
+  #   Inflict 10% more damage with Holy Light.
+  #   Compound on: Accessory
+  - Id: 39429
+    Name: 'Cookie Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bLuk,2;
+      bonus2 bSkillAtk,"AL_HOLYLIGHT",10;
+
+  # 39431 Dragon Egg Rune
+  #   Add a chance of gaining 'Honey Herbal Tea' each time a Dragon monster is killed.
+  #   Compound on: Accessory
+  - Id: 39431
+    Name: 'Dragon Egg Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining 'Honey Herbal Tea' each time a Dragon monster is killed
+
+  # 39433 Errende Ebecee Rune
+  #   Add a 5% chance of auto casting Level 1 Pneuma on the user when the user receives Physical Damage.
+  #   Compound on: Accessory
+  - Id: 39433
+    Name: 'Errende Ebecee Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpellWhenHit,"AL_PNEUMA",1,50;
+
+  # 39436 Gargoyle Rune
+  #   Every time you kill an Insect monster, there is a 1% chance of gaining a 'Box of Thunder'.
+  #   Compound on: Accessory
+  - Id: 39436
+    Name: 'Gargoyle Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Every time you kill an Insect monster, there is a 1% chance of gaining a 'Box of Thunder'
+
+  # 39437 Gazeti Rune
+  #   Add a 5% chance of auto casting Level 2 Cold Bolt on the enemy when attacking.
+  #   (grey) [+Gazeti Card]
+  #   Multiple Gazeti runes stack
+  #   Compound on: Accessory
+  - Id: 39437
+    Name: 'Gazeti Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"MG_COLDBOLT",2,50;
+    Album:
+      - Requires: ['Gazeti Card']
+        Script: |
+          # TODO: Multiple Gazeti runes stack
+
+  # 39438 Greatest General Rune
+  #   Add a 0.2% chance of auto casting Level 5 Call Spirits on the user when attacking.
+  #   [Acolyte Class]
+  #   The chance is increased to 2%.
+  #   (grey) [+Greatest General Card]
+  #   Triples the chance.
+  #   Compound on: Accessory
+  - Id: 39438
+    Name: 'Greatest General Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"MO_CALLSPIRITS",5,2;
+      if (BaseClass == Job_Acolyte) {
+        # TODO: The chance is increased to 2%
+      }
+    Album:
+      - Requires: ['Greatest General Card']
+        Script: |
+          # TODO: Triples the chance
+
+  # 39439 Gremlin Rune
+  #   Add a chance of gaining 'Bomber Steak' each time a Brute monster is killed.
+  #   Compound on: Accessory
+  - Id: 39439
+    Name: 'Gremlin Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining 'Bomber Steak' each time a Brute monster is killed
+
+  # 39440 Grove Rune
+  #   Add a chance of gaining 'Fruit Mix' each time a Formless monster is killed.
+  #   Compound on: Accessory
+  - Id: 39440
+    Name: 'Grove Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining 'Fruit Mix' each time a Formless monster is killed
+
+  # 39441 Heater Rune
+  #   Critical Rate + 3
+  #   [Swordman Class]
+  #   Perfect Dodge + 3
+  #   Compound on: Accessory
+  - Id: 39441
+    Name: 'Heater Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bCritical,3;
+      if (BaseClass == Job_Swordman) {
+        bonus bFlee2,3;
+      }
+
+  # 39442 Hell Poodle Rune
+  #   HIT +1
+  #   Increases recovery rate of Meat by 100%.
+  #   Has a 1% chance to cause Bleeding status on an enemy when dealing short ranged physical attack.
+  #   Compound on: Accessory
+  - Id: 39442
+    Name: 'Hell Poodle Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bHit,1;
+      # TODO: Increases recovery rate of Meat by 100%
+      # TODO: Has a 1% chance to cause Bleeding status on an enemy when dealing short ranged physical attack
+
+  # 39446 Hylozoist Rune
+  #   Add a chance of transforming a monster while fighting.
+  #   [+ Raggler, Zipper Bear, Myst Case & Baby Leopard Rune]
+  #   Restore 2 SP every time when attacking.
+  #   Inflict 20% more damage with Mammonite.
+  #   LUK + 10
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Merchant Class]
+  #   Add a chance of gaining 'Old Purple Box' each time a monster is killed.
+  #   Reflect single target Magic back at the caster (Success Chance 20%).
+  #   Compound on: Accessory
+  - Id: 39446
+    Name: 'Hylozoist Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of transforming a monster while fighting
+      if (BaseClass == Job_Merchant) {
+        # TODO: Add a chance of gaining 'Old Purple Box' each time a monster is killed
+        bonus bMagicDamageReturn,20;
+      }
+    Sets:
+      - Requires: [39411, 39217, 39528, 39269] # Raggler, Zipper Bear, Myst Case, Baby Leopard
+        Script: |
+          bonus bSPDrainValue,2;
+          bonus2 bSkillAtk,"MC_MAMMONITE",20;
+          bonus bLuk,10;
+    Album:
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39448 Imp Rune
+  #   Reduce Casting Time of Fire Bolt by 25%. Inflict 25% more damage with Fire Bolt.
+  #   (grey) [+Imp Card]
+  #   Damage + 25% with Flaming Petals
+  #   Compound on: Accessory
+  - Id: 39448
+    Name: 'Imp Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Reduce Casting Time of Fire Bolt by 25%. Inflict 25% more damage with Fire Bolt
+    Album:
+      - Requires: ['Imp Card']
+        Script: |
+          # TODO: Damage + 25% with Flaming Petals
+
+  # 39451 Kobold Rune
+  #   CRIT + 4
+  #   STR + 1
+  #   Compound on: Accessory
+  - Id: 39451
+    Name: 'Kobold Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bCritical,4;
+      bonus bStr,1;
+
+  # 39452 Kukre Rune
+  #   AGI + 2
+  #   Compound on: Accessory
+  - Id: 39452
+    Name: 'Kukre Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bAgi,2;
+
+  # 39453 Lude Rune
+  #   [Novice, Super Novice]
+  #   Add a 20% chance of auto casting Level 1 Endure on the user when the user receives Physical Damage.
+  #   [+ Quve Rune]
+  #   Maximum HP + 300
+  #   (grey) [+Grand Peco Card]
+  #   Remove autocast effects. Cast Delay -30%
+  #   Compound on: Accessory
+  - Id: 39453
+    Name: 'Lude Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      if (BaseJob == Job_Novice || BaseJob == Job_Super_Novice) {
+        bonus3 bAutoSpellWhenHit,"SM_ENDURE",1,200;
+      }
+    Sets:
+      - Requires: [39470] # Quve
+        Script: |
+          bonus bMaxHP,300;
+    Album:
+      - Requires: ['Grand Peco Card']
+        Script: |
+          # TODO: Remove autocast effects. Cast Delay -30%
+
+  # 39454 Mantis Rune
+  #   STR + 3
+  #   Compound on: Accessory
+  - Id: 39454
+    Name: 'Mantis Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bStr,3;
+
+  # 39458 Muka Rune
+  #   HP Recovery + 10%
+  #   Compound on: Accessory
+  - Id: 39458
+    Name: 'Muka Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bHPrecovRate,10;
+
+  # 39460 Orc Archer Rune
+  #   Every time you kill a DemiHuman monster, there is a 1% chance of gaining a 'Box of Panting'.
+  #   Compound on: Accessory
+  - Id: 39460
+    Name: 'Orc Archer Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Every time you kill a DemiHuman monster, there is a 1% chance of gaining a 'Box of Panting'
+
+  # 39462 Owl Baron Rune
+  #   Add a 3% chance of auto casting Level 1 Lex Aeterna on an enemy when attacking.
+  #   Compound on: Accessory
+  - Id: 39462
+    Name: 'Owl Baron Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"PR_LEXAETERNA",1,30;
+
+  # 39463 Owl Duke Rune
+  #   Add a 0.3% chance of auto casting Level 3 Impositio Manus on the user when attacking.
+  #   [+ Owl Baron Rune]
+  #   Add a 2% chance of auto casting Level 5 Lightning Bolt on an enemy when attacking.
+  #   Chance of auto casting Impositio Manus increased to 1.0%
+  #   Compound on: Accessory
+  - Id: 39463
+    Name: 'Owl Duke Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"PR_IMPOSITIO",3,3;
+    Sets:
+      - Requires: [39462] # Owl Baron
+        Script: |
+          bonus3 bAutoSpell,"MG_LIGHTNINGBOLT",5,20;
+          # TODO: Chance of auto casting Impositio Manus increased to 1.0%
+
+  # 39464 Phen Rune
+  #   Skill casting can not be interrupted.
+  #   Increase Casting Time by 25%.
+  #   (grey) [+Beholder Card, except with Bowling Bash and when under effect of Poem of Bragi]
+  #   Reduce Cast Time by 5%
+  #   Compound on: Accessory
+  - Id: 39464
+    Name: 'Phen Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bNoCastCancel;
+      bonus bCastrate,25;
+    Album:
+      - Requires: ['Beholder Card']
+        Note: 'except with Bowling Bash and when under effect of Poem of Bragi'
+        Script: |
+          bonus bCastrate,-5;
+
+  # 39470 Quve Rune
+  #   [Novice, Super Novice]
+  #   Add a 10% chance of auto casting Level 1 Increase Agility on the user when the user receives Physical Damage.
+  #   [+ Lude Rune]
+  #   Maximum SP + 60
+  #   Compound on: Accessory
+  - Id: 39470
+    Name: 'Quve Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      if (BaseJob == Job_Novice || BaseJob == Job_Super_Novice) {
+        bonus3 bAutoSpellWhenHit,"MER_INCAGI",1,100;
+      }
+    Sets:
+      - Requires: [39453] # Lude
+        Script: |
+          bonus bMaxSP,60;
+
+  # 39472 Raydric Archer Rune
+  #   Every time you kill a Demon monster, there is a 1% chance of gaining a 'Box of Resentment'.
+  #   Compound on: Accessory
+  - Id: 39472
+    Name: 'Raydric Archer Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Every time you kill a Demon monster, there is a 1% chance of gaining a 'Box of Resentment'
+
+  # 39475 Shinobi Rune
+  #   AGI + 1
+  #   Add a 10% chance of auto casting Level 5 Cloaking on the user when the user receives Physical Damage.
+  #   If you equip this without learning Level 3 Cloaking or higher, it only activates when you are next to the wall.
+  #   (grey) [+Frilldora Card, on Assassin and Rogue]
+  #   Remove Cloaking auto-cast
+  #   Compound on: Accessory
+  - Id: 39475
+    Name: 'Shinobi Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bAgi,1;
+      bonus3 bAutoSpellWhenHit,"AS_CLOAKING",5,100;
+      # TODO: If you equip this without learning Level 3 Cloaking or higher, it only activates when you are next to the wall
+    Album:
+      - Requires: ['Frilldora Card']
+        Note: 'on Assassin and Rogue'
+        Script: |
+          # TODO: Remove Cloaking auto-cast
+
+  # 39476 Siroma Rune
+  #   Reduce Casting Time of Cold Bolt by 25%. Inflict 25% more damage with Cold Bolt.
+  #   (grey) [+Siroma Card]
+  #   Damage + 25% with Freezing Spear
+  #   Compound on: Accessory
+  - Id: 39476
+    Name: 'Siroma Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Reduce Casting Time of Cold Bolt by 25%. Inflict 25% more damage with Cold Bolt
+    Album:
+      - Requires: ['Siroma Card']
+        Script: |
+          # TODO: Damage + 25% with Freezing Spear
+
+  # 39477 Sleeper Rune
+  #   Every time you kill a Fish monster, there is a 1% chance of gaining a 'Box of Drowsiness'.
+  #   Compound on: Accessory
+  - Id: 39477
+    Name: 'Sleeper Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Every time you kill a Fish monster, there is a 1% chance of gaining a 'Box of Drowsiness'
+
+  # 39479 Snowier Rune
+  #   Add a low chance of gaining Ice Cream when a monster gets killed.
+  #   Ice Cream recovery rate + 100%.
+  #   Compound on: Accessory
+  - Id: 39479
+    Name: 'Snowier Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Add a low chance of gaining Ice Cream when a monster gets killed
+      # TODO: Ice Cream recovery rate + 100%
+
+  # 39480 Spore Rune
+  #   VIT + 2
+  #   Compound on: Accessory
+  - Id: 39480
+    Name: 'Spore Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bVit,2;
+
+  # 39482 Stapo Rune
+  #   Enables use of Level 1 Pick Stone and Level 1 Throw Stone.
+  #   Compound on: Accessory
+  - Id: 39482
+    Name: 'Stapo Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      # TODO: Enables use of Level 1 Pick Stone and Level 1 Throw Stone
+
+  # 39488 Wickebine Tres Rune
+  #   Add a 5% chance of auto casting Level 1 Strip Armor on the enemy when attacking.
+  #   [+ Stainer, Wanderer, Wild Rose & Shinobi Rune]
+  #   STR + 6
+  #   AGI + 4
+  #   Inflict 10% more damage with Back Stab.
+  #   Add a 5% chance of auto casting Level 5 Strip Armor on the enemy when attacking if the user has mastered the skill at Level 5.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Rogue]
+  #   Disables the Auto-Intimidate ability of the Wanderer Card.
+  #   Reduce SP Consumption of skills by 20%.
+  #   Compound on: Accessory
+  - Id: 39488
+    Name: 'Wickebine Tres Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus3 bAutoSpell,"RG_STRIPARMOR",1,50;
+      if (BaseJob == Job_Rogue) {
+        # TODO: Disables the Auto-Intimidate ability of the Wanderer Card
+        bonus bUseSPrate,-20;
+      }
+    Sets:
+      - Requires: [39535, 39255, 39415, 39475] # Stainer, Wanderer, Wild Rose, Shinobi
+        Script: |
+          bonus bStr,6;
+          bonus bAgi,4;
+          bonus2 bSkillAtk,"RG_BACKSTAP",10;
+          # TODO: Add a 5% chance of auto casting Level 5 Strip Armor on the enemy when attacking if the user has mastered the skill at Level 5
+    Album:
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39492 Yoyo Rune
+  #   AGI + 1
+  #   Perfect Dodge + 5
+  #   Compound on: Accessory
+  - Id: 39492
+    Name: 'Yoyo Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bAgi,1;
+      bonus bFlee2,5;
+
+  # 39493 Zerom Rune
+  #   DEX + 3
+  #   Compound on: Accessory
+  - Id: 39493
+    Name: 'Zerom Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bDex,3;
+
+  # 39494 Zhu Po Long Rune
+  #   AGI + 1
+  #   Critical Rate + 3
+  #   Compound on: Accessory
+  - Id: 39494
+    Name: 'Zhu Po Long Rune'
+    Location: Accessory
+    Reviewed: false
+    Script: |
+      bonus bAgi,1;
+      bonus bCritical,3;
+
+  # 39496 Banshee Rune
+  #   [Mage]
+  #   Max SP + 100, Max HP - 100
+  #   Inflict 20% more damage with Soul Strike and Napalm Beat.
+  #   Compound on: Headgear
+  - Id: 39496
+    Name: 'Banshee Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      if (BaseJob == Job_Mage) {
+        bonus bMaxSP,100;
+        bonus bMaxHP,-100;
+        bonus2 bSkillAtk,"MG_SOULSTRIKE",20;
+        bonus2 bSkillAtk,"MG_NAPALMBEAT",20;
+      }
+
+  # 39498 Carat Rune
+  #   INT + 2
+  #   [When compounded into an item with refine rate of +9 or higher]
+  #   Maximum SP + 150
+  #   Compound on: Headgear
+  - Id: 39498
+    Name: 'Carat Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,2;
+      if (getrefine() >= 9) {
+        bonus bMaxSP,150;
+      }
+
+  # 39501 Dark Illusion Rune
+  #   Maximum HP and SP - 10%
+  #   Reduce Casting Time by 10%.
+  #   Compound on: Headgear
+  - Id: 39501
+    Name: 'Dark Illusion Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bMaxHPrate,-10;
+      bonus bMaxSPrate,-10;
+      bonus bCastrate,-10;
+
+  # 39502 Deviruchi Rune
+  #   Gain immunity to the Blind status.
+  #   STR + 1
+  #   Compound on: Headgear
+  - Id: 39502
+    Name: 'Deviruchi Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Blind,10000;
+      bonus bStr,1;
+
+  # 39504 Elder Willow Rune
+  #   INT + 2
+  #   Compound on: Headgear
+  - Id: 39504
+    Name: 'Elder Willow Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,2;
+
+  # 39505 Evil Nymph Rune
+  #   INT + 1
+  #   Maximum SP + 50
+  #   Compound on: Headgear
+  - Id: 39505
+    Name: 'Evil Nymph Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,1;
+      bonus bMaxSP,50;
+
+  # 39507 Gemini-S58 Rune
+  #   [Base Agility >= 90]
+  #   Add a 30% resistance against Silence and Stun.
+  #   [Base Vitality >= 80]
+  #   Add a 50% resistance against Stone Curse and Sleep.
+  #   Compound on: Headgear
+  - Id: 39507
+    Name: 'Gemini-S58 Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      if (readparam(bAgi) >= 90) {
+        bonus2 bResEff,Eff_Silence,3000;
+        bonus2 bResEff,Eff_Stun,3000;
+      }
+      if (readparam(bVit) >= 80) {
+        bonus2 bResEff,Eff_Stone,5000;
+        bonus2 bResEff,Eff_Sleep,5000;
+      }
+
+  # 39509 Giant Hornet Rune
+  #   Add a 10% resistance against Wind Property attacks.
+  #   Compound on: Headgear
+  - Id: 39509
+    Name: 'Giant Hornet Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Wind,10;
+
+  # 39510 Gibbet Rune
+  #   [When compounded into an item with refine rate of 0~5]
+  #   MDEF + 5
+  #   (grey) [+Gibbet Card]
+  #   MDEF + 3
+  #   Compound on: Headgear
+  - Id: 39510
+    Name: 'Gibbet Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      if (getrefine() <= 5) {
+        bonus bMdef,5;
+      }
+    Album:
+      - Requires: ['Gibbet Card']
+        Script: |
+          bonus bMdef,3;
+
+  # 39511 Giearth Rune
+  #   Gain immunity to the Confusion status.
+  #   Add a 15% resistance against Earth Property attacks.
+  #   Compound on: Headgear
+  - Id: 39511
+    Name: 'Giearth Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Confusion,10000;
+      bonus2 bSubEle,Ele_Earth,15;
+
+  # 39514 Holden Rune
+  #   LUK + 2
+  #   [+ Raggler, Zipper Bear, Muka & Baby Leopard Rune]
+  #   STR + 4
+  #   Maximum HP and SP + 7%
+  #   Inflict 20% more damage with Mammonite.
+  #   Gain 1 SP on every physical attack on enemies.
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   [Alchemist]
+  #   Add a 1% chance of auto casting Level 1 Adrenaline Rush on the user when attacking.
+  #   Add a chance of gaining 'Glistening Coat' or 'Stem' each time a monster is killed.
+  #   Compound on: Headgear
+  - Id: 39514
+    Name: 'Holden Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bLuk,2;
+      if (BaseJob == Job_Alchemist) {
+        bonus3 bAutoSpell,"BS_ADRENALINE",1,10;
+        # TODO: Add a chance of gaining 'Glistening Coat' or 'Stem' each time a monster is killed
+      }
+    Sets:
+      - Requires: [39411, 39217, 39458, 39269] # Raggler, Zipper Bear, Muka, Baby Leopard
+        Script: |
+          bonus bStr,4;
+          bonus bMaxHPrate,7;
+          bonus bMaxSPrate,7;
+          bonus2 bSkillAtk,"MC_MAMMONITE",20;
+          bonus bSPDrainValue,1;
+    Album:
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39515 Incubus Rune
+  #   INT -3
+  #   Maximum SP +150
+  #   SP Recovery -20%
+  #   [+ Succubus Rune]
+  #   INT +4
+  #   SP Recovery +30%
+  #   Compound on: Headgear
+  - Id: 39515
+    Name: 'Incubus Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,-3;
+      bonus bMaxSP,150;
+      bonus bSPrecovRate,-20;
+    Sets:
+      - Requires: [39333] # Succubus
+        Script: |
+          bonus bInt,4;
+          bonus bSPrecovRate,30;
+
+  # 39516 Isilla Rune
+  #   INT +2
+  #   Each magic cast has a chance of reducing cast time by 50% and Flee +30 for 5 seconds.
+  #   Compound on: Headgear
+  - Id: 39516
+    Name: 'Isilla Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,2;
+      # TODO: Each magic cast has a chance of reducing cast time by 50% and Flee +30 for 5 seconds
+
+  # 39517 Kathryne Keyron Rune
+  #   Reduce Casting Time by 1% per Refine Level of the equipment this card is compunded on.
+  #   [Refine Rate +9 or higher]
+  #   MATK + 2%
+  #   Compound on: Headgear
+  - Id: 39517
+    Name: 'Kathryne Keyron Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      # TODO: Reduce Casting Time by 1% per Refine Level of the equipment this card is compunded on
+      if (getrefine() >= 9) {
+        bonus bMatkRate,2;
+      }
+
+  # 39520 Leaf Cat Rune
+  #   Add a 10% resistance against Water Property attacks.
+  #   Compound on: Headgear
+  - Id: 39520
+    Name: 'Leaf Cat Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Water,10;
+
+  # 39521 Leib Olmai Rune
+  #   Add a 10% resistance against Fire Property attacks.
+  #   Compound on: Headgear
+  - Id: 39521
+    Name: 'Leib Olmai Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Fire,10;
+
+  # 39523 Marduk Rune
+  #   Gain immunity to the Silence status.
+  #   Compound on: Headgear
+  - Id: 39523
+    Name: 'Marduk Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Silence,10000;
+
+  # 39528 Myst Case Rune
+  #   Add a chance of gaining Gift Box each time a monster is killed.
+  #   Compound on: Headgear
+  - Id: 39528
+    Name: 'Myst Case Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      # TODO: Add a chance of gaining Gift Box each time a monster is killed
+
+  # 39529 Nightmare Rune
+  #   Gain immunity to the Sleep status.
+  #   AGI + 1
+  #   Compound on: Headgear
+  - Id: 39529
+    Name: 'Nightmare Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Sleep,10000;
+      bonus bAgi,1;
+
+  # 39531 Permeter Rune
+  #   Add a 15% resistance against Shadow and Undead Property attacks.
+  #   Compound on: Headgear
+  - Id: 39531
+    Name: 'Permeter Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bSubEle,Ele_Dark,15;
+      bonus2 bSubEle,Ele_Undead,15;
+
+  # 39533 Rideword Rune
+  #   INT + 1
+  #   [Acolyte Class]
+  #   INT + 1
+  #   MDEF + 1
+  #   Compound on: Headgear
+  - Id: 39533
+    Name: 'Rideword Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,1;
+      if (BaseClass == Job_Acolyte) {
+        bonus bInt,1;
+        bonus bMdef,1;
+      }
+
+  # 39534 Seyren Windsor Rune
+  #   STR - 6
+  #   Increase STR by an amount equal to the refine rate of the equipment this card is compound on.
+  #   Compound on: Headgear
+  - Id: 39534
+    Name: 'Seyren Windsor Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bStr,-6;
+      bonus bStr,getrefine();
+
+  # 39535 Stainer Rune
+  #   Increase resistance to Silence status by 20%.
+  #   DEF + 1
+  #   Compound on: Headgear
+  - Id: 39535
+    Name: 'Stainer Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Silence,2000;
+      bonus bDef,1;
+
+  # 39536 Stalactic Golem Rune
+  #   DEF + 1
+  #   Add a 20% resistance against Stun.
+  #   Compound on: Headgear
+  - Id: 39536
+    Name: 'Stalactic Golem Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bDef,1;
+      bonus2 bResEff,Eff_Stun,2000;
+
+  # 39537 Tower Keeper Rune
+  #   INT + 1
+  #   Reduce Casting Time by 5%.
+  #   [+ Alarm, Clock & Punk Card]
+  #   MDEF + 3
+  #   DEF + 3
+  #   (grey) [+Wormtail Card]
+  #   All stats + 1, MATK + 15
+  #   Compound on: Headgear
+  - Id: 39537
+    Name: 'Tower Keeper Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bInt,1;
+      bonus bCastrate,-5;
+    Album:
+      - Requires: ['Alarm, Clock & Punk Card']
+        Script: |
+          bonus bMdef,3;
+          bonus bDef,3;
+      - Requires: ['Wormtail Card']
+        Script: |
+          bonus bAllStats,1;
+          bonus bMatk,15;
+
+  # 39538 Ungoliant Rune
+  #   Gain immunity to the Bleeding status.
+  #   HP Recovery + 10%
+  #   Compound on: Headgear
+  - Id: 39538
+    Name: 'Ungoliant Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus2 bResEff,Eff_Bleeding,10000;
+      bonus bHPrecovRate,10;
+
+  # 39539 Vanberk Rune
+  #   STR + 2
+  #   Each attack has a chance of gaining CRIT +100 for 5 seconds.
+  #   Compound on: Headgear
+  - Id: 39539
+    Name: 'Vanberk Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bStr,2;
+      # TODO: Each attack has a chance of gaining CRIT +100 for 5 seconds
+
+  # 39542 Willow Rune
+  #   Maximum SP + 80
+  #   Compound on: Headgear
+  - Id: 39542
+    Name: 'Willow Rune'
+    Location: Headgear
+    Reviewed: false
+    Script: |
+      bonus bMaxSP,80;
