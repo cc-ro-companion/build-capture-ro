@@ -34,8 +34,22 @@ describe('buildCharacter', () => {
       empty,
     );
     expect(character.bonuses.calls).toEqual([
-      { name: 'bMdef', args: [1], itemId: 2101, slot: 'leftHand', source: 'shield' },
-      { name: 'bStr', args: [2], itemId: 1101, slot: 'rightHand', source: 'none' },
+      {
+        name: 'bMdef',
+        args: [1],
+        itemId: 2101,
+        slot: 'leftHand',
+        origin: { kind: 'item' },
+        source: 'shield',
+      },
+      {
+        name: 'bStr',
+        args: [2],
+        itemId: 1101,
+        slot: 'rightHand',
+        origin: { kind: 'item' },
+        source: 'none',
+      },
     ]);
   });
 

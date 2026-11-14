@@ -122,7 +122,7 @@ results become fixtures that `pnpm test` then guards.
    left; pipeline then fails on any TODO.
 4. [x] **Combos.** `combos.ts`, card combos dropped, override file. Check:
    pipeline tests; combo count in the progress log.
-5. [ ] **Engine: runes, sets, combos.** Rune context, slot rules, active
+5. [x] **Engine: runes, sets, combos.** Rune context, slot rules, active
    set and combo detection, album effects ignored. Check: engine tests.
 6. [ ] **Build model and share code.** Runes per item, inventory, tags 15
    and 16. Check: tests including a recorded 4a code.

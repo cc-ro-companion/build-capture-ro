@@ -13,31 +13,44 @@ import type { Slot } from './gear';
  */
 export type BonusSource = 'none' | 'shield' | 'leftWeapon';
 
-export interface SourcedBonusCall extends BonusCall {
-  itemId: number;
-  slot: Slot;
+/** Which script a record came from. */
+export type ScriptOrigin =
+  | { kind: 'item' }
+  /** A rune compounded in the item. */
+  | { kind: 'rune'; runeId: number }
+  /** A rune set held by `runeId`, active with the `requires` runes. */
+  | { kind: 'runeSet'; runeId: number; requires: readonly number[] }
+  /** An item combo of these equipment ids. */
+  | { kind: 'combo'; items: readonly number[] };
+
+/**
+ * Where a record came from. `itemId` and `slot` are the equipped item whose
+ * script ran, or the item the rune sits in (for a rune set, the item holding
+ * the set's rune); a combo belongs to no single item, so both are null.
+ */
+export interface Sourced {
+  itemId: number | null;
+  slot: Slot | null;
+  origin: ScriptOrigin;
+}
+
+export interface SourcedBonusCall extends BonusCall, Sourced {
   source: BonusSource;
 }
 
-export interface SourcedSkill extends GrantedSkill {
-  itemId: number;
-  slot: Slot;
-}
+export interface SourcedSkill extends GrantedSkill, Sourced {}
 
-export interface SourcedAutoBonus extends AutoBonus {
-  itemId: number;
-  slot: Slot;
+export interface SourcedAutoBonus extends AutoBonus, Sourced {
   source: BonusSource;
 }
 
 /**
- * How an equipped item's script ran, for what the engine leaves out beyond
- * its bonus calls: a script stopped by a runtime error keeps only the calls
- * before it, and a script that read a skill level saw 0 for every skill.
+ * How one script ran (an item's, a rune's, a rune set's or a combo's), for
+ * what the engine leaves out beyond its bonus calls: a script stopped by a
+ * runtime error keeps only the calls before it, and a script that read a
+ * skill level saw 0 for every skill. Every active rune set and combo has a run.
  */
-export interface ScriptRun {
-  itemId: number;
-  slot: Slot;
+export interface ScriptRun extends Sourced {
   error?: string;
   readsSkillLevel: boolean;
 }

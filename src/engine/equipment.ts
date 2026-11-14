@@ -1,6 +1,32 @@
 // Equipment rules shared by the status window and auto attack: refinement
-// bonuses from refine.yml as rAthena's status_calc_pc applies them.
-import type { Item, RefineLevel, RefineTables } from '../data/types';
+// bonuses from refine.yml as rAthena's status_calc_pc applies them, and
+// which rune fits which equipped item.
+import type { Item, RefineLevel, RefineTables, RuneLocation } from '../data/types';
+import type { Slot } from './gear';
+
+/**
+ * Whether a rune of `location` fits the item in `slot`: runes go into card
+ * slots like vanilla cards, so a Weapon rune fits a weapon in either hand and
+ * a Shield rune only a shield in the left hand.
+ */
+export function runeFits(location: RuneLocation, slot: Slot, item: Item): boolean {
+  switch (location) {
+    case 'Weapon':
+      return (slot === 'rightHand' || slot === 'leftHand') && item.type === 'weapon';
+    case 'Shield':
+      return slot === 'leftHand' && item.type === 'armor';
+    case 'Armor':
+      return slot === 'armor';
+    case 'Garment':
+      return slot === 'garment';
+    case 'Footgear':
+      return slot === 'shoes';
+    case 'Accessory':
+      return slot === 'accessoryLeft' || slot === 'accessoryRight';
+    case 'Headgear':
+      return slot === 'headTop' || slot === 'headMid' || slot === 'headLow';
+  }
+}
 
 /** rAthena `MAX_REFINE`; ccRO refines to +10, which the build model enforces. */
 const MAX_REFINE = 20;

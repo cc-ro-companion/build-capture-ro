@@ -1,10 +1,13 @@
 // Turns a character's equipped items into the engine's input: each item's
-// script evaluated for the build, collected into a BonusSet in the order
-// rAthena's status_calc_pc runs them, plus equipment DEF and refine ATK.
-import type { BonusStats, Item, Job, RefineTables } from '../data/types';
+// script, then item combos and rune sets, then the runes in the items,
+// evaluated for the build and collected into a BonusSet in the order rAthena's
+// status_calc_pc runs item scripts, combos and cards; plus equipment DEF and
+// refine ATK.
+import type { BonusStats, Combo, Item, Job, RefineTables, Rune, ScriptStmt } from '../data/types';
 import {
   BonusSet,
   type BonusSource,
+  type ScriptOrigin,
   type ScriptRun,
   type SourcedAutoBonus,
   type SourcedBonusCall,
@@ -51,6 +54,8 @@ export interface EquippedItem {
   slot: Slot;
   item: Item;
   refine: number;
+  /** Runes compounded in the item, in card slot order; none when absent. */
+  runes?: readonly Rune[];
 }
 
 export interface CharacterBase {
@@ -69,6 +74,15 @@ export function bonusSource(slot: Slot, item: Item): BonusSource {
   return item.type === 'weapon' ? 'leftWeapon' : 'shield';
 }
 
+/**
+ * `sd->state.lr_flag` while a rune's script runs. rAthena runs card scripts
+ * in the left-hand item as LR_FLAG_WEAPON when its `equip` is EQP_HAND_L,
+ * and EQP_SHIELD is EQP_HAND_L, so a shield's runes count as left weapon too.
+ */
+export function runeBonusSource(slot: Slot): BonusSource {
+  return slot === 'leftHand' ? 'leftWeapon' : 'none';
+}
+
 /** Stat bonuses (`param_equip`) from the calls: bStr…bLuk, bAllStats, bAgiVit, bAgiDexStr. */
 export function equipmentStats(bonuses: BonusSet): BonusStats {
   const all = bonuses.sum('bAllStats');
@@ -84,28 +98,94 @@ export function equipmentStats(bonuses: BonusSet): BonusStats {
   };
 }
 
+/** Equipped items in the order status_calc_pc runs their scripts. */
+function scriptOrder(equipment: readonly EquippedItem[]): EquippedItem[] {
+  return SCRIPT_ORDER.flatMap((slot) => equipment.filter((equipped) => equipped.slot === slot));
+}
+
+/**
+ * Item combos whose items are all equipped, in data order. Each equipped item
+ * counts once, so a combo listing an id twice needs two of that item, and a
+ * combo applies once however often its items are worn (rAthena pc_checkcombo).
+ */
+export function activeCombos(
+  equipment: readonly EquippedItem[],
+  combos: readonly Combo[],
+): Combo[] {
+  const worn = new Map<number, number>();
+  for (const { item } of equipment) worn.set(item.id, (worn.get(item.id) ?? 0) + 1);
+  return combos.filter((combo) => {
+    const needed = new Map<number, number>();
+    for (const id of combo.items) needed.set(id, (needed.get(id) ?? 0) + 1);
+    return [...needed].every(([id, count]) => (worn.get(id) ?? 0) >= count);
+  });
+}
+
+export interface ActiveRuneSet {
+  rune: Rune;
+  /** Index into `rune.sets`. */
+  index: number;
+  /** The first equipped item, in script order, that holds the set's rune. */
+  host: EquippedItem;
+}
+
+/**
+ * Rune sets that apply: the rune holding the set and every rune it requires
+ * are equipped anywhere. Each applies once, however many copies are worn.
+ */
+export function activeRuneSets(equipment: readonly EquippedItem[]): ActiveRuneSet[] {
+  const ordered = scriptOrder(equipment);
+  const worn = new Set(
+    ordered.flatMap((equipped) => (equipped.runes ?? []).map((rune) => rune.id)),
+  );
+  const active: ActiveRuneSet[] = [];
+  const seen = new Set<number>();
+  for (const host of ordered) {
+    for (const rune of host.runes ?? []) {
+      if (seen.has(rune.id)) continue;
+      seen.add(rune.id);
+      rune.sets.forEach((set, index) => {
+        if (set.requires.every((id) => worn.has(id))) active.push({ rune, index, host });
+      });
+    }
+  }
+  return active;
+}
+
+interface ScriptPlace {
+  itemId: number | null;
+  slot: Slot | null;
+  origin: ScriptOrigin;
+}
+
 /**
  * Engine input for a character wearing `equipment`. An item that occupies
  * several slots (a multi-location headgear) is listed once, as rAthena's
  * `pc_is_same_equip_index` skips the repeats. Items whose script did not
- * parse (`effects: null`) contribute their DEF and refine only.
+ * parse (`effects: null`) contribute their DEF, refine and runes only.
+ * Scripts run in status_calc_pc's order: item scripts, then combos (with rune
+ * sets, which ccRO's rune text describes like combos), then cards (runes).
+ * Album effects (phase 8) never run.
  */
 export function buildCharacter(
   base: CharacterBase,
   equipment: readonly EquippedItem[],
   refineTables: RefineTables,
+  combos: readonly Combo[] = [],
 ): CharacterInput {
-  const ordered = SCRIPT_ORDER.flatMap((slot) =>
-    equipment.filter((equipped) => equipped.slot === slot),
-  );
+  const ordered = scriptOrder(equipment);
   const calls: SourcedBonusCall[] = [];
   const skills: SourcedSkill[] = [];
   const autoBonuses: SourcedAutoBonus[] = [];
   const runs: ScriptRun[] = [];
-  for (const { slot, item, refine } of ordered) {
-    if (item.effects === null) continue;
+  const run = (
+    effects: readonly ScriptStmt[],
+    refine: number,
+    place: ScriptPlace,
+    source: BonusSource,
+  ) => {
     let readsSkillLevel = false;
-    const result = evaluateEffects(item.effects, {
+    const result = evaluateEffects(effects, {
       refine,
       baseStats: base.baseStats,
       baseLevel: base.baseLevel,
@@ -116,18 +196,42 @@ export function buildCharacter(
         return 0;
       },
     });
-    const source = bonusSource(slot, item);
-    const origin = { itemId: item.id, slot };
-    for (const call of result.calls) calls.push({ ...call, ...origin, source });
-    for (const skill of result.skills) skills.push({ ...skill, ...origin });
+    for (const call of result.calls) calls.push({ ...call, ...place, source });
+    for (const skill of result.skills) skills.push({ ...skill, ...place });
     for (const autoBonus of result.autoBonuses)
-      autoBonuses.push({ ...autoBonus, ...origin, source });
+      autoBonuses.push({ ...autoBonus, ...place, source });
     runs.push({
-      ...origin,
+      ...place,
       readsSkillLevel,
       ...(result.error === undefined ? {} : { error: result.error }),
     });
+  };
+
+  for (const { slot, item, refine } of ordered) {
+    if (item.effects === null) continue;
+    const place = { itemId: item.id, slot, origin: { kind: 'item' } } as const;
+    run(item.effects, refine, place, bonusSource(slot, item));
   }
+  // A combo runs with no current item (current_equip_item_index -1), where
+  // getrefine() returns 0.
+  for (const combo of activeCombos(ordered, combos)) {
+    if (combo.effects === null) continue;
+    const origin: ScriptOrigin = { kind: 'combo', items: combo.items };
+    run(combo.effects, 0, { itemId: null, slot: null, origin }, 'none');
+  }
+  for (const { rune, index, host } of activeRuneSets(ordered)) {
+    const set = rune.sets[index]!;
+    const origin: ScriptOrigin = { kind: 'runeSet', runeId: rune.id, requires: set.requires };
+    run(set.effects, 0, { itemId: host.item.id, slot: host.slot, origin }, 'none');
+  }
+  // A rune's script runs in the context of the item it sits in, as a card's does.
+  for (const { slot, item, refine, runes } of ordered) {
+    for (const rune of runes ?? []) {
+      const origin: ScriptOrigin = { kind: 'rune', runeId: rune.id };
+      run(rune.effects, refine, { itemId: item.id, slot, origin }, runeBonusSource(slot));
+    }
+  }
+
   const bonuses = new BonusSet(calls, skills, autoBonuses, runs);
   const rightHand = equipment.find((equipped) => equipped.slot === 'rightHand');
   const weapon = rightHand?.item.type === 'weapon' ? rightHand.item : null;

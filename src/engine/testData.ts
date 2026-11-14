@@ -1,6 +1,15 @@
 // Hand-made records for engine tests, so expected values do not shift when
 // the generated data is regenerated.
-import type { BonusStats, Item, Job, Monster, RefineTables, ScriptStmt } from '../data/types';
+import type {
+  BonusStats,
+  Combo,
+  Item,
+  Job,
+  Monster,
+  RefineTables,
+  Rune,
+  ScriptStmt,
+} from '../data/types';
 import { BonusSet } from './bonuses';
 import { buildCharacter, type CharacterBase, type EquippedItem } from './gear';
 import type { CharacterInput } from './stats';
@@ -123,6 +132,7 @@ export function gearCharacter(
   equipment: readonly EquippedItem[],
   partial: Partial<CharacterBase> = {},
   refine: RefineTables = { armor: [], weapon: [] },
+  combos: readonly Combo[] = [],
 ): CharacterInput {
   const base = character();
   return buildCharacter(
@@ -135,5 +145,18 @@ export function gearCharacter(
     },
     equipment,
     refine,
+    combos,
   );
+}
+
+export function testRune(partial: Partial<Rune> = {}): Rune {
+  return {
+    id: 39101,
+    location: 'Weapon',
+    effects: [],
+    sets: [],
+    album: [],
+    reviewed: true,
+    ...partial,
+  };
 }

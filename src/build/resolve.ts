@@ -1,13 +1,15 @@
 // Lookup of builds' ids in the game data, and conversion of a build into the
 // engine's inputs.
 import {
+  combos as allCombos,
   items as allItems,
   jobsData,
   monsters as allMonsters,
   namesEn,
+  runes as allRunes,
   tables as allTables,
 } from '../data';
-import type { Item, Job, Monster, NamesFile, TablesFile } from '../data/types';
+import type { Combo, Item, Job, Monster, NamesFile, Rune, TablesFile } from '../data/types';
 import { buildCharacter, SLOTS, type EquippedItem } from '../engine/gear';
 import type { CharacterInput } from '../engine/stats';
 import { dummyMonster, type Dummy } from './dummy';
@@ -22,6 +24,10 @@ export interface GameData {
   itemList: readonly Item[];
   monsters: ReadonlyMap<number, Monster>;
   monsterList: readonly Monster[];
+  runes: ReadonlyMap<number, Rune>;
+  /** Every rune in id order, for rune search. */
+  runeList: readonly Rune[];
+  combos: readonly Combo[];
   /** Index = base level − 1; total stat points. */
   statPoints: readonly number[];
   tables: TablesFile;
@@ -32,6 +38,9 @@ export interface GameDataSource {
   jobs: readonly Job[];
   items: readonly Item[];
   monsters: readonly Monster[];
+  /** None when left out, as in tests that do not need them. */
+  runes?: readonly Rune[];
+  combos?: readonly Combo[];
   statPoints: readonly number[];
   tables: TablesFile;
   names: NamesFile;
@@ -49,6 +58,9 @@ export function createGameData(source: GameDataSource): GameData {
     itemList: ascending(source.items),
     monsters: byId(source.monsters),
     monsterList: ascending(source.monsters),
+    runes: byId(source.runes ?? []),
+    runeList: ascending(source.runes ?? []),
+    combos: source.combos ?? [],
     statPoints: source.statPoints,
     tables: source.tables,
     names: source.names,
@@ -60,6 +72,8 @@ export const gameData: GameData = createGameData({
   jobs: jobsData.jobs,
   items: allItems,
   monsters: allMonsters,
+  runes: allRunes,
+  combos: allCombos,
   statPoints: jobsData.statPoints,
   tables: allTables,
   names: namesEn,
@@ -134,6 +148,7 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
       { job, baseLevel: build.baseLevel, jobLevel: build.jobLevel, baseStats: { ...build.stats } },
       equipment,
       data.tables.refine,
+      data.combos,
     ),
     monster,
     dummy,

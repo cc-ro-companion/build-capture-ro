@@ -36,7 +36,7 @@ export function notModelledNotes(resolved: ResolvedBuild): Partial<Record<Slot, 
       continue;
     }
     const { bonuses } = resolved.character;
-    const ofSlot = <T extends { slot: Slot }>(records: readonly T[]) =>
+    const ofSlot = <T extends { slot: Slot | null }>(records: readonly T[]) =>
       records.filter((record) => record.slot === slot);
     const labels = notModelledLabels(ofSlot(bonuses.calls));
     const extra = [
