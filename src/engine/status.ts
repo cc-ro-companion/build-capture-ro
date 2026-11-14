@@ -1,6 +1,8 @@
-// Status window values (ATK, HIT, FLEE, CRIT, ASPD) as rAthena pre-renewal
-// computes them for a player, without skills, buffs or equipment bonuses.
+// Status window values as rAthena pre-renewal computes them for a player in
+// status_calc_pc_sub and status_calc_misc, with equipment bonuses but without
+// skills or buffs.
 import type { BonusStats } from '../data/types';
+import { BonusSet } from './bonuses';
 import type { EngineConfig } from './config';
 import { totalStats, type CharacterInput } from './stats';
 
@@ -40,6 +42,12 @@ export function usesArrowPath(weaponType: string): boolean {
   return ARROW_WEAPON_TYPES.has(weaponType);
 }
 
+/** status.hpp `DEFTYPE_MIN`/`DEFTYPE_MAX`: pre-renewal DEF is a signed char. */
+const DEFTYPE_MIN = -128;
+const DEFTYPE_MAX = 127;
+
+const clamp = (value: number, low: number, high: number) => Math.min(Math.max(value, low), high);
+
 /** `status_base_atk`, BL_PC pre-renewal branch. */
 export function baseAtk(total: BonusStats, weaponType: string): number {
   const dexMain = isDexMainWeapon(weaponType);
@@ -50,25 +58,121 @@ export function baseAtk(total: BonusStats, weaponType: string): number {
 }
 
 /**
- * Critical rate in tenths of a percent (`status->cri`): `status_calc_misc`
- * gives 10 + LUK × 10 / 3, `status_calc_critical` floors it at 10, and
- * `status_calc_bl_main` doubles it for katars after that.
+ * Critical rate in tenths of a percent (`status->cri`): `bCritical` × 10 plus
+ * `status_calc_misc`'s 10 + LUK × 10 / 3 (at least 1), times
+ * `critical_rate` (100 + `bCriticalRate`) / 100, then `status_calc_critical`
+ * floors it at 10 and `status_calc_bl_main` doubles it for katars.
  */
-export function criticalRate(total: BonusStats, weaponType: string): number {
-  const cri = Math.max(10, 10 + Math.trunc((total.luk * 10) / 3));
+export function criticalRate(
+  total: BonusStats,
+  weaponType: string,
+  bonuses: BonusSet = new BonusSet([]),
+): number {
+  let cri = Math.max(1, bonuses.sum('bCritical') * 10 + 10 + Math.trunc((total.luk * 10) / 3));
+  const rate = Math.max(0, 100 + bonuses.sum('bCriticalRate'));
+  if (rate !== 100) cri = Math.trunc((cri * rate) / 100);
+  cri = Math.max(10, cri);
   return weaponType === 'Katar' ? cri * 2 : cri;
 }
 
 /**
  * Attack motion in ms (`status->amotion`): `status_base_amotion_pc`
- * pre-renewal, capped as in `status_calc_pc_sub` by `pc_maxaspd`.
+ * pre-renewal including `bAspd` (`aspd_add` −10 per point), times
+ * `aspd_rate` (1000 − 10 per `bAspdRate` point) / 1000 in
+ * `status_calc_bl_main`, capped by `pc_maxaspd`.
  */
 export function attackMotion(input: CharacterInput, config: EngineConfig): number {
   const total = totalStats(input);
+  const { bonuses } = input;
   const base = input.job.baseAspd[weaponTypeOf(input)] ?? UNLISTED_WEAPON_DELAY;
-  const amotion = base - Math.trunc((base * (4 * total.agi + total.dex)) / 1000);
+  let amotion = base - Math.trunc((base * (4 * total.agi + total.dex)) / 1000);
+  amotion -= 10 * bonuses.sum('bAspd');
+  const aspdRate = Math.max(0, 1000 - 10 * bonuses.sum('bAspdRate'));
+  amotion = Math.trunc((amotion * aspdRate) / 1000);
   const fastest = AMOTION_ZERO_ASPD - config.maxAspd * AMOTION_INTERVAL;
   return Math.min(Math.max(amotion, fastest), MAX_AMOTION);
+}
+
+/** `status->batk`: `bBaseAtk` plus `status_base_atk` (status_calc_misc adds to it). */
+export function totalBaseAtk(input: CharacterInput): number {
+  return input.bonuses.sum('bBaseAtk') + baseAtk(totalStats(input), weaponTypeOf(input));
+}
+
+/**
+ * `status->hit`: `bHit` + level + DEX (at least 1, status_calc_misc), times
+ * `hit_rate` (100 + `bHitRate`) / 100, at least 1 (`status_calc_hit`).
+ */
+export function hitValue(input: CharacterInput): number {
+  const hit = Math.max(1, input.bonuses.sum('bHit') + input.baseLevel + totalStats(input).dex);
+  const rate = Math.max(0, 100 + input.bonuses.sum('bHitRate'));
+  return Math.max(1, rate === 100 ? hit : Math.trunc((hit * rate) / 100));
+}
+
+/**
+ * Equipment DEF (`status->def`): item and refine DEF plus `bDef`, times
+ * `def_rate` (100 + `bDefRate`) / 100, then capped at `max_def`. rAthena
+ * stores it in a signed char and wraps on overflow; it is clamped here,
+ * which only differs for totals no real gear reaches.
+ */
+export function equipmentDef(input: CharacterInput, config: EngineConfig): number {
+  let def = input.equipmentDef + input.bonuses.sum('bDef');
+  const rate = Math.max(0, 100 + input.bonuses.sum('bDefRate'));
+  if (rate !== 100) def = Math.trunc((def * rate) / 100);
+  return Math.min(clamp(def, DEFTYPE_MIN, DEFTYPE_MAX), config.maxDef);
+}
+
+/** Equipment MDEF (`status->mdef`): `bMdef`, capped at `max_def`. */
+export function equipmentMdef(input: CharacterInput, config: EngineConfig): number {
+  return Math.min(clamp(input.bonuses.sum('bMdef'), DEFTYPE_MIN, DEFTYPE_MAX), config.maxDef);
+}
+
+/**
+ * `status_calc_maxhp_pc` / `status_calc_maxsp_pc`: base points × (1 + stat
+ * / 100), plus the stat's equipment bonus once more, plus the flat bonus,
+ * plus rate − 100 percent of that, truncated, then capped. rAthena computes
+ * in doubles, as JavaScript does.
+ */
+function maxPoints(
+  basePoints: number,
+  stat: number,
+  equipStat: number,
+  flat: number,
+  rate: number,
+  cap: number,
+): number {
+  let points = basePoints;
+  if (stat > 0) points *= 1.0 + stat * 0.01;
+  points += equipStat + flat;
+  points += (points * (rate - 100)) / 100;
+  return clamp(Math.trunc(Math.max(points, 1)), 1, cap);
+}
+
+function basePointsAt(table: readonly number[], baseLevel: number): number {
+  return table[clamp(baseLevel, 1, table.length) - 1] ?? 0;
+}
+
+export function maxHp(input: CharacterInput, config: EngineConfig): number {
+  const { bonuses } = input;
+  return maxPoints(
+    basePointsAt(input.job.baseHp, input.baseLevel),
+    totalStats(input).vit,
+    input.equipmentStats.vit,
+    bonuses.sum('bMaxHP'),
+    100 + bonuses.sum('bMaxHPrate'),
+    config.maxHp,
+  );
+}
+
+export function maxSp(input: CharacterInput, config: EngineConfig): number {
+  const { bonuses } = input;
+  return maxPoints(
+    basePointsAt(input.job.baseSp, input.baseLevel),
+    totalStats(input).int,
+    input.equipmentStats.int,
+    bonuses.sum('bMaxSP'),
+    100 + bonuses.sum('bMaxSPrate'),
+    config.maxSp,
+  );
 }
 
 /** ASPD as the client derives it from amotion, with its one decimal. */
@@ -82,7 +186,7 @@ export interface StatusWindow {
    * (base ATK + weapon ATK) and `pc_rightside_atk` (refine ATK, `rhw.atk2`).
    */
   atk: [number, number];
-  /** Base ATK from stats alone. */
+  /** Base ATK (`status->batk`): `bBaseAtk` plus the stat-based value. */
   baseAtk: number;
   /** Weapon ATK (`rhw.atk`). */
   weaponAtk: number;
@@ -102,29 +206,44 @@ export interface StatusWindow {
    * (ASPD 136.7) shows as 136 in ccRO.
    */
   aspd: number;
+  /** Equipment DEF and VIT DEF (`def`, `def2`). */
+  def: [number, number];
+  /** Equipment MDEF and INT MDEF (`mdef`, `mdef2`). */
+  mdef: [number, number];
+  maxHp: number;
+  maxSp: number;
 }
 
 export function statusWindow(input: CharacterInput, config: EngineConfig): StatusWindow {
   const total = totalStats(input);
+  const { bonuses } = input;
   const weaponType = weaponTypeOf(input);
-  const batk = baseAtk(total, weaponType);
+  const batk = totalBaseAtk(input);
   const weaponAtk = input.weapon?.attack ?? 0;
-  const critRate = criticalRate(total, weaponType);
+  const critRate = criticalRate(total, weaponType, bonuses);
   const amotion = attackMotion(input, config);
   const aspdExact = aspdFromAmotion(amotion);
+  // status_calc_misc pre-renewal: FLEE = bFlee + level + AGI, at least 1;
+  // perfect dodge (enable_perfect_flee covers players) = bFlee2 × 10 + LUK + 10
+  // in tenths, at least 10 once set (status_calc_flee2).
+  const flee = Math.max(1, bonuses.sum('bFlee') + input.baseLevel + total.agi);
+  const flee2 = Math.max(0, bonuses.sum('bFlee2') * 10 + total.luk + 10);
   return {
     atk: [batk + weaponAtk, input.weaponRefine.atk],
     baseAtk: batk,
     weaponAtk,
-    // status_calc_misc pre-renewal: HIT = level + DEX, FLEE = level + AGI, both at least 1.
-    hit: Math.max(1, input.baseLevel + total.dex),
-    flee: Math.max(1, input.baseLevel + total.agi),
-    // enable_perfect_flee covers players: flee2 = LUK + 10, in tenths.
-    perfectDodge: Math.trunc((total.luk + 10) / 10),
+    hit: hitValue(input),
+    flee,
+    perfectDodge: Math.trunc((flee2 === 0 ? 0 : Math.max(10, flee2)) / 10),
     crit: Math.trunc(critRate / 10),
     critRate,
     amotion,
     aspdExact,
     aspd: Math.floor(aspdExact),
+    // status_calc_misc pre-renewal: def2 = VIT, mdef2 = INT + VIT / 2.
+    def: [equipmentDef(input, config), total.vit],
+    mdef: [equipmentMdef(input, config), total.int + Math.trunc(total.vit / 2)],
+    maxHp: maxHp(input, config),
+    maxSp: maxSp(input, config),
   };
 }

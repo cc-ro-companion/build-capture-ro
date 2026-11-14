@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { rAthenaDefaults } from '../engine/config';
 import { autoAttack } from '../engine/autoAttack';
+import { buildCharacter } from '../engine/gear';
 import { testJob, testWeapon } from '../engine/testData';
 import { defaultDummy, dummyMonster, MAX_DUMMIES, normalizeDummies, type Dummy } from './dummy';
 import { gameData } from './resolve';
@@ -98,14 +99,16 @@ describe('normalizeDummies', () => {
 
 describe('dummyMonster', () => {
   it('feeds the dummy settings into the engine', () => {
-    const character = {
-      job: testJob(),
-      baseLevel: 50,
-      jobLevel: 1,
-      baseStats: { str: 50, agi: 1, vit: 1, int: 1, dex: 10, luk: 1 },
-      weapon: testWeapon(),
-      weaponRefine: { atk: 0, overrefine: 0 },
-    };
+    const character = buildCharacter(
+      {
+        job: testJob(),
+        baseLevel: 50,
+        jobLevel: 1,
+        baseStats: { str: 50, agi: 1, vit: 1, int: 1, dex: 10, luk: 1 },
+      },
+      [{ slot: 'rightHand', item: testWeapon(), refine: 0 }],
+      gameData.tables.refine,
+    );
     // Neutral attacks do 0 % against Ghost level 4.
     const ghost = dummyMonster({ ...defaultDummy(0), element: 'Ghost', elementLevel: 4 });
     const result = autoAttack(character, ghost, gameData.tables, rAthenaDefaults);

@@ -51,7 +51,7 @@ const JOB_FILE_ALIASES: Record<string, string> = {
   Supernovice: 'Super_Novice',
 };
 
-const JOB_FILES = ['job_stats.yml', 'job_aspd.yml', 'job_exp.yml'];
+const JOB_FILES = ['job_stats.yml', 'job_aspd.yml', 'job_exp.yml', 'job_basepoints.yml'];
 const CLASSIC_STATS = ['Str', 'Agi', 'Vit', 'Int', 'Dex', 'Luk'] as const;
 
 /** Parses `enum e_job` from rAthena's source into name → value. */
@@ -156,6 +156,30 @@ function cumulativeBonusStats(record: YamlMap, maxJobLevel: number): BonusStats[
   return rows;
 }
 
+/**
+ * `BaseHp`/`BaseSp` per base level as rAthena reads them with HP_SP_TABLES
+ * (on by default in `src/config/core.hpp`); every level up to the job's
+ * maximum must be present, as a missing one would read as 0 HP.
+ */
+function perLevelPoints(
+  record: YamlMap,
+  field: 'BaseHp' | 'BaseSp',
+  valueField: 'Hp' | 'Sp',
+  maxBaseLevel: number,
+): number[] {
+  const entries = Array.isArray(record[field]) ? (record[field] as YamlMap[]) : [];
+  const byLevel = new Map(entries.map((entry) => [Number(entry.Level), Number(entry[valueField])]));
+  const points: number[] = [];
+  for (let level = 1; level <= maxBaseLevel; level++) {
+    const value = byLevel.get(level);
+    if (value === undefined || Number.isNaN(value)) {
+      throw new Error(`Job ${String(record.Job)}: no ${field} for base level ${level}.`);
+    }
+    points.push(value);
+  }
+  return points;
+}
+
 export function convertJob(record: YamlMap): Job {
   const job = SUPPORTED_JOBS.find((candidate) => candidate.key === record.Job);
   if (job === undefined) throw new Error(`Unknown job ${String(record.Job)}.`);
@@ -164,13 +188,16 @@ export function convertJob(record: YamlMap): Job {
   if (typeof aspd !== 'object' || aspd === null || Object.keys(aspd).length === 0) {
     throw new Error(`Job ${job.key}: missing BaseASPD.`);
   }
+  const maxBaseLevel = requireNumber(record, 'MaxBaseLevel');
   return {
     id: job.id,
     key: job.key,
-    maxBaseLevel: requireNumber(record, 'MaxBaseLevel'),
+    maxBaseLevel,
     maxJobLevel,
     bonusStats: cumulativeBonusStats(record, maxJobLevel),
     baseAspd: { ...(aspd as Record<string, number>) },
+    baseHp: perLevelPoints(record, 'BaseHp', 'Hp', maxBaseLevel),
+    baseSp: perLevelPoints(record, 'BaseSp', 'Sp', maxBaseLevel),
   };
 }
 

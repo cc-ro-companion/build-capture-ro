@@ -67,11 +67,19 @@ describe('expandJobGroups', () => {
   });
 });
 
+const points = (field: 'Hp' | 'Sp', levels: number, perLevel: number) =>
+  Array.from({ length: levels }, (_, index) => ({
+    Level: index + 1,
+    [field]: 40 + perLevel * index,
+  }));
+
 describe('convertJob', () => {
   it('accumulates classic bonus stats per job level and ignores trait stats', () => {
     const job = convertJob({
       Job: 'Novice',
-      MaxBaseLevel: 99,
+      MaxBaseLevel: 3,
+      BaseHp: points('Hp', 3, 5),
+      BaseSp: points('Sp', 3, 1),
       MaxJobLevel: 4,
       BaseASPD: { Fist: 500 },
       BonusStats: [
@@ -85,6 +93,31 @@ describe('convertJob', () => {
       [0, 1],
       [2, 2],
     ]);
+  });
+
+  it('reads base HP and SP per base level, later group entries winning', () => {
+    const job = convertJob({
+      Job: 'Novice',
+      MaxBaseLevel: 3,
+      MaxJobLevel: 1,
+      BaseASPD: { Fist: 500 },
+      BaseHp: [...points('Hp', 3, 5), { Level: 3, Hp: 99 }],
+      BaseSp: points('Sp', 3, 1),
+    });
+    expect(job.baseHp).toEqual([40, 45, 99]);
+    expect(job.baseSp).toEqual([40, 41, 42]);
+  });
+
+  it('fails when a base level has no HP entry', () => {
+    const record = {
+      Job: 'Novice',
+      MaxBaseLevel: 3,
+      MaxJobLevel: 1,
+      BaseASPD: { Fist: 500 },
+      BaseHp: points('Hp', 2, 5),
+      BaseSp: points('Sp', 3, 1),
+    };
+    expect(() => convertJob(record)).toThrow('Job Novice: no BaseHp for base level 3.');
   });
 
   it('fails when a field the engine needs is missing', () => {

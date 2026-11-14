@@ -65,6 +65,10 @@ describe('fixture comparison rules', () => {
     amotion: 476,
     aspdExact: 152.4,
     aspd: 152,
+    def: [0, 1],
+    mdef: [0, 1],
+    maxHp: 1000,
+    maxSp: 100,
   };
   const attack: AutoAttackResult = {
     normal: { min: 90, max: 102, avg: 96 },

@@ -1,5 +1,6 @@
-// Character stats: base + job bonus, and the stat point budget.
+// Character stats: base + job bonus + equipment, and the stat point budget.
 import type { BonusStats, Item, Job } from '../data/types';
+import type { BonusSet } from './bonuses';
 import type { WeaponRefine } from './equipment';
 
 export const STAT_NAMES = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
@@ -15,6 +16,12 @@ export interface CharacterInput {
   weapon: Item | null;
   /** Refine ATK and overupgrade of the right-hand weapon (equipment.ts `weaponRefine`). */
   weaponRefine: WeaponRefine;
+  /** Bonus calls of every equipped item (gear.ts `buildCharacter`). */
+  bonuses: BonusSet;
+  /** Stat bonuses from item scripts, rAthena's `param_equip`. */
+  equipmentStats: BonusStats;
+  /** Item DEF of every equipped piece plus refine DEF, before `bDef`. */
+  equipmentDef: number;
 }
 
 /** Job bonus row for the job level; rAthena `job_info->job_bonus[job_level - 1]`. */
@@ -23,11 +30,16 @@ export function jobBonus(job: Job, jobLevel: number): BonusStats {
   return job.bonusStats[index] ?? { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 };
 }
 
-/** Base stats plus job bonus, as `status_calc_pc_sub` adds them (no equipment yet). */
+/**
+ * Base stats plus job bonus plus equipment, as `status_calc_pc_sub` adds
+ * them, never below 0 (`cap_value(i, 0, USHRT_MAX)`).
+ */
 export function totalStats(input: CharacterInput): BonusStats {
   const bonus = jobBonus(input.job, input.jobLevel);
   const result = { ...input.baseStats };
-  for (const stat of STAT_NAMES) result[stat] += bonus[stat];
+  for (const stat of STAT_NAMES) {
+    result[stat] = Math.max(0, result[stat] + bonus[stat] + input.equipmentStats[stat]);
+  }
   return result;
 }
 

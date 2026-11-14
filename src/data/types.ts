@@ -26,6 +26,10 @@ export interface Job {
    * (e.g. 1161 Balmung, which every job can equip).
    */
   baseAspd: Record<string, number>;
+  /** Index = base level - 1; job_basepoints.yml `BaseHp`. */
+  baseHp: number[];
+  /** Index = base level - 1; job_basepoints.yml `BaseSp`. */
+  baseSp: number[];
 }
 
 export interface JobsFile {

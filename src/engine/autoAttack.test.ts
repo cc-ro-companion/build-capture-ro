@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import type { TablesFile } from '../data/types';
+import type { ScriptStmt, TablesFile } from '../data/types';
 import { autoAttack } from './autoAttack';
 import { rAthenaDefaults } from './config';
-import { character, stats, testMonster, testWeapon } from './testData';
+import type { CharacterBase, EquippedItem, Slot } from './gear';
+import {
+  bonus,
+  character,
+  gearCharacter,
+  stats,
+  testArmor,
+  testMonster,
+  testWeapon,
+} from './testData';
 
 // Values as in rAthena's size_fix.yml and pre-re attr_fix.yml, reduced to
 // what the cases below use.
@@ -263,5 +272,145 @@ describe('ASPD and DPS', () => {
     expect(result.critChance).toBe(0.2);
     expect(result.hitChance).toBeCloseTo(0.4);
     expect(result.dps).toBeCloseTo(expected, 10);
+  });
+});
+
+describe('equipment effects on auto attack', () => {
+  // Fire vs Water 1 is 50 % in pre-re attr_fix.yml.
+  const elementTables: TablesFile = {
+    ...tables,
+    sizeModifier: { ...tables.sizeModifier, '1hSword': { small: 75, medium: 100, large: 75 } },
+    elementModifier: [{ Neutral: { Neutral: 100, Water: 100 }, Fire: { Neutral: 100, Water: 50 } }],
+  };
+  const RC_PLANT = 3;
+  const RC_ALL = 12;
+  const CLASS_NORMAL = 0;
+  // DEX 80 ≥ ATK 25, so the sword always rolls 25; base ATK 17. 42 − soft DEF 1 = 41 on Poring.
+  const dexStats = { baseStats: stats({ dex: 80 }) };
+  // STR 99 with DEX 1: base ATK 99 + 81 = 180; crits do 25 + 180 = 205.
+  const strStats = { baseStats: stats({ str: 99 }) };
+
+  function hit(
+    effects: ScriptStmt[],
+    {
+      monster = poring,
+      weapon = sword,
+      partial = dexStats as Partial<CharacterBase>,
+      slot = 'armor' as Slot,
+    } = {},
+  ) {
+    const equipment: EquippedItem[] = [{ slot: 'rightHand', item: weapon, refine: 0 }];
+    const holder =
+      slot === 'leftHand'
+        ? testArmor({ locations: ['Left_Hand'], effects })
+        : testArmor({ effects });
+    equipment.push({ slot, item: { ...holder, defense: 0 }, refine: 0 });
+    return autoAttack(gearCharacter(equipment, partial), monster, elementTables, rAthenaDefaults);
+  }
+
+  it('takes the weapon element from bAtkEle (pc_bonus SP_ATKELE: rhw.ele)', () => {
+    expect(hit([]).normal.avg).toBe(41);
+    // battle_calc_element_damage: 41 × 50 / 100.
+    expect(hit([bonus('bAtkEle', 3)]).normal.avg).toBe(20);
+  });
+
+  it('applies bAddRace for the target race and RC_ALL as a card fix after element', () => {
+    // battle_calc_cardfix: cardfix 1000 × 120 / 100; 41 − 41 × (1000 − 1200) / 1000 = 49.
+    expect(hit([bonus('bAddRace', RC_PLANT, 20)]).normal.avg).toBe(49);
+    expect(hit([bonus('bAddRace', RC_ALL, 20)]).normal.avg).toBe(49);
+    expect(hit([bonus('bAddRace', 7, 20)]).normal.avg).toBe(41);
+    // Fire first: 20, then + 20 % = 24.
+    expect(hit([bonus('bAtkEle', 3), bonus('bAddRace', RC_PLANT, 20)]).normal.avg).toBe(24);
+  });
+
+  it('multiplies race, size and class card fixes one after another for melee', () => {
+    // 1000 → 1100 (race) → 1210 (size medium): 205 + 205 × 210 / 1000 = 248.05 → 248, not 246.
+    const result = hit([bonus('bAddRace', RC_PLANT, 10), bonus('bAddSize', 1, 10)], {
+      partial: strStats,
+    });
+    expect(result.crit.avg).toBe(248);
+    expect(hit([bonus('bAddClass', CLASS_NORMAL, 10)], { partial: strStats }).crit.avg).toBe(225);
+  });
+
+  it('multiplies per race group for melee but adds them up for arrow attacks', () => {
+    const goblinOrc = testMonster({ raceGroups: ['Goblin', 'Orc'] });
+    const effects = [bonus('bAddRace2', 1, 10), bonus('bAddRace2', 3, 10)];
+    // Melee: 1210 → 205 + 43.05 = 248.
+    expect(hit(effects, { monster: goblinOrc, partial: strStats }).crit.avg).toBe(248);
+    // Bow with DEX 99: crit 15 + base ATK 180 = 195; arrow branch 1200: 195 + 39 = 234.
+    const bowCrit = hit(effects, {
+      monster: goblinOrc,
+      weapon: bow,
+      partial: { baseStats: stats({ dex: 99 }) },
+    });
+    expect(bowCrit.crit.avg).toBe(234);
+  });
+
+  it('applies bLongAtkRate to bows and guns only (BF_LONG normal attacks)', () => {
+    // Bow crit with stats 1: ATK 15 + base ATK 1 = 16; + 50 % = 24.
+    expect(hit([bonus('bLongAtkRate', 50)], { weapon: bow, partial: {} }).crit.avg).toBe(24);
+    expect(hit([bonus('bLongAtkRate', 50)], { partial: strStats }).crit.avg).toBe(205);
+  });
+
+  it('ignores DEF with bIgnoreDefRace, but not from a shield (lr_flag LR_FLAG_SHIELD)', () => {
+    const armored = testMonster({ defense: 50 });
+    // attack_ignores_def: no hard or soft DEF, 42.
+    expect(hit([bonus('bIgnoreDefRace', RC_PLANT)], { monster: armored }).normal.avg).toBe(42);
+    expect(hit([bonus('bIgnoreDefClass', CLASS_NORMAL)], { monster: armored }).normal.avg).toBe(42);
+    // From a shield it does nothing: 42 × 50 / 100 − 1 = 20.
+    const shielded = hit([bonus('bIgnoreDefRace', RC_PLANT)], {
+      monster: armored,
+      slot: 'leftHand',
+    });
+    expect(shielded.normal.avg).toBe(20);
+  });
+
+  it('turns DEF into damage with bDefRatioAtkClass (is_attack_piercing)', () => {
+    // Hard DEF 50, soft DEF 40..43: 42 × (90..93) / 100 = 37, 38, 38, 39.
+    const tough = testMonster({ defense: 50, vit: 40 });
+    const result = hit([bonus('bDefRatioAtkClass', CLASS_NORMAL)], { monster: tough });
+    expect(result.normal).toEqual({ min: 37, max: 39, avg: 38 });
+    // Crits are never piercing and ignore DEF: 42.
+    expect(result.crit.avg).toBe(42);
+  });
+
+  it('lowers hard and soft DEF with bIgnoreDefRaceRate (battle_calc_defense_reduction)', () => {
+    const tough = testMonster({ defense: 50, vit: 40 });
+    // Without: 42 × 50 / 100 = 21 − 40..43 → 1.
+    expect(hit([], { monster: tough }).normal.avg).toBe(1);
+    // 50 %: DEF 25, VIT 20 (soft DEF exactly 20): 42 × 75 / 100 = 31 − 20 = 11.
+    expect(hit([bonus('bIgnoreDefRaceRate', RC_PLANT, 50)], { monster: tough }).normal.avg).toBe(
+      11,
+    );
+  });
+
+  it('adds bCritAtkRate to crits only, on the base damage (battle_calc_skill_base_damage)', () => {
+    const result = hit([bonus('bCritAtkRate', 50)]);
+    // 42 + 21 = 63; normal hits unchanged.
+    expect(result.crit.avg).toBe(63);
+    expect(result.normal.avg).toBe(41);
+  });
+
+  it('skips the size modifier with bNoSizeFix', () => {
+    const small = testMonster({ size: 'small' });
+    // 25 × 75 / 100 = 18 + 17 − 1 = 34; without size fix 41.
+    expect(hit([], { monster: small }).normal.avg).toBe(34);
+    expect(hit([bonus('bNoSizeFix')], { monster: small }).normal.avg).toBe(41);
+  });
+
+  it('adds bCriticalAddRace × 10 to the crit roll (is_attack_critical)', () => {
+    // LUK 30: cri 10 + 100 = 110, − 2 × 30 = 50 → 5 %; + 50 → 10 %.
+    const partial = { baseStats: stats({ luk: 30 }) };
+    expect(hit([], { partial }).critChance).toBe(0.05);
+    expect(hit([bonus('bCriticalAddRace', RC_PLANT, 5)], { partial }).critChance).toBe(0.1);
+  });
+
+  it('hits outright with the highest bPerfectHitRate before the hit roll (is_attack_hitting)', () => {
+    const evasive = testMonster({ level: 99, agi: 99 });
+    // Hit rate 80 + HIT 130 − FLEE 198 = 12 %; perfect hit 20 %: 0.2 + 0.8 × 0.12.
+    const result = hit([bonus('bPerfectHitRate', 20), bonus('bPerfectHitRate', 10)], {
+      monster: evasive,
+    });
+    expect(result.hitChance).toBeCloseTo(0.296, 10);
   });
 });

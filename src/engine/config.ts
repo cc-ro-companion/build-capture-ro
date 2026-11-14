@@ -10,6 +10,12 @@ export interface EngineConfig {
   minHitRate: number;
   /** battle.conf `max_hitrate`, percent. */
   maxHitRate: number;
+  /** player.conf `max_def`: equipment DEF and MDEF cap (over_def_bonus 0). */
+  maxDef: number;
+  /** player.conf `max_hp_lv99`; base levels above 99 are not supported. */
+  maxHp: number;
+  /** player.conf `max_sp`. */
+  maxSp: number;
 }
 
 export const rAthenaDefaults: EngineConfig = {
@@ -17,4 +23,7 @@ export const rAthenaDefaults: EngineConfig = {
   maxAspd: 190,
   minHitRate: 5,
   maxHitRate: 100,
+  maxDef: 99,
+  maxHp: 330000,
+  maxSp: 1000000,
 };

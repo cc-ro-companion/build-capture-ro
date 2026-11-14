@@ -8,7 +8,7 @@ import {
   tables as allTables,
 } from '../data';
 import type { Item, Job, Monster, NamesFile, TablesFile } from '../data/types';
-import { weaponRefine } from '../engine/equipment';
+import { buildCharacter } from '../engine/gear';
 import type { CharacterInput } from '../engine/stats';
 import { dummyMonster, type Dummy } from './dummy';
 import type { Build } from './model';
@@ -113,15 +113,12 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
     monster = dummy && dummyMonster(dummy);
   }
   return {
-    character: {
-      job,
-      baseLevel: build.baseLevel,
-      jobLevel: build.jobLevel,
-      baseStats: { ...build.stats },
-      weapon,
-      // Builds have no refine yet; the equipment model adds it.
-      weaponRefine: weaponRefine(data.tables.refine, weapon, 0),
-    },
+    character: buildCharacter(
+      { job, baseLevel: build.baseLevel, jobLevel: build.jobLevel, baseStats: { ...build.stats } },
+      // Builds hold only a +0 right-hand weapon until the equipment model.
+      weapon === null ? [] : [{ slot: 'rightHand', item: weapon, refine: 0 }],
+      data.tables.refine,
+    ),
     monster,
     dummy,
   };

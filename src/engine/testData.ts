@@ -1,6 +1,8 @@
 // Hand-made records for engine tests, so expected values do not shift when
 // the generated data is regenerated.
-import type { BonusStats, Item, Job, Monster } from '../data/types';
+import type { BonusStats, Item, Job, Monster, RefineTables, ScriptStmt } from '../data/types';
+import { BonusSet } from './bonuses';
+import { buildCharacter, type CharacterBase, type EquippedItem } from './gear';
 import type { CharacterInput } from './stats';
 
 export function stats(partial: Partial<BonusStats> = {}): BonusStats {
@@ -17,6 +19,9 @@ export function testJob(partial: Partial<Job> = {}): Job {
     maxJobLevel: 50,
     bonusStats: Array.from({ length: 50 }, () => ({ ...zeroBonus })),
     baseAspd: { Fist: 400, Dagger: 500, '1hSword': 550, '2hSword': 600, Bow: 700, Katar: 500 },
+    // Swordman-like: HP 40 + 5 per level, SP 11 + 1 per level.
+    baseHp: Array.from({ length: 99 }, (_, index) => 40 + 5 * index),
+    baseSp: Array.from({ length: 99 }, (_, index) => 11 + index),
     ...partial,
   };
 }
@@ -82,6 +87,51 @@ export function character(partial: Partial<CharacterInput> = {}): CharacterInput
     baseStats: stats(),
     weapon: null,
     weaponRefine: { atk: 0, overrefine: 0 },
+    bonuses: new BonusSet([]),
+    equipmentStats: { ...zeroBonus },
+    equipmentDef: 0,
     ...partial,
   };
+}
+
+/** `bonus name,args...;` as the parser stores it, with number arguments. */
+export function bonus(name: string, ...args: number[]): ScriptStmt {
+  return { k: 'bonus', name, args: args.map((value) => ({ k: 'num', v: value })) };
+}
+
+export function testArmor(partial: Partial<Item> = {}): Item {
+  return testWeapon({
+    id: 2301,
+    aegisName: 'Cotton_Shirt',
+    type: 'armor',
+    weaponType: undefined,
+    attack: 0,
+    defense: 1,
+    weaponLevel: undefined,
+    locations: ['Armor'],
+    ...partial,
+  });
+}
+
+/**
+ * A character wearing items through `buildCharacter`, with an empty refine
+ * table unless one is given, so expected values stay hand-computable.
+ */
+export function gearCharacter(
+  equipment: readonly EquippedItem[],
+  partial: Partial<CharacterBase> = {},
+  refine: RefineTables = { armor: [], weapon: [] },
+): CharacterInput {
+  const base = character();
+  return buildCharacter(
+    {
+      job: base.job,
+      baseLevel: base.baseLevel,
+      jobLevel: base.jobLevel,
+      baseStats: base.baseStats,
+      ...partial,
+    },
+    equipment,
+    refine,
+  );
 }
