@@ -166,7 +166,7 @@ describe('evaluateEffects', () => {
       ],
       context({ refine: 4 }),
     );
-    expect(result.calls.map((c) => c.args[0])).toEqual([8, 0]);
+    expect(result.calls.map((bonusCall) => bonusCall.args[0])).toEqual([8, 0]);
   });
 
   it('reads raised stats (no job bonus) with readparam, and the levels', () => {

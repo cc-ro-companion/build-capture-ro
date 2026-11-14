@@ -3,6 +3,7 @@
 // plain-word labels for the ones it does not.
 import type { AutobonusCommand } from '../data/types';
 import type { AutoBonus, BonusArg, BonusCall, GrantedSkill } from './effects';
+import type { Slot } from './gear';
 
 /**
  * Where a bonus came from, as rAthena's `sd->state.lr_flag` while the item's
@@ -14,16 +15,31 @@ export type BonusSource = 'none' | 'shield' | 'leftWeapon';
 
 export interface SourcedBonusCall extends BonusCall {
   itemId: number;
+  slot: Slot;
   source: BonusSource;
 }
 
 export interface SourcedSkill extends GrantedSkill {
   itemId: number;
+  slot: Slot;
 }
 
 export interface SourcedAutoBonus extends AutoBonus {
   itemId: number;
+  slot: Slot;
   source: BonusSource;
+}
+
+/**
+ * How an equipped item's script ran, for what the engine leaves out beyond
+ * its bonus calls: a script stopped by a runtime error keeps only the calls
+ * before it, and a script that read a skill level saw 0 for every skill.
+ */
+export interface ScriptRun {
+  itemId: number;
+  slot: Slot;
+  error?: string;
+  readsSkillLevel: boolean;
 }
 
 const ALL_SOURCES: readonly BonusSource[] = ['none', 'shield', 'leftWeapon'];
@@ -40,15 +56,18 @@ export class BonusSet {
   readonly calls: readonly SourcedBonusCall[];
   readonly skills: readonly SourcedSkill[];
   readonly autoBonuses: readonly SourcedAutoBonus[];
+  readonly runs: readonly ScriptRun[];
 
   constructor(
     calls: readonly SourcedBonusCall[],
     skills: readonly SourcedSkill[] = [],
     autoBonuses: readonly SourcedAutoBonus[] = [],
+    runs: readonly ScriptRun[] = [],
   ) {
     this.calls = calls;
     this.skills = skills;
     this.autoBonuses = autoBonuses;
+    this.runs = runs;
   }
 
   /**

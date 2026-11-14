@@ -22,8 +22,8 @@ function unsupported(source: string): Extract<ParseResult, { ok: false }> {
   return result;
 }
 
-const num = (v: number): ScriptExpr => ({ k: 'num', v });
-const str = (v: string): ScriptExpr => ({ k: 'str', v });
+const num = (value: number): ScriptExpr => ({ k: 'num', v: value });
+const str = (value: string): ScriptExpr => ({ k: 'str', v: value });
 const op = (operator: string, ...args: ScriptExpr[]): ScriptExpr => ({
   k: 'op',
   op: operator,
@@ -81,10 +81,11 @@ describe('parseScript statements', () => {
   });
 
   it('resolves bonus names case-insensitively to rAthena spelling', () => {
-    expect(effects('BONUS bAGI,1; bonus bdex,2;').map((s) => s.k === 'bonus' && s.name)).toEqual([
-      'bAgi',
-      'bDex',
-    ]);
+    expect(
+      effects('BONUS bAGI,1; bonus bdex,2;').map(
+        (statement) => statement.k === 'bonus' && statement.name,
+      ),
+    ).toEqual(['bAgi', 'bDex']);
   });
 
   it('rejects an unknown bonus name', () => {
@@ -145,6 +146,7 @@ describe('parseScript statements', () => {
       statement: 'sc_start SC_X,1000,1;',
     });
     expect(unsupported('Callfunc "F_X";').reason).toBe('command "callfunc"');
+    expect(unsupported('constructor 1;').reason).toBe('command "constructor"');
   });
 
   it('parses skill with a name or id, a level expression and an optional flag', () => {

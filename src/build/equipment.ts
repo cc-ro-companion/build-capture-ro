@@ -3,6 +3,7 @@
 // level cannot wear. Mirrors rAthena's pc_equippoint and pc_equipitem.
 import type { Item } from '../data/types';
 import { SLOTS, type Slot } from '../engine/gear';
+import { DUAL_WIELD_TYPES } from '../engine/status';
 import { itemName, jobCanEquip, jobName, levelCanEquip, type GameData } from './resolve';
 
 export { SLOTS, type Slot };
@@ -30,9 +31,6 @@ const SLOT_LOCATIONS: Record<Slot, string> = {
   rightHand: 'Right_Hand',
   leftHand: 'Left_Hand',
 };
-
-/** Weapon types that `pc_equippoint` lets a dual-wield job hold in the left hand. */
-const DUAL_WIELD_TYPES = new Set(['Dagger', '1hSword', '1hAxe']);
 
 /**
  * Jobs that dual wield: pc_equippoint returns EQP_ARMS for Assassin (and

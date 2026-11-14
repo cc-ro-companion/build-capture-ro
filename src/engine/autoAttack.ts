@@ -458,13 +458,17 @@ function hitDamage(
 
   if (pierce) {
     // `ATK_RATE2(damage, def1 + vit_def)` with no soft DEF subtraction; then
-    // refine ATK and the floor.
-    for (const base of baseDamages) {
+    // refine ATK and the floor. Base damages repeat a lot (weapon roll ×
+    // overupgrade), and a dummy's soft DEF spans up to 2,401 values, so each
+    // distinct base is enumerated once and weighted by how often it occurs.
+    const baseCounts = new Map<number, number>();
+    for (const base of baseDamages) baseCounts.set(base, (baseCounts.get(base) ?? 0) + 1);
+    for (const [base, count] of baseCounts) {
       for (let soft = softDef.first; soft <= lastSoftDef; soft++) {
         const damage = finish(
           Math.max(floor, Math.trunc((base * (hardDef + soft)) / 100) + refineAtk),
         );
-        sum += damage;
+        sum += damage * count;
         min = Math.min(min, damage);
         max = Math.max(max, damage);
       }

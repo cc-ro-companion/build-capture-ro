@@ -24,7 +24,9 @@ export function noteCount(note: NotModelledNote): number {
 /**
  * Notes per filled slot, only for items with something not modelled. Bonuses
  * are the calls the build's evaluation produced, so a bonus behind a refine
- * or job condition that is not met does not show.
+ * or job condition that is not met does not show. A script that read a skill
+ * level, which is 0 until skills are modelled, or that stopped early, gets a
+ * label of its own, as its missing bonuses leave no calls to list.
  */
 export function notModelledNotes(resolved: ResolvedBuild): Partial<Record<Slot, NotModelledNote>> {
   const notes: Partial<Record<Slot, NotModelledNote>> = {};
@@ -34,13 +36,17 @@ export function notModelledNotes(resolved: ResolvedBuild): Partial<Record<Slot, 
       continue;
     }
     const { bonuses } = resolved.character;
-    const ofItem = <T extends { itemId: number }>(records: readonly T[]) =>
-      records.filter((record) => record.itemId === item.id);
-    const labels = notModelledLabels(ofItem(bonuses.calls));
+    const ofSlot = <T extends { slot: Slot }>(records: readonly T[]) =>
+      records.filter((record) => record.slot === slot);
+    const labels = notModelledLabels(ofSlot(bonuses.calls));
     const extra = [
-      ...ofItem(bonuses.skills).map(skillLabel),
-      ...ofItem(bonuses.autoBonuses).map(autoBonusLabel),
+      ...ofSlot(bonuses.skills).map(skillLabel),
+      ...ofSlot(bonuses.autoBonuses).map(autoBonusLabel),
     ];
+    for (const run of ofSlot(bonuses.runs)) {
+      if (run.readsSkillLevel) extra.push('effects that depend on skill levels');
+      if (run.error !== undefined) extra.push(`effects after a script error (${run.error})`);
+    }
     for (const label of extra) if (!labels.includes(label)) labels.push(label);
     if (labels.length > 0) notes[slot] = { labels };
   }

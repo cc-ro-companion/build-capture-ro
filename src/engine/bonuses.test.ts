@@ -17,7 +17,7 @@ function call(
   args: (number | string)[],
   source: SourcedBonusCall['source'] = 'none',
 ): SourcedBonusCall {
-  return { name, args, itemId: 1, source };
+  return { name, args, itemId: 1, slot: 'armor', source };
 }
 
 const set = new BonusSet([

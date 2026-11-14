@@ -153,7 +153,8 @@ class Parser {
       return statements;
     }
     if (token.kind === 'ident' && token.text === 'if') return [this.parseIf()];
-    if (token.kind === 'ident' && lower(token.text) in BONUS_COMMANDS) return [this.parseBonus()];
+    if (token.kind === 'ident' && Object.hasOwn(BONUS_COMMANDS, lower(token.text)))
+      return [this.parseBonus()];
     if (token.kind === 'ident' && lower(token.text) === 'skill') return [this.parseSkill()];
     const autobonus = AUTOBONUS_COMMANDS.find((command) => command === lower(token.text));
     if (token.kind === 'ident' && autobonus !== undefined) return [this.parseAutobonus(autobonus)];

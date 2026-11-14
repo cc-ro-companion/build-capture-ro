@@ -120,4 +120,79 @@ describe('notModelledNotes with conditional bonuses', () => {
       armor: { labels: ['SP drain'] },
     });
   });
+
+  it('notes each slot by its own evaluation when one item fills two slots', () => {
+    const ASSASSIN = 12;
+    const knife = gameData.items.get(1201) as Item;
+    const knifeData = createGameData({
+      jobs: [...gameData.jobs.values()],
+      items: [{ ...knife, effects: refineGated }],
+      monsters: [],
+      statPoints: gameData.statPoints,
+      tables: gameData.tables,
+      names: { items: {}, monsters: {}, jobs: {} },
+    });
+    const equipment = { rightHand: { item: 1201, refine: 0 }, leftHand: { item: 1201, refine: 7 } };
+    const notes = notModelledNotes(
+      resolveBuild({ ...defaultBuild(), job: ASSASSIN, equipment }, knifeData),
+    );
+    expect(notes).toEqual({ leftHand: { labels: ['SP drain'] } });
+  });
+
+  function shirtWith(effects: ScriptStmt[]): GameData {
+    return createGameData({
+      jobs: [...gameData.jobs.values()],
+      items: [{ ...shirt, effects }],
+      monsters: [],
+      statPoints: gameData.statPoints,
+      tables: gameData.tables,
+      names: { items: {}, monsters: {}, jobs: {} },
+    });
+  }
+
+  it('notes a script that reads a skill level, which is 0 until skills exist', () => {
+    // if (getskilllv("SM_SWORD") == 10) bonus bMdef,1;
+    const skillGated: ScriptStmt[] = [
+      {
+        k: 'if',
+        cond: {
+          k: 'op',
+          op: '==',
+          args: [
+            { k: 'call', fn: 'getskilllv', args: [{ k: 'str', v: 'SM_SWORD' }] },
+            { k: 'num', v: 10 },
+          ],
+        },
+        then: [{ k: 'bonus', name: 'bMdef', args: [{ k: 'num', v: 1 }] }],
+        else: [],
+      },
+    ];
+    expect(notesFor({ armor: { item: 2301, refine: 0 } }, shirtWith(skillGated))).toEqual({
+      armor: { labels: ['effects that depend on skill levels'] },
+    });
+  });
+
+  it('notes a script that stops early at a runtime error', () => {
+    // bonus bMdef,1; bonus bMdef,1/0;
+    const stopsEarly: ScriptStmt[] = [
+      { k: 'bonus', name: 'bMdef', args: [{ k: 'num', v: 1 }] },
+      {
+        k: 'bonus',
+        name: 'bMdef',
+        args: [
+          {
+            k: 'op',
+            op: '/',
+            args: [
+              { k: 'num', v: 1 },
+              { k: 'num', v: 0 },
+            ],
+          },
+        ],
+      },
+    ];
+    const notes = notesFor({ armor: { item: 2301, refine: 0 } }, shirtWith(stopsEarly));
+    expect(notes.armor?.labels).toHaveLength(1);
+    expect(notes.armor?.labels[0]).toMatch(/^effects after a script error \(.+\)$/);
+  });
 });

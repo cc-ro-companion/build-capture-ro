@@ -30,8 +30,12 @@ const AMOTION_ZERO_ASPD = 2000;
 /** status.hpp `AMOTION_INTERVAL`. */
 const AMOTION_INTERVAL = 10;
 
-/** Weapon types that pair into a dual-wield type (`pc_calcweapontype` W_DOUBLE_*). */
-const DUAL_WIELD_TYPES = new Set(['Dagger', '1hSword', '1hAxe']);
+/**
+ * Weapon types that pair into a dual-wield type (`pc_calcweapontype`
+ * W_DOUBLE_*), which are also the ones `pc_equippoint` lets a dual-wield job
+ * hold in the left hand.
+ */
+export const DUAL_WIELD_TYPES: ReadonlySet<string> = new Set(['Dagger', '1hSword', '1hAxe']);
 
 /**
  * `sd->status.weapon`: the right-hand type, or the left-hand type when only

@@ -117,10 +117,6 @@ export class BuildState {
     this.update({ ...this.build, stats: { ...this.build.stats, [stat]: value } });
   }
 
-  setWeapon(itemId: number | null): void {
-    this.equip('rightHand', itemId);
-  }
-
   /**
    * Puts an item into a slot (null empties it), taking off what it overlaps.
    * The refine starts at +0; an item that does not fit the slot is ignored.

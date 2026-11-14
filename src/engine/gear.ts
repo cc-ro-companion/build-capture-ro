@@ -5,6 +5,7 @@ import type { BonusStats, Item, Job, RefineTables } from '../data/types';
 import {
   BonusSet,
   type BonusSource,
+  type ScriptRun,
   type SourcedAutoBonus,
   type SourcedBonusCall,
   type SourcedSkill,
@@ -100,24 +101,34 @@ export function buildCharacter(
   const calls: SourcedBonusCall[] = [];
   const skills: SourcedSkill[] = [];
   const autoBonuses: SourcedAutoBonus[] = [];
+  const runs: ScriptRun[] = [];
   for (const { slot, item, refine } of ordered) {
     if (item.effects === null) continue;
+    let readsSkillLevel = false;
     const result = evaluateEffects(item.effects, {
       refine,
       baseStats: base.baseStats,
       baseLevel: base.baseLevel,
       jobLevel: base.jobLevel,
       jobId: base.job.id,
-      skillLevel: () => 0,
+      skillLevel: () => {
+        readsSkillLevel = true;
+        return 0;
+      },
     });
     const source = bonusSource(slot, item);
-    for (const call of result.calls) calls.push({ ...call, itemId: item.id, source });
-    for (const skill of result.skills) skills.push({ ...skill, itemId: item.id });
-    for (const autoBonus of result.autoBonuses) {
-      autoBonuses.push({ ...autoBonus, itemId: item.id, source });
-    }
+    const origin = { itemId: item.id, slot };
+    for (const call of result.calls) calls.push({ ...call, ...origin, source });
+    for (const skill of result.skills) skills.push({ ...skill, ...origin });
+    for (const autoBonus of result.autoBonuses)
+      autoBonuses.push({ ...autoBonus, ...origin, source });
+    runs.push({
+      ...origin,
+      readsSkillLevel,
+      ...(result.error === undefined ? {} : { error: result.error }),
+    });
   }
-  const bonuses = new BonusSet(calls, skills, autoBonuses);
+  const bonuses = new BonusSet(calls, skills, autoBonuses, runs);
   const rightHand = equipment.find((equipped) => equipped.slot === 'rightHand');
   const weapon = rightHand?.item.type === 'weapon' ? rightHand.item : null;
   // A weapon in the left hand is `lhw` (status_calc_pc: EQI_HAND_L equipped

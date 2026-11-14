@@ -6,11 +6,12 @@ import { MAX_RESULTS, searchEquipment, searchMonsters } from './search';
 
 const SWORDMAN = 1;
 const MAGE = 2;
+const weapons = gameData.itemList.filter((item) => item.type === 'weapon');
 
 describe('searchEquipment right hand (shipped data)', () => {
   it('lists every weapon the job can equip, whatever its equip level', () => {
     for (const jobId of [SWORDMAN, MAGE]) {
-      const all = gameData.weapons.filter((item) => !item.hidden && item.jobs.includes(jobId));
+      const all = weapons.filter((item) => !item.hidden && item.jobs.includes(jobId));
       const result = searchEquipment('', 'rightHand', jobId, gameData);
       expect(result.total).toBe(all.length);
       for (const item of result.matches) expect(item.jobs).toContain(jobId);
@@ -21,7 +22,7 @@ describe('searchEquipment right hand (shipped data)', () => {
     const swords = searchEquipment('sword', 'rightHand', SWORDMAN, gameData).matches;
     expect(swords.map((item) => item.id)).toContain(1101);
     const all = searchEquipment('', 'rightHand', SWORDMAN, gameData);
-    const filtered = gameData.weapons.filter(
+    const filtered = weapons.filter(
       (item) => !item.hidden && item.jobs.includes(SWORDMAN) && item.equipLevelMin > 1,
     );
     expect(filtered.length).toBeGreaterThan(0);
@@ -65,7 +66,7 @@ describe('searchEquipment hidden items', () => {
   });
 
   it('marks shipped items from hidden-items.yml as hidden', () => {
-    expect(gameData.weapons.some((item) => item.hidden)).toBe(true);
+    expect(weapons.some((item) => item.hidden)).toBe(true);
   });
 });
 
