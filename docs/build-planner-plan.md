@@ -79,7 +79,7 @@ anyway, so a bigger session later is worth more).
    and the auto attack result: min/max/average, hit chance, crit, ASPD, DPS.
    Includes the build state model, saving in the browser, and share codes
    with data version. First validation session.
-4. [ ] **Equipment and effects.** All equipment slots, refinement, the
+4. [x] **Equipment and effects.** All equipment slots, refinement, the
    effect model, and the conversion of rAthena item scripts into effects.
    Runes, combos, and the per-build inventory of configured items. The
    script conversion is the largest unknown of the project; its approach is
@@ -171,7 +171,7 @@ Found while reviewing the runes (phase 4b); each belongs to the phase named.
   a subset of rAthena script, unsupported scripts are rewritten by hand as
   overrides, and ccRO runes are written in rAthena script too. Phase 4 is
   split into [4a](plans/archive/phase-4a-equipment-scripts-plan.md) (equipment,
-  refinement, script conversion) and [4b](phase-4b-runes-combos-inventory-plan.md)
+  refinement, script conversion) and [4b](plans/archive/phase-4b-runes-combos-inventory-plan.md)
   (runes, combos, inventory).
 - Format of the hand-entered ccRO data (runes, card system, costumes) and
   where the maintainer's prepared material comes in. Runes in phase 4, the
@@ -183,3 +183,4 @@ Found while reviewing the runes (phase 4b); each belongs to the phase named.
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-13 · Phase 1 Foundation · verification passes; deployed to GitHub Pages and confirmed by the maintainer; plan archived at [plans/archive/phase-1-foundation-plan.md](plans/archive/phase-1-foundation-plan.md) · 3ba8b26
 - 2026-11-13 · Phase 2 Data pipeline · verification passes; plan archived at [plans/archive/phase-2-data-pipeline-plan.md](plans/archive/phase-2-data-pipeline-plan.md). Its open item is settled: the other `db/` base files (`job_stats.yml`, `statpoint.yml`, `attr_fix.yml`, `mob_db.yml`, `item_db.yml`) have empty bodies and only import `db/pre-re`, so only `size_fix.yml` needed the base merge · 0ba2d1c
+- 2026-11-14 · Phase 4 Equipment and effects · 4a and 4b done, verification passes; no validation session for phase 4 (maintainer's choice); plans archived at [plans/archive/phase-4a-equipment-scripts-plan.md](plans/archive/phase-4a-equipment-scripts-plan.md) and [plans/archive/phase-4b-runes-combos-inventory-plan.md](plans/archive/phase-4b-runes-combos-inventory-plan.md) · –
