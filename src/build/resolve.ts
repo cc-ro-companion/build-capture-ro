@@ -18,8 +18,10 @@ export interface GameData {
   /** Job ids in display order. */
   jobOrder: readonly number[];
   items: ReadonlyMap<number, Item>;
-  /** Weapons in id order, for search. */
+  /** Weapons in id order. */
   weapons: readonly Item[];
+  /** Every item in id order, for equipment search. */
+  itemList: readonly Item[];
   monsters: ReadonlyMap<number, Monster>;
   monsterList: readonly Monster[];
   /** Index = base level − 1; total stat points. */
@@ -47,6 +49,7 @@ export function createGameData(source: GameDataSource): GameData {
     jobOrder: source.jobs.map((job) => job.id),
     items: byId(source.items),
     weapons: ascending(source.items.filter((item) => item.type === 'weapon')),
+    itemList: ascending(source.items),
     monsters: byId(source.monsters),
     monsterList: ascending(source.monsters),
     statPoints: source.statPoints,
@@ -103,6 +106,8 @@ export interface ResolvedBuild {
   monster: Monster | null;
   /** The target dummy, when the target is one of the build's dummies. */
   dummy: Dummy | null;
+  /** The build's equipped items that resolve, in slot order. */
+  equipment: EquippedItem[];
 }
 
 /**
@@ -135,5 +140,6 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
     ),
     monster,
     dummy,
+    equipment,
   };
 }

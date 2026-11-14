@@ -153,7 +153,7 @@ app is the maintainer's step.
 8. [x] **Build model v2 and share code tag 14.** Equipment, v1 migration,
    saved-build migration, slot rules in normalize. Check: tests including a
    recorded phase 3 code and phase 3 saved JSON.
-9. [ ] **Equipment panel.** Slots, per-slot search, refine, "not modelled"
+9. [x] **Equipment panel.** Slots, per-slot search, refine, "not modelled"
    notes, results summary line. Check: component tests and `pnpm build`.
 10. [ ] **Hand fixes.** Rewrite the scripts of the most-used unsupported
     items the maintainer picks from the coverage report as overrides.

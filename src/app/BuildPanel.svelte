@@ -1,24 +1,15 @@
 <script lang="ts">
-  import { jobName, itemName, levelCanEquip } from '../build/resolve';
-  import { searchWeapons } from '../build/search';
+  import { jobName } from '../build/resolve';
   import { jobBonus, statPointCost, STAT_NAMES, type StatName } from '../engine/stats';
-  import { usesArrowPath } from '../engine/status';
   import type { BuildState } from './build.svelte';
+  import EquipmentPanel from './EquipmentPanel.svelte';
   import NumberInput from './NumberInput.svelte';
 
   let { planner }: { planner: BuildState } = $props();
 
-  let weaponQuery = $state('');
-  let showHidden = $state(false);
-
   const job = $derived(planner.resolved.character.job);
   const bonus = $derived(jobBonus(job, planner.build.jobLevel));
   const pointsLeft = $derived(planner.pointsBudget - planner.pointsSpent);
-  const weapons = $derived(
-    searchWeapons(weaponQuery, planner.build.job, planner.data, { showHidden }),
-  );
-  const weapon = $derived(planner.resolved.character.weapon);
-  const rangedWeapon = $derived(usesArrowPath(weapon?.weaponType ?? ''));
 
   function onJobChange(event: Event & { currentTarget: HTMLSelectElement }) {
     planner.setJob(Number(event.currentTarget.value));
@@ -95,57 +86,7 @@
     {/if}
   </p>
 
-  <div class="picker">
-    <h3>Weapon</h3>
-    <p class="selected" data-testid="selected-weapon">
-      {weapon ? `${itemName(planner.data, weapon.id)} (${weapon.id})` : 'No weapon'}
-    </p>
-    {#if planner.equipmentErrors.length > 0}
-      <ul class="errors" aria-label="Equipment errors">
-        {#each planner.equipmentErrors as error, index (index)}
-          <li role="alert">{error}</li>
-        {/each}
-      </ul>
-    {/if}
-    {#if rangedWeapon}
-      <p class="note">Computed without ammunition (no arrow or bullet ATK); ammo comes later.</p>
-    {/if}
-    <input
-      type="search"
-      placeholder="Search weapon by name or id"
-      aria-label="Search weapon"
-      bind:value={weaponQuery}
-    />
-    <label class="toggle">
-      <input type="checkbox" bind:checked={showHidden} />
-      Show hidden items
-    </label>
-    <ul class="results" aria-label="Weapon results">
-      <li>
-        <button type="button" onclick={() => planner.setWeapon(null)}>No weapon</button>
-      </li>
-      {#each weapons.matches as item (item.id)}
-        <li>
-          <button
-            type="button"
-            class:active={item.id === planner.build.equipment.rightHand?.item}
-            class:level-blocked={!levelCanEquip(item, planner.build.baseLevel)}
-            onclick={() => planner.setWeapon(item.id)}
-          >
-            {itemName(planner.data, item.id)}
-            <span class="meta"
-              >{item.id} · {item.weaponType} · ATK {item.attack} · Lv {item.equipLevelMin}</span
-            >
-          </button>
-        </li>
-      {/each}
-    </ul>
-    {#if weapons.total > weapons.matches.length}
-      <p class="note">
-        Showing {weapons.matches.length} of {weapons.total}; type to narrow the list.
-      </p>
-    {/if}
-  </div>
+  <EquipmentPanel {planner} />
 </div>
 
 <style>
@@ -187,83 +128,6 @@
   }
 
   .over {
-    color: var(--color-error);
-  }
-
-  .picker h3 {
-    margin: 0 0 4px;
-    font-size: 14px;
-  }
-
-  .selected {
-    margin: 0 0 6px;
-    font-weight: 600;
-  }
-
-  .errors {
-    margin: 4px 0;
-    padding-left: 18px;
-    color: var(--color-error);
-    font-size: 12px;
-  }
-
-  .note {
-    margin: 4px 0;
-    color: var(--color-muted);
-    font-size: 12px;
-  }
-
-  .toggle {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    margin-top: 4px;
-    font-size: 12px;
-  }
-
-  input[type='search'] {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .results {
-    list-style: none;
-    margin: 6px 0 0;
-    padding: 0;
-    max-height: 220px;
-    overflow-y: auto;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-  }
-
-  .results button {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
-    padding: 3px 6px;
-    border: 0;
-    background: none;
-    color: inherit;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-  }
-
-  .results button:hover,
-  .results button.active {
-    background: var(--color-highlight);
-  }
-
-  .meta {
-    color: var(--color-muted);
-    font-size: 12px;
-    white-space: nowrap;
-  }
-
-  /* Equippable, but not at the current base level; the build reports it as an error. */
-  .results button.level-blocked,
-  .results button.level-blocked .meta {
     color: var(--color-error);
   }
 </style>

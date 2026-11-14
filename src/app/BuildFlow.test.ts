@@ -9,6 +9,7 @@ import { saveBuild, STORAGE_KEY, UNREADABLE_KEY } from '../build/storage';
 import { dataMeta } from '../data';
 import { autoAttack } from '../engine/autoAttack';
 import { rAthenaDefaults } from '../engine/config';
+import { statusWindow } from '../engine/status';
 import App from './App.svelte';
 
 const version = { hash: dataMeta.hash, label: dataMeta.label };
@@ -58,10 +59,10 @@ describe('build flow', () => {
     await setNumber('STR', 50);
     await setNumber('AGI', 30);
     await setNumber('DEX', 30);
-    await pick('Weapon results', 'Search weapon', '1101', /^Sword/);
+    await pick('Right hand results', 'Search right hand', '1101', /^Sword/);
     await pick('Monster results', 'Search monster', '1002', /^Poring/);
 
-    expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
+    expect(screen.getByTestId('slot-rightHand').textContent).toContain('Sword (1101)');
     expect(screen.getByTestId('selected-target').textContent).toContain('Poring (1002)');
 
     const expected = expectedResult(swordman);
@@ -96,7 +97,7 @@ describe('build flow', () => {
     saveBuild(swordman, version, localStorage);
     render(App);
     await fireEvent.change(screen.getByLabelText('Job'), { target: { value: '2' } });
-    expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
+    expect(screen.getByTestId('slot-rightHand').textContent).toContain('Sword (1101)');
     expect(screen.getByRole('list', { name: 'Equipment errors' }).textContent).toMatch(
       /Sword \(1101\) cannot be equipped by Mage/,
     );
@@ -107,18 +108,137 @@ describe('build flow', () => {
   it('offers a weapon above the base level in red and says the level is too low', async () => {
     saveBuild({ ...swordman, baseLevel: 1, equipment: {} }, version, localStorage);
     render(App);
-    await fireEvent.input(screen.getByLabelText('Search weapon'), { target: { value: '1101' } });
-    const list = screen.getByRole('list', { name: 'Weapon results' });
+    await fireEvent.input(screen.getByLabelText('Search right hand'), {
+      target: { value: '1101' },
+    });
+    const list = screen.getByRole('list', { name: 'Right hand results' });
     const sword = within(list).getByRole('button', { name: /^Sword/ });
     expect(sword.classList.contains('level-blocked')).toBe(true);
     await fireEvent.click(sword);
-    expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
+    expect(screen.getByTestId('slot-rightHand').textContent).toContain('Sword (1101)');
     expect(screen.getByRole('list', { name: 'Equipment errors' }).textContent).toBe(
       'Base level 1 is too low for Sword (1101); it needs base level 2.',
     );
     await setNumber('Base level', 2);
     expect(screen.queryByRole('list', { name: 'Equipment errors' })).toBeNull();
     expect(sword.classList.contains('level-blocked')).toBe(false);
+  });
+});
+
+describe('equipment panel', () => {
+  const ASSASSIN = 12;
+
+  function slotText(slot: string): string {
+    return screen.getByTestId(`slot-${slot}`).textContent ?? '';
+  }
+
+  async function equip(slotLabel: string, query: string, name: RegExp) {
+    const slots = screen.getByRole('table', { name: 'Equipment slots' });
+    await fireEvent.click(within(slots).getByRole('button', { name: slotLabel }));
+    await pick(`${slotLabel} results`, `Search ${slotLabel.toLowerCase()}`, query, name);
+  }
+
+  it('fills slots through search, refines them, and shows the engine’s status window', async () => {
+    saveBuild(swordman, version, localStorage);
+    render(App);
+    await equip('Armor', '2301', /^Cotton Shirt/);
+    await equip('Left hand', '2101', /^Guard/);
+    await equip('Left accessory', '2601', /^Ring/);
+    await setNumber('Armor refine', 4);
+    await setNumber('Right hand refine', 7);
+
+    expect(slotText('armor')).toContain('Cotton Shirt (2301)');
+    expect(slotText('leftHand')).toContain('Guard (2101)');
+    expect(slotText('accessoryLeft')).toContain('Ring (2601)');
+    // Ring is not refineable, so it has no refine input.
+    expect(screen.queryByLabelText('Left accessory refine')).toBeNull();
+
+    const geared: Build = {
+      ...swordman,
+      equipment: {
+        armor: { item: 2301, refine: 4 },
+        leftHand: { item: 2101, refine: 0 },
+        accessoryLeft: { item: 2601, refine: 0 },
+        rightHand: { item: 1101, refine: 7 },
+      },
+    };
+    const status = statusWindow(resolveBuild(geared, gameData).character, rAthenaDefaults);
+    expect(screen.getByTestId('status-def').textContent).toBe(
+      `${status.def[0]} + ${status.def[1]}`,
+    );
+    expect(screen.getByTestId('status-atk').textContent).toBe(
+      `${status.atk[0]} + ${status.atk[1]}`,
+    );
+    expect(screen.getByTestId('status-hp').textContent).toBe(String(status.maxHp));
+    expect(screen.getByTestId('dps').textContent).toBe(expectedResult(geared).dps.toFixed(1));
+
+    cleanup();
+    render(App);
+    expect(slotText('armor')).toContain('Cotton Shirt (2301)');
+    expect((screen.getByLabelText('Right hand refine') as HTMLInputElement).value).toBe('7');
+  });
+
+  it('clears the slots a multi-location headgear or a two-handed weapon covers', async () => {
+    saveBuild(swordman, version, localStorage);
+    render(App);
+    await equip('Middle headgear', '2201', /^Sunglasses/);
+    await equip('Upper headgear', '2224', /^Goggles/);
+    expect(slotText('headTop')).toContain('Goggles (2224)');
+    expect(slotText('headMid')).toContain('Goggles (also here)');
+    await equip('Middle headgear', '2201', /^Sunglasses/);
+    expect(slotText('headTop')).toContain('Empty');
+    expect(slotText('headMid')).toContain('Sunglasses (2201)');
+
+    await equip('Left hand', '2101', /^Guard/);
+    await equip('Right hand', '1116', /^Katana/);
+    expect(slotText('leftHand')).toContain('Katana (also here)');
+    await fireEvent.click(screen.getByRole('button', { name: 'Remove Left hand' }));
+    expect(slotText('rightHand')).toContain('Empty');
+    expect(slotText('leftHand')).toContain('Empty');
+  });
+
+  it('shows both hands of an Assassin with two daggers and a DPS that includes both', () => {
+    const assassin: Build = {
+      ...swordman,
+      job: ASSASSIN,
+      equipment: { rightHand: { item: 1201, refine: 0 }, leftHand: { item: 1201, refine: 0 } },
+    };
+    saveBuild(assassin, version, localStorage);
+    render(App);
+    const expected = expectedResult(assassin);
+    if (!expected.left) throw new Error('expected a left hand result');
+    const left = screen.getByTestId('damage-left').textContent ?? '';
+    expect(left).toContain(`${expected.left.normal.min}`);
+    expect(left).toContain(expected.left.normal.avg.toFixed(1));
+    expect(screen.getByTestId('damage-normal').textContent).toContain('Right hand');
+    expect(screen.getByTestId('dps').textContent).toBe(expected.dps.toFixed(1));
+    expect(screen.getByText('DPS (both hands)')).toBeTruthy();
+  });
+
+  it('notes effects that are not modelled and counts them in the results', () => {
+    saveBuild(
+      {
+        ...swordman,
+        baseLevel: 50,
+        equipment: { headMid: { item: 2201, refine: 0 }, rightHand: { item: 1131, refine: 0 } },
+      },
+      version,
+      localStorage,
+    );
+    render(App);
+    expect(screen.getByTestId('note-headMid').textContent).toBe('Not modelled: status resistance.');
+    expect(screen.getByTestId('note-rightHand').textContent).toMatch(
+      /Script not read \(command "skill"\)/,
+    );
+    expect(screen.getByTestId('not-modelled-summary').textContent).toMatch(
+      /^2 equipment effects not modelled/,
+    );
+  });
+
+  it('shows no summary line when every effect is modelled', () => {
+    saveBuild(swordman, version, localStorage);
+    render(App);
+    expect(screen.queryByTestId('not-modelled-summary')).toBeNull();
   });
 });
 
@@ -271,7 +391,7 @@ describe('saving and share links', () => {
   it('opens a #b= link and removes the fragment', () => {
     window.history.replaceState(null, '', `/#b=${encodeShareCode(swordman, version)}`);
     render(App);
-    expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
+    expect(screen.getByTestId('slot-rightHand').textContent).toContain('Sword (1101)');
     expect(screen.getByTestId('selected-target').textContent).toContain('Poring (1002)');
     expect(window.location.hash).toBe('');
   });

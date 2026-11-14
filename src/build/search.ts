@@ -1,6 +1,7 @@
-// Weapon and monster search: case-insensitive substring over the English
+// Equipment and monster search: case-insensitive substring over the English
 // name, the aegis name and the id.
 import type { Item, Monster } from '../data/types';
+import { fitsSlot, jobCanUseSlot, type Slot } from './equipment';
 import { itemName, jobCanEquip, monsterName, type GameData } from './resolve';
 
 export const MAX_RESULTS = 50;
@@ -38,21 +39,25 @@ export interface ItemSearchOptions {
 }
 
 /**
- * Weapons the job can equip that match the query, whatever their equip
- * level: the build keeps gear above its base level and reports it as an error.
+ * Items for one equipment slot that the job can hold there and that match
+ * the query, whatever their equip level: the build keeps gear above its base
+ * level and reports it as an error.
  */
-export function searchWeapons(
+export function searchEquipment(
   query: string,
+  slot: Slot,
   jobId: number,
   data: GameData,
   options: ItemSearchOptions = {},
 ): SearchResult<Item> {
   const matches = matcher(query);
   return collect(
-    data.weapons,
+    data.itemList,
     (item) =>
       (options.showHidden === true || item.hidden !== true) &&
+      fitsSlot(item, slot) &&
       jobCanEquip(item, jobId) &&
+      jobCanUseSlot(item, slot, jobId) &&
       matches(item.id, item.aegisName, itemName(data, item.id)),
   );
 }

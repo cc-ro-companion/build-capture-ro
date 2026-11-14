@@ -3,6 +3,7 @@
 import { defaultDummy, MAX_DUMMIES, type Dummy } from '../build/dummy';
 import { defaultBuild, normalizeBuild, sameBuild, type Build, type Target } from '../build/model';
 import { equipmentErrors, fitsSlot, withEquipped, type Slot } from '../build/equipment';
+import { notModelledNotes } from '../build/notModelled';
 import { resolveBuild, type GameData } from '../build/resolve';
 import {
   decodeShareCode,
@@ -52,6 +53,8 @@ export class BuildState {
   equipmentErrors = $derived.by(() =>
     equipmentErrors(this.build.equipment, this.build.job, this.build.baseLevel, this.data),
   );
+  /** Per slot, what the engine leaves out of the equipped item. */
+  notModelled = $derived.by(() => notModelledNotes(this.resolved));
   pointsSpent = $derived.by(() => statPointsSpent(this.build.stats));
   pointsBudget = $derived.by(() => statPointBudget(this.data.statPoints, this.build.baseLevel));
   shareCode = $derived.by(() => encodeShareCode(this.build, this.version));
