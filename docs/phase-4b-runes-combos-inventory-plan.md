@@ -136,3 +136,4 @@ results become fixtures that `pnpm test` then guards.
 
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
+- 2026-11-14 · Task 1 draft tool · vitest data-pipeline/tools 39 passed, lint clean; 235 runes, 95 TODO lines, all 365 scripts parse without them · cbeb4d2
