@@ -20,6 +20,7 @@ const VALUE_PREFIXES = [
   'ATF_',
   'EAJ_',
   'EAJL_',
+  'IG_',
 ];
 
 /** Headers whose enums and #defines give the values of the exported constants. */
@@ -29,6 +30,7 @@ const HEADERS = [
   'src/map/mob.hpp',
   'src/map/status.hpp',
   'src/map/battle.hpp',
+  'src/map/itemdb.hpp',
 ];
 
 function stripComments(source: string): string {

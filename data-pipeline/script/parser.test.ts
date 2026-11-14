@@ -244,8 +244,8 @@ describe('parseScript expressions', () => {
   });
 
   it('rejects unknown names', () => {
-    expect(unsupported('bonus2 bAddItemGroupHealRate,IG_Potion,20;').reason).toBe(
-      'unknown name "IG_Potion"',
+    expect(unsupported('bonus2 bAddItemGroupHealRate,IG_No_Such_Group,20;').reason).toBe(
+      'unknown name "IG_No_Such_Group"',
     );
   });
 
@@ -502,6 +502,17 @@ if (getrefine()>6) {
     expect(effects('bonus bAtkEle,Ele_Fire;\nskill "MG_FIREBOLT",3;\n')).toMatchObject([
       { k: 'bonus', name: 'bAtkEle' },
       { k: 'skill', skill: str('MG_FIREBOLT'), level: num(3) },
+    ]);
+  });
+
+  it('2417: item group constant (IG_Potion, itemdb.hpp e_random_item_group)', () => {
+    expect(effects('bonus bAgi,2;\nbonus2 bAddItemGroupHealRate,IG_Potion,20;\n')).toEqual([
+      { k: 'bonus', name: 'bAgi', args: [num(2)] },
+      {
+        k: 'bonus',
+        name: 'bAddItemGroupHealRate',
+        args: [{ k: 'const', name: 'IG_POTION', v: 36 }, num(20)],
+      },
     ]);
   });
 

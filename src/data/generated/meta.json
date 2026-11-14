@@ -1,10 +1,10 @@
 {
   "label": "ccRO 2026-11",
-  "hash": "b5c3bf9a",
+  "hash": "2f884da8",
   "rathenaCommit": "7f080871c8b3bbe7a79027194633201c63422ee1",
   "rathenaCommitDate": "2026-06-18T11:30:09+02:00",
   "rathenaDirty": false,
   "overridesHash": "d746283c1d72475979cda00a0673907280a6bd022a907ab1f05b17c27334854b",
-  "coverageHash": "323fcbf7c6c9e5becfc36a39a722b773049bc2c5a10b6a78edca58a8da290018",
-  "generatedAt": "2026-11-14T05:13:11.836Z"
+  "coverageHash": "2bc424eae239ead6151c04e7cdaa7a2d62c38c322bc8f059597380c719d6e1df",
+  "generatedAt": "2026-11-14T05:17:56.342Z"
 }

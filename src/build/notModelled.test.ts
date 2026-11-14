@@ -37,6 +37,13 @@ describe('notModelledNotes (shipped data)', () => {
     expect(notes.rightHand?.labels).toContain('temporary bonus on attack');
   });
 
+  it('applies AGI from Fricco’s Shoes (2417) and notes its potion healing', () => {
+    const equipment = { shoes: { item: 2417, refine: 0 } };
+    expect(notesFor(equipment).shoes).toEqual({ labels: ['item group healing %'] });
+    const resolved = resolveBuild({ ...defaultBuild(), job: SWORDMAN, equipment }, gameData);
+    expect(resolved.character.equipmentStats.agi).toBe(2);
+  });
+
   it('reports an unsupported script as one effect', () => {
     const shirt = gameData.items.get(2301) as Item;
     const data = createGameData({

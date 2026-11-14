@@ -278,6 +278,8 @@ export const BONUS_LABELS: Readonly<Record<string, string>> = {
   bExpAddClass: 'EXP against boss or normal monsters',
   bAddMonsterDropItem: 'extra drops',
   bAddMonsterIdDropItem: 'extra drops from a monster',
+  bAddMonsterDropItemGroup: 'extra drops from an item group',
+  bAddItemGroupHealRate: 'item group healing %',
   bGetZenyNum: 'zeny on kill',
   bNoGemStone: 'no gemstone cost',
   bNoWalkDelay: 'no flinch when hit',

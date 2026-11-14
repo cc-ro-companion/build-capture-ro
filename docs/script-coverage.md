@@ -6,8 +6,8 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 
 | Equipment with a script | Items | Parsed | Unsupported | Parsed |
 | --- | ---: | ---: | ---: | ---: |
-| All | 1267 | 1259 | 8 | 99.4 % |
-| Not hidden | 540 | 537 | 3 | 99.4 % |
+| All | 1267 | 1262 | 5 | 99.6 % |
+| Not hidden | 540 | 540 | 0 | 100.0 % |
 
 ## Unsupported by reason
 
@@ -18,9 +18,6 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 | function "gettime" | 1 |
 | function "strcharinfo" | 1 |
 | function "vip_status" | 1 |
-| unknown name "IG_Jewel" | 1 |
-| unknown name "IG_Ore" | 1 |
-| unknown name "IG_Potion" | 1 |
 
 ### autobonus bonus: command "sc_start"
 
@@ -52,30 +49,12 @@ script can be rewritten in `data-overrides/items.yml` (`Script:`).
 | ---: | --- | --- | --- |
 | 2132 | Shell Of Resistance | yes | `if (vip_status(VIP_STATUS_ACTIVE)) {` |
 
-### unknown name "IG_Jewel"
-
-| Id | Name | Hidden | Statement |
-| ---: | --- | --- | --- |
-| 1142 | Jeweled Sword |  | `bonus2 bAddMonsterDropItemGroup,IG_Jewel,10000;` |
-
-### unknown name "IG_Ore"
-
-| Id | Name | Hidden | Statement |
-| ---: | --- | --- | --- |
-| 1143 | Gaia Sword |  | `bonus2 bAddMonsterDropItemGroup,IG_Ore,10000;` |
-
-### unknown name "IG_Potion"
-
-| Id | Name | Hidden | Statement |
-| ---: | --- | --- | --- |
-| 2417 | Fricco's Shoes |  | `bonus2 bAddItemGroupHealRate,IG_Potion,20;` |
-
 ## Bonuses in parsed scripts
 
 By name and number of values; computed bonuses change the status window
 and auto attack, the others are stored and shown as "not modelled".
 
-36 of 116 bonuses are computed; 80 are stored only.
+36 of 118 bonuses are computed; 82 are stored only.
 
 | Bonus | Values | Items | Computed |
 | --- | ---: | ---: | --- |
@@ -87,8 +66,8 @@ and auto attack, the others are stored and shown as "not modelled".
 | `bAtkEle` | 1 | 105 | yes |
 | `bMatkRate` | 1 | 105 |  |
 | `bSubRace` | 2 | 98 |  |
+| `bAgi` | 1 | 89 | yes |
 | `bUnbreakableWeapon` | 0 | 89 |  |
-| `bAgi` | 1 | 88 | yes |
 | `bLuk` | 1 | 81 | yes |
 | `bAutoSpell` | 3 | 66 |  |
 | `bSubEle` | 2 | 64 |  |
@@ -162,6 +141,7 @@ and auto attack, the others are stored and shown as "not modelled".
 | `bAddDefMonster` | 2 | 2 |  |
 | `bAddEffOnSkill` | 3 | 2 |  |
 | `bAddItemHealRate` | 2 | 2 |  |
+| `bAddMonsterDropItemGroup` | 2 | 2 |  |
 | `bAddMonsterIdDropItem` | 3 | 2 |  |
 | `bAddRace2` | 2 | 2 | yes |
 | `bAddSkillBlow` | 2 | 2 |  |
@@ -180,6 +160,7 @@ and auto attack, the others are stored and shown as "not modelled".
 | `bSubSize` | 2 | 2 |  |
 | `bUnbreakableArmor` | 0 | 2 |  |
 | `bUnbreakableGarment` | 0 | 2 |  |
+| `bAddItemGroupHealRate` | 2 | 1 |  |
 | `bAddItemHealRate` | 1 | 1 |  |
 | `bAspd` | 1 | 1 | yes |
 | `bClassChange` | 1 | 1 |  |

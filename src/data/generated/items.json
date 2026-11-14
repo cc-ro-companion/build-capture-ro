@@ -1054,8 +1054,16 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "unknown name \"IG_Jewel\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItemGroup",
+        "args": [
+          { "k": "const", "name": "IG_JEWEL", "v": 26 },
+          { "k": "num", "v": 10000 }
+        ]
+      }
+    ]
   },
   {
     "id": 1143,
@@ -1072,8 +1080,16 @@
     "refineable": true,
     "locations": ["Right_Hand"],
     "jobs": [1, 5, 6, 7, 10, 12, 14, 17, 18],
-    "effects": null,
-    "unsupported": "unknown name \"IG_Ore\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItemGroup",
+        "args": [
+          { "k": "const", "name": "IG_ORE", "v": 17 },
+          { "k": "num", "v": 10000 }
+        ]
+      }
+    ]
   },
   {
     "id": 1144,
@@ -25215,8 +25231,23 @@
     "refineable": true,
     "locations": ["Shoes"],
     "jobs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 24, 25, 4046, 4047, 4049],
-    "effects": null,
-    "unsupported": "unknown name \"IG_Potion\""
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddItemGroupHealRate",
+        "args": [
+          { "k": "const", "name": "IG_POTION", "v": 36 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ]
   },
   {
     "id": 2418,
