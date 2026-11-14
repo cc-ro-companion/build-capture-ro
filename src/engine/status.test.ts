@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { jobsData } from '../data';
+import { jobsData, tables } from '../data';
 import type { ScriptStmt } from '../data/types';
 import { rAthenaDefaults } from './config';
 import { totalStats } from './stats';
@@ -227,5 +227,67 @@ describe('max HP and SP (status_calc_maxhp_pc, status_calc_maxsp_pc)', () => {
     // job_basepoints.yml Knight level 99: 7978; VIT 1 + job bonus 1: × 1.02 = 8137.56.
     expect(maxHp(character, rAthenaDefaults)).toBe(8137);
     expect(maxHp(character, { ...rAthenaDefaults, maxHp: 8000 })).toBe(8000);
+  });
+});
+
+describe('shields and dual wield in the status window', () => {
+  const dagger = testWeapon({ id: 1201, weaponType: 'Dagger', attack: 40 });
+  const sword = testWeapon();
+  const shield = (effects: ScriptStmt[] = []) =>
+    testArmor({ id: 2101, defense: 3, locations: ['Left_Hand'], effects });
+
+  it('adds a refined shield’s refine DEF like any armor (status_calc_pc refinedef)', () => {
+    // Shield +4: 4 × 70 = 280 hundredths, (280 + 50) / 100 = 3; plus its DEF 3.
+    const character = gearCharacter(
+      [{ slot: 'leftHand', item: shield(), refine: 4 }],
+      {},
+      tables.refine,
+    );
+    expect(statusWindow(character, rAthenaDefaults).def[0]).toBe(6);
+  });
+
+  it('gives a shield no ASPD delay; only its own bAspdRate counts (pre-renewal status_base_amotion_pc)', () => {
+    // A shield leaves weapontype2 at W_FIST (pc_equipitem), so amotion uses the
+    // sword alone: 550 − trunc(550 × 5 / 1000) = 548.
+    const right = { slot: 'rightHand' as const, item: sword, refine: 0 };
+    const plain = gearCharacter([right, { slot: 'leftHand', item: shield(), refine: 0 }]);
+    expect(attackMotion(plain, rAthenaDefaults)).toBe(548);
+    expect(attackMotion(gearCharacter([right]), rAthenaDefaults)).toBe(548);
+    // pc_bonus SP_ASPD_RATE accepts LR_FLAG_SHIELD: 548 × 950 / 1000 = 520.
+    const fast = gearCharacter([
+      right,
+      { slot: 'leftHand', item: shield([bonus('bAspdRate', 5)]), refine: 0 },
+    ]);
+    expect(attackMotion(fast, rAthenaDefaults)).toBe(520);
+  });
+
+  it('takes 70 % of both hands’ delays when dual wielding (W_DOUBLE_*)', () => {
+    // (Dagger 500 + 1hSword 550) × 7 / 10 = 735; 735 − trunc(735 × 5 / 1000) = 732.
+    const character = gearCharacter([
+      { slot: 'rightHand', item: dagger, refine: 0 },
+      { slot: 'leftHand', item: sword, refine: 0 },
+    ]);
+    expect(attackMotion(character, rAthenaDefaults)).toBe(732);
+  });
+
+  it('uses the left weapon’s delay when only the left hand holds one (pc_calcweapontype)', () => {
+    // Dagger 500 − 2 = 498.
+    const character = gearCharacter([{ slot: 'leftHand', item: dagger, refine: 0 }]);
+    expect(attackMotion(character, rAthenaDefaults)).toBe(498);
+  });
+
+  it('shows both hands’ weapon and refine ATK (pc_leftside_atk, pc_rightside_atk pre-renewal)', () => {
+    // Weapon level 1 +7: 14 refine ATK each; base ATK 1.
+    const character = gearCharacter(
+      [
+        { slot: 'rightHand', item: dagger, refine: 7 },
+        { slot: 'leftHand', item: sword, refine: 7 },
+      ],
+      {},
+      tables.refine,
+    );
+    const window = statusWindow(character, rAthenaDefaults);
+    expect(window.atk).toEqual([1 + 40 + 25, 14 + 14]);
+    expect(window.leftWeaponAtk).toBe(25);
   });
 });

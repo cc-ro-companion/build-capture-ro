@@ -87,6 +87,8 @@ export function character(partial: Partial<CharacterInput> = {}): CharacterInput
     baseStats: stats(),
     weapon: null,
     weaponRefine: { atk: 0, overrefine: 0 },
+    leftWeapon: null,
+    leftWeaponRefine: { atk: 0, overrefine: 0 },
     bonuses: new BonusSet([]),
     equipmentStats: { ...zeroBonus },
     equipmentDef: 0,

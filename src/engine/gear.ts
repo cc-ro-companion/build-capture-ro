@@ -108,10 +108,16 @@ export function buildCharacter(
   const bonuses = new BonusSet(calls);
   const rightHand = equipment.find((equipped) => equipped.slot === 'rightHand');
   const weapon = rightHand?.item.type === 'weapon' ? rightHand.item : null;
+  // A weapon in the left hand is `lhw` (status_calc_pc: EQI_HAND_L equipped
+  // as EQP_HAND_L); a shield there is armor and only adds DEF and its script.
+  const leftHand = equipment.find((equipped) => equipped.slot === 'leftHand');
+  const leftWeapon = leftHand?.item.type === 'weapon' ? leftHand.item : null;
   return {
     ...base,
     weapon,
     weaponRefine: weaponRefine(refineTables, weapon, rightHand?.refine ?? 0),
+    leftWeapon,
+    leftWeaponRefine: weaponRefine(refineTables, leftWeapon, leftHand?.refine ?? 0),
     bonuses,
     equipmentStats: equipmentStats(bonuses),
     // status_calc_pc adds every equipped item's DEF, then (refinedef + 50) / 100.

@@ -414,3 +414,144 @@ describe('equipment effects on auto attack', () => {
     expect(result.hitChance).toBeCloseTo(0.296, 10);
   });
 });
+
+describe('dual wield (battle_calc_weapon_attack with damage2)', () => {
+  const dualTables: TablesFile = {
+    ...tables,
+    sizeModifier: { ...tables.sizeModifier, Dagger: { small: 100, medium: 75, large: 50 } },
+    elementModifier: [{ Neutral: { Neutral: 100, Water: 100 }, Fire: { Neutral: 100, Water: 50 } }],
+  };
+  const RC_PLANT = 3;
+  // ATK 40 dagger; with DEX 80 every roll is 40, size 75 % on Poring → 30.
+  const dagger = testWeapon({ id: 1201, weaponType: 'Dagger', attack: 40 });
+  // DEX 80: base ATK 1 + 0 + 16 + 0 = 17, so each hand's base damage is 30 + 17 = 47.
+  const dexStats = { baseStats: stats({ dex: 80 }) };
+
+  function dual(
+    leftEffects: ScriptStmt[] = [],
+    { monster = poring, partial = dexStats as Partial<CharacterBase>, right = true } = {},
+  ) {
+    const equipment: EquippedItem[] = [
+      { slot: 'leftHand', item: { ...dagger, id: 1202, effects: leftEffects }, refine: 0 },
+    ];
+    if (right) equipment.push({ slot: 'rightHand', item: dagger, refine: 0 });
+    return autoAttack(gearCharacter(equipment, partial), monster, dualTables, rAthenaDefaults);
+  }
+
+  it('scales right by 50 % and left by 30 % at mastery 0 (battle_calc_attack_left_right_hands)', () => {
+    const result = dual();
+    // 47 − soft DEF 1 = 46 per hand: right 46 × 50 / 100 = 23, left 46 × 30 / 100 = 13.
+    expect(result.normal).toEqual({ min: 23, max: 23, avg: 23 });
+    expect(result.left?.normal).toEqual({ min: 13, max: 13, avg: 13 });
+    // Crits skip DEF on both hands: 47 → 23 and 14.
+    expect(result.crit.avg).toBe(23);
+    expect(result.left?.crit.avg).toBe(14);
+  });
+
+  it('adds both hands to DPS on the same hit and crit roll', () => {
+    const result = dual();
+    // amotion (500 + 500) × 7 / 10 = 700 − trunc(700 × 84 / 1000) = 642; no crits, always hits.
+    expect(result.amotion).toBe(642);
+    expect(result.dps).toBeCloseTo((1000 / 1284) * (23 + 13), 10);
+  });
+
+  it('uses the left weapon’s own bAtkEle for the left hand only (lhw.ele)', () => {
+    const result = dual([bonus('bAtkEle', 3)]);
+    // Left: 46 × 50 % (Fire vs Water) = 23 → × 30 % = 6; right stays Neutral.
+    expect(result.left?.normal.avg).toBe(6);
+    expect(result.normal.avg).toBe(23);
+  });
+
+  it('moves the left weapon’s card bonuses to the right hand (left_cardfix_to_right)', () => {
+    const result = dual([bonus('bAddRace', RC_PLANT, 20)]);
+    // Right: 46 + 9 = 55 → × 50 % = 27. Left: card fix untouched, 13.
+    expect(result.normal.avg).toBe(27);
+    expect(result.left?.normal.avg).toBe(13);
+  });
+
+  it('moves the left weapon’s ignore-DEF flag to the right hand (attack_ignores_def)', () => {
+    const armored = testMonster({ defense: 50 });
+    const result = dual([bonus('bIgnoreDefRace', RC_PLANT)], { monster: armored });
+    // Right ignores DEF: 47 → 23. Left: 47 × 50 / 100 = 23 − 1 = 22 → 6.
+    expect(result.normal.avg).toBe(23);
+    expect(result.left?.normal.avg).toBe(6);
+  });
+
+  it('floors the left hand at 0, not 1, after DEF (battle_min_damage)', () => {
+    const wall = testMonster({ defense: 100, vit: 1 });
+    const result = dual([], { monster: wall });
+    // Hard DEF 100 leaves 0, − 1: right floors at 1 → max(1, 0) = 1; left stays 0.
+    expect(result.normal.avg).toBe(1);
+    expect(result.left?.normal).toEqual({ min: 0, max: 0, avg: 0 });
+  });
+
+  it('adds the left weapon’s refine and overupgrade to the left hand (lhw.atk2, left_weapon.overrefine)', () => {
+    const left = { ...dagger, id: 1202 };
+    const input = character({
+      ...dexStats,
+      weapon: dagger,
+      leftWeapon: left,
+      leftWeaponRefine: { atk: 10, overrefine: 2 },
+    });
+    const result = autoAttack(input, poring, dualTables, rAthenaDefaults);
+    // Left: 47 + {1, 2} − 1 + 10 = 57 or 58 → 17 either way; right unchanged 23.
+    expect(result.left?.normal).toEqual({ min: 17, max: 17, avg: 17 });
+    expect(result.normal.avg).toBe(23);
+  });
+
+  it('matches brute force for the left hand partly at its floor of 0', () => {
+    // STR 99, DEX 10: base ATK 99 + 81 + 2 = 182. Weapon level 4 left dagger:
+    // min 10 × 160 / 100 = 16, rolls 16..39, size 75 %. Soft DEF 200..299.
+    const tank = testMonster({ vit: 200 });
+    const leftWeapon = { ...dagger, id: 1202, weaponLevel: 4 };
+    const input = character({
+      baseStats: stats({ str: 99, dex: 10 }),
+      weapon: dagger,
+      leftWeapon,
+    });
+    let min = Infinity;
+    let max = -Infinity;
+    let sum = 0;
+    let count = 0;
+    for (let weaponValue = 16; weaponValue <= 39; weaponValue++) {
+      for (let softDef = 200; softDef <= 299; softDef++) {
+        let damage = Math.max(0, Math.trunc((weaponValue * 75) / 100) + 182 - softDef);
+        if (damage !== 0) damage = Math.max(1, Math.trunc((damage * 30) / 100));
+        min = Math.min(min, damage);
+        max = Math.max(max, damage);
+        sum += damage;
+        count++;
+      }
+    }
+    const result = autoAttack(input, tank, dualTables, rAthenaDefaults);
+    expect(result.left?.normal.min).toBe(min);
+    expect(result.left?.normal.max).toBe(max);
+    expect(result.left?.normal.avg).toBeCloseTo(sum / count, 10);
+    // The case must reach the floor and the minimum of 1 after the rate.
+    expect(min).toBe(0);
+    expect(max).toBeGreaterThan(1);
+  });
+
+  it('deals an unarmed right-hand hit and a 30 % left hit with only a left weapon', () => {
+    const result = dual([], { right: false });
+    // Right: bare hands, base ATK 17 − 1 = 16, no hand rate. Left: 46 → 13.
+    expect(result.normal.avg).toBe(16);
+    expect(result.left?.normal.avg).toBe(13);
+  });
+
+  it('has no left hand with a shield or a katar', () => {
+    const shield = testArmor({ id: 2101, locations: ['Left_Hand'] });
+    const shielded = gearCharacter(
+      [
+        { slot: 'rightHand', item: dagger, refine: 0 },
+        { slot: 'leftHand', item: shield, refine: 0 },
+      ],
+      dexStats,
+    );
+    const result = autoAttack(shielded, poring, dualTables, rAthenaDefaults);
+    expect(result.left).toBeNull();
+    // A shield does not halve the right hand: 46.
+    expect(result.normal.avg).toBe(46);
+    expect(attack({ weapon: katar }).left).toBeNull();
+  });
+});

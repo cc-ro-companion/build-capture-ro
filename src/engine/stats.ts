@@ -16,6 +16,10 @@ export interface CharacterInput {
   weapon: Item | null;
   /** Refine ATK and overupgrade of the right-hand weapon (equipment.ts `weaponRefine`). */
   weaponRefine: WeaponRefine;
+  /** Dual-wielded left-hand weapon (`lhw`); null for a shield or an empty left hand. */
+  leftWeapon: Item | null;
+  /** Refine ATK and overupgrade of the left-hand weapon. */
+  leftWeaponRefine: WeaponRefine;
   /** Bonus calls of every equipped item (gear.ts `buildCharacter`). */
   bonuses: BonusSet;
   /** Stat bonuses from item scripts, rAthena's `param_equip`. */

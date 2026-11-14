@@ -2,10 +2,11 @@
 // `battle_calc_weapon_attack` for skill_id 0: crit roll, hit roll, base
 // damage, overupgrade, crit damage bonus, DEF (ignored, by ratio or
 // reduced), refine ATK, minimum damage, element, attacker card fix, katar
-// off-hand hit.
-import type { Monster, TablesFile } from '../data/types';
+// off-hand hit, and the dual-wield left hand with both hands' rates.
+import type { Item, Monster, TablesFile } from '../data/types';
 import type { BonusSet, BonusSource } from './bonuses';
 import type { EngineConfig } from './config';
+import type { WeaponRefine } from './equipment';
 import { totalStats, type CharacterInput } from './stats';
 import { statusWindow, totalBaseAtk, usesArrowPath, weaponTypeOf } from './status';
 
@@ -16,9 +17,17 @@ export interface DamageRange {
   avg: number;
 }
 
-export interface AutoAttackResult {
+export interface HandDamage {
   normal: DamageRange;
   crit: DamageRange;
+}
+
+export interface AutoAttackResult {
+  /** Right-hand damage (the only hand without a dual-wielded left weapon). */
+  normal: DamageRange;
+  crit: DamageRange;
+  /** Left-hand damage of a dual-wield attack, dealt on the same hit; null otherwise. */
+  left: HandDamage | null;
   /** Chance a non-critical attack hits, 0..1, perfect hit included. */
   hitChance: number;
   /** Chance an attack is critical, 0..1; crits always hit. */
@@ -26,6 +35,7 @@ export interface AutoAttackResult {
   amotion: number;
   aspd: number;
   attacksPerSecond: number;
+  /** Expected damage per second, both hands included. */
   dps: number;
 }
 
@@ -153,37 +163,34 @@ export function targetKeys(monster: Monster): TargetKeys {
   };
 }
 
-/**
- * Right-hand ignore-DEF and DEF-ratio bonuses come from LR_FLAG_NONE and,
- * because `left_cardfix_to_right` is on, from a left-hand weapon; a
- * shield's are dropped (`pc_bonus` SP_IGNORE_DEF_RACE, `attack_ignores_def`).
- */
-const RIGHT_HAND_FLAG_SOURCES: readonly BonusSource[] = ['none', 'leftWeapon'];
 /** Bonuses rAthena stores on `right_weapon`: LR_FLAG_NONE and the shield. */
 const RIGHT_WEAPON_SOURCES: readonly BonusSource[] = ['none', 'shield'];
+const LEFT_WEAPON_SOURCES: readonly BonusSource[] = ['leftWeapon'];
 
-/** A race or class bitmask bonus that matches the target or `*_ALL`. */
-function hasTargetFlag(bonuses: BonusSet, name: string, target: TargetKeys): boolean {
+/** A race or class bitmask bonus from `sources` that matches the target or `*_ALL`. */
+function hasTargetFlag(
+  bonuses: BonusSet,
+  name: string,
+  target: TargetKeys,
+  sources: readonly BonusSource[],
+): boolean {
   const [key, all] = name.endsWith('Race') ? [target.race, RC_ALL] : [target.class, CLASS_ALL];
+  return bonuses.has(name, [key], sources) || bonuses.has(name, [all], sources);
+}
+
+/** `attack_ignores_def` for one hand, crits aside. */
+function ignoresDef(bonuses: BonusSet, target: TargetKeys, sources: readonly BonusSource[]) {
   return (
-    bonuses.has(name, [key], RIGHT_HAND_FLAG_SOURCES) ||
-    bonuses.has(name, [all], RIGHT_HAND_FLAG_SOURCES)
+    hasTargetFlag(bonuses, 'bIgnoreDefRace', target, sources) ||
+    hasTargetFlag(bonuses, 'bIgnoreDefClass', target, sources)
   );
 }
 
-/** `attack_ignores_def` for the right hand, crits aside. */
-function ignoresDef(bonuses: BonusSet, target: TargetKeys): boolean {
+/** `is_attack_piercing` for one hand (bDefRatioAtkRace/Class), crits aside. */
+function piercesDef(bonuses: BonusSet, target: TargetKeys, sources: readonly BonusSource[]) {
   return (
-    hasTargetFlag(bonuses, 'bIgnoreDefRace', target) ||
-    hasTargetFlag(bonuses, 'bIgnoreDefClass', target)
-  );
-}
-
-/** `is_attack_piercing` for the right hand (bDefRatioAtkRace/Class), crits aside. */
-function piercesDef(bonuses: BonusSet, target: TargetKeys): boolean {
-  return (
-    hasTargetFlag(bonuses, 'bDefRatioAtkRace', target) ||
-    hasTargetFlag(bonuses, 'bDefRatioAtkClass', target)
+    hasTargetFlag(bonuses, 'bDefRatioAtkRace', target, sources) ||
+    hasTargetFlag(bonuses, 'bDefRatioAtkClass', target, sources)
   );
 }
 
@@ -229,26 +236,114 @@ function applyCardFix(damage: number, cardfix: number): number {
   return damage - Math.trunc((damage * (1000 - Math.max(0, cardfix))) / 1000);
 }
 
-/** Weapon element: the last `bAtkEle` from the right weapon or armor (`rhw.ele`), else Neutral. */
-export function weaponElement(input: CharacterInput): string {
-  const value = input.bonuses.last('bAtkEle', [], RIGHT_WEAPON_SOURCES);
+function elementFrom(input: CharacterInput, sources: readonly BonusSource[]): string {
+  const value = input.bonuses.last('bAtkEle', [], sources);
   return (typeof value === 'number' ? ELEMENT_NAMES[value] : undefined) ?? 'Neutral';
 }
 
+/** Weapon element: the last `bAtkEle` from the right weapon or armor (`rhw.ele`), else Neutral. */
+export function weaponElement(input: CharacterInput): string {
+  return elementFrom(input, RIGHT_WEAPON_SOURCES);
+}
+
+/** Left-hand weapon element: the last `bAtkEle` of the left weapon's script (`lhw.ele`). */
+export function leftWeaponElement(input: CharacterInput): string {
+  return elementFrom(input, LEFT_WEAPON_SOURCES);
+}
+
+/**
+ * One hand's part of a normal attack. rAthena computes `damage` (right) and
+ * `damage2` (left) side by side in battle_calc_weapon_attack with the same
+ * crit, hit and soft DEF rolls; they differ in these values.
+ */
+interface Hand {
+  weapon: Item | null;
+  refine: WeaponRefine;
+  /** Weapon type whose size_fix.yml row applies (`atkmods` from weapontype1 or weapontype2). */
+  sizeType: string;
+  element: string;
+  /** Sources whose ignore-DEF and DEF-ratio flags apply to this hand. */
+  defFlagSources: readonly BonusSource[];
+  /** Attacker card fix in thousandths. */
+  cardfix: number;
+  /** `battle_min_damage` after refine ATK. */
+  floor: number;
+  /** Final percent from `battle_calc_attack_left_right_hands`, or null. */
+  handRate: number | null;
+  /** Katar off-hand hit, right hand only. */
+  katar: boolean;
+}
+
+/**
+ * The hands that deal damage (`is_attack_right_handed`, `is_attack_left_handed`).
+ * With `left_cardfix_to_right` on, the right hand takes the left weapon's
+ * ignore-DEF and DEF-ratio flags and its card bonuses, so the left hand keeps
+ * neither (`attack_ignores_def`, `is_attack_piercing`, and `battle_calc_cardfix`
+ * with left flag 3 applies an untouched `cardfix_`); a shield's flags are
+ * dropped. Without a right-hand weapon the right hand still deals an unarmed
+ * hit and the left weapon keeps its own flags. Dual wield scales the right
+ * hand by AS_RIGHT (50 + 10 × level) % and the left by AS_LEFT (30 + 10 ×
+ * level) %, each at least 1; mastery levels are 0 until skills exist. rAthena
+ * applies the rates to Thief-family jobs, the only ones that can hold a
+ * left-hand weapon.
+ */
+function attackHands(
+  input: CharacterInput,
+  target: TargetKeys,
+): { right: Hand; left: Hand | null } {
+  const weaponType = weaponTypeOf(input);
+  const leftWeapon = input.leftWeapon;
+  const leftOnly = input.weapon === null && leftWeapon !== null;
+  const right: Hand = {
+    weapon: input.weapon,
+    refine: input.weaponRefine,
+    sizeType: input.weapon?.weaponType ?? 'Fist',
+    element: weaponElement(input),
+    defFlagSources: leftOnly ? ['none'] : ['none', 'leftWeapon'],
+    cardfix: attackerCardFix(input.bonuses, target, usesArrowPath(weaponType)),
+    // rAthena skips the right hand's floor without a right-hand weapon and
+    // leaves a negative unarmed hit; it is floored at 0 here instead.
+    floor: leftOnly ? 0 : 1,
+    handRate: null,
+    katar: weaponType === 'Katar',
+  };
+  // `is_attack_left_handed`: a left weapon with ATK, or one without a right weapon.
+  if (leftWeapon === null || !(leftOnly || leftWeapon.attack > 0)) return { right, left: null };
+  if (!leftOnly) right.handRate = 50;
+  const left: Hand = {
+    weapon: leftWeapon,
+    refine: input.leftWeaponRefine,
+    sizeType: leftWeapon.weaponType ?? 'Fist',
+    element: leftWeaponElement(input),
+    defFlagSources: leftOnly ? LEFT_WEAPON_SOURCES : [],
+    cardfix: 1000,
+    // Left-hand damage is floored at 0, not 1 (`battle_min_damage`).
+    floor: 0,
+    handRate: 30,
+    katar: false,
+  };
+  return { right, left };
+}
+
 /** Possible weapon damage values before size, each equally likely. */
-function weaponRoll(input: CharacterInput, dex: number, critical: boolean): number[] {
+function weaponRoll(
+  input: CharacterInput,
+  weapon: Item | null,
+  dex: number,
+  critical: boolean,
+): number[] {
   const weaponType = weaponTypeOf(input);
   // Bows always take the arrow path; guns only when not critical
   // (`battle_calc_skill_base_damage` pre-renewal default case).
   const arrow = usesArrowPath(weaponType) && (weaponType === 'Bow' || !critical);
-  let atkMax = input.weapon?.attack ?? 0;
+  let atkMax = weapon?.attack ?? 0;
   let atkMin = 0;
 
-  // `battle_calc_base_damage`, PC branch.
+  // `battle_calc_base_damage`, PC branch: the DEX minimum scales by this hand's weapon level.
   if (!critical || arrow) {
     atkMin = dex;
-    if (input.weapon) {
-      atkMin = Math.trunc((atkMin * (80 + (input.weapon.weaponLevel ?? 1) * 20)) / 100);
+    if (weapon) {
+      atkMin = Math.trunc((atkMin * (80 + (weapon.weaponLevel ?? 1) * 20)) / 100);
     }
     if (atkMin > atkMax) atkMin = atkMax;
     if (arrow) {
@@ -277,23 +372,29 @@ function elementRatio(attackElement: string, monster: Monster, tables: TablesFil
   return level?.[attackElement]?.[monster.element] ?? 100;
 }
 
-function sizeRatio(input: CharacterInput, monster: Monster, tables: TablesFile): number {
+function sizeRatio(
+  input: CharacterInput,
+  hand: Hand,
+  monster: Monster,
+  tables: TablesFile,
+): number {
   // bNoSizeFix skips the size multiplier (`special_state.no_sizefix`).
   if (input.bonuses.has('bNoSizeFix')) return 100;
-  return tables.sizeModifier[weaponTypeOf(input)]?.[monster.size] ?? 100;
+  return tables.sizeModifier[hand.sizeType]?.[monster.size] ?? 100;
 }
 
 /**
- * Damage over every combination of weapon roll and soft DEF roll, each
- * equally likely. A VIT 999 target has 2401 soft DEF values, so for the
+ * One hand's damage over every combination of weapon roll and soft DEF roll,
+ * each equally likely. A VIT 999 target has 2401 soft DEF values, so for the
  * usual DEF formula they are not enumerated: damage only depends on
- * `max(1, beforeSoftDef − softDef)` through a monotone function, so each
+ * `max(floor, beforeSoftDef − softDef)` through a monotone function, so each
  * weapon value's soft DEF range is summed from prefix sums and its extremes
  * are the range ends. DEF-ratio attacks scale with soft DEF instead and are
  * enumerated.
  */
 function hitDamage(
   input: CharacterInput,
+  hand: Hand,
   monster: Monster,
   tables: TablesFile,
   critical: boolean,
@@ -302,14 +403,12 @@ function hitDamage(
   const target = targetKeys(monster);
   const total = totalStats(input);
   const batk = totalBaseAtk(input);
-  const weaponType = weaponTypeOf(input);
-  const size = sizeRatio(input, monster, tables);
-  const element = elementRatio(weaponElement(input), monster, tables);
-  const cardfix = attackerCardFix(bonuses, target, usesArrowPath(weaponType));
-  const katar = weaponType === 'Katar';
+  const size = sizeRatio(input, hand, monster, tables);
+  const element = elementRatio(hand.element, monster, tables);
+  const { cardfix, floor, handRate } = hand;
   // Crits ignore DEF (`attack_ignores_def`), as do bIgnoreDefRace/Class; crits never pierce.
-  const ignore = critical || ignoresDef(bonuses, target);
-  const pierce = !ignore && piercesDef(bonuses, target);
+  const ignore = critical || ignoresDef(bonuses, target, hand.defFlagSources);
+  const pierce = !ignore && piercesDef(bonuses, target, hand.defFlagSources);
 
   // `battle_calc_defense_reduction`: bIgnoreDefRaceRate/ClassRate lower hard and
   // soft DEF (at most 100 %), then pre-renewal caps hard DEF at 100.
@@ -330,19 +429,22 @@ function hitDamage(
   const softDef = ignore ? { first: 0, count: 1 } : softDefRoll(def2);
   const lastSoftDef = softDef.first + softDef.count - 1;
 
-  // Element, then the attacker card fix, then the katar off-hand hit:
-  // damage × (1 + 2 × Double Attack level) / 100.
+  // Element, then the attacker card fix, then `battle_calc_attack_left_right_hands`:
+  // the katar off-hand hit, damage × (1 + 2 × Double Attack level) / 100, or
+  // the dual-wield hand rate on nonzero damage, at least 1.
   const finish = (afterDef: number) => {
     const damage = applyCardFix(Math.trunc((afterDef * element) / 100), cardfix);
-    return katar ? damage + Math.trunc(damage / 100) : damage;
+    if (hand.katar) return damage + Math.trunc(damage / 100);
+    if (handRate === null || damage === 0) return damage;
+    return Math.max(1, Math.trunc((damage * handRate) / 100));
   };
 
   // `battle_add_weapon_damage`: overupgrade adds 1..overrefine (rnd() % n + 1), crits included.
-  const { atk: refineAtk, overrefine } = input.weaponRefine;
+  const { atk: refineAtk, overrefine } = hand.refine;
   const overValues = overrefine > 0 ? Array.from({ length: overrefine }, (_, i) => i + 1) : [0];
   // Pre-renewal bCritAtkRate (only when positive) adds to a crit's base damage, before DEF.
   const critAtkRate = critical ? bonuses.sum('bCritAtkRate') : 0;
-  const baseDamages = weaponRoll(input, total.dex, critical).flatMap((weaponValue) =>
+  const baseDamages = weaponRoll(input, hand.weapon, total.dex, critical).flatMap((weaponValue) =>
     overValues.map((over) => {
       // Size fix on the weapon part, then base ATK and overupgrade (`battle_calc_base_damage`).
       const base = Math.trunc((weaponValue * size) / 100) + batk + over;
@@ -356,10 +458,12 @@ function hitDamage(
 
   if (pierce) {
     // `ATK_RATE2(damage, def1 + vit_def)` with no soft DEF subtraction; then
-    // refine ATK and the floor of 1.
+    // refine ATK and the floor.
     for (const base of baseDamages) {
       for (let soft = softDef.first; soft <= lastSoftDef; soft++) {
-        const damage = finish(Math.max(1, Math.trunc((base * (hardDef + soft)) / 100) + refineAtk));
+        const damage = finish(
+          Math.max(floor, Math.trunc((base * (hardDef + soft)) / 100) + refineAtk),
+        );
         sum += damage;
         min = Math.min(min, damage);
         max = Math.max(max, damage);
@@ -369,24 +473,24 @@ function hitDamage(
   }
 
   // Refine ATK is added after DEF (`battle_calc_attack_post_defense`), before
-  // the floor of 1, so it is folded into the value soft DEF is taken from.
+  // the floor, so it is folded into the value soft DEF is taken from.
   const beforeSoftDefs = baseDamages.map(
     (base) => Math.trunc((base * (100 - hardDef)) / 100) + refineAtk,
   );
-  // prefix[x] = finish(1) + … + finish(x).
-  const highest = Math.max(1, ...beforeSoftDefs.map((value) => value - softDef.first));
+  // prefixAt(x) = finish(floor) + … + finish(x); prefixAt(floor - 1) = 0.
+  const highest = Math.max(floor, ...beforeSoftDefs.map((value) => value - softDef.first));
   const prefix = [0];
-  for (let x = 1; x <= highest; x++) prefix.push((prefix[x - 1] ?? 0) + finish(x));
-  const prefixAt = (x: number) => prefix[x] ?? 0;
+  for (let x = floor; x <= highest; x++) prefix.push((prefix[prefix.length - 1] ?? 0) + finish(x));
+  const prefixAt = (x: number) => prefix[x - floor + 1] ?? 0;
 
   for (const beforeSoftDef of beforeSoftDefs) {
-    // Floor of 1 after DEF and refine (`battle_calc_attack_post_defense`), before element.
-    const high = Math.max(1, beforeSoftDef - softDef.first);
-    const low = Math.max(1, beforeSoftDef - lastSoftDef);
-    // Soft DEF values that leave 1 or less all give damage 1 before element.
-    const atFloor = Math.min(softDef.count, Math.max(0, lastSoftDef - (beforeSoftDef - 1) + 1));
+    // Floor after DEF and refine (`battle_calc_attack_post_defense`), before element.
+    const high = Math.max(floor, beforeSoftDef - softDef.first);
+    const low = Math.max(floor, beforeSoftDef - lastSoftDef);
+    // Soft DEF values that leave `floor` or less all give `floor` before element.
+    const atFloor = Math.min(softDef.count, Math.max(0, lastSoftDef - (beforeSoftDef - floor) + 1));
     const aboveFloor = softDef.count - atFloor;
-    sum += atFloor * finish(1);
+    sum += atFloor * finish(floor);
     if (aboveFloor > 0) sum += prefixAt(high) - prefixAt(high - aboveFloor);
     const ends = [finish(low), finish(high)];
     min = Math.min(min, ...ends);
@@ -404,8 +508,13 @@ export function autoAttack(
   const { bonuses } = input;
   const target = targetKeys(monster);
   const status = statusWindow(input, config);
-  const normal = hitDamage(input, monster, tables, false);
-  const crit = hitDamage(input, monster, tables, true);
+  const hands = attackHands(input, target);
+  const damageOf = (hand: Hand): HandDamage => ({
+    normal: hitDamage(input, hand, monster, tables, false),
+    crit: hitDamage(input, hand, monster, tables, true),
+  });
+  const { normal, crit } = damageOf(hands.right);
+  const left = hands.left && damageOf(hands.left);
 
   // `is_attack_hitting`: 80 + HIT − FLEE, capped by min/max_hitrate; before
   // that, bPerfectHitRate (the highest one counts) hits on rnd() % 100.
@@ -424,11 +533,15 @@ export function autoAttack(
 
   // A player's attack delay is 2 × amotion (`AMOTION_DIVIDER_PC`).
   const attacksPerSecond = 1000 / (2 * status.amotion);
-  const expectedPerAttack = critChance * crit.avg + (1 - critChance) * hitChance * normal.avg;
+  // Both hands land on the same crit and hit roll.
+  const normalAvg = normal.avg + (left?.normal.avg ?? 0);
+  const critAvg = crit.avg + (left?.crit.avg ?? 0);
+  const expectedPerAttack = critChance * critAvg + (1 - critChance) * hitChance * normalAvg;
 
   return {
     normal,
     crit,
+    left,
     hitChance,
     critChance,
     amotion: status.amotion,

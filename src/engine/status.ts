@@ -30,8 +30,26 @@ const AMOTION_ZERO_ASPD = 2000;
 /** status.hpp `AMOTION_INTERVAL`. */
 const AMOTION_INTERVAL = 10;
 
+/** Weapon types that pair into a dual-wield type (`pc_calcweapontype` W_DOUBLE_*). */
+const DUAL_WIELD_TYPES = new Set(['Dagger', '1hSword', '1hAxe']);
+
+/**
+ * `sd->status.weapon`: the right-hand type, or the left-hand type when only
+ * the left hand holds a weapon (`pc_calcweapontype`). A dual-wield pair gets
+ * its own W_DOUBLE_* type, which only `attackMotion` reads differently: every
+ * pair member is a STR-based melee weapon, so the other checks give the same
+ * answer for the right hand's type.
+ */
 export function weaponTypeOf(input: CharacterInput): string {
-  return input.weapon?.weaponType ?? 'Fist';
+  return input.weapon?.weaponType ?? input.leftWeapon?.weaponType ?? 'Fist';
+}
+
+/** Right and left weapon types when both hands hold a pair with a W_DOUBLE_* type, else null. */
+export function dualWieldPair(input: CharacterInput): [string, string] | null {
+  const right = input.weapon?.weaponType;
+  const left = input.leftWeapon?.weaponType;
+  if (right === undefined || left === undefined) return null;
+  return DUAL_WIELD_TYPES.has(right) && DUAL_WIELD_TYPES.has(left) ? [right, left] : null;
 }
 
 export function isDexMainWeapon(weaponType: string): boolean {
@@ -84,7 +102,14 @@ export function criticalRate(
 export function attackMotion(input: CharacterInput, config: EngineConfig): number {
   const total = totalStats(input);
   const { bonuses } = input;
-  const base = input.job.baseAspd[weaponTypeOf(input)] ?? UNLISTED_WEAPON_DELAY;
+  const delay = (weaponType: string) => input.job.baseAspd[weaponType] ?? UNLISTED_WEAPON_DELAY;
+  // Pre-renewal has no shield delay: a shield leaves `weapontype2` at W_FIST
+  // and only its script bonuses change ASPD. A dual-wield pair takes 70 % of
+  // both hands' delays.
+  const pair = dualWieldPair(input);
+  const base = pair
+    ? Math.trunc(((delay(pair[0]) + delay(pair[1])) * 7) / 10)
+    : delay(weaponTypeOf(input));
   let amotion = base - Math.trunc((base * (4 * total.agi + total.dex)) / 1000);
   amotion -= 10 * bonuses.sum('bAspd');
   const aspdRate = Math.max(0, 1000 - 10 * bonuses.sum('bAspdRate'));
@@ -183,13 +208,16 @@ export function aspdFromAmotion(amotion: number): number {
 export interface StatusWindow {
   /**
    * The two ATK numbers the status window shows: `pc_leftside_atk`
-   * (base ATK + weapon ATK) and `pc_rightside_atk` (refine ATK, `rhw.atk2`).
+   * (base ATK + both hands' weapon ATK) and `pc_rightside_atk` (both hands'
+   * refine ATK, `rhw.atk2 + lhw.atk2`).
    */
   atk: [number, number];
   /** Base ATK (`status->batk`): `bBaseAtk` plus the stat-based value. */
   baseAtk: number;
-  /** Weapon ATK (`rhw.atk`). */
+  /** Right-hand weapon ATK (`rhw.atk`). */
   weaponAtk: number;
+  /** Left-hand weapon ATK (`lhw.atk`); 0 without a dual-wielded weapon. */
+  leftWeaponAtk: number;
   hit: number;
   flee: number;
   /** Perfect dodge as shown (`flee2 / 10`). */
@@ -220,6 +248,7 @@ export function statusWindow(input: CharacterInput, config: EngineConfig): Statu
   const weaponType = weaponTypeOf(input);
   const batk = totalBaseAtk(input);
   const weaponAtk = input.weapon?.attack ?? 0;
+  const leftWeaponAtk = input.leftWeapon?.attack ?? 0;
   const critRate = criticalRate(total, weaponType, bonuses);
   const amotion = attackMotion(input, config);
   const aspdExact = aspdFromAmotion(amotion);
@@ -229,9 +258,10 @@ export function statusWindow(input: CharacterInput, config: EngineConfig): Statu
   const flee = Math.max(1, bonuses.sum('bFlee') + input.baseLevel + total.agi);
   const flee2 = Math.max(0, bonuses.sum('bFlee2') * 10 + total.luk + 10);
   return {
-    atk: [batk + weaponAtk, input.weaponRefine.atk],
+    atk: [batk + weaponAtk + leftWeaponAtk, input.weaponRefine.atk + input.leftWeaponRefine.atk],
     baseAtk: batk,
     weaponAtk,
+    leftWeaponAtk,
     hit: hitValue(input),
     flee,
     perfectDodge: Math.trunc((flee2 === 0 ? 0 : Math.max(10, flee2)) / 10),

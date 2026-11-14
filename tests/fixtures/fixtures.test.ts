@@ -57,6 +57,7 @@ describe('fixture comparison rules', () => {
     atk: [104, 0],
     baseAtk: 79,
     weaponAtk: 25,
+    leftWeaponAtk: 0,
     hit: 62,
     flee: 81,
     perfectDodge: 1,
@@ -73,6 +74,7 @@ describe('fixture comparison rules', () => {
   const attack: AutoAttackResult = {
     normal: { min: 90, max: 102, avg: 96 },
     crit: { min: 104, max: 104, avg: 104 },
+    left: null,
     hitChance: 1,
     critChance: 0,
     amotion: 476,
