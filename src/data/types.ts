@@ -161,6 +161,16 @@ export interface Rune {
   reviewed: boolean;
 }
 
+/** An rAthena item combo: applies once while every listed item is equipped. */
+export interface Combo {
+  /** Equipment ids, ascending; an id listed twice needs two of that item. */
+  items: number[];
+  /** Parsed `Script`, `null` when it is outside the parsed subset. */
+  effects: ScriptStmt[] | null;
+  /** Why `effects` is null. */
+  unsupported?: string;
+}
+
 export type Size = 'small' | 'medium' | 'large';
 export type MonsterClass = 'normal' | 'boss' | 'guardian' | 'battlefield';
 

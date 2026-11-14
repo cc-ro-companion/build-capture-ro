@@ -3,7 +3,16 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { COVERAGE_FILE } from '../../data-pipeline/coverage.ts';
 import { hashData, hashOverrides, hashTexts, META_FILE } from '../../data-pipeline/hash.ts';
-import { dataMeta, items, jobsData, monsters, namesEn as names, tables } from './index';
+import {
+  combos,
+  dataMeta,
+  items,
+  jobsData,
+  monsters,
+  namesEn as names,
+  runes,
+  tables,
+} from './index';
 
 const repoRoot = path.resolve(import.meta.dirname, '..', '..');
 const generatedDir = path.join(import.meta.dirname, 'generated');
@@ -165,6 +174,29 @@ describe('generated tables', () => {
   it('has an element modifier row for every monster element', () => {
     for (const element of new Set(monsters.map((monster) => monster.element))) {
       expect(tables.elementModifier[0], element).toHaveProperty(element);
+    }
+  });
+});
+
+describe('generated runes and combos', () => {
+  it('has the 235 client runes, each named, with sets naming other runes', () => {
+    expect(runes).toHaveLength(235);
+    const ids = new Set(runes.map((rune) => rune.id));
+    for (const rune of runes) {
+      expect(names.runes[String(rune.id) as keyof typeof names.runes]).toMatch(/ Rune$/);
+      for (const set of rune.sets) {
+        for (const required of set.requires) expect(ids.has(required)).toBe(true);
+      }
+    }
+  });
+
+  it('lists only generated equipment in combos, ids ascending', () => {
+    const equipmentIds = new Set(items.map((item) => item.id));
+    expect(combos.length).toBeGreaterThan(0);
+    for (const combo of combos) {
+      expect(combo.items.length).toBeGreaterThanOrEqual(2);
+      expect(combo.items.every((id) => equipmentIds.has(id))).toBe(true);
+      expect([...combo.items].sort((a, b) => a - b)).toEqual(combo.items);
     }
   });
 });

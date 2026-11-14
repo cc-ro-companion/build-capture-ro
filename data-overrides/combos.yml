@@ -1,0 +1,5 @@
+# ccRO differences to rAthena's db/pre-re/item_combos.yml. See README.md.
+# Body: { Items: [item ids], Script } replaces the script of the combo with
+# exactly those items, or adds it. Remove: lists of item ids.
+Body: []
+Remove: []

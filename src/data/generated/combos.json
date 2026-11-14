@@ -1,0 +1,2348 @@
+[
+  {
+    "items": [1472, 2677],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1472, 2711],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1473, 2677],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1473, 2711],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1572, 2716, 2717],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 700 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1573, 2334],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 8 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1573, 2372],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 8 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1573, 2716, 2717],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 700 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1615, 18539],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1616, 2515],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSpeedRate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1618, 2509],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1618, 2535],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1620, 2509],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1620, 2535],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1629, 5045],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [1631, 2129],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "PR_TURNUNDEAD" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [1723, 2718],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2001, 2677],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2001, 2711],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2109, 2239, 2717],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2114, 2353, 5122],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_SWORDMAN", "v": 1 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bDef",
+            "args": [
+              { "k": "num", "v": 6 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ]
+  },
+  {
+    "items": [2115, 2353, 5124],
+    "effects": null,
+    "unsupported": "function \"getequiprefinerycnt\""
+  },
+  {
+    "items": [2116, 2355, 2420, 2521, 5125],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 900 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "HP_ASSUMPTIO" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2121, 2239, 2717],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2278, 18656],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12192 },
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2281, 18656],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 1000 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2286, 18539],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bUseSPrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2312, 2656],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 150 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2313, 2656],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 150 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2337, 2654],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bUseSPrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 300 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2339, 2522],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2339, 2523],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2353, 2417, 2516],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2353, 2418, 2517],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2353, 5123],
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bDex" }
+              ]
+            },
+            { "k": "num", "v": 69 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bUseSPrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ]
+  },
+  {
+    "items": [2353, 5493],
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bDex" }
+              ]
+            },
+            { "k": "num", "v": 69 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bUseSPrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ]
+  },
+  {
+    "items": [2354, 2419, 2520, 5128],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_EARTH", "v": 2 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2358, 5153],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 6 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2359, 2654],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bUseSPrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 300 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2369, 2428, 2533, 5306],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Freeze", "v": 1 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "WZ_FROSTNOVA" },
+        "level": { "k": "num", "v": 10 }
+      }
+    ]
+  },
+  {
+    "items": [2371, 2522],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2371, 2523],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2376, 2435, 2538],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower2",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddItemHealRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus2",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bHPRegenRate",
+            "args": [
+              { "k": "num", "v": 600 },
+              { "k": "num", "v": 1000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 5 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_HEAL; }"
+      }
+    ]
+  },
+  {
+    "items": [2377, 2435, 2538],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MC_MAMMONITE" },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillHeal",
+        "args": [
+          { "k": "str", "v": "AM_POTIONPITCHER" },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillHeal2",
+        "args": [
+          { "k": "str", "v": "AM_POTIONPITCHER" },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillHeal2",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bUnbreakableArmor",
+        "args": []
+      }
+    ]
+  },
+  {
+    "items": [2378, 2435, 2538],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bHPRegenRate",
+            "args": [
+              { "k": "num", "v": 300 },
+              { "k": "num", "v": 1000 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 10 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_HEAL; }"
+      }
+    ]
+  },
+  {
+    "items": [2379, 2436, 2539],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 2000 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus2",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bDefEle",
+            "args": [
+              { "k": "const", "name": "ELE_GHOST", "v": 8 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 30 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_ENERGYCOAT; }"
+      }
+    ]
+  },
+  {
+    "items": [2380, 2436, 2539],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "str", "v": "AL_HOLYLIGHT" },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 50 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 6 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus2",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bDefEle",
+            "args": [
+              { "k": "const", "name": "ELE_GHOST", "v": 8 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 30 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "const", "name": "BF_WEAPON", "v": 1 },
+        "onStart": "{ specialeffect2 EF_ENERGYCOAT; }"
+      }
+    ]
+  },
+  {
+    "items": [2381, 2436, 2539],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bLongAtkDef",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDelayrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2382, 2437, 2540],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ALL", "v": 12 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLAYER_HUMAN", "v": 10 },
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 12 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bLongAtkDef",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDelayrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2394, 2444, 2549],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Freeze", "v": 1 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillHeal2",
+        "args": [
+          { "k": "str", "v": "AM_POTIONPITCHER" },
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillHeal2",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillHeal2",
+        "args": [
+          { "k": "str", "v": "PR_SANCTUARY" },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2408, 2655],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddDefMonster",
+        "args": [
+          { "k": "num", "v": 1196 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddDefMonster",
+        "args": [
+          { "k": "num", "v": 1197 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2441, 2546],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2518, 2648, 2649, 5126],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 11 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bNoCastCancel",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2519, 2650, 2651, 5127],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 13 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 18 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee2",
+        "args": [
+          { "k": "num", "v": 13 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2607, 2677],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2607, 2711],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2607, 2786],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2608, 2677],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2608, 2711],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2608, 2786],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2626, 2677],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2626, 2711],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2626, 2786],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "PR_MAGNUS" },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2720, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2721, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2722, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2723, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2724, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2725, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2733, 2772],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddClass",
+        "args": [
+          { "k": "const", "name": "CLASS_ALL", "v": 6 },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHealPower",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2777, 2778, 5479],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2779, 2780, 5482],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ANGEL", "v": 8 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [2779, 2780, 5577],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ANGEL", "v": 8 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [5040, 5442],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [5068, 5653],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAtkRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [5074, 5653],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [5086, 18656],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12192 },
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 538 },
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddItemHealRate",
+        "args": [
+          { "k": "num", "v": 12192 },
+          { "k": "num", "v": 100 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddItemHealRate",
+        "args": [
+          { "k": "num", "v": 538 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [5176, 18656],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bAtk",
+            "args": [
+              { "k": "num", "v": 50 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 5 },
+        "duration": { "k": "num", "v": 10000 },
+        "flag": { "k": "num", "v": 0 },
+        "onStart": "{ specialeffect2 EF_POTION_BERSERK; }"
+      }
+    ]
+  },
+  {
+    "items": [5358, 5653],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [5401, 5653],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ]
+  },
+  {
+    "items": [18507, 18539],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bUseSPrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

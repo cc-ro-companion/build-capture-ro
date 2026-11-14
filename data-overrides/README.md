@@ -24,6 +24,7 @@ Rules:
 | `jobs.yml` | `job_stats.yml`, `job_aspd.yml`, `job_exp.yml` | `Job` |
 | `hidden-items.yml` | generated equipment | `id` |
 | `runes.yml` | – (ccRO only) | `Id` |
+| `combos.yml` | `item_combos.yml` | sorted item id list |
 
 `hidden-items.yml` has its own format: review groups, each a list of
 `{ id, name, hide, reason }` entries, one per line. Items with `hide: true`
@@ -55,6 +56,11 @@ was drafted once from the client's item info by
 `# TODO: <client text>` lines are text the draft could not map. They are
 skipped while `Reviewed: false`; `pnpm data` stops if a reviewed rune still
 has one, if a script does not parse, or if a set names an unknown rune.
+
+`combos.yml` has its own format, since rAthena combos have no id: a `Body`
+entry `{ Items: [item ids], Script }` replaces the script of the combo with
+exactly those items, or adds a new one; `Remove` lists item id lists. Ids may
+be in any order.
 
 `meta.yml` holds the data label shown in the app footer:
 ```yaml

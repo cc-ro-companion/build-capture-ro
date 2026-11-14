@@ -1,5 +1,6 @@
 // Typed access to the generated game data. The JSON is written by
 // `pnpm data`; never edit it by hand.
+import combosJson from './generated/combos.json';
 import itemsJson from './generated/items.json';
 import jobsJson from './generated/jobs.json';
 import metaJson from './generated/meta.json';
@@ -7,7 +8,16 @@ import monstersJson from './generated/monsters.json';
 import namesJson from './generated/names.en.json';
 import runesJson from './generated/runes.json';
 import tablesJson from './generated/tables.json';
-import type { DataMeta, Item, JobsFile, Monster, NamesFile, Rune, TablesFile } from './types';
+import type {
+  Combo,
+  DataMeta,
+  Item,
+  JobsFile,
+  Monster,
+  NamesFile,
+  Rune,
+  TablesFile,
+} from './types';
 
 export type * from './types';
 
@@ -18,6 +28,7 @@ export type * from './types';
 export const dataMeta: DataMeta = metaJson;
 export const jobsData = jobsJson as unknown as JobsFile;
 export const items = itemsJson as unknown as Item[];
+export const combos = combosJson as unknown as Combo[];
 export const monsters = monstersJson as unknown as Monster[];
 export const runes = runesJson as unknown as Rune[];
 export const tables = tablesJson as unknown as TablesFile;

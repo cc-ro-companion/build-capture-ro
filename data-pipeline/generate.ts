@@ -1,6 +1,7 @@
 import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { DataMeta, NamesFile } from '../src/data/types.ts';
+import { generateCombos } from './combos.ts';
 import { COVERAGE_FILE, coverageReport } from './coverage.ts';
 import { hashData, hashOverrides, hashTexts, META_FILE } from './hash.ts';
 import { loadHiddenItems } from './hiddenItems.ts';
@@ -52,6 +53,12 @@ function main(): void {
   const runes = loadRunes(path.join(overridesDir, 'runes.yml'));
   const unreviewed = runes.data.filter((rune) => !rune.reviewed).length;
   console.log(`Runes: ${runes.data.length} (${unreviewed} not reviewed)`);
+  const combos = generateCombos(rathenaDir, path.join(overridesDir, 'combos.yml'), items.data);
+  const unparsedCombos = combos.data.filter((combo) => combo.effects === null).length;
+  console.log(
+    `Combos: ${combos.data.length} (${combos.stats.dropped} dropped: cards, ammo or gear no supported job wears; ` +
+      `${unparsedCombos} not parsed)`,
+  );
   const tables = generateTables(rathenaDir);
   const coverage = coverageReport(items.data, items.names, items.scripts);
   const scripted = items.data.filter((item) => (items.scripts.get(item.id) ?? '').trim() !== '');
@@ -67,6 +74,7 @@ function main(): void {
   const dataFiles: Record<string, string> = {
     'jobs.json': formatJson(jobs.data),
     'items.json': formatJson(items.data),
+    'combos.json': formatJson(combos.data),
     'monsters.json': formatJson(monsters.data),
     'runes.json': formatJson(runes.data),
     'tables.json': formatJson(tables),

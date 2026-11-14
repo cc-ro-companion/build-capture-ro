@@ -120,7 +120,7 @@ results become fixtures that `pnpm test` then guards.
 3. [ ] **Maintainer review.** The maintainer resolves TODOs and sets
    `Reviewed: true`. Can run in parallel with tasks 4–8. Check: no TODO
    left; pipeline then fails on any TODO.
-4. [ ] **Combos.** `combos.ts`, card combos dropped, override file. Check:
+4. [x] **Combos.** `combos.ts`, card combos dropped, override file. Check:
    pipeline tests; combo count in the progress log.
 5. [ ] **Engine: runes, sets, combos.** Rune context, slot rules, active
    set and combo detection, album effects ignored. Check: engine tests.
