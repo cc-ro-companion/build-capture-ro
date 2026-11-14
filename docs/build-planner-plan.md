@@ -131,6 +131,20 @@ compares against ccRO's training dummy, and the results become fixtures that
 `pnpm test` then guards. Trying the deployed app in the browser is the
 maintainer's step.
 
+## Deferred tasks
+Found while reviewing the runes (phase 4b); each belongs to the phase named.
+- **Poison you inflict** (phase 6, or wherever status effects on the target
+  are modelled): damage per tick and tick rate. Giant Spider Rune's album
+  effect makes it tick 200% faster, Snake Rune's 50% faster; both are
+  stored as `Unmodelled` text in `data-overrides/runes.yml` until then.
+- **Self-healing** (phase 5, healing skills): decide how Enchanted Peach
+  Tree Rune's album effect "Heal Effectiveness +10% when self-healing" maps
+  (`bSkillHeal` also counts healing others). Stored as `Unmodelled` text.
+- **Double attack and the katar hit** (phase 5): the engine computes neither
+  the TF_DOUBLE roll nor the katar off-hand hit's TF_DOUBLE level (it uses
+  Lv 0). A granted TF_DOUBLE (Sidewinder Rune) works with any weapon; see
+  the Sidewinder section of [runes-todo-review.md](runes-todo-review.md).
+
 ## Open questions
 - ~~How CI and the Pages deploy get the rAthena data.~~ Decided in phase 2:
   the generator runs locally and the generated JSON is committed.

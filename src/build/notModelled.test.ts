@@ -290,3 +290,18 @@ describe('notes for runes, rune sets and combos (shipped data)', () => {
     );
   });
 });
+
+describe('Unmodelled rune texts (shipped data)', () => {
+  it('shows a rune’s text at the item it sits in', () => {
+    // Death Word Rune: -50 SP when unequipped.
+    const resolved = resolveBuild(
+      {
+        ...defaultBuild(),
+        job: SWORDMAN,
+        equipment: { rightHand: { item: 1101, refine: 0, runes: [39122] } },
+      },
+      gameData,
+    );
+    expect(notModelledNotes(resolved).rightHand?.labels).toContain('-50 SP when unequipped');
+  });
+});

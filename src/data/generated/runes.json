@@ -14,7 +14,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39103,
@@ -58,7 +58,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39104,
@@ -77,10 +77,11 @@
       {
         "requires": ["Zipper Bear Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39105,
@@ -220,7 +221,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39110,
@@ -238,7 +239,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39111,
@@ -276,7 +277,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39114,
@@ -293,7 +294,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39116,
@@ -336,7 +337,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39120,
@@ -374,7 +375,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39122,
@@ -397,6 +398,7 @@
         ]
       }
     ],
+    "unmodelled": ["-50 SP when unequipped"],
     "sets": [],
     "album": [
       {
@@ -434,7 +436,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39123,
@@ -458,7 +460,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39129,
@@ -475,7 +477,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39132,
@@ -519,7 +521,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39133,
@@ -549,7 +551,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39134,
@@ -587,7 +589,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39135,
@@ -604,7 +606,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39138,
@@ -648,7 +650,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39140,
@@ -675,7 +677,8 @@
       {
         "requires": ["Familiar Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["+ 10% of Blind status duration works vs MVPs. Against non-MVPs, Blind status that you deal reduce HIT and FLEE by an additional 5%"]
       },
       {
         "requires": ["Hunter Fly Card"],
@@ -691,7 +694,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39142,
@@ -723,7 +726,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39143,
@@ -790,7 +793,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39145,
@@ -828,7 +831,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39146,
@@ -845,7 +848,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39148,
@@ -883,7 +886,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39149,
@@ -907,10 +910,11 @@
       {
         "requires": ["Zipper Bear Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39152,
@@ -941,6 +945,7 @@
         ]
       }
     ],
+    "unmodelled": ["-50 SP when unequipped"],
     "sets": [],
     "album": [
       {
@@ -986,7 +991,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39153,
@@ -1005,10 +1010,11 @@
       {
         "requires": ["Zipper Bear Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39155,
@@ -1053,10 +1059,11 @@
       {
         "requires": ["Zipper Bear Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39156,
@@ -1087,7 +1094,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39157,
@@ -1104,7 +1111,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39159,
@@ -1121,7 +1128,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39160,
@@ -1159,7 +1166,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39163,
@@ -1182,6 +1189,7 @@
         ]
       }
     ],
+    "unmodelled": ["-50 SP when unequipped"],
     "sets": [],
     "album": [
       {
@@ -1227,7 +1235,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39168,
@@ -1251,7 +1259,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39169,
@@ -1268,7 +1276,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39170,
@@ -1285,7 +1293,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39175,
@@ -1312,7 +1320,8 @@
       {
         "requires": ["Metaller Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Ignores + 7.5% of enemy's Resistance vs status Silence"]
       },
       {
         "requires": ["Hunter Fly Card"],
@@ -1328,7 +1337,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39176,
@@ -1352,7 +1361,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39178,
@@ -1384,10 +1393,11 @@
       {
         "requires": ["Zipper Bear Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39183,
@@ -1404,7 +1414,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39184,
@@ -1442,7 +1452,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39185,
@@ -1459,7 +1469,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39188,
@@ -1482,6 +1492,7 @@
         ]
       }
     ],
+    "unmodelled": ["-50 SP when unequipped"],
     "sets": [],
     "album": [
       {
@@ -1505,7 +1516,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39189,
@@ -1532,7 +1543,8 @@
       {
         "requires": ["Plankton Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Adds 5% of initial sleep time where the effect is uninterruptible by damage"]
       },
       {
         "requires": ["Hunter Fly Card"],
@@ -1548,7 +1560,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39191,
@@ -1571,6 +1583,7 @@
         ]
       }
     ],
+    "unmodelled": ["-50 SP when unequipped"],
     "sets": [],
     "album": [
       {
@@ -1632,7 +1645,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39193,
@@ -1670,7 +1683,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39195,
@@ -1687,7 +1700,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39196,
@@ -1707,7 +1720,8 @@
       {
         "requires": ["Savage Babe Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Duration + 10% with Stun status. This duration works against non-MVP Boss Monsters"]
       },
       {
         "requires": ["Hunter Fly Card"],
@@ -1723,7 +1737,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39197,
@@ -1740,7 +1754,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39198,
@@ -1757,21 +1771,36 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39200,
     "location": "Weapon",
-    "effects": [],
+    "effects": [
+      {
+        "k": "skill",
+        "skill": { "k": "str", "v": "TF_DOUBLE" },
+        "level": { "k": "num", "v": 1 }
+      }
+    ],
     "sets": [],
     "album": [
       {
         "requires": ["Sidewinder Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bDoubleAddRate",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ],
+        "unmodelled": ["Only if equipped on a dagger; the script cannot check the weapon type yet"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39203,
@@ -1795,7 +1824,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39204,
@@ -1822,7 +1851,8 @@
       {
         "requires": ["Snake Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Poison status that you deal ticks 50% faster"]
       },
       {
         "requires": ["Hunter Fly Card"],
@@ -1838,7 +1868,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39206,
@@ -1868,7 +1898,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39209,
@@ -1885,7 +1915,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39211,
@@ -1970,7 +2000,8 @@
             ],
             "else": []
           }
-        ]
+        ],
+        "unmodelled": ["Intimidate Auto-Spell will not function"]
       }
     ],
     "album": [
@@ -1995,7 +2026,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39214,
@@ -2012,7 +2043,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39217,
@@ -2063,10 +2094,11 @@
       {
         "requires": ["Zipper Bear Card"],
         "rightHandOnly": true,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Damage + 5% with basic attacks and skills Chain Action, Triple Attack, Chain Combo, Combo Finish and combo-chained Asura Strike"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39219,
@@ -2201,7 +2233,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39221,
@@ -2224,7 +2256,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39222,
@@ -2247,7 +2279,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39226,
@@ -2286,7 +2318,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39227,
@@ -2324,7 +2356,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39230,
@@ -2421,7 +2453,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39231,
@@ -2465,7 +2497,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39232,
@@ -2490,7 +2522,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39233,
@@ -2536,7 +2568,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39234,
@@ -2582,7 +2614,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39235,
@@ -2620,7 +2652,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39236,
@@ -2681,15 +2713,34 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39237,
     "location": "Garment",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_FIREBOLT" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_FIREBALL" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39239,
@@ -2721,7 +2772,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39240,
@@ -2767,7 +2818,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39241,
@@ -2805,7 +2856,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39243,
@@ -2851,7 +2902,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39244,
@@ -2892,7 +2943,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39245,
@@ -2916,7 +2967,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39246,
@@ -2973,7 +3024,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39247,
@@ -3019,7 +3070,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39248,
@@ -3065,7 +3116,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39249,
@@ -3082,7 +3133,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39251,
@@ -3107,7 +3158,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39255,
@@ -3146,7 +3197,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39256,
@@ -3176,7 +3227,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39258,
@@ -3226,7 +3277,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39259,
@@ -3269,7 +3320,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39261,
@@ -3305,7 +3356,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39262,
@@ -3321,7 +3372,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39263,
@@ -3380,7 +3431,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39266,
@@ -3505,7 +3556,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39267,
@@ -3531,10 +3582,20 @@
       {
         "requires": ["Argiope Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillUseSPrate",
+            "args": [
+              { "k": "str", "v": "AS_POISONREACT" },
+              { "k": "num", "v": 30 }
+            ]
+          }
+        ],
+        "unmodelled": ["Poison React triggers against missed attacks"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39269,
@@ -3583,7 +3644,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39271,
@@ -3599,7 +3660,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39272,
@@ -3631,7 +3692,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39273,
@@ -3682,7 +3743,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39275,
@@ -3741,7 +3802,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39276,
@@ -3776,7 +3837,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39278,
@@ -3812,7 +3873,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39279,
@@ -3832,10 +3893,20 @@
       {
         "requires": ["Dark Frame Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddEffWhenHit",
+            "args": [
+              { "k": "const", "name": "Eff_Stone", "v": 11 },
+              { "k": "num", "v": 600 }
+            ]
+          }
+        ],
+        "unmodelled": ["Ignores 30% of enemy's resistance to Stone Curse. Stone Curse can affect MVPs, changing their property to Earth 1 (but no other effects)"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39280,
@@ -3867,7 +3938,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39284,
@@ -3904,7 +3975,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39285,
@@ -3931,9 +4002,10 @@
         ]
       }
     ],
+    "unmodelled": ["Drain 100 SP as the armor is unequipped"],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39287,
@@ -3969,7 +4041,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39289,
@@ -3999,7 +4071,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39291,
@@ -4163,7 +4235,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39293,
@@ -4183,10 +4255,20 @@
       {
         "requires": ["Giant Spider Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddEffWhenHit",
+            "args": [
+              { "k": "const", "name": "Eff_Poison", "v": 4 },
+              { "k": "num", "v": 600 }
+            ]
+          }
+        ],
+        "unmodelled": ["Poison status that you deal ticks 200% faster"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39295,
@@ -4241,7 +4323,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39301,
@@ -4261,10 +4343,20 @@
       {
         "requires": ["Kraben Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddEffWhenHit",
+            "args": [
+              { "k": "const", "name": "Eff_Blind", "v": 8 },
+              { "k": "num", "v": 600 }
+            ]
+          }
+        ],
+        "unmodelled": ["Reapplying Blind refreshes its duration"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39303,
@@ -4401,7 +4493,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39304,
@@ -4433,7 +4525,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39305,
@@ -4458,7 +4550,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39306,
@@ -4501,7 +4593,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39307,
@@ -4537,7 +4629,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39309,
@@ -4573,7 +4665,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39311,
@@ -4596,7 +4688,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39312,
@@ -4626,7 +4718,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39316,
@@ -4655,7 +4747,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39318,
@@ -4671,7 +4763,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39325,
@@ -4697,10 +4789,11 @@
       {
         "requires": ["Sandman Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Stone Curse has Success Chance + 20%, Range + 5 and affects a 3x3 area"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39330,
@@ -4729,7 +4822,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39331,
@@ -4766,7 +4859,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39332,
@@ -4804,7 +4897,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39333,
@@ -4866,7 +4959,7 @@
       }
     ],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39334,
@@ -4903,7 +4996,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39337,
@@ -4939,7 +5032,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39339,
@@ -5072,7 +5165,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39340,
@@ -5095,7 +5188,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39342,
@@ -5231,7 +5324,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39343,
@@ -5262,7 +5355,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39345,
@@ -5293,7 +5386,7 @@
       }
     ],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39346,
@@ -5323,7 +5416,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39347,
@@ -5340,7 +5433,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39350,
@@ -5357,7 +5450,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39351,
@@ -5390,7 +5483,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39352,
@@ -5438,10 +5531,11 @@
       {
         "requires": ["Enchanted Peach Tree Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Heal Effectiveness +10% when self-healing"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39353,
@@ -5465,7 +5559,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39354,
@@ -5502,11 +5596,43 @@
           { "k": "const", "name": "Eff_Stone", "v": 11 },
           { "k": "num", "v": 3000 }
         ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Curse", "v": 5 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEffWhenHit",
+        "args": [
+          { "k": "const", "name": "Eff_Stone", "v": 11 },
+          { "k": "num", "v": 500 }
+        ]
       }
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39357,
@@ -5539,7 +5665,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39358,
@@ -5555,7 +5681,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39359,
@@ -5572,7 +5698,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39361,
@@ -5597,7 +5723,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39366,
@@ -5621,7 +5747,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39367,
@@ -5645,7 +5771,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39368,
@@ -5662,7 +5788,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39369,
@@ -5708,7 +5834,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39370,
@@ -5725,7 +5851,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39371,
@@ -5757,7 +5883,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39373,
@@ -5774,7 +5900,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39374,
@@ -5791,7 +5917,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39376,
@@ -5815,7 +5941,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39377,
@@ -5832,7 +5958,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39378,
@@ -5849,7 +5975,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39381,
@@ -5881,7 +6007,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39386,
@@ -5904,7 +6030,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39390,
@@ -5920,7 +6046,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39393,
@@ -5968,7 +6094,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39394,
@@ -6010,7 +6136,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39397,
@@ -6079,7 +6205,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39398,
@@ -6174,7 +6300,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39403,
@@ -6190,7 +6316,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39404,
@@ -6213,7 +6339,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39405,
@@ -6261,7 +6387,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39406,
@@ -6332,6 +6458,14 @@
                   { "k": "const", "name": "RC_BRUTE", "v": 2 },
                   { "k": "num", "v": 5 }
                 ]
+              },
+              {
+                "k": "bonus",
+                "name": "bComaRace",
+                "args": [
+                  { "k": "const", "name": "RC_BRUTE", "v": 2 },
+                  { "k": "num", "v": 100 }
+                ]
               }
             ],
             "else": []
@@ -6361,7 +6495,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39408,
@@ -6385,7 +6519,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39410,
@@ -6418,7 +6552,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39411,
@@ -6441,7 +6575,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39413,
@@ -6464,7 +6598,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39414,
@@ -6487,7 +6621,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39415,
@@ -6524,7 +6658,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39416,
@@ -6540,7 +6674,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39419,
@@ -6556,31 +6690,61 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39420,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12058 },
+          { "k": "const", "name": "RC_INSECT", "v": 4 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39421,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12053 },
+          { "k": "const", "name": "RC_FISH", "v": 5 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39422,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12068 },
+          { "k": "const", "name": "RC_ANGEL", "v": 8 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39426,
@@ -6630,7 +6794,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39429,
@@ -6654,15 +6818,25 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39431,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12048 },
+          { "k": "const", "name": "RC_DRAGON", "v": 9 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39433,
@@ -6680,7 +6854,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39436,
@@ -6698,7 +6872,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39437,
@@ -6719,10 +6893,11 @@
       {
         "requires": ["Gazeti Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Multiple Gazeti runes stack"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39438,
@@ -6798,23 +6973,43 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39439,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12043 },
+          { "k": "const", "name": "RC_BRUTE", "v": 2 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39440,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 12063 },
+          { "k": "const", "name": "RC_FORMLESS", "v": 0 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39441,
@@ -6851,7 +7046,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39442,
@@ -6884,12 +7079,20 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39446,
     "location": "Accessory",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bClassChange",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
     "sets": [
       {
         "requires": [39411, 39217, 39528, 39269],
@@ -6929,6 +7132,14 @@
             "then": [
               {
                 "k": "bonus",
+                "name": "bAddMonsterDropItem",
+                "args": [
+                  { "k": "num", "v": 617 },
+                  { "k": "num", "v": 5 }
+                ]
+              },
+              {
+                "k": "bonus",
                 "name": "bMagicDamageReturn",
                 "args": [
                   { "k": "num", "v": 20 }
@@ -6962,7 +7173,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39448,
@@ -7008,7 +7219,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39451,
@@ -7031,7 +7242,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39452,
@@ -7047,7 +7258,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39453,
@@ -7109,10 +7320,25 @@
       {
         "requires": ["Grand Peco Card"],
         "rightHandOnly": false,
-        "effects": []
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bDelayrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 30 }
+                ]
+              }
+            ]
+          }
+        ],
+        "unmodelled": ["Remove autocast effects"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39454,
@@ -7128,7 +7354,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39458,
@@ -7144,7 +7370,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39460,
@@ -7162,7 +7388,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39462,
@@ -7180,7 +7406,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39463,
@@ -7222,7 +7448,7 @@
       }
     ],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39464,
@@ -7264,7 +7490,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39470,
@@ -7323,7 +7549,7 @@
       }
     ],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39472,
@@ -7341,7 +7567,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39475,
@@ -7364,16 +7590,18 @@
         ]
       }
     ],
+    "unmodelled": ["If you equip this without learning Level 3 Cloaking or higher, it only activates when you are next to the wall"],
     "sets": [],
     "album": [
       {
         "requires": ["Frilldora Card"],
         "rightHandOnly": false,
         "note": "on Assassin and Rogue",
-        "effects": []
+        "effects": [],
+        "unmodelled": ["Remove Cloaking auto-cast"]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39476,
@@ -7419,7 +7647,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39477,
@@ -7437,12 +7665,20 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39479,
     "location": "Accessory",
     "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 536 },
+          { "k": "num", "v": 2000 }
+        ]
+      },
       {
         "k": "bonus",
         "name": "bAddItemHealRate",
@@ -7454,7 +7690,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39480,
@@ -7470,7 +7706,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39482,
@@ -7489,7 +7725,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39488,
@@ -7587,7 +7823,8 @@
             ],
             "else": []
           }
-        ]
+        ],
+        "unmodelled": ["Disables the Auto-Intimidate ability of the Wanderer Card"]
       }
     ],
     "album": [
@@ -7612,7 +7849,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39492,
@@ -7635,7 +7872,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39493,
@@ -7651,7 +7888,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39494,
@@ -7674,7 +7911,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39496,
@@ -7733,7 +7970,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39498,
@@ -7774,7 +8011,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39501,
@@ -7822,7 +8059,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39502,
@@ -7846,7 +8083,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39504,
@@ -7862,7 +8099,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39505,
@@ -7885,7 +8122,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39507,
@@ -7966,7 +8203,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39509,
@@ -7983,7 +8220,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39510,
@@ -8031,7 +8268,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39511,
@@ -8056,7 +8293,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39514,
@@ -8129,6 +8366,22 @@
                   { "k": "num", "v": 1 },
                   { "k": "num", "v": 10 }
                 ]
+              },
+              {
+                "k": "bonus",
+                "name": "bAddMonsterDropItem",
+                "args": [
+                  { "k": "num", "v": 7139 },
+                  { "k": "num", "v": 3 }
+                ]
+              },
+              {
+                "k": "bonus",
+                "name": "bAddMonsterDropItem",
+                "args": [
+                  { "k": "num", "v": 905 },
+                  { "k": "num", "v": 10 }
+                ]
               }
             ],
             "else": []
@@ -8158,7 +8411,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39515,
@@ -8220,7 +8473,7 @@
       }
     ],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39516,
@@ -8232,11 +8485,41 @@
         "args": [
           { "k": "num", "v": 2 }
         ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 50 }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 30 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 50 },
+        "duration": { "k": "num", "v": 5000 },
+        "flag": { "k": "const", "name": "BF_MAGIC", "v": 2 },
+        "onStart": "{ specialeffect2 EF_SUFFRAGIUM; }"
       }
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39517,
@@ -8287,7 +8570,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39520,
@@ -8304,7 +8587,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39521,
@@ -8321,7 +8604,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39523,
@@ -8338,15 +8621,24 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39528,
     "location": "Headgear",
-    "effects": [],
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddMonsterDropItem",
+        "args": [
+          { "k": "num", "v": 644 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39529,
@@ -8370,7 +8662,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39531,
@@ -8395,7 +8687,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39533,
@@ -8439,7 +8731,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39534,
@@ -8472,7 +8764,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39535,
@@ -8496,7 +8788,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39536,
@@ -8520,7 +8812,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39537,
@@ -8590,7 +8882,7 @@
         ]
       }
     ],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39538,
@@ -8614,7 +8906,7 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39539,
@@ -8626,11 +8918,28 @@
         "args": [
           { "k": "num", "v": 2 }
         ]
+      },
+      {
+        "k": "autobonus",
+        "command": "autobonus",
+        "bonus": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "rate": { "k": "num", "v": 5 },
+        "duration": { "k": "num", "v": 5000 },
+        "flag": { "k": "num", "v": 0 },
+        "onStart": "{ specialeffect2 EF_ENHANCE; }"
       }
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": 39542,
@@ -8646,6 +8955,6 @@
     ],
     "sets": [],
     "album": [],
-    "reviewed": false
+    "reviewed": true
   }
 ]

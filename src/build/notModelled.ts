@@ -22,6 +22,10 @@ export function noteCount(note: NotModelledNote): number {
   return (note.unsupported === undefined ? 0 : 1) + note.labels.length;
 }
 
+function addLabels(labels: string[], texts: readonly string[] | undefined): void {
+  for (const text of texts ?? []) if (!labels.includes(text)) labels.push(text);
+}
+
 /** Labels for what the engine leaves out of the records, without repeats. */
 function labelsOf(
   bonuses: ResolvedBuild['character']['bonuses'],
@@ -51,12 +55,13 @@ function labelsOf(
 export function notModelledNotes(resolved: ResolvedBuild): Partial<Record<Slot, NotModelledNote>> {
   const notes: Partial<Record<Slot, NotModelledNote>> = {};
   const { bonuses } = resolved.character;
-  for (const { slot, item } of resolved.equipment) {
+  for (const { slot, item, runes } of resolved.equipment) {
     const labels = labelsOf(
       bonuses,
       (record) =>
         record.slot === slot && (record.origin.kind === 'item' || record.origin.kind === 'rune'),
     );
+    for (const rune of runes ?? []) addLabels(labels, rune.unmodelled);
     if (item.effects === null) {
       notes[slot] = { unsupported: item.unsupported ?? 'unknown script', labels };
     } else if (labels.length > 0) {
@@ -91,6 +96,13 @@ export function groupNotes(resolved: ResolvedBuild, data: GameData): GroupNote[]
         : origin.items.map((id) => itemName(data, id)).join(' + ');
     // The records of one script run share its origin object (buildCharacter).
     const labels = labelsOf(bonuses, (record) => record.origin === origin);
+    if (origin.kind === 'runeSet') {
+      const requires = origin.requires.join(',');
+      const set = data.runes
+        .get(origin.runeId)
+        ?.sets.find((candidate) => candidate.requires.join(',') === requires);
+      addLabels(labels, set?.unmodelled);
+    }
     notes.push({ kind: origin.kind, name, labels });
   }
   const unread = data.combos.filter((combo) => combo.effects === null);

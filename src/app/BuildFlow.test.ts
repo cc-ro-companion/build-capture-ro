@@ -488,7 +488,7 @@ describe('runes, combos and inventory', () => {
     render(App);
   }
 
-  it('offers only fitting runes, adds one with its draft badge, and updates the numbers', async () => {
+  it('offers only fitting runes, adds one, and updates the numbers', async () => {
     openWith(assassin);
     await fireEvent.click(screen.getByRole('button', { name: 'Add rune to Right hand' }));
     const search = screen.getByLabelText('Search runes for right hand');
@@ -501,7 +501,8 @@ describe('runes, combos and inventory', () => {
 
     const runes = screen.getByTestId('runes-rightHand');
     expect(runes.textContent).toContain('Andre Larva Rune');
-    expect(within(runes).getByText('draft')).toBeTruthy();
+    // Every shipped rune is reviewed; EquipmentPanel.test.ts covers the draft badge.
+    expect(within(runes).queryByText('draft')).toBeNull();
     const withRune: Build = {
       ...assassin,
       equipment: { rightHand: { item: 1201, refine: 7, runes: [39103] } },

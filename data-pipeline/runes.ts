@@ -54,6 +54,19 @@ function list(value: unknown, where: string): unknown[] {
   return value;
 }
 
+/**
+ * `Unmodelled`: client text of effects that no rAthena bonus expresses (or
+ * that only matter outside a planner), shown in the "not modelled" notes.
+ * Left out of the output when empty.
+ */
+function unmodelled(value: unknown, where: string): { unmodelled?: string[] } {
+  const texts = list(value, `${where}: Unmodelled`);
+  if (!texts.every((text) => typeof text === 'string' && text !== '')) {
+    throw new OverrideError(`${where}: Unmodelled must list texts.`);
+  }
+  return texts.length > 0 ? { unmodelled: texts as string[] } : {};
+}
+
 function convertSet(value: unknown, reviewed: boolean, where: string): RuneSet {
   if (!isMap(value)) throw new OverrideError(`${where}: must be a map.`);
   const requires = list(value.Requires, `${where}: Requires`);
@@ -62,7 +75,11 @@ function convertSet(value: unknown, reviewed: boolean, where: string): RuneSet {
   if (empty || !requires.every((id) => Number.isInteger(id))) {
     throw new OverrideError(`${where}: Requires must list rune ids.`);
   }
-  return { requires: requires as number[], effects: runeScript(value.Script, reviewed, where) };
+  return {
+    requires: requires as number[],
+    effects: runeScript(value.Script, reviewed, where),
+    ...unmodelled(value.Unmodelled, where),
+  };
 }
 
 function convertAlbum(value: unknown, reviewed: boolean, where: string): AlbumEffect {
@@ -82,6 +99,7 @@ function convertAlbum(value: unknown, reviewed: boolean, where: string): AlbumEf
     rightHandOnly: value.RightHandOnly === true,
     ...(value.Note !== undefined ? { note: value.Note } : {}),
     effects: runeScript(value.Script, reviewed, where),
+    ...unmodelled(value.Unmodelled, where),
   };
 }
 
@@ -117,6 +135,7 @@ function convertRune(entry: unknown, fileName: string): { rune: Rune; name: stri
       id,
       location: entry.Location as RuneLocation,
       effects: runeScript(entry.Script, reviewed, `${where}: Script`),
+      ...unmodelled(entry.Unmodelled, where),
       sets,
       album,
       reviewed,

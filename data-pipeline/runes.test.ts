@@ -132,3 +132,39 @@ describe('parseRunes: empty set Requires', () => {
     expect(() => parseRunes(withEmptySet(true), 'r.yml')).toThrow('Requires must list rune ids.');
   });
 });
+
+describe('parseRunes: Unmodelled', () => {
+  const text = yaml(
+    'Runes:',
+    '  - Id: 39200',
+    '    Name: Text Rune',
+    '    Location: Weapon',
+    '    Reviewed: true',
+    "    Script: ''",
+    '    Unmodelled:',
+    "      - '-50 SP when unequipped'",
+    '    Sets:',
+    '      - Requires: [39101]',
+    "        Script: ''",
+    '        Unmodelled: [Disables an autocast]',
+    '    Album:',
+    "      - Requires: ['Snake Card']",
+    "        Script: ''",
+    '        Unmodelled: [Poison ticks faster]',
+    '  - { Id: 39101, Name: Other Rune, Location: Weapon, Reviewed: true }',
+  );
+
+  it('keeps the texts per rune, set and album entry', () => {
+    const rune = parseRunes(text, 'r.yml').data[1]!;
+    expect(rune.unmodelled).toEqual(['-50 SP when unequipped']);
+    expect(rune.sets[0]!.unmodelled).toEqual(['Disables an autocast']);
+    expect(rune.album[0]!.unmodelled).toEqual(['Poison ticks faster']);
+    expect('unmodelled' in parseRunes(text, 'r.yml').data[0]!).toBe(false);
+  });
+
+  it('rejects anything but a list of texts', () => {
+    expect(() => parseRunes(text.replace('[Disables an autocast]', '[3]'), 'r.yml')).toThrow(
+      'rune 39200: Sets[0]: Unmodelled must list texts.',
+    );
+  });
+});

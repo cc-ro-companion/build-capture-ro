@@ -6,9 +6,13 @@ vanilla card scripts (`db/pre-re/item_db_etc.yml`) and combos
 (`db/pre-re/item_combos.yml`). Item ids were checked against the client's
 `itemInfo_orig.lua`. Nothing was looked up on ratemyserver.
 
-**Status (2026-11-14):** S1, S2 and all ✓ rows are applied in `runes.yml`;
-47 TODO lines remain (the ? rows and the comment-only ones). The last step
-waits until the ? rows are decided. S1 covers 11 runes, not 12.
+**Status (2026-11-14): done.** S1, S2 and all rows are applied; every rune
+is `Reviewed: true`. The maintainer's answers: Kasa 5% each; Flame Skull 5%
+each; Merman Coma 1%; Hylozoist 1%; Isilla and Vanberk as vanilla; drop rows
+as proposed; "no rAthena bonus" rows and the album exceptions go into the
+new `Unmodelled` field (D1). Poison ticks (Giant Spider, Snake) and
+self-healing (Enchanted Peach Tree) are deferred tasks in
+[build-planner-plan.md](build-planner-plan.md). S1 covered 11 runes, not 12.
 
 Markers: **✓** = the client text maps cleanly (usually to the vanilla card
 script). **?** = needs your decision (there is a question). **–** = no rAthena

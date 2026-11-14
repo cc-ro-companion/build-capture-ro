@@ -136,6 +136,8 @@ export interface RuneSet {
   /** Other rune ids; the rune that holds the set is required implicitly. */
   requires: number[];
   effects: ScriptStmt[];
+  /** Client text of effects no script expresses; shown as not modelled. */
+  unmodelled?: string[];
 }
 
 /** A card album effect (phase 8): stored, never applied yet. */
@@ -147,6 +149,8 @@ export interface AlbumEffect {
   /** Extra client text on the condition, e.g. `except with Bowling Bash`. */
   note?: string;
   effects: ScriptStmt[];
+  /** Client text of effects no script expresses; shown as not modelled. */
+  unmodelled?: string[];
 }
 
 /** A ccRO rune from data-overrides/runes.yml. Its scripts run in the context of the item it sits in. */
@@ -155,6 +159,8 @@ export interface Rune {
   id: number;
   location: RuneLocation;
   effects: ScriptStmt[];
+  /** Client text of effects no script expresses; shown as not modelled. */
+  unmodelled?: string[];
   sets: RuneSet[];
   album: AlbumEffect[];
   /** False while the maintainer has not checked the drafted script against the client text. */

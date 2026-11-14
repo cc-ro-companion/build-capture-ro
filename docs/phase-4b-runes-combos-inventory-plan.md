@@ -117,7 +117,7 @@ results become fixtures that `pnpm test` then guards.
 2. [x] **Rune pipeline.** `runes.ts`, types, fail on TODO only for
    `Reviewed: true` entries (drafts are allowed while review runs).
    Check: pipeline tests, `pnpm data`.
-3. [ ] **Maintainer review.** The maintainer resolves TODOs and sets
+3. [x] **Maintainer review.** The maintainer resolves TODOs and sets
    `Reviewed: true`. Can run in parallel with tasks 4–8. Check: no TODO
    left; pipeline then fails on any TODO.
 4. [x] **Combos.** `combos.ts`, card combos dropped, override file. Check:

@@ -47,6 +47,8 @@ was drafted once from the client's item info by
       - Requires: [39331, 39531]
         Script: |
           bonus bStr,10;
+    Unmodelled:             # client text no script expresses; shown as not modelled
+      - '-50 SP when unequipped'
     Album:                  # card album effects (phase 8): stored, not applied
       - Requires: ['Mobster Card']
         RightHandOnly: true
