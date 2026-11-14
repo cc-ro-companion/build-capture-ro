@@ -106,7 +106,16 @@ describe('equipmentErrors', () => {
   it('reports items the job or level cannot wear', () => {
     const katar = equip({}, 'rightHand', JUR);
     expect(equipmentErrors(katar, SWORDMAN, 99, gameData)).toEqual([
-      'Jur (1250) cannot be equipped by Swordman at base level 99.',
+      'Jur (1250) cannot be equipped by Swordman.',
     ]);
+  });
+
+  it('says when the base level is too low for an item', () => {
+    const katar = equip({}, 'rightHand', JUR);
+    const needed = item(JUR).equipLevelMin;
+    expect(equipmentErrors(katar, ASSASSIN, needed - 1, gameData)).toEqual([
+      `Base level ${needed - 1} is too low for Jur (1250); it needs base level ${needed}.`,
+    ]);
+    expect(equipmentErrors(katar, ASSASSIN, needed, gameData)).toEqual([]);
   });
 });

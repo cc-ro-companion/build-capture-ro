@@ -1,7 +1,7 @@
 // Weapon and monster search: case-insensitive substring over the English
 // name, the aegis name and the id.
 import type { Item, Monster } from '../data/types';
-import { canEquip, itemName, monsterName, type GameData } from './resolve';
+import { itemName, jobCanEquip, monsterName, type GameData } from './resolve';
 
 export const MAX_RESULTS = 50;
 
@@ -37,11 +37,13 @@ export interface ItemSearchOptions {
   showHidden?: boolean;
 }
 
-/** Weapons the job can equip at the base level that match the query. */
+/**
+ * Weapons the job can equip that match the query, whatever their equip
+ * level: the build keeps gear above its base level and reports it as an error.
+ */
 export function searchWeapons(
   query: string,
   jobId: number,
-  baseLevel: number,
   data: GameData,
   options: ItemSearchOptions = {},
 ): SearchResult<Item> {
@@ -50,7 +52,7 @@ export function searchWeapons(
     data.weapons,
     (item) =>
       (options.showHidden === true || item.hidden !== true) &&
-      canEquip(item, jobId, baseLevel) &&
+      jobCanEquip(item, jobId) &&
       matches(item.id, item.aegisName, itemName(data, item.id)),
   );
 }

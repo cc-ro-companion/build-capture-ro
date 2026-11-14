@@ -103,6 +103,23 @@ describe('build flow', () => {
     await fireEvent.change(screen.getByLabelText('Job'), { target: { value: '1' } });
     expect(screen.queryByRole('list', { name: 'Equipment errors' })).toBeNull();
   });
+
+  it('offers a weapon above the base level in red and says the level is too low', async () => {
+    saveBuild({ ...swordman, baseLevel: 1, equipment: {} }, version, localStorage);
+    render(App);
+    await fireEvent.input(screen.getByLabelText('Search weapon'), { target: { value: '1101' } });
+    const list = screen.getByRole('list', { name: 'Weapon results' });
+    const sword = within(list).getByRole('button', { name: /^Sword/ });
+    expect(sword.classList.contains('level-blocked')).toBe(true);
+    await fireEvent.click(sword);
+    expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
+    expect(screen.getByRole('list', { name: 'Equipment errors' }).textContent).toBe(
+      'Base level 1 is too low for Sword (1101); it needs base level 2.',
+    );
+    await setNumber('Base level', 2);
+    expect(screen.queryByRole('list', { name: 'Equipment errors' })).toBeNull();
+    expect(sword.classList.contains('level-blocked')).toBe(false);
+  });
 });
 
 describe('training dummies', () => {

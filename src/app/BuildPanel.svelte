@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { jobName, itemName } from '../build/resolve';
+  import { jobName, itemName, levelCanEquip } from '../build/resolve';
   import { searchWeapons } from '../build/search';
   import { jobBonus, statPointCost, STAT_NAMES, type StatName } from '../engine/stats';
   import { usesArrowPath } from '../engine/status';
@@ -15,9 +15,7 @@
   const bonus = $derived(jobBonus(job, planner.build.jobLevel));
   const pointsLeft = $derived(planner.pointsBudget - planner.pointsSpent);
   const weapons = $derived(
-    searchWeapons(weaponQuery, planner.build.job, planner.build.baseLevel, planner.data, {
-      showHidden,
-    }),
+    searchWeapons(weaponQuery, planner.build.job, planner.data, { showHidden }),
   );
   const weapon = $derived(planner.resolved.character.weapon);
   const rangedWeapon = $derived(usesArrowPath(weapon?.weaponType ?? ''));
@@ -131,10 +129,13 @@
           <button
             type="button"
             class:active={item.id === planner.build.equipment.rightHand?.item}
+            class:level-blocked={!levelCanEquip(item, planner.build.baseLevel)}
             onclick={() => planner.setWeapon(item.id)}
           >
             {itemName(planner.data, item.id)}
-            <span class="meta">{item.id} · {item.weaponType} · ATK {item.attack}</span>
+            <span class="meta"
+              >{item.id} · {item.weaponType} · ATK {item.attack} · Lv {item.equipLevelMin}</span
+            >
           </button>
         </li>
       {/each}
@@ -258,5 +259,11 @@
     color: var(--color-muted);
     font-size: 12px;
     white-space: nowrap;
+  }
+
+  /* Equippable, but not at the current base level; the build reports it as an error. */
+  .results button.level-blocked,
+  .results button.level-blocked .meta {
+    color: var(--color-error);
   }
 </style>

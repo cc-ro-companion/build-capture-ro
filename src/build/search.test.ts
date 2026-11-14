@@ -1,48 +1,43 @@
 import { describe, expect, it } from 'vitest';
 import type { Item } from '../data/types';
-import { canEquip, createGameData, gameData } from './resolve';
+import { createGameData, gameData } from './resolve';
 import { MAX_RESULTS, searchMonsters, searchWeapons } from './search';
 
 const SWORDMAN = 1;
 const MAGE = 2;
 
 describe('searchWeapons (shipped data)', () => {
-  it('only lists weapons the job can equip at the base level', () => {
-    for (const [jobId, baseLevel] of [
-      [SWORDMAN, 1],
-      [SWORDMAN, 99],
-      [MAGE, 50],
-    ] as const) {
-      const all = gameData.weapons.filter(
-        (item) => !item.hidden && canEquip(item, jobId, baseLevel),
-      );
-      const result = searchWeapons('', jobId, baseLevel, gameData);
+  it('lists every weapon the job can equip, whatever its equip level', () => {
+    for (const jobId of [SWORDMAN, MAGE]) {
+      const all = gameData.weapons.filter((item) => !item.hidden && item.jobs.includes(jobId));
+      const result = searchWeapons('', jobId, gameData);
       expect(result.total).toBe(all.length);
-      for (const item of result.matches) {
-        expect(item.jobs).toContain(jobId);
-        expect(item.equipLevelMin).toBeLessThanOrEqual(baseLevel);
-      }
+      for (const item of result.matches) expect(item.jobs).toContain(jobId);
     }
   });
 
-  it('hides Sword (equip level 2) at base level 1 and shows it at 2', () => {
-    const ids = (baseLevel: number) =>
-      searchWeapons('sword', SWORDMAN, baseLevel, gameData).matches.map((item) => item.id);
-    expect(ids(1)).not.toContain(1101);
-    expect(ids(2)).toContain(1101);
+  it('offers weapons whose equip level is above 1, such as Sword (level 2)', () => {
+    const swords = searchWeapons('sword', SWORDMAN, gameData).matches;
+    expect(swords.map((item) => item.id)).toContain(1101);
+    const all = searchWeapons('', SWORDMAN, gameData);
+    const filtered = gameData.weapons.filter(
+      (item) => !item.hidden && item.jobs.includes(SWORDMAN) && item.equipLevelMin > 1,
+    );
+    expect(filtered.length).toBeGreaterThan(0);
+    expect(all.total).toBeGreaterThan(filtered.length);
   });
 
   it('does not offer swords to a Mage', () => {
-    expect(searchWeapons('1101', MAGE, 50, gameData).total).toBe(0);
+    expect(searchWeapons('1101', MAGE, gameData).total).toBe(0);
   });
 
   it('matches name, aegis name and id, ignoring case', () => {
-    expect(searchWeapons('SWORD', SWORDMAN, 50, gameData).matches.map((i) => i.id)).toContain(1101);
-    expect(searchWeapons('1101', SWORDMAN, 50, gameData).matches[0]?.id).toBe(1101);
+    expect(searchWeapons('SWORD', SWORDMAN, gameData).matches.map((i) => i.id)).toContain(1101);
+    expect(searchWeapons('1101', SWORDMAN, gameData).matches[0]?.id).toBe(1101);
   });
 
   it('returns at most 50 matches but counts all', () => {
-    const result = searchWeapons('', SWORDMAN, 99, gameData);
+    const result = searchWeapons('', SWORDMAN, gameData);
     expect(result.matches).toHaveLength(MAX_RESULTS);
     expect(result.total).toBeGreaterThan(MAX_RESULTS);
   });
@@ -59,7 +54,7 @@ describe('searchWeapons hidden items', () => {
     names: { items: {}, monsters: {}, jobs: {} },
   });
   const ids = (showHidden: boolean) =>
-    searchWeapons('', SWORDMAN, 99, data, { showHidden }).matches.map((item) => item.id);
+    searchWeapons('', SWORDMAN, data, { showHidden }).matches.map((item) => item.id);
 
   it('leaves hidden items out unless asked for them', () => {
     expect(ids(false)).toEqual([1101]);

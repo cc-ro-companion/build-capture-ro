@@ -3,7 +3,7 @@
 // level cannot wear. Mirrors rAthena's pc_equippoint and pc_equipitem.
 import type { Item } from '../data/types';
 import { SLOTS, type Slot } from '../engine/gear';
-import { canEquip, itemName, jobName, type GameData } from './resolve';
+import { itemName, jobCanEquip, jobName, levelCanEquip, type GameData } from './resolve';
 
 export { SLOTS, type Slot };
 
@@ -138,6 +138,13 @@ export function withEquipped(
   return next;
 }
 
+function levelError(name: string, item: Item, baseLevel: number): string {
+  if (baseLevel < item.equipLevelMin) {
+    return `Base level ${baseLevel} is too low for ${name}; it needs base level ${item.equipLevelMin}.`;
+  }
+  return `Base level ${baseLevel} is too high for ${name}; it allows at most base level ${item.equipLevelMax}.`;
+}
+
 /**
  * Equipped items the build's job or level cannot wear. They stay in the
  * build, so a level or job change does not destroy gear, and are shown as
@@ -155,10 +162,10 @@ export function equipmentErrors(
     const item = entry && data.items.get(entry.item);
     if (!entry || !item) continue;
     const name = `${itemName(data, entry.item)} (${entry.item})`;
-    if (!canEquip(item, jobId, baseLevel)) {
-      errors.push(
-        `${name} cannot be equipped by ${jobName(data, jobId)} at base level ${baseLevel}.`,
-      );
+    if (!jobCanEquip(item, jobId)) {
+      errors.push(`${name} cannot be equipped by ${jobName(data, jobId)}.`);
+    } else if (!levelCanEquip(item, baseLevel)) {
+      errors.push(levelError(name, item, baseLevel));
     } else if (!jobCanUseSlot(item, slot, jobId)) {
       errors.push(`${name}: ${jobName(data, jobId)} cannot hold a weapon in the left hand.`);
     }

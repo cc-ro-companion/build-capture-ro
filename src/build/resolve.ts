@@ -81,11 +81,20 @@ export function monsterName(data: GameData, monsterId: number): string {
   );
 }
 
-/** Whether the job can wear the item at the base level (job list and level limits). */
-export function canEquip(item: Item, jobId: number, baseLevel: number): boolean {
-  if (!item.jobs.includes(jobId)) return false;
+/** Whether the item's job list includes the job. */
+export function jobCanEquip(item: Item, jobId: number): boolean {
+  return item.jobs.includes(jobId);
+}
+
+/** Whether the base level is within the item's equip level limits. */
+export function levelCanEquip(item: Item, baseLevel: number): boolean {
   if (baseLevel < item.equipLevelMin) return false;
   return item.equipLevelMax === 0 || baseLevel <= item.equipLevelMax;
+}
+
+/** Whether the job can wear the item at the base level (job list and level limits). */
+export function canEquip(item: Item, jobId: number, baseLevel: number): boolean {
+  return jobCanEquip(item, jobId) && levelCanEquip(item, baseLevel);
 }
 
 export interface ResolvedBuild {
