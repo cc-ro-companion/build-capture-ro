@@ -1,0 +1,7932 @@
+[
+  {
+    "id": 39101,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_POISON", "v": 5 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39103,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39104,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLongAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Zipper Bear Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39105,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 7 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_SWORDMAN", "v": 1 }
+          ]
+        },
+        "then": [],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39331, 39531, 39394, 39441],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpell",
+            "args": [
+              { "k": "str", "v": "BS_WEAPONPERFECT" },
+              { "k": "num", "v": 1 },
+              { "k": "num", "v": 3 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPrecovRate",
+            "args": [
+              { "k": "num", "v": 50 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39110,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "WZ_METEOR" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39111,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_INSECT", "v": 4 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39114,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_INSECT", "v": 4 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39116,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 30 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39120,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_BRUTE", "v": 2 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39122,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_SOULSTRIKE" },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_NAPALMBEAT" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Death Word Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_NAPALMBEAT" },
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39123,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddSize",
+        "args": [
+          { "k": "const", "name": "Size_Small", "v": 0 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39129,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39132,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39133,
+    "location": "Weapon",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39134,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DRAGON", "v": 9 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39135,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DRAGON", "v": 9 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39138,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39140,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Familiar Card"],
+        "rightHandOnly": true,
+        "effects": []
+      },
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39142,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_FISH", "v": 5 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Flora Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAddRace",
+            "args": [
+              { "k": "const", "name": "RC_FISH", "v": 5 },
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39143,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bCriticalAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMON", "v": 6 },
+              { "k": "num", "v": 9 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCriticalAddRace",
+            "args": [
+              { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+              { "k": "num", "v": 9 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39145,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39146,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_BRUTE", "v": 2 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39148,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_FORMLESS", "v": 0 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39149,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bUnbreakableWeapon",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Zipper Bear Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39152,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_THUNDERSTORM" },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_JUPITEL" },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_VERMILION" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Hill Wind Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_LIGHTNINGBOLT" },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "WZ_VERMILION" },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39153,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Zipper Bear Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39155,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAspdRate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Zipper Bear Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39156,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPDrainRate",
+        "args": [
+          { "k": "num", "v": 30 },
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39157,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39159,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_EARTH", "v": 2 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39160,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLANT", "v": 3 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39163,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_FROSTNOVA" },
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_STORMGUST" },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Laurell Weinder Card"],
+        "rightHandOnly": false,
+        "effects": []
+      },
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39168,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Curse", "v": 5 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39169,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39170,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_GHOST", "v": 8 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39175,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Metaller Card"],
+        "rightHandOnly": true,
+        "effects": []
+      },
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39176,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddSize",
+        "args": [
+          { "k": "const", "name": "Size_Large", "v": 2 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39178,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Zipper Bear Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39183,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39184,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39185,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_FORMLESS", "v": 0 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39188,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_EARTHSPIKE" },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_HEAVENDRIVE" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39189,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Sleep", "v": 3 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Plankton Card"],
+        "rightHandOnly": true,
+        "effects": []
+      },
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39191,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_FIREPILLAR" },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_METEOR" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Red Ferus Card"],
+        "rightHandOnly": true,
+        "effects": []
+      },
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": true,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39193,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_FISH", "v": 5 },
+          { "k": "num", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39195,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_DARK", "v": 7 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39196,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 500 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Savage Babe Card"],
+        "rightHandOnly": true,
+        "effects": []
+      },
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39197,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_PLANT", "v": 3 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39198,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39200,
+    "location": "Weapon",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Sidewinder Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39203,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddSize",
+        "args": [
+          { "k": "const", "name": "Size_Medium", "v": 1 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39204,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEff",
+        "args": [
+          { "k": "const", "name": "Eff_Poison", "v": 4 },
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Snake Card"],
+        "rightHandOnly": true,
+        "effects": []
+      },
+      {
+        "requires": ["Hunter Fly Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39206,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 9 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Mobster Card"],
+        "rightHandOnly": true,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39209,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39211,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritAtkRate",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPDrainValue",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_THIEF", "v": 6 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bNoGemStone",
+            "args": []
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39255, 39415, 39475, 39494],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAgi",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAspdRate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSpeedRate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSPDrainValue",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39214,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39217,
+    "location": "Weapon",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPDrainValue",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_MERCHANT", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bUnbreakableWeapon",
+            "args": []
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Zipper Bear Card"],
+        "rightHandOnly": true,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39219,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "||",
+          "args": [
+            {
+              "k": "op",
+              "op": "||",
+              "args": [
+                {
+                  "k": "op",
+                  "op": "==",
+                  "args": [
+                    { "k": "ref", "name": "BaseClass" },
+                    { "k": "const", "name": "JOB_SWORDMAN", "v": 1 }
+                  ]
+                },
+                {
+                  "k": "op",
+                  "op": "==",
+                  "args": [
+                    { "k": "ref", "name": "BaseClass" },
+                    { "k": "const", "name": "JOB_MERCHANT", "v": 5 }
+                  ]
+                }
+              ]
+            },
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_THIEF", "v": 6 }
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "||",
+          "args": [
+            {
+              "k": "op",
+              "op": "||",
+              "args": [
+                {
+                  "k": "op",
+                  "op": "==",
+                  "args": [
+                    { "k": "ref", "name": "BaseClass" },
+                    { "k": "const", "name": "JOB_MAGE", "v": 2 }
+                  ]
+                },
+                {
+                  "k": "op",
+                  "op": "==",
+                  "args": [
+                    { "k": "ref", "name": "BaseClass" },
+                    { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+                  ]
+                }
+              ]
+            },
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseClass" },
+                { "k": "const", "name": "JOB_ARCHER", "v": 3 }
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bInt",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxSPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39221,
+    "location": "Garment",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39222,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee2",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39226,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AC_DOUBLE" },
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AC_SHOWER" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39227,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Hornet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39230,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bStr" }
+              ]
+            },
+            { "k": "num", "v": 80 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bVit" }
+              ]
+            },
+            { "k": "num", "v": 80 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bLuk" }
+              ]
+            },
+            { "k": "num", "v": 80 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bCritical",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39231,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39232,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_NAPALMBEAT" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39233,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_EARTH", "v": 2 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Hode Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_EARTH", "v": 2 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39234,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_DARK", "v": 7 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Isis Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_DARK", "v": 7 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39235,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Hornet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39236,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "<=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 8 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Kapha Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39237,
+    "location": "Garment",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39239,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAddEle",
+        "args": [
+          { "k": "const", "name": "ELE_EARTH", "v": 2 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCriticalAddRace",
+        "args": [
+          { "k": "const", "name": "RC_BRUTE", "v": 2 },
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39240,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_GHOST", "v": 8 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Marionette Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_GHOST", "v": 8 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39241,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Hornet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39243,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_POISON", "v": 5 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Myst Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_POISON", "v": 5 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39244,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 9 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39245,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLongAtkDef",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39246,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 9 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39247,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_UNDEAD", "v": 9 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Orc Zombie Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_UNDEAD", "v": 9 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39248,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "WZ_QUAGMIRE" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39249,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39251,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_FIREPILLAR" },
+          { "k": "num", "v": 40 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "WZ_METEOR" },
+          { "k": "num", "v": 40 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39255,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "RG_PLAGIARISM" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_THIEF", "v": 6 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39256,
+    "location": "Garment",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_GHOST", "v": 8 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 50 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39258,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMatkRate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_MAGE", "v": 2 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMaxSP",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39259,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Hornet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39261,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          {
+            "k": "op",
+            "op": "*",
+            "args": [
+              {
+                "k": "op",
+                "op": "/",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "readparam",
+                    "args": [
+                      { "k": "str", "v": "bLuk" }
+                    ]
+                  },
+                  { "k": "num", "v": 18 }
+                ]
+              },
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39262,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_HOLY", "v": 6 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39263,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "AC_CONCENTRATION" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39266,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_CRUSADER", "v": 14 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bDefEle",
+            "args": [
+              { "k": "const", "name": "ELE_HOLY", "v": 6 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39531, 39394, 39441],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bInt",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bDef",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSPrecovRate",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39267,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_POISON", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Argiope Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39269,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_MERCHANT", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bUnbreakableArmor",
+            "args": []
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39271,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_DARK", "v": 7 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39272,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Brilight Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39273,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_ROGUE", "v": 17 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAtkRate",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatkRate",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Hornet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39275,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "CR_AUTOGUARD" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39276,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bUnbreakableArmor",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39278,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          {
+            "k": "op",
+            "op": "*",
+            "args": [
+              {
+                "k": "op",
+                "op": "/",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "readparam",
+                    "args": [
+                      { "k": "str", "v": "bVit" }
+                    ]
+                  },
+                  { "k": "num", "v": 18 }
+                ]
+              },
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39279,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Dark Frame Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39280,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Demon Pungus Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39284,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Hornet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bFlee",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39285,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSPGainValue",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39287,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          {
+            "k": "op",
+            "op": "*",
+            "args": [
+              {
+                "k": "op",
+                "op": "/",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "readparam",
+                    "args": [
+                      { "k": "str", "v": "bInt" }
+                    ]
+                  },
+                  { "k": "num", "v": 18 }
+                ]
+              },
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39289,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_UNDEAD", "v": 9 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39291,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "AL_BLESSING" },
+          { "k": "num", "v": 2 },
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bSubRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMON", "v": 6 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSubRace",
+            "args": [
+              { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+              { "k": "num", "v": 30 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bExpAddRace",
+            "args": [
+              { "k": "const", "name": "RC_DEMON", "v": 6 },
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bExpAddRace",
+            "args": [
+              { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39533, 39352, 39429],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bVit",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bUseSPrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39293,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Giant Spider Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39295,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39301,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Kraben Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39303,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_MAGE", "v": 2 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMatkRate",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 15 }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39369, 39408, 39505, 39232, 39426],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bDef",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxHP",
+            "args": [
+              { "k": "num", "v": 500 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39304,
+    "location": "Armor",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Majoruros Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39305,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Freeze", "v": 1 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39306,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39307,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          {
+            "k": "op",
+            "op": "*",
+            "args": [
+              {
+                "k": "op",
+                "op": "/",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "readparam",
+                    "args": [
+                      { "k": "str", "v": "bStr" }
+                    ]
+                  },
+                  { "k": "num", "v": 18 }
+                ]
+              },
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39309,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          {
+            "k": "op",
+            "op": "*",
+            "args": [
+              {
+                "k": "op",
+                "op": "/",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "readparam",
+                    "args": [
+                      { "k": "str", "v": "bDex" }
+                    ]
+                  },
+                  { "k": "num", "v": 18 }
+                ]
+              },
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39311,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39312,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39316,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39318,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 700 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39325,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_EARTH", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Sandman Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39330,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPGainValue",
+        "args": [
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39331,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMdef",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39332,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39333,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 1000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39515],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bVit",
+            "args": [
+              { "k": "num", "v": 4 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPrecovRate",
+            "args": [
+              { "k": "num", "v": 30 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39334,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDefEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39337,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          {
+            "k": "op",
+            "op": "*",
+            "args": [
+              {
+                "k": "op",
+                "op": "/",
+                "args": [
+                  {
+                    "k": "call",
+                    "fn": "readparam",
+                    "args": [
+                      { "k": "str", "v": "bAgi" }
+                    ]
+                  },
+                  { "k": "num", "v": 18 }
+                ]
+              },
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39339,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bBaseAtk",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_MONK", "v": 15 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bUseSPrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 10 }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bNoCastCancel",
+            "args": []
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39533, 39429],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bBaseAtk",
+            "args": [
+              { "k": "num", "v": 25 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxSP",
+            "args": [
+              { "k": "num", "v": 80 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAutoSpell",
+            "args": [
+              { "k": "str", "v": "AL_CRUCIS" },
+              { "k": "num", "v": 5 },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MO_EXTREMITYFIST" },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39340,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39342,
+    "location": "Armor",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 500 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_SAGE", "v": 16 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMagicDamageReturn",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 20 }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39408, 39505, 39232, 39426],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bInt",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "WZ_HEAVENDRIVE" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_THUNDERSTORM" },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39343,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubClass",
+        "args": [
+          { "k": "const", "name": "CLASS_BOSS", "v": 1 },
+          { "k": "num", "v": 40 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubClass",
+        "args": [
+          { "k": "const", "name": "CLASS_NORMAL", "v": 0 },
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 40 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39345,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "AL_CRUCIS" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39178],
+        "effects": []
+      }
+    ],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39346,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Shell Fish Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39347,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_ANGEL", "v": 8 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39350,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_INSECT", "v": 4 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39351,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 6 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          {
+            "k": "call",
+            "fn": "getrefine",
+            "args": []
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39352,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "AL_HEAL" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Enchanted Peach Tree Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39353,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubSize",
+        "args": [
+          { "k": "const", "name": "Size_Large", "v": 2 },
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39354,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 3000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Curse", "v": 5 },
+          { "k": "num", "v": 3000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 3000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stone", "v": 11 },
+          { "k": "num", "v": 3000 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39357,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubSize",
+        "args": [
+          { "k": "const", "name": "Size_Small", "v": 0 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubSize",
+        "args": [
+          { "k": "const", "name": "Size_Medium", "v": 1 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubSize",
+        "args": [
+          { "k": "const", "name": "Size_Large", "v": 2 },
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39358,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLongAtkDef",
+        "args": [
+          { "k": "num", "v": 35 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39359,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39361,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stone", "v": 11 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMON", "v": 6 },
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39366,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubSize",
+        "args": [
+          { "k": "const", "name": "Size_Small", "v": 0 },
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39367,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubSize",
+        "args": [
+          { "k": "const", "name": "Size_Medium", "v": 1 },
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39368,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_BRUTE", "v": 2 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39369,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Parasite Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bDef",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSubEle",
+            "args": [
+              { "k": "const", "name": "ELE_NEUTRAL", "v": 0 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39370,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_FORMLESS", "v": 0 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39371,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_FISH", "v": 5 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Rafflesia Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSubRace",
+            "args": [
+              { "k": "const", "name": "RC_FISH", "v": 5 },
+              { "k": "num", "v": 30 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39373,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DRAGON", "v": 9 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39374,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_PLANT", "v": 3 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39376,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "CR_SHIELDBOOMERANG" },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39377,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_UNDEAD", "v": 1 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39378,
+    "location": "Shield",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubRace",
+        "args": [
+          { "k": "const", "name": "RC_DEMIHUMAN", "v": 7 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39381,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "MG_SIGHT" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 200 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39386,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39390,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39393,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 9 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxSPrate",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39394,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHP",
+        "args": [
+          { "k": "num", "v": 300 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 9 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "SM_BASH" },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39397,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "<=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 4 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 4 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxSPrate",
+            "args": [
+              { "k": "num", "v": 4 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bHPrecovRate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSPrecovRate",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39398,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39120, 39263, 39419, 39226],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bDex",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "BA_MUSICALSTRIKE" },
+              { "k": "num", "v": 10 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "DC_THROWARROW" },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Zealotus Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "BA_MUSICALSTRIKE" },
+              { "k": "num", "v": 25 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "DC_THROWARROW" },
+              { "k": "num", "v": 25 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39403,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39404,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39405,
+    "location": "Footgear",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Megalith Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39406,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_ARCHER", "v": 3 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bExpAddRace",
+            "args": [
+              { "k": "const", "name": "RC_BRUTE", "v": 2 },
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39120, 39263, 39419, 39226],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bLongAtkRate",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAgi",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bDex",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39408,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_FROSTDIVER" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39410,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          {
+            "k": "call",
+            "fn": "getrefine",
+            "args": []
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39411,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39413,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39414,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          { "k": "num", "v": 8 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          { "k": "num", "v": 8 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39415,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_THIEF", "v": 6 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bFlee2",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39416,
+    "location": "Footgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 20 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39419,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLongAtkDef",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39420,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39421,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39422,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39426,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bNoCastCancel",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "num", "v": 30 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "MG_FIREWALL" },
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": false,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39429,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSkillAtk",
+        "args": [
+          { "k": "str", "v": "AL_HOLYLIGHT" },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39431,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39433,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "AL_PNEUMA" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39436,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39437,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MG_COLDBOLT" },
+          { "k": "num", "v": 2 },
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Gazeti Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39438,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "MO_CALLSPIRITS" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+          ]
+        },
+        "then": [],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Greatest General Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39439,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39440,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39441,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_SWORDMAN", "v": 1 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bFlee2",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39442,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHit",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39446,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_MERCHANT", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMagicDamageReturn",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39411, 39217, 39528, 39269],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bSPDrainValue",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MC_MAMMONITE" },
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bLuk",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39448,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Imp Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39451,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 4 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39452,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39453,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "||",
+          "args": [
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_NOVICE", "v": 0 }
+              ]
+            },
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_SUPER_NOVICE", "v": 23 }
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpellWhenHit",
+            "args": [
+              { "k": "str", "v": "SM_ENDURE" },
+              { "k": "num", "v": 1 },
+              { "k": "num", "v": 200 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39470],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxHP",
+            "args": [
+              { "k": "num", "v": 300 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Grand Peco Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39454,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39458,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39460,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39462,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "PR_LEXAETERNA" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 30 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39463,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "PR_IMPOSITIO" },
+          { "k": "num", "v": 3 },
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39462],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpell",
+            "args": [
+              { "k": "str", "v": "MG_LIGHTNINGBOLT" },
+              { "k": "num", "v": 5 },
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39464,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bNoCastCancel",
+        "args": []
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          { "k": "num", "v": 25 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Beholder Card"],
+        "rightHandOnly": false,
+        "note": "except with Bowling Bash and when under effect of Poem of Bragi",
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bCastrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 5 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39470,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "||",
+          "args": [
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_NOVICE", "v": 0 }
+              ]
+            },
+            {
+              "k": "op",
+              "op": "==",
+              "args": [
+                { "k": "ref", "name": "BaseJob" },
+                { "k": "const", "name": "JOB_SUPER_NOVICE", "v": 23 }
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpellWhenHit",
+            "args": [
+              { "k": "str", "v": "MER_INCAGI" },
+              { "k": "num", "v": 1 },
+              { "k": "num", "v": 100 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39453],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMaxSP",
+            "args": [
+              { "k": "num", "v": 60 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39472,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39475,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAutoSpellWhenHit",
+        "args": [
+          { "k": "str", "v": "AS_CLOAKING" },
+          { "k": "num", "v": 5 },
+          { "k": "num", "v": 100 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Frilldora Card"],
+        "rightHandOnly": false,
+        "note": "on Assassin and Rogue",
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39476,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Siroma Card"],
+        "rightHandOnly": false,
+        "effects": []
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39477,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39479,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39480,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bVit",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39482,
+    "location": "Accessory",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39488,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAutoSpell",
+        "args": [
+          { "k": "str", "v": "RG_STRIPARMOR" },
+          { "k": "num", "v": 1 },
+          { "k": "num", "v": 50 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_ROGUE", "v": 17 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bUseSPrate",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 20 }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39535, 39255, 39415, 39475],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 6 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bAgi",
+            "args": [
+              { "k": "num", "v": 4 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "RG_BACKSTAP" },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39492,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bFlee2",
+        "args": [
+          { "k": "num", "v": 5 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39493,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDex",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39494,
+    "location": "Accessory",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCritical",
+        "args": [
+          { "k": "num", "v": 3 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39496,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_MAGE", "v": 2 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMaxSP",
+            "args": [
+              { "k": "num", "v": 100 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxHP",
+            "args": [
+              {
+                "k": "op",
+                "op": "-",
+                "args": [
+                  { "k": "num", "v": 100 }
+                ]
+              }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_SOULSTRIKE" },
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MG_NAPALMBEAT" },
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39498,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 9 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMaxSP",
+            "args": [
+              { "k": "num", "v": 150 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39501,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxHPrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSPrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39502,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Blind", "v": 8 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39504,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39505,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 50 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39507,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bAgi" }
+              ]
+            },
+            { "k": "num", "v": 90 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bResEff",
+            "args": [
+              { "k": "const", "name": "Eff_Silence", "v": 6 },
+              { "k": "num", "v": 3000 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bResEff",
+            "args": [
+              { "k": "const", "name": "Eff_Stun", "v": 2 },
+              { "k": "num", "v": 3000 }
+            ]
+          }
+        ],
+        "else": []
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "readparam",
+              "args": [
+                { "k": "str", "v": "bVit" }
+              ]
+            },
+            { "k": "num", "v": 80 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bResEff",
+            "args": [
+              { "k": "const", "name": "Eff_Stone", "v": 11 },
+              { "k": "num", "v": 5000 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bResEff",
+            "args": [
+              { "k": "const", "name": "Eff_Sleep", "v": 3 },
+              { "k": "num", "v": 5000 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39509,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WIND", "v": 4 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39510,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "<=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 5 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Gibbet Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39511,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Confusion", "v": 7 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_EARTH", "v": 2 },
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39514,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bLuk",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseJob" },
+            { "k": "const", "name": "JOB_ALCHEMIST", "v": 18 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bAutoSpell",
+            "args": [
+              { "k": "str", "v": "BS_ADRENALINE" },
+              { "k": "num", "v": 1 },
+              { "k": "num", "v": 10 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39411, 39217, 39458, 39269],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bStr",
+            "args": [
+              { "k": "num", "v": 4 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxHPrate",
+            "args": [
+              { "k": "num", "v": 7 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMaxSPrate",
+            "args": [
+              { "k": "num", "v": 7 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSkillAtk",
+            "args": [
+              { "k": "str", "v": "MC_MAMMONITE" },
+              { "k": "num", "v": 20 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSPDrainValue",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39515,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 150 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSPrecovRate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [
+      {
+        "requires": [39333],
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bInt",
+            "args": [
+              { "k": "num", "v": 4 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bSPrecovRate",
+            "args": [
+              { "k": "num", "v": 30 }
+            ]
+          }
+        ]
+      }
+    ],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39516,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39517,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": ">=",
+          "args": [
+            {
+              "k": "call",
+              "fn": "getrefine",
+              "args": []
+            },
+            { "k": "num", "v": 9 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bMatkRate",
+            "args": [
+              { "k": "num", "v": 2 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39520,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_WATER", "v": 1 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39521,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_FIRE", "v": 3 },
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39523,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 10000 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39528,
+    "location": "Headgear",
+    "effects": [],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39529,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Sleep", "v": 3 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bAgi",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39531,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_DARK", "v": 7 },
+          { "k": "num", "v": 15 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bSubEle",
+        "args": [
+          { "k": "const", "name": "ELE_UNDEAD", "v": 9 },
+          { "k": "num", "v": 15 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39533,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "if",
+        "cond": {
+          "k": "op",
+          "op": "==",
+          "args": [
+            { "k": "ref", "name": "BaseClass" },
+            { "k": "const", "name": "JOB_ACOLYTE", "v": 4 }
+          ]
+        },
+        "then": [
+          {
+            "k": "bonus",
+            "name": "bInt",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39534,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 6 }
+            ]
+          }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          {
+            "k": "call",
+            "fn": "getrefine",
+            "args": []
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39535,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Silence", "v": 6 },
+          { "k": "num", "v": 2000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39536,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bDef",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Stun", "v": 2 },
+          { "k": "num", "v": 2000 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39537,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bInt",
+        "args": [
+          { "k": "num", "v": 1 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bCastrate",
+        "args": [
+          {
+            "k": "op",
+            "op": "-",
+            "args": [
+              { "k": "num", "v": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [
+      {
+        "requires": ["Alarm, Clock & Punk Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bMdef",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bDef",
+            "args": [
+              { "k": "num", "v": 3 }
+            ]
+          }
+        ]
+      },
+      {
+        "requires": ["Wormtail Card"],
+        "rightHandOnly": false,
+        "effects": [
+          {
+            "k": "bonus",
+            "name": "bAllStats",
+            "args": [
+              { "k": "num", "v": 1 }
+            ]
+          },
+          {
+            "k": "bonus",
+            "name": "bMatk",
+            "args": [
+              { "k": "num", "v": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "reviewed": false
+  },
+  {
+    "id": 39538,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bResEff",
+        "args": [
+          { "k": "const", "name": "Eff_Bleeding", "v": 9 },
+          { "k": "num", "v": 10000 }
+        ]
+      },
+      {
+        "k": "bonus",
+        "name": "bHPrecovRate",
+        "args": [
+          { "k": "num", "v": 10 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39539,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bStr",
+        "args": [
+          { "k": "num", "v": 2 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  },
+  {
+    "id": 39542,
+    "location": "Headgear",
+    "effects": [
+      {
+        "k": "bonus",
+        "name": "bMaxSP",
+        "args": [
+          { "k": "num", "v": 80 }
+        ]
+      }
+    ],
+    "sets": [],
+    "album": [],
+    "reviewed": false
+  }
+]

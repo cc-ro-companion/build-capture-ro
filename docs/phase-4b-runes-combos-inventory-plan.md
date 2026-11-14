@@ -114,7 +114,7 @@ results become fixtures that `pnpm test` then guards.
    run it on the maintainer's client file and commit the draft
    `runes.yml`. Check: tool tests on sample client entries; report the
    TODO count in the progress log.
-2. [ ] **Rune pipeline.** `runes.ts`, types, fail on TODO only for
+2. [x] **Rune pipeline.** `runes.ts`, types, fail on TODO only for
    `Reviewed: true` entries (drafts are allowed while review runs).
    Check: pipeline tests, `pnpm data`.
 3. [ ] **Maintainer review.** The maintainer resolves TODOs and sets

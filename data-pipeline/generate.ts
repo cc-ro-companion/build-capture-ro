@@ -10,6 +10,7 @@ import { formatJson } from './json.ts';
 import { generateMonsters } from './monsters.ts';
 import { loadMeta, loadOverrideFile } from './overrides.ts';
 import { readRathenaSource, resolveRathenaDir } from './rathena.ts';
+import { loadRunes } from './runes.ts';
 import { generateTables } from './tables.ts';
 
 const repoRoot = path.resolve(import.meta.dirname, '..');
@@ -48,17 +49,26 @@ function main(): void {
   console.log(`Equipment: ${items.data.length} (${hidden.size} hidden)`);
   const monsters = generateMonsters(rathenaDir, overrides.monsters);
   console.log(`Monsters: ${monsters.data.length}`);
+  const runes = loadRunes(path.join(overridesDir, 'runes.yml'));
+  const unreviewed = runes.data.filter((rune) => !rune.reviewed).length;
+  console.log(`Runes: ${runes.data.length} (${unreviewed} not reviewed)`);
   const tables = generateTables(rathenaDir);
   const coverage = coverageReport(items.data, items.names, items.scripts);
   const scripted = items.data.filter((item) => (items.scripts.get(item.id) ?? '').trim() !== '');
   const parsed = scripted.filter((item) => item.effects !== null).length;
   console.log(`Scripts: ${parsed} of ${scripted.length} parsed`);
-  const names: NamesFile = { items: items.names, monsters: monsters.names, jobs: jobs.names };
+  const names: NamesFile = {
+    items: items.names,
+    monsters: monsters.names,
+    jobs: jobs.names,
+    runes: runes.names,
+  };
 
   const dataFiles: Record<string, string> = {
     'jobs.json': formatJson(jobs.data),
     'items.json': formatJson(items.data),
     'monsters.json': formatJson(monsters.data),
+    'runes.json': formatJson(runes.data),
     'tables.json': formatJson(tables),
     'names.en.json': formatJson(names),
   };

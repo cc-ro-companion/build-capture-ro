@@ -23,12 +23,38 @@ Rules:
 | `monsters.yml` | `mob_db.yml` | `Id` |
 | `jobs.yml` | `job_stats.yml`, `job_aspd.yml`, `job_exp.yml` | `Job` |
 | `hidden-items.yml` | generated equipment | `id` |
+| `runes.yml` | – (ccRO only) | `Id` |
 
 `hidden-items.yml` has its own format: review groups, each a list of
 `{ id, name, hide, reason }` entries, one per line. Items with `hide: true`
 are not obtainable on ccRO; they stay in the data, so builds that use them
 keep loading, but search leaves them out unless "show hidden items" is
 ticked. `pnpm data` stops if a hidden id is not generated equipment.
+
+`runes.yml` holds every ccRO rune, keyed by its client item id (39xxx). It
+was drafted once from the client's item info by
+`data-pipeline/tools/draft-runes.ts` and is maintained by hand. Each entry:
+```yaml
+  # client text the entry was drafted from, as a comment
+  - Id: 39105
+    Name: 'Assaulter Rune'
+    Location: Weapon        # Weapon, Shield, Armor, Garment, Footgear, Accessory, Headgear
+    Reviewed: false         # true once checked against the client text
+    Script: |               # rAthena item script; getrefine() is the host item's refine
+      bonus bCritAtkRate,10;
+    Sets:                   # bonus while these other runes are equipped too
+      - Requires: [39331, 39531]
+        Script: |
+          bonus bStr,10;
+    Album:                  # card album effects (phase 8): stored, not applied
+      - Requires: ['Mobster Card']
+        RightHandOnly: true
+        Script: |
+          bonus bCritical,3;
+```
+`# TODO: <client text>` lines are text the draft could not map. They are
+skipped while `Reviewed: false`; `pnpm data` stops if a reviewed rune still
+has one, if a script does not parse, or if a set names an unknown rune.
 
 `meta.yml` holds the data label shown in the app footer:
 ```yaml

@@ -52,6 +52,7 @@ uncommitted changes, and records `rathenaDirty: true`.
 | `jobs.json` | `job_stats.yml`, `job_aspd.yml`, `job_exp.yml`, `job_basepoints.yml` (base HP/SP per level), `statpoint.yml`; ids checked against `enum e_job` in `src/common/mmo.hpp` | `jobs.yml` |
 | `items.json` | `item_db.yml` → `item_db_equip.yml` | `items.yml`, `hidden-items.yml` |
 | `monsters.json` | `mob_db.yml` | `monsters.yml` |
+| `runes.json` | – (ccRO runes, from the game client) | `runes.yml` |
 | `tables.json` | `db/size_fix.yml` → `size_fix.yml`, `attr_fix.yml`, `refine.yml` (Armor and Weapon groups) | – |
 | `names.en.json` | display names of the above | – |
 | `meta.json` | data version, see below | `meta.yml` |
@@ -77,6 +78,10 @@ subset gets `effects: null` and an `unsupported` reason, and is listed in
 `docs/script-coverage.md` with the statement that stopped the parser. To fix
 one, rewrite its `Script:` in `data-overrides/items.yml`; the parser reads the
 override like any other script.
+
+Rune scripts in `data-overrides/runes.yml` use the same parser, but a rune
+script outside the subset stops `pnpm data`: they are written by hand, so a
+parse failure is a mistake to fix, not an effect to skip.
 
 Constants (`RC_*`, `Ele_*`, `Job_*`, bonus names, ...) come from a static table,
 `script/constants.ts`, so the parser tests run without rAthena. After an

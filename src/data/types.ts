@@ -127,6 +127,40 @@ export interface Item {
   hidden?: true;
 }
 
+/** Where a rune can be compounded, as the client's "Compound on" names it (Shoes → Footgear). */
+export type RuneLocation =
+  'Weapon' | 'Shield' | 'Armor' | 'Garment' | 'Footgear' | 'Accessory' | 'Headgear';
+
+/** A rune set bonus: applies once while `requires` and the owning rune are all equipped. */
+export interface RuneSet {
+  /** Other rune ids; the rune that holds the set is required implicitly. */
+  requires: number[];
+  effects: ScriptStmt[];
+}
+
+/** A card album effect (phase 8): stored, never applied yet. */
+export interface AlbumEffect {
+  /** Card names as the client writes them, e.g. `Mobster Card`. */
+  requires: string[];
+  /** Applies only while the rune sits in the right-hand item. */
+  rightHandOnly: boolean;
+  /** Extra client text on the condition, e.g. `except with Bowling Bash`. */
+  note?: string;
+  effects: ScriptStmt[];
+}
+
+/** A ccRO rune from data-overrides/runes.yml. Its scripts run in the context of the item it sits in. */
+export interface Rune {
+  /** Client item id (39xxx); stable, used in builds and share codes. */
+  id: number;
+  location: RuneLocation;
+  effects: ScriptStmt[];
+  sets: RuneSet[];
+  album: AlbumEffect[];
+  /** False while the maintainer has not checked the drafted script against the client text. */
+  reviewed: boolean;
+}
+
 export type Size = 'small' | 'medium' | 'large';
 export type MonsterClass = 'normal' | 'boss' | 'guardian' | 'battlefield';
 
@@ -197,6 +231,7 @@ export interface NamesFile {
   items: Record<string, string>;
   monsters: Record<string, string>;
   jobs: Record<string, string>;
+  runes: Record<string, string>;
 }
 
 export interface DataMeta {

@@ -55,7 +55,7 @@ describe('searchEquipment hidden items', () => {
     monsters: [],
     statPoints: gameData.statPoints,
     tables: gameData.tables,
-    names: { items: {}, monsters: {}, jobs: {} },
+    names: { items: {}, monsters: {}, jobs: {}, runes: {} },
   });
   const ids = (showHidden: boolean) =>
     searchEquipment('', 'rightHand', SWORDMAN, data, { showHidden }).matches.map((item) => item.id);

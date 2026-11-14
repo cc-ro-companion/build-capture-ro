@@ -52,7 +52,7 @@ describe('notModelledNotes (shipped data)', () => {
       monsters: [],
       statPoints: gameData.statPoints,
       tables: gameData.tables,
-      names: { items: {}, monsters: {}, jobs: {} },
+      names: { items: {}, monsters: {}, jobs: {}, runes: {} },
     });
     const notes = notesFor({ armor: { item: 2301, refine: 0 } }, data);
     expect(notes.armor).toEqual({ unsupported: 'command "callfunc"', labels: [] });
@@ -111,7 +111,7 @@ describe('notModelledNotes with conditional bonuses', () => {
     monsters: [],
     statPoints: gameData.statPoints,
     tables: gameData.tables,
-    names: { items: {}, monsters: {}, jobs: {} },
+    names: { items: {}, monsters: {}, jobs: {}, runes: {} },
   });
 
   it('shows a bonus only once its condition holds for the build', () => {
@@ -130,7 +130,7 @@ describe('notModelledNotes with conditional bonuses', () => {
       monsters: [],
       statPoints: gameData.statPoints,
       tables: gameData.tables,
-      names: { items: {}, monsters: {}, jobs: {} },
+      names: { items: {}, monsters: {}, jobs: {}, runes: {} },
     });
     const equipment = { rightHand: { item: 1201, refine: 0 }, leftHand: { item: 1201, refine: 7 } };
     const notes = notModelledNotes(
@@ -146,7 +146,7 @@ describe('notModelledNotes with conditional bonuses', () => {
       monsters: [],
       statPoints: gameData.statPoints,
       tables: gameData.tables,
-      names: { items: {}, monsters: {}, jobs: {} },
+      names: { items: {}, monsters: {}, jobs: {}, runes: {} },
     });
   }
 

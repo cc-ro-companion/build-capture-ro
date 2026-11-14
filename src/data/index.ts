@@ -5,8 +5,9 @@ import jobsJson from './generated/jobs.json';
 import metaJson from './generated/meta.json';
 import monstersJson from './generated/monsters.json';
 import namesJson from './generated/names.en.json';
+import runesJson from './generated/runes.json';
 import tablesJson from './generated/tables.json';
-import type { DataMeta, Item, JobsFile, Monster, NamesFile, TablesFile } from './types';
+import type { DataMeta, Item, JobsFile, Monster, NamesFile, Rune, TablesFile } from './types';
 
 export type * from './types';
 
@@ -18,5 +19,6 @@ export const dataMeta: DataMeta = metaJson;
 export const jobsData = jobsJson as unknown as JobsFile;
 export const items = itemsJson as unknown as Item[];
 export const monsters = monstersJson as unknown as Monster[];
+export const runes = runesJson as unknown as Rune[];
 export const tables = tablesJson as unknown as TablesFile;
 export const namesEn: NamesFile = namesJson;

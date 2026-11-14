@@ -8,7 +8,9 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import type { RuneLocation } from '../../src/data/types.ts';
 import { loadDb, PRE_RE_DIR, resolveRathenaDir } from '../rathena.ts';
+import { TODO_MARKER } from '../runes.ts';
 
 export interface ClientLine {
   text: string;
@@ -21,9 +23,6 @@ export interface ClientRune {
   name: string;
   lines: ClientLine[];
 }
-
-export type RuneLocation =
-  'Weapon' | 'Shield' | 'Armor' | 'Garment' | 'Footgear' | 'Accessory' | 'Headgear';
 
 export interface DraftSet {
   requires: number[];
@@ -56,7 +55,7 @@ export interface DraftContext {
   skillsByName: ReadonlyMap<string, string>;
 }
 
-export const TODO_PREFIX = '# TODO: ';
+export const TODO_PREFIX = `${TODO_MARKER} `;
 const RUNE_ID_MIN = 39000;
 const RUNE_ID_MAX = 39999;
 const GREY = '^808080';

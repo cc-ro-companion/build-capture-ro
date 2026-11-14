@@ -47,6 +47,7 @@ const data = createGameData({
     },
     monsters: { 1002: 'Poring' },
     jobs: {},
+    runes: {},
   },
 });
 
