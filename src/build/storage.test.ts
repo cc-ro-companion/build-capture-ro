@@ -13,7 +13,13 @@ const build: Build = {
   job: 1,
   baseLevel: 50,
   jobLevel: 30,
-  weapon: 1101,
+  equipment: {
+    headTop: { item: 2224, refine: 4 },
+    armor: { item: 2303, refine: 10 },
+    accessoryLeft: { item: 2601, refine: 0 },
+    rightHand: { item: 1101, refine: 7 },
+    leftHand: { item: 2101, refine: 5 },
+  },
   dummies: [defaultDummy(0), { ...defaultDummy(1), name: 'Ghost', element: 'Ghost', def: 60 }],
   target: { dummy: 1 },
 };
@@ -52,6 +58,42 @@ describe('storage', () => {
     expect(json).toContain('\n  "baseLevel": 50');
     expect(json).toContain('"name": "Ghost"');
     expect(load(storage)).toEqual({ build, warnings: [], dataHint: null });
+  });
+
+  it('migrates a phase 3 saved build: the weapon goes to the right hand at +0', () => {
+    // As the phase 3 planner saved it (commit a85e1b9).
+    const phase3 = {
+      v: 1,
+      job: 12,
+      baseLevel: 99,
+      jobLevel: 50,
+      stats: { str: 99, agi: 90, vit: 30, int: 1, dex: 40, luk: 10 },
+      weapon: 1250,
+      dummies: [],
+      target: { monster: 1002 },
+      d: current.hash,
+      l: current.label,
+    };
+    const storage = memoryStorage();
+    storage.setItem(STORAGE_KEY, JSON.stringify(phase3, null, 2));
+    const result = load(storage);
+    if (!result || !('build' in result)) throw new Error('phase 3 build did not load');
+    expect(result.warnings).toEqual([]);
+    expect(result.build).toEqual({
+      v: 2,
+      job: 12,
+      baseLevel: 99,
+      jobLevel: 50,
+      stats: phase3.stats,
+      equipment: { rightHand: { item: 1250, refine: 0 } },
+      dummies: [],
+      target: { monster: 1002 },
+    });
+    saveBuild(result.build, current, storage);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject({
+      v: 2,
+      equipment: { rightHand: { item: 1250, refine: 0 } },
+    });
   });
 
   it('returns null when nothing is saved', () => {

@@ -18,12 +18,36 @@ const data = createGameData({
       ...testWeapon({ id: 2301, aegisName: 'Cotton_Shirt' }),
       type: 'armor',
       weaponType: undefined,
+      locations: ['Armor'],
+    },
+    {
+      ...testWeapon({ id: 2210, aegisName: 'Hair_Band' }),
+      type: 'armor',
+      weaponType: undefined,
+      locations: ['Head_Top'],
+      refineable: false,
+    },
+    {
+      ...testWeapon({ id: 2224, aegisName: 'Goggles' }),
+      type: 'armor',
+      weaponType: undefined,
+      locations: ['Head_Mid', 'Head_Top'],
     },
   ],
   monsters: [testMonster()],
   statPoints: [48, 51, 54],
   tables: { sizeModifier: {}, elementModifier: [], refine: { armor: [], weapon: [] } },
-  names: { items: { 1101: 'Sword', 1102: 'Sword' }, monsters: { 1002: 'Poring' }, jobs: {} },
+  names: {
+    items: {
+      1101: 'Sword',
+      1102: 'Sword',
+      2301: 'Cotton Shirt',
+      2210: 'Hair Band',
+      2224: 'Goggles',
+    },
+    monsters: { 1002: 'Poring' },
+    jobs: {},
+  },
 });
 
 function valid(partial: Partial<Build> = {}): Build {
@@ -32,7 +56,7 @@ function valid(partial: Partial<Build> = {}): Build {
     job: 1,
     baseLevel: 50,
     jobLevel: 30,
-    weapon: 1101,
+    equipment: { rightHand: { item: 1101, refine: 4 } },
     dummies: [defaultDummy(0)],
     target: { monster: 1002 },
     ...partial,
@@ -55,15 +79,86 @@ describe('normalizeBuild', () => {
   it('rejects data that is not a build', () => {
     expect(normalizeBuild('x', data, rAthenaDefaults)).toHaveProperty('error');
     expect(normalizeBuild({ job: 1 }, data, rAthenaDefaults)).toHaveProperty('error');
-    expect(normalizeBuild({ ...valid(), v: 2 }, data, rAthenaDefaults)).toEqual({
+    expect(normalizeBuild({ ...valid(), v: 3 }, data, rAthenaDefaults)).toEqual({
       error: expect.stringMatching(/newer version/),
     });
   });
 
-  it('drops an unknown weapon id with a warning', () => {
-    const result = normalize(valid({ weapon: 99999 }));
-    expect(result.build.weapon).toBeNull();
-    expect(result.warnings).toEqual(['Unknown weapon 99999 removed.']);
+  it('drops an unknown item id with a warning', () => {
+    const result = normalize(valid({ equipment: { rightHand: { item: 99999, refine: 0 } } }));
+    expect(result.build.equipment).toEqual({});
+    expect(result.warnings).toEqual(['Unknown item 99999 in rightHand removed.']);
+  });
+
+  it('migrates a v1 build: the weapon goes to the right hand at +0, without a warning', () => {
+    const v1: Record<string, unknown> = { ...valid(), v: 1, weapon: 1101 };
+    delete v1.equipment;
+    const result = normalize(v1);
+    expect(result.build).toEqual(valid({ equipment: { rightHand: { item: 1101, refine: 0 } } }));
+    expect(result.warnings).toEqual([]);
+    expect(normalize({ ...v1, weapon: null }).build.equipment).toEqual({});
+  });
+
+  it('ignores an equipment field in a v1 build', () => {
+    expect(normalize({ ...valid(), v: 1, weapon: null }).build.equipment).toEqual({});
+  });
+
+  it('drops items that do not fit their slot, and unknown slots', () => {
+    const result = normalize({
+      ...valid(),
+      equipment: {
+        headTop: { item: 1101, refine: 0 },
+        armor: { item: 2301, refine: 0 },
+        cape: { item: 2301, refine: 0 },
+      },
+    });
+    expect(result.build.equipment).toEqual({ armor: { item: 2301, refine: 0 } });
+    expect(result.warnings).toEqual([
+      'Unknown equipment slot cape; its item was removed.',
+      'Sword (1101) does not fit headTop; removed.',
+    ]);
+  });
+
+  it('drops armor in a weapon slot', () => {
+    const result = normalize(valid({ equipment: { rightHand: { item: 2301, refine: 0 } } }));
+    expect(result.build.equipment).toEqual({});
+    expect(result.warnings).toEqual(['Cotton Shirt (2301) does not fit rightHand; removed.']);
+  });
+
+  it('stores a multi-location headgear under its first slot and drops what it overlaps', () => {
+    const moved = normalize(valid({ equipment: { headMid: { item: 2224, refine: 0 } } }));
+    expect(moved.build.equipment).toEqual({ headTop: { item: 2224, refine: 0 } });
+    const result = normalize(
+      valid({
+        equipment: { headTop: { item: 2210, refine: 0 }, headMid: { item: 2224, refine: 0 } },
+      }),
+    );
+    expect(result.build.equipment).toEqual({ headTop: { item: 2210, refine: 0 } });
+    expect(result.warnings).toEqual([
+      'Goggles (2224) overlaps an item in an earlier slot; removed.',
+    ]);
+  });
+
+  it('clamps refine to 0..10 and forces 0 on items that cannot be refined', () => {
+    const result = normalize(
+      valid({
+        equipment: {
+          headTop: { item: 2210, refine: 3 },
+          armor: { item: 2301, refine: 12 },
+          rightHand: { item: 1101, refine: -1 },
+        },
+      }),
+    );
+    expect(result.build.equipment).toEqual({
+      headTop: { item: 2210, refine: 0 },
+      armor: { item: 2301, refine: 10 },
+      rightHand: { item: 1101, refine: 0 },
+    });
+    expect(result.warnings).toEqual([
+      'Hair Band (2210) cannot be refined; refine set to 0.',
+      'Refine 12 of Cotton Shirt (2301) is outside 0–10; set to 10.',
+      'Refine -1 of Sword (1101) is outside 0–10; set to 0.',
+    ]);
   });
 
   it('drops an unknown monster id with a warning', () => {
@@ -92,24 +187,11 @@ describe('normalizeBuild', () => {
     expect(normalize(rest).build).toMatchObject({ dummies: [], target: null });
   });
 
-  it('drops a weapon the job cannot equip', () => {
-    const result = normalize(valid({ job: 2 }));
-    expect(result.build.weapon).toBeNull();
-    expect(result.warnings).toEqual([
-      'Sword (1101) cannot be equipped by Mage at base level 50; removed.',
-    ]);
-  });
-
-  it('drops a weapon outside its equip level range', () => {
-    expect(normalize(valid({ baseLevel: 1 })).build.weapon).toBeNull();
-    expect(normalize(valid({ weapon: 1102, baseLevel: 11 })).build.weapon).toBeNull();
-    expect(normalize(valid({ weapon: 1102, baseLevel: 10 })).build.weapon).toBe(1102);
-  });
-
-  it('drops an item that is not a weapon', () => {
-    const result = normalize(valid({ weapon: 2301 }));
-    expect(result.build.weapon).toBeNull();
-    expect(result.warnings[0]).toMatch(/not a weapon/);
+  it('keeps gear the job or level cannot wear, without a warning', () => {
+    const mage = normalize(valid({ job: 2 }));
+    expect(mage.build.equipment).toEqual(valid().equipment);
+    expect(mage.warnings).toEqual([]);
+    expect(normalize(valid({ baseLevel: 1 })).build.equipment).toEqual(valid().equipment);
   });
 
   it('clamps levels to the job maximums with a warning', () => {
@@ -134,13 +216,13 @@ describe('normalizeBuild', () => {
 
   it('replaces missing or non-numeric values with defaults', () => {
     const result = normalize({ v: 1, job: 1, stats: { str: 'x' } });
-    expect(result.build).toMatchObject({ baseLevel: 1, jobLevel: 1, weapon: null });
+    expect(result.build).toMatchObject({ baseLevel: 1, jobLevel: 1, equipment: {} });
     expect(result.build.stats.str).toBe(1);
     expect(result.warnings.length).toBeGreaterThan(0);
   });
 
   it('falls back to the default job for an unknown job id', () => {
-    const result = normalize(valid({ job: 777, jobLevel: 5, weapon: null }));
+    const result = normalize(valid({ job: 777, jobLevel: 5, equipment: {} }));
     expect(result.build.job).toBe(0);
     expect(result.warnings[0]).toMatch(/Unknown job 777/);
   });
@@ -149,7 +231,9 @@ describe('normalizeBuild', () => {
 describe('sameBuild', () => {
   it('compares every field', () => {
     expect(sameBuild(valid(), valid())).toBe(true);
-    expect(sameBuild(valid(), valid({ weapon: null }))).toBe(false);
+    expect(sameBuild(valid(), valid({ equipment: {} }))).toBe(false);
+    const refined = valid({ equipment: { rightHand: { item: 1101, refine: 5 } } });
+    expect(sameBuild(valid(), refined)).toBe(false);
     expect(sameBuild(valid(), valid({ stats: { ...valid().stats, luk: 2 } }))).toBe(false);
     expect(sameBuild(valid(), valid({ target: { dummy: 0 } }))).toBe(false);
     expect(sameBuild(valid(), valid({ target: null }))).toBe(false);
@@ -168,7 +252,7 @@ describe('resolveBuild', () => {
   });
 
   it('resolves bare hands and no target to null', () => {
-    const resolved = resolveBuild(valid({ weapon: null, target: null }), data);
+    const resolved = resolveBuild(valid({ equipment: {}, target: null }), data);
     expect(resolved.character.weapon).toBeNull();
     expect(resolved.monster).toBeNull();
     expect(resolved.dummy).toBeNull();

@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { dataMeta } from '../data';
 import { rAthenaDefaults } from '../engine/config';
 import { defaultDummy, type Dummy } from './dummy';
+import { autoAttack } from '../engine/autoAttack';
+import { statusWindow } from '../engine/status';
 import { defaultBuild, type Build } from './model';
-import { gameData } from './resolve';
+import { gameData, resolveBuild } from './resolve';
 import {
   decodeShareCode,
   encodeShareCode,
@@ -21,9 +23,29 @@ const typical: Build = {
   baseLevel: 99,
   jobLevel: 50,
   stats: { str: 99, agi: 90, vit: 30, int: 1, dex: 40, luk: 10 },
-  weapon: 1250,
+  equipment: { rightHand: { item: 1250, refine: 7 } },
   target: { monster: 1002 },
 };
+
+// Every slot filled: dual-wielded knives, goggles over top and mid headgear.
+const fullGear: Build = {
+  ...typical,
+  equipment: {
+    headTop: { item: 2224, refine: 4 },
+    headLow: { item: 2218, refine: 0 },
+    armor: { item: 2303, refine: 10 },
+    garment: { item: 2503, refine: 5 },
+    shoes: { item: 2403, refine: 3 },
+    accessoryLeft: { item: 2601, refine: 0 },
+    accessoryRight: { item: 2604, refine: 0 },
+    rightHand: { item: 1201, refine: 8 },
+    leftHand: { item: 1204, refine: 6 },
+  },
+};
+
+// Written by the phase 3 encoder (commit a85e1b9): the typical build with
+// Jur as `weapon` (tag 10), data 1a2b3c4d "ccRO 2026-11".
+const PHASE_3_CODE = 'AQEMAmMDMgRjBVoGHgcBCCgJCgriCQvqBwAaKzxNDGNjUk8gMjAyNi0xMQ';
 
 // The same character against a configured dummy, as a validation session uses.
 const dummy: Dummy = {
@@ -63,8 +85,60 @@ describe('share code', () => {
     expect(result).toEqual({ build: typical, warnings: [], dataHint: null });
   });
 
+  it('round-trips full gear with refines', () => {
+    expect(decode(encodeShareCode(fullGear, current))).toEqual({
+      build: fullGear,
+      warnings: [],
+      dataHint: null,
+    });
+  });
+
+  it('opens a phase 3 code with the weapon in the right hand and the same numbers', () => {
+    const result = decode(PHASE_3_CODE);
+    if (!('build' in result)) throw new Error(result.error);
+    expect(result.build).toEqual({
+      ...typical,
+      equipment: { rightHand: { item: 1250, refine: 0 } },
+    });
+    expect(result.warnings).toEqual([]);
+    // Recorded from the phase 3 engine for this build (commit a85e1b9).
+    const resolved = resolveBuild(result.build, gameData);
+    const status = statusWindow(resolved.character, rAthenaDefaults);
+    expect(status).toMatchObject({ atk: [341, 0], aspd: 172, critRate: 86, def: [0, 32] });
+    const attack = autoAttack(
+      resolved.character,
+      resolved.monster ?? fail(),
+      gameData.tables,
+      rAthenaDefaults,
+    );
+    expect(attack.normal).toEqual({ min: 274, max: 342, avg: 308.0882352941176 });
+    expect(attack.crit).toEqual({ min: 344, max: 344, avg: 344 });
+    expect(attack.dps).toBe(559.822357203751);
+  });
+
+  it('rejects a code that fills a slot twice', () => {
+    const bytes = bytesOf(encodeShareCode(typical, current));
+    // Tag 14 for the right hand (slot 8), item 1201, +0, inserted before the first field.
+    expect(decode(codeOf([1, 14, 8, 0xb1, 0x09, 0, ...bytes.slice(1)]))).toEqual({
+      error: expect.stringMatching(/repeats the rightHand slot/),
+    });
+    // Tag 10 (phase 3 weapon) next to a tag 14 right hand.
+    expect(decode(codeOf([1, 10, 0xb1, 0x09, ...bytes.slice(1)]))).toEqual({
+      error: expect.stringMatching(/repeats the rightHand slot/),
+    });
+  });
+
+  it('decodes an unknown slot index as a warning', () => {
+    const bytes = bytesOf(encodeShareCode(typical, current));
+    const result = decode(codeOf([1, 14, 40, 0xb1, 0x09, 0, ...bytes.slice(1)]));
+    expect(result).toMatchObject({ build: { equipment: typical.equipment } });
+    expect('warnings' in result && result.warnings).toEqual([
+      'Unknown equipment slot #40; its item was removed.',
+    ]);
+  });
+
   it('round-trips bare hands and no target', () => {
-    const build = { ...typical, weapon: null, target: null };
+    const build = { ...typical, equipment: {}, target: null };
     expect(decode(encodeShareCode(build, current))).toMatchObject({ build });
   });
 
@@ -84,6 +158,7 @@ describe('share code', () => {
   it.each([
     ['a monster target', typical],
     ['one dummy as target', withDummy],
+    ['full gear', fullGear],
   ])('is url-safe and keeps a typical link with %s under 200 characters', (_, build) => {
     const code = encodeShareCode(build, current);
     expect(code).toMatch(/^[A-Za-z0-9_-]+$/);
@@ -113,9 +188,9 @@ describe('share code', () => {
   });
 
   it('decodes content problems as warnings, not errors', () => {
-    const code = encodeShareCode({ ...typical, weapon: 99999, baseLevel: 200 }, current);
-    const result = decode(code);
-    expect(result).toMatchObject({ build: { weapon: null, baseLevel: 99 } });
+    const build = { ...typical, equipment: { armor: { item: 99999, refine: 0 } }, baseLevel: 200 };
+    const result = decode(encodeShareCode(build, current));
+    expect(result).toMatchObject({ build: { equipment: {}, baseLevel: 99 } });
     expect('warnings' in result && result.warnings).toHaveLength(2);
   });
 
@@ -143,8 +218,11 @@ describe('share code', () => {
     });
   });
 
-  it('rejects truncated codes with a dummy', () => {
-    const bytes = bytesOf(encodeShareCode(withDummy, current));
+  it.each([
+    ['a dummy', withDummy],
+    ['full gear', fullGear],
+  ])('rejects truncated codes with %s', (_, build) => {
+    const bytes = bytesOf(encodeShareCode(build, current));
     for (let length = 1; length < bytes.length; length++) {
       expect(decode(codeOf(bytes.slice(0, length)))).toHaveProperty('error');
     }
@@ -171,3 +249,7 @@ describe('share code', () => {
     expect(shareLink('https://host/app/#b=old', 'new')).toBe('https://host/app/#b=new');
   });
 });
+
+function fail(): never {
+  throw new Error('test build needs a monster');
+}

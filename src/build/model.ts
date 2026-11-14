@@ -5,10 +5,20 @@ import type { BonusStats } from '../data/types';
 import type { EngineConfig } from '../engine/config';
 import { STAT_NAMES } from '../engine/stats';
 import { normalizeDummies, sameDummy, type Dummy } from './dummy';
-import { canEquip, itemName, jobName, type GameData } from './resolve';
+import {
+  fitsSlot,
+  homeSlot,
+  MAX_REFINE,
+  SLOTS,
+  coveredSlots,
+  type Equipment,
+  type Slot,
+} from './equipment';
+import { itemName, jobName, type GameData } from './resolve';
 import { integerOrUndefined, isRecord } from './untrusted';
 
-export const BUILD_VERSION = 1;
+/** v1 (phase 3) held only `weapon`, a right-hand item id; normalize migrates it. */
+export const BUILD_VERSION = 2;
 
 export interface Build {
   v: typeof BUILD_VERSION;
@@ -16,8 +26,8 @@ export interface Build {
   baseLevel: number;
   jobLevel: number;
   stats: BonusStats;
-  /** Right-hand weapon item id; null for bare hands. */
-  weapon: number | null;
+  /** Equipped items by slot; a multi-slot item is stored under its first slot only. */
+  equipment: Equipment;
   /** The user's own training dummy settings, stored by value. */
   dummies: Dummy[];
   target: Target;
@@ -35,7 +45,7 @@ export function defaultBuild(): Build {
     baseLevel: 1,
     jobLevel: 1,
     stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 },
-    weapon: null,
+    equipment: {},
     dummies: [],
     target: null,
   };
@@ -54,7 +64,7 @@ export function normalizeBuild(
   config: EngineConfig,
 ): NormalizeResult {
   if (!isRecord(raw)) return { error: 'The data is not a build.' };
-  if (raw.v !== BUILD_VERSION) {
+  if (raw.v !== BUILD_VERSION && raw.v !== 1) {
     return typeof raw.v === 'number' && raw.v > BUILD_VERSION
       ? { error: `The build was made with a newer version of the planner (format ${raw.v}).` }
       : { error: 'The data is not a build of a known format.' };
@@ -93,23 +103,13 @@ export function normalizeBuild(
     stats[stat] = clamp(stat.toUpperCase(), rawStats[stat], 1, config.maxStat, 1);
   }
 
-  let weapon: number | null = null;
-  if (raw.weapon !== null && raw.weapon !== undefined) {
-    const weaponId = integerOrUndefined(raw.weapon);
-    const item = weaponId === undefined ? undefined : data.items.get(weaponId);
-    if (weaponId === undefined || !item) {
-      warnings.push(`Unknown weapon ${String(raw.weapon)} removed.`);
-    } else if (item.type !== 'weapon') {
-      warnings.push(`${itemName(data, weaponId)} (${weaponId}) is not a weapon; removed.`);
-    } else if (!canEquip(item, jobId, baseLevel)) {
-      warnings.push(
-        `${itemName(data, weaponId)} (${weaponId}) cannot be equipped by ` +
-          `${jobName(data, jobId)} at base level ${baseLevel}; removed.`,
-      );
-    } else {
-      weapon = weaponId;
-    }
-  }
+  const rawEquipment =
+    raw.v === 1
+      ? raw.weapon === null || raw.weapon === undefined
+        ? {}
+        : { rightHand: { item: raw.weapon, refine: 0 } }
+      : raw.equipment;
+  const equipment = normalizeEquipment(rawEquipment, data, warnings);
 
   const dummies = normalizeDummies(raw.dummies, warnings);
   const target = normalizeTarget(raw.target, dummies.length, data, warnings);
@@ -121,12 +121,89 @@ export function normalizeBuild(
       baseLevel,
       jobLevel,
       stats,
-      weapon,
+      equipment,
       dummies,
       target,
     },
     warnings,
   };
+}
+
+/**
+ * Unknown items and items that do not fit their slot are dropped; refine is
+ * clamped. Items the job or level cannot wear are kept (see equipmentErrors).
+ * When items overlap, the one in the earlier slot stays.
+ */
+function normalizeEquipment(raw: unknown, data: GameData, warnings: string[]): Equipment {
+  if (raw === null || raw === undefined) return {};
+  if (!isRecord(raw)) {
+    warnings.push('The equipment is not a list of slots; removed.');
+    return {};
+  }
+  const known = new Set<string>(SLOTS);
+  for (const key of Object.keys(raw)) {
+    if (!known.has(key)) warnings.push(`Unknown equipment slot ${key}; its item was removed.`);
+  }
+  const equipment: Equipment = {};
+  const taken = new Set<Slot>();
+  for (const slot of SLOTS) {
+    const entry = raw[slot];
+    if (entry === undefined || entry === null) continue;
+    const itemId = integerOrUndefined(isRecord(entry) ? entry.item : undefined);
+    const item = itemId === undefined ? undefined : data.items.get(itemId);
+    if (itemId === undefined || !item) {
+      const shown = isRecord(entry) ? String(entry.item) : String(entry);
+      warnings.push(`Unknown item ${shown} in ${slot} removed.`);
+      continue;
+    }
+    const name = `${itemName(data, itemId)} (${itemId})`;
+    if (!fitsSlot(item, slot)) {
+      warnings.push(`${name} does not fit ${slot}; removed.`);
+      continue;
+    }
+    const covered = coveredSlots(item, slot);
+    if (covered.some((coveredSlot) => taken.has(coveredSlot))) {
+      warnings.push(`${name} overlaps an item in an earlier slot; removed.`);
+      continue;
+    }
+    for (const coveredSlot of covered) taken.add(coveredSlot);
+    equipment[homeSlot(item, slot)] = {
+      item: itemId,
+      refine: normalizeRefine(isRecord(entry) ? entry.refine : undefined, item, name, warnings),
+    };
+  }
+  return equipment;
+}
+
+function normalizeRefine(
+  raw: unknown,
+  item: { refineable: boolean },
+  name: string,
+  warnings: string[],
+): number {
+  const refine = raw === undefined ? 0 : integerOrUndefined(raw);
+  if (refine === undefined) {
+    warnings.push(`Refine of ${name} is not a number; set to 0.`);
+    return 0;
+  }
+  if (!item.refineable) {
+    if (refine !== 0) warnings.push(`${name} cannot be refined; refine set to 0.`);
+    return 0;
+  }
+  const clamped = Math.min(Math.max(refine, 0), MAX_REFINE);
+  if (clamped !== refine) {
+    warnings.push(`Refine ${refine} of ${name} is outside 0–${MAX_REFINE}; set to ${clamped}.`);
+  }
+  return clamped;
+}
+
+export function sameEquipment(a: Equipment, b: Equipment): boolean {
+  return SLOTS.every((slot) => {
+    const left = a[slot];
+    const right = b[slot];
+    if (!left || !right) return left === right;
+    return left.item === right.item && left.refine === right.refine;
+  });
 }
 
 function normalizeTarget(
@@ -169,7 +246,7 @@ export function sameBuild(a: Build, b: Build): boolean {
     a.baseLevel === b.baseLevel &&
     a.jobLevel === b.jobLevel &&
     STAT_NAMES.every((stat) => a.stats[stat] === b.stats[stat]) &&
-    a.weapon === b.weapon &&
+    sameEquipment(a.equipment, b.equipment) &&
     a.dummies.length === b.dummies.length &&
     a.dummies.every((dummy, index) => {
       const other = b.dummies[index];

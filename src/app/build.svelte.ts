@@ -2,7 +2,8 @@
 // notices from loading it, and everything the engine derives from it.
 import { defaultDummy, MAX_DUMMIES, type Dummy } from '../build/dummy';
 import { defaultBuild, normalizeBuild, sameBuild, type Build, type Target } from '../build/model';
-import { canEquip, itemName, resolveBuild, type GameData } from '../build/resolve';
+import { equipmentErrors, fitsSlot, withEquipped, type Slot } from '../build/equipment';
+import { resolveBuild, type GameData } from '../build/resolve';
 import {
   decodeShareCode,
   encodeShareCode,
@@ -46,6 +47,10 @@ export class BuildState {
     this.resolved.monster
       ? autoAttack(this.resolved.character, this.resolved.monster, this.data.tables, this.config)
       : null,
+  );
+  /** Equipped items the job or level cannot wear; kept in the build. */
+  equipmentErrors = $derived.by(() =>
+    equipmentErrors(this.build.equipment, this.build.job, this.build.baseLevel, this.data),
   );
   pointsSpent = $derived.by(() => statPointsSpent(this.build.stats));
   pointsBudget = $derived.by(() => statPointBudget(this.data.statPoints, this.build.baseLevel));
@@ -110,7 +115,32 @@ export class BuildState {
   }
 
   setWeapon(itemId: number | null): void {
-    this.update({ ...this.build, weapon: itemId });
+    this.equip('rightHand', itemId);
+  }
+
+  /**
+   * Puts an item into a slot (null empties it), taking off what it overlaps.
+   * The refine starts at +0; an item that does not fit the slot is ignored.
+   */
+  equip(slot: Slot, itemId: number | null): void {
+    if (itemId !== null) {
+      const item = this.data.items.get(itemId);
+      if (!item || !fitsSlot(item, slot)) return;
+    }
+    const entry = itemId === null ? null : { item: itemId, refine: 0 };
+    this.update({
+      ...this.build,
+      equipment: withEquipped(this.build.equipment, slot, entry, this.data),
+    });
+  }
+
+  setRefine(slot: Slot, refine: number): void {
+    const entry = this.build.equipment[slot];
+    if (!entry) return;
+    this.update({
+      ...this.build,
+      equipment: { ...this.build.equipment, [slot]: { ...entry, refine } },
+    });
   }
 
   setMonster(monsterId: number): void {
@@ -155,23 +185,14 @@ export class BuildState {
   }
 
   /**
-   * Applies an edit through normalize so the build stays valid. A weapon that
-   * the new job or level cannot equip is removed with a notice; clamping of
-   * typed numbers is silent because the inputs show the result.
+   * Applies an edit through normalize so the build stays valid. Clamping of
+   * typed numbers is silent because the inputs show the result; gear the new
+   * job or level cannot wear stays and shows up in equipmentErrors.
    */
   private update(next: Build): void {
-    const previousWeapon = this.build.weapon;
     const result = normalizeBuild($state.snapshot(next), this.data, this.config);
     if ('error' in result) return;
     this.build = result.build;
     this.warnings = [];
-    if (previousWeapon !== null && next.weapon === previousWeapon && result.build.weapon === null) {
-      const item = this.data.items.get(previousWeapon);
-      const reason =
-        item && !canEquip(item, result.build.job, result.build.baseLevel)
-          ? 'cannot be equipped with the new job or level'
-          : 'is not available';
-      this.warnings = [`${itemName(this.data, previousWeapon)} ${reason}; removed.`];
-    }
   }
 }

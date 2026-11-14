@@ -5,16 +5,21 @@
 // Format version 1:
 //   byte      format version (1)
 //   repeated  varint tag, varint value; tag 0 ends the list
-//             tags 1–10: job, base level, job level, STR..LUK, weapon (0 = none)
+//             tags 1–9: job, base level, job level, STR..LUK
+//             tag 10: right-hand weapon at +0 (0 = none); read only, phase 3
+//               codes wrote it, tag 14 replaced it
 //             tag 11: target monster id; tag 12: target dummy index + 1 (one of the two)
 //             tag 13, repeated in list order: a dummy record as the value:
 //               varint name length, the name as UTF-8, then varints level, DEF,
 //               MDEF, STR, AGI, VIT, INT, DEX, LUK, size index, race index,
 //               element index, element level (index tables in ./dummy)
+//             tag 14, repeated, one per equipped slot: the value is varints
+//               slot index (SLOTS order in ./equipment), item id, refine
 //   4 bytes   data hash (8 hex characters)
 //   varint    label length, then the label as UTF-8
 import type { EngineConfig } from '../engine/config';
 import { DUMMY_ELEMENTS, DUMMY_NUMBERS, DUMMY_RACES, DUMMY_SIZES } from './dummy';
+import { SLOTS } from './equipment';
 import { BUILD_VERSION, normalizeBuild, type Build, type Target } from './model';
 import type { GameData } from './resolve';
 
@@ -32,11 +37,12 @@ const FIELD_TAGS = {
   int: 7,
   dex: 8,
   luk: 9,
-  weapon: 10,
 } as const;
+const TAG_WEAPON = 10;
 const TAG_TARGET_MONSTER = 11;
 const TAG_TARGET_DUMMY = 12;
 const TAG_DUMMY = 13;
+const TAG_EQUIPPED = 14;
 type Field = keyof typeof FIELD_TAGS;
 const FIELD_BY_TAG = new Map(
   Object.entries(FIELD_TAGS).map(([field, tag]) => [tag as number, field as Field]),
@@ -119,7 +125,6 @@ export function encodeShareCode(build: Build, version: DataVersion): string {
     baseLevel: build.baseLevel,
     jobLevel: build.jobLevel,
     ...build.stats,
-    weapon: build.weapon ?? 0,
   };
   const bytes: number[] = [FORMAT_VERSION];
   const writeValue = (name: string, value: number) => {
@@ -139,6 +144,14 @@ export function encodeShareCode(build: Build, version: DataVersion): string {
     writeVarint(bytes, TAG_TARGET_DUMMY);
     writeValue('target dummy', build.target.dummy + 1);
   }
+  SLOTS.forEach((slot, index) => {
+    const entry = build.equipment[slot];
+    if (!entry) return;
+    writeVarint(bytes, TAG_EQUIPPED);
+    writeValue('slot', index);
+    writeValue(`${slot} item`, entry.item);
+    writeValue(`${slot} refine`, entry.refine);
+  });
   for (const dummy of build.dummies) {
     writeVarint(bytes, TAG_DUMMY);
     writeText(bytes, dummy.name);
@@ -228,6 +241,13 @@ function readCode(code: string): DecodedCode | { error: string } {
     const values: Partial<Record<Field, number>> = {};
     let target: Target = null;
     const dummies: Record<string, unknown>[] = [];
+    // Unknown slot indexes are kept as `#index` keys so normalize warns about them.
+    const equipment: Record<string, { item: number; refine: number }> = {};
+    const addEquipped = (slot: string, item: number, refine: number) => {
+      if (slot in equipment) throw new CorruptCode(`repeats the ${slot} slot`);
+      equipment[slot] = { item, refine };
+    };
+    let weaponSeen = false;
     for (let tag = reader.varint(); tag !== TAG_END; tag = reader.varint()) {
       if (tag === TAG_TARGET_MONSTER || tag === TAG_TARGET_DUMMY) {
         if (target !== null) throw new CorruptCode('has more than one target');
@@ -239,6 +259,20 @@ function readCode(code: string): DecodedCode | { error: string } {
       }
       if (tag === TAG_DUMMY) {
         dummies.push(readDummy(reader));
+        continue;
+      }
+      if (tag === TAG_WEAPON) {
+        if (weaponSeen) throw new CorruptCode(`repeats field ${tag}`);
+        weaponSeen = true;
+        const weapon = reader.varint();
+        if (weapon !== 0) addEquipped('rightHand', weapon, 0);
+        continue;
+      }
+      if (tag === TAG_EQUIPPED) {
+        const index = reader.varint();
+        const item = reader.varint();
+        const refine = reader.varint();
+        addEquipped(SLOTS[index] ?? `#${index}`, item, refine);
         continue;
       }
       const field = FIELD_BY_TAG.get(tag);
@@ -264,7 +298,7 @@ function readCode(code: string): DecodedCode | { error: string } {
           dex: values.dex,
           luk: values.luk,
         },
-        weapon: values.weapon === 0 ? null : values.weapon,
+        equipment,
         dummies,
         target,
       },

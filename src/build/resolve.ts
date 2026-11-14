@@ -8,7 +8,7 @@ import {
   tables as allTables,
 } from '../data';
 import type { Item, Job, Monster, NamesFile, TablesFile } from '../data/types';
-import { buildCharacter } from '../engine/gear';
+import { buildCharacter, SLOTS, type EquippedItem } from '../engine/gear';
 import type { CharacterInput } from '../engine/stats';
 import { dummyMonster, type Dummy } from './dummy';
 import type { Build } from './model';
@@ -98,12 +98,18 @@ export interface ResolvedBuild {
 
 /**
  * Engine inputs for a normalized build. Ids that do not resolve (which
- * normalize already removed) fall back to bare hands and no target.
+ * normalize already removed) are left out. Items the job or level cannot
+ * wear still count, as the build shows them as errors rather than dropping them.
  */
 export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
   const job = data.jobs.get(build.job);
   if (!job) throw new Error(`Unknown job id ${build.job}; normalize the build first.`);
-  const weapon = build.weapon === null ? null : (data.items.get(build.weapon) ?? null);
+  const equipment: EquippedItem[] = [];
+  for (const slot of SLOTS) {
+    const entry = build.equipment[slot];
+    const item = entry && data.items.get(entry.item);
+    if (entry && item) equipment.push({ slot, item, refine: entry.refine });
+  }
   let monster: Monster | null = null;
   let dummy: Dummy | null = null;
   if (build.target && 'monster' in build.target) {
@@ -115,8 +121,7 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
   return {
     character: buildCharacter(
       { job, baseLevel: build.baseLevel, jobLevel: build.jobLevel, baseStats: { ...build.stats } },
-      // Builds hold only a +0 right-hand weapon until the equipment model.
-      weapon === null ? [] : [{ slot: 'rightHand', item: weapon, refine: 0 }],
+      equipment,
       data.tables.refine,
     ),
     monster,

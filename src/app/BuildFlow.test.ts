@@ -2,7 +2,7 @@
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/svelte';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { defaultDummy, MAX_DUMMIES } from '../build/dummy';
-import { defaultBuild, type Build } from '../build/model';
+import { BUILD_VERSION, defaultBuild, type Build } from '../build/model';
 import { gameData, resolveBuild } from '../build/resolve';
 import { encodeShareCode } from '../build/shareCode';
 import { saveBuild, STORAGE_KEY, UNREADABLE_KEY } from '../build/storage';
@@ -19,7 +19,7 @@ const swordman: Build = {
   baseLevel: 50,
   jobLevel: 30,
   stats: { str: 50, agi: 30, vit: 1, int: 1, dex: 30, luk: 1 },
-  weapon: 1101,
+  equipment: { rightHand: { item: 1101, refine: 0 } },
   target: { monster: 1002 },
 };
 
@@ -92,14 +92,16 @@ describe('build flow', () => {
     expect(within(points).getByRole('alert').textContent).toMatch(/over budget by 580/);
   });
 
-  it('removes a weapon the new job cannot equip, with a notice', async () => {
+  it('keeps a weapon the new job cannot equip and shows it as an error', async () => {
     saveBuild(swordman, version, localStorage);
     render(App);
     await fireEvent.change(screen.getByLabelText('Job'), { target: { value: '2' } });
-    expect(screen.getByTestId('selected-weapon').textContent).toBe('No weapon');
-    expect(screen.getByRole('list', { name: 'Build warnings' }).textContent).toMatch(
-      /Sword cannot be equipped/,
+    expect(screen.getByTestId('selected-weapon').textContent).toContain('Sword (1101)');
+    expect(screen.getByRole('list', { name: 'Equipment errors' }).textContent).toMatch(
+      /Sword \(1101\) cannot be equipped by Mage/,
     );
+    await fireEvent.change(screen.getByLabelText('Job'), { target: { value: '1' } });
+    expect(screen.queryByRole('list', { name: 'Equipment errors' })).toBeNull();
   });
 });
 
@@ -290,12 +292,15 @@ describe('saving and share links', () => {
   });
 
   it('keeps an unreadable saved build before autosave replaces it', () => {
-    const newer = JSON.stringify({ ...swordman, v: 2 });
+    const newer = JSON.stringify({ ...swordman, v: BUILD_VERSION + 1 });
     localStorage.setItem(STORAGE_KEY, newer);
     render(App);
     expect(screen.getByRole('alert').textContent).toMatch(/newer version.*copy is kept/);
     expect(localStorage.getItem(UNREADABLE_KEY)).toBe(newer);
-    expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject({ v: 1, job: 0 });
+    expect(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}')).toMatchObject({
+      v: BUILD_VERSION,
+      job: 0,
+    });
   });
 
   it('shows both errors when the saved build and the link are unreadable', () => {

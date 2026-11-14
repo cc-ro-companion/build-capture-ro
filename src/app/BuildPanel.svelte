@@ -102,6 +102,13 @@
     <p class="selected" data-testid="selected-weapon">
       {weapon ? `${itemName(planner.data, weapon.id)} (${weapon.id})` : 'No weapon'}
     </p>
+    {#if planner.equipmentErrors.length > 0}
+      <ul class="errors" aria-label="Equipment errors">
+        {#each planner.equipmentErrors as error, index (index)}
+          <li role="alert">{error}</li>
+        {/each}
+      </ul>
+    {/if}
     {#if rangedWeapon}
       <p class="note">Computed without ammunition (no arrow or bullet ATK); ammo comes later.</p>
     {/if}
@@ -123,7 +130,7 @@
         <li>
           <button
             type="button"
-            class:active={item.id === planner.build.weapon}
+            class:active={item.id === planner.build.equipment.rightHand?.item}
             onclick={() => planner.setWeapon(item.id)}
           >
             {itemName(planner.data, item.id)}
@@ -190,6 +197,13 @@
   .selected {
     margin: 0 0 6px;
     font-weight: 600;
+  }
+
+  .errors {
+    margin: 4px 0;
+    padding-left: 18px;
+    color: var(--color-error);
+    font-size: 12px;
   }
 
   .note {
