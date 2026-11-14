@@ -138,3 +138,4 @@ results become fixtures that `pnpm test` then guards.
 <!-- implement skill appends: date · task · result · commit -->
 - 2026-11-14 · Task 1 draft tool · vitest data-pipeline/tools 39 passed, lint clean; 235 runes, 95 TODO lines, all 365 scripts parse without them · cbeb4d2
 - 2026-11-14 · Task 2 rune pipeline · pnpm data: Runes 235 (235 not reviewed); check 0 errors, lint clean, test 464 passed (fixes the overrides-hash test that task 1's new runes.yml broke) · a203d4d
+- 2026-11-14 · Task 4 combos · pnpm data: Combos 81 kept, 75 dropped (35 with cards, 5 with arrows, 35 with rebirth-only gear), 9 not parsed (getequiprefinerycnt); check 0 errors, lint clean, test 477 passed · 4cefb6e
