@@ -101,8 +101,8 @@ start, open source under GPL-3.0.
 
 ## Version history
 - An app changelog, including ccRO-specific changes, is key for a public tool.
-- It starts at 1.0: the launch must be good enough, and from then on people
-  see what changes. No per-build revision history.
+- It starts with the open beta, before 1.0: from then on people see what
+  changes. No per-build revision history.
 
 ## Formula validation
 - Done by the maintainer in dedicated test sessions: create characters in
@@ -125,7 +125,7 @@ start, open source under GPL-3.0.
   monsters are in.
 - Sprites extracted from the client, RMS as fallback.
 - Share codes rely on stable ids and carry a data version.
-- Version history = app changelog from 1.0 on.
+- Version history = app changelog from the open beta on.
 - Real product from the start, no prototypes.
 
 ## Open questions (deferred to development on purpose)

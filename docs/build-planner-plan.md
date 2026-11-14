@@ -11,8 +11,9 @@ stays at phase level on purpose.
 Ship a public, Path of Building inspired build planner for the ccRO
 community: plan a character in the desktop browser, pick a target monster,
 and see damage dealt and damage taken. No login, no backend, hosted on GitHub
-Pages as an offline-capable PWA, builds shared as codes. Launch as 1.0 once
-the numbers hold up against ccRO's training dummy.
+Pages as an offline-capable PWA, builds shared as codes. Release an open
+beta first, then launch as 1.0 once the numbers hold up against ccRO's
+training dummy.
 
 ## Out of scope
 - Rebirth jobs, renewal mechanics, servers other than ccRO.
@@ -59,8 +60,11 @@ tests/fixtures/  validated characters with expected numbers
 
 ## Phases
 
-Each phase ends with something usable in the deployed app and, from phase 2
-on, a validation session against the training dummy.
+Each phase ends with something usable in the deployed app. From phase 5
+on, its last task is a reminder: ask the maintainer whether a validation
+session against the training dummy is due now or should wait for more
+features. Phase 4 has none (decided 2026-11-14: nuances will need fixing
+anyway, so a bigger session later is worth more).
 
 1. [x] **Foundation.** Project scaffold, license (GPL-3.0, rAthena credit,
    disclaimer), CI (type check, lint, tests, build), GitHub Pages deploy with
@@ -84,10 +88,13 @@ on, a validation session against the training dummy.
    skills, offensive skills (physical, then magical), multi-hit display,
    cast time and cast delay, ammo with element. Done job by job for the
    base first and second jobs.
+   Last task: ask the maintainer whether a validation session is due.
 6. [ ] **Buffs, consumables, debuffs.** Own and party buffs, cooking, ASPD
    potions, converters, scrolls, mounts, pet bonuses, monster debuffs.
+   Last task: ask the maintainer whether a validation session is due.
 7. [ ] **Expanded classes.** Taekwon, Star Gladiator, Soul Linker, Ninja,
    Gunslinger, Super Novice, each with its special mechanics.
+   Last task: ask the maintainer whether a validation session is due.
 8. [ ] **ccRO features.** Card system (album with collection bonuses),
    costumes, ccRO consumables, ccRO specialities, Scaled Dungeon monsters.
    Data is entered by hand from the maintainer's prepared material; settles
@@ -95,16 +102,25 @@ on, a validation session against the training dummy.
    Includes the Dimik Card (43700) album effect for Gunslingers with a
    Gatling Gun: double attack speed (amotion halved before the cap) and
    ASPD cap 195, moved here from phase 4a.
+   Last task: ask the maintainer whether a validation session is due.
 9. [ ] **Damage taken.** Monster auto attacks and skills against the
    player's DEF/MDEF, flee, perfect dodge, armor element and reductions.
    Needs monster skill data in the pipeline.
+   Last task: ask the maintainer whether a validation session is due.
 10. [ ] **Comparisons and build management.** "What if" previews on hover
     and tick, plus duplicating, organizing, exporting and importing builds.
+    Last task: ask the maintainer whether a validation session is due.
 11. [ ] **Assets and PWA.** Sprite and icon extraction, the external asset
     store pulled in at build time, service worker with precache, offline
     use, installability.
-12. [ ] **Launch 1.0.** Full validation pass over all jobs, performance
-    pass on search and filtering, changelog, remove the banner, announce.
+    Last task: ask the maintainer whether a validation session is due.
+12. [ ] **Open beta.** Public release before 1.0: the "unfinished" banner
+    becomes a beta banner, the app changelog (version history, see the idea
+    file) starts here, and the beta is announced to the ccRO community.
+    Last task: ask the maintainer whether a validation session is due.
+13. [ ] **Launch 1.0.** Full validation pass over all jobs, performance
+    pass on search and filtering, fixes from the open beta, remove the beta
+    banner, announce.
 
 Phases 6 to 9 are independent of each other and can be reordered. Phase 11
 can move earlier if the app feels bare without sprites during validation.

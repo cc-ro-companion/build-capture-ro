@@ -11,9 +11,8 @@ Equipped items take ccRO runes in their card slots, and rune effects
 count in the results. Rune sets and rAthena item combos apply when
 everything they need is equipped. Each build keeps an inventory of
 configured items (item, refine, runes), so the user can swap between
-setups without configuring them again. The phase ends with the
-validation session for all of phase 4 at ccRO's training dummy, recorded
-as fixtures.
+setups without configuring them again. Phase 4 has no validation
+session (see Decisions).
 
 ## Out of scope
 - Vanilla rAthena cards: ccRO uses runes only (maintainer).
@@ -45,7 +44,7 @@ as fixtures.
 | Build model | Stays `v: 2`: each equipped item gains `runes: id[]` and the build gains `inventory`; both default to empty when missing, so 4a builds load unchanged. Unknown rune ids are dropped with a warning; runes that do not fit the item's location, or more than its slots, are kept but shown as an error | Optional fields need no migration; lowering slots by a data change must not silently destroy a build. |
 | Share code | New tag 15, repeated: runes of one equipped item as varint slot index, varint count, rune ids. New tag 16, repeated in list order: one inventory item as varint item id, refine, count, rune ids. Rune ids are stored as `id − 39000` to save bytes | Additive tags keep 4a links decoding. |
 | Results display | The build panel shows applied set and combo bonuses by name; "not modelled" notes from 4a also cover runes, sets and combos; album effects are listed apart as "needs card album (phase 8)" | The user sees why a number did or did not change. |
-| Validation | One session at the end of 4b for all of phase 4, recorded as fixtures in `tests/fixtures/auto-attack/`: at least refined weapon and armor, a stat item, a shield, an Assassin dual wielding, a weapon with `bAtkEle`, a race/size damage rune, and an active combo or rune set. The fixture format gains `equipment` (and `inventory` is not needed). Deviations found are fixed in the engine or recorded as ccRO overrides with the session as source | Maintainer's choice: one session for phase 4. |
+| Validation | No session for phase 4. A bigger session follows once more features exist; from phase 5 on, each phase's last task asks the maintainer whether one is due | Maintainer, 2026-11-14: many nuances will need fixing anyway, so testing more features at once is worth more. (Earlier choice: one session at the end of 4b for all of phase 4.) |
 
 ## Design
 
@@ -69,7 +68,6 @@ src/build/
 src/app/
   EquipmentPanel.svelte  rune slots per item, draft badge, set/combo notes
   InventoryPanel.svelte  list, store, equip, remove
-tests/fixtures/auto-attack/   phase 4 validation fixtures
 ```
 
 ### Data shapes (final names may differ)
@@ -99,15 +97,14 @@ interface EquippedItem { item: number; refine: number; runes: number[] }
       item with refine and runes unchanged.
 - [ ] A 4a share link and saved build open unchanged; a build with runes and
       inventory round-trips through a share code and `localStorage`.
-- [ ] The phase 4 validation fixtures pass in `pnpm test`.
 
 ## Verification
 ```
 pnpm data && git diff --exit-code src/data/generated docs/script-coverage.md
 pnpm check && pnpm lint && pnpm test && pnpm build
 ```
-The validation session at the training dummy is the maintainer's step; its
-results become fixtures that `pnpm test` then guards.
+There is no validation session for phase 4; the existing phase 3 fixtures
+still run in `pnpm test`.
 
 ## Tasks
 1. [x] **Draft tool.** `draft-runes.ts` with phrase mappings and TODO lines;
@@ -130,9 +127,8 @@ results become fixtures that `pnpm test` then guards.
    notes, inventory panel. Check: component tests, `pnpm build`.
 8. [x] **Review.** Run `/code-review` on the phase diff, fix findings, run
    the full verification.
-9. [ ] **Validation session.** The maintainer records the characters listed
-   under Decisions; fixtures added; deviations fixed or recorded as
-   overrides. Check: `pnpm test` with the new fixtures.
+9. [x] ~~**Validation session.**~~ Dropped: no session for phase 4 (see
+   Decisions).
 
 ## Progress log
 <!-- implement skill appends: date · task · result · commit -->
@@ -144,3 +140,4 @@ results become fixtures that `pnpm test` then guards.
 - 2026-11-14 · Task 7 UI · check 0 errors, lint clean, test 537 passed (flow tests: fitting-rune picker, draft badge, album note, full slots, rune error, combo listed, inventory store/equip round trip), build ok · 3812862
 - 2026-11-14 · Task 8 review · /code-review: 4 bugs, 5 cleanups; fixed all but the second sort in activeRuneSets (exported, needs its own order); pnpm data only generatedAt, check 0 errors, lint clean, test 544 passed, build ok · eac459c
 - 2026-11-14 · Task 3 maintainer review · runes.yml: 0 TODO, 235 of 235 reviewed (pnpm data: Runes 235, 0 not reviewed); review notes in docs/runes-todo-review.md; check 0 errors, lint clean, test 549 passed, build ok · fcdb070
+- 2026-11-14 · plan change agreed with the maintainer: no validation session for phase 4; task 9 dropped; the master plan gains an open beta phase and a validation reminder at the end of each phase from 5 on · –
