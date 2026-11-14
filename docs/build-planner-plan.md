@@ -92,6 +92,9 @@ on, a validation session against the training dummy.
    costumes, ccRO consumables, ccRO specialities, Scaled Dungeon monsters.
    Data is entered by hand from the maintainer's prepared material; settles
    how it is kept current per patch. (Runes are already in phase 4.)
+   Includes the Dimik Card (43700) album effect for Gunslingers with a
+   Gatling Gun: double attack speed (amotion halved before the cap) and
+   ASPD cap 195, moved here from phase 4a.
 9. [ ] **Damage taken.** Monster auto attacks and skills against the
    player's DEF/MDEF, flee, perfect dodge, armor element and reductions.
    Needs monster skill data in the pipeline.
