@@ -85,6 +85,23 @@ describe('share code', () => {
     expect(result).toEqual({ build: typical, warnings: [], dataHint: null });
   });
 
+  it('loads a build that wears a hidden item, without a warning', () => {
+    const hiddenKatar = gameData.itemList.find(
+      (item) => item.hidden === true && item.weaponType === 'Katar' && item.jobs.includes(12),
+    );
+    expect(hiddenKatar).toBeDefined();
+    const build: Build = {
+      ...typical,
+      equipment: { rightHand: { item: hiddenKatar!.id, refine: 0 } },
+    };
+    expect(decode(encodeShareCode(build, current))).toEqual({
+      build,
+      warnings: [],
+      dataHint: null,
+    });
+    expect(resolveBuild(build, gameData).character.weapon?.id).toBe(hiddenKatar!.id);
+  });
+
   it('round-trips full gear with refines', () => {
     expect(decode(encodeShareCode(fullGear, current))).toEqual({
       build: fullGear,

@@ -323,6 +323,18 @@ describe('equipment effects on auto attack', () => {
     expect(hit([bonus('bAtkEle', 3), bonus('bAddRace', RC_PLANT, 20)]).normal.avg).toBe(24);
   });
 
+  it('applies bAddEle for the target element and Ele_All, before race for melee', () => {
+    // The test monster is Water (Ele_Water 1); Ele_All is 10. 41 × 1200 / 1000 = 49.
+    expect(hit([bonus('bAddEle', 1, 20)]).normal.avg).toBe(49);
+    expect(hit([bonus('bAddEle', 10, 20)]).normal.avg).toBe(49);
+    expect(hit([bonus('bAddEle', 3, 20)]).normal.avg).toBe(41);
+    // battle_calc_cardfix melee: 1000 → 1100 (element) → 1210 (race), as race then size above.
+    const result = hit([bonus('bAddEle', 1, 10), bonus('bAddRace', RC_PLANT, 10)], {
+      partial: strStats,
+    });
+    expect(result.crit.avg).toBe(248);
+  });
+
   it('multiplies race, size and class card fixes one after another for melee', () => {
     // 1000 → 1100 (race) → 1210 (size medium): 205 + 205 × 210 / 1000 = 248.05 → 248, not 246.
     const result = hit([bonus('bAddRace', RC_PLANT, 10), bonus('bAddSize', 1, 10)], {
