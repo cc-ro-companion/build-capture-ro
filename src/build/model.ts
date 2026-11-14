@@ -9,8 +9,10 @@ import {
   fitsSlot,
   homeSlot,
   MAX_REFINE,
+  MAX_RUNES,
   SLOTS,
   coveredSlots,
+  type EquippedRef,
   type Equipment,
   type Slot,
 } from './equipment';
@@ -20,6 +22,9 @@ import { integerOrUndefined, isRecord } from './untrusted';
 /** v1 (phase 3) held only `weapon`, a right-hand item id; normalize migrates it. */
 export const BUILD_VERSION = 2;
 
+/** Most configured items the inventory holds. */
+export const MAX_INVENTORY = 50;
+
 export interface Build {
   v: typeof BUILD_VERSION;
   job: number;
@@ -28,6 +33,11 @@ export interface Build {
   stats: BonusStats;
   /** Equipped items by slot; a multi-slot item is stored under its first slot only. */
   equipment: Equipment;
+  /**
+   * Configured items (refine, runes) kept for swapping, by value: storing
+   * and equipping copy, so the inventory never changes what is equipped.
+   */
+  inventory: EquippedRef[];
   /** The user's own training dummy settings, stored by value. */
   dummies: Dummy[];
   target: Target;
@@ -46,6 +56,7 @@ export function defaultBuild(): Build {
     jobLevel: 1,
     stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 },
     equipment: {},
+    inventory: [],
     dummies: [],
     target: null,
   };
@@ -110,6 +121,7 @@ export function normalizeBuild(
         : { rightHand: { item: raw.weapon, refine: 0 } }
       : raw.equipment;
   const equipment = normalizeEquipment(rawEquipment, data, warnings);
+  const inventory = normalizeInventory(raw.inventory, data, warnings);
 
   const dummies = normalizeDummies(raw.dummies, warnings);
   const target = normalizeTarget(raw.target, dummies.length, data, warnings);
@@ -122,11 +134,90 @@ export function normalizeBuild(
       jobLevel,
       stats,
       equipment,
+      inventory,
       dummies,
       target,
     },
     warnings,
   };
+}
+
+/**
+ * Rune ids that exist in the data, in order; unknown ids are dropped with a
+ * warning. Runes that do not fit the item stay (see runeErrors), up to
+ * MAX_RUNES. Returns undefined for none, as builds leave the field out.
+ */
+function normalizeRunes(
+  raw: unknown,
+  data: GameData,
+  name: string,
+  warnings: string[],
+): number[] | undefined {
+  if (raw === undefined || raw === null) return undefined;
+  if (!Array.isArray(raw)) {
+    warnings.push(`The runes of ${name} are not a list; removed.`);
+    return undefined;
+  }
+  const runes: number[] = [];
+  for (const value of raw) {
+    const runeId = integerOrUndefined(value);
+    if (runeId === undefined || !data.runes.has(runeId)) {
+      warnings.push(`Unknown rune ${String(value)} in ${name} removed.`);
+      continue;
+    }
+    runes.push(runeId);
+  }
+  if (runes.length > MAX_RUNES) {
+    warnings.push(
+      `${name} holds ${runes.length} runes; no item has more than ${MAX_RUNES}, extra removed.`,
+    );
+    runes.length = MAX_RUNES;
+  }
+  return runes.length > 0 ? runes : undefined;
+}
+
+/** One stored item: unknown items are dropped (undefined), refine clamped, runes normalized. */
+function normalizeRef(
+  entry: unknown,
+  data: GameData,
+  where: string,
+  warnings: string[],
+): EquippedRef | undefined {
+  const itemId = integerOrUndefined(isRecord(entry) ? entry.item : undefined);
+  const item = itemId === undefined ? undefined : data.items.get(itemId);
+  if (itemId === undefined || !item) {
+    const shown = isRecord(entry) ? String(entry.item) : String(entry);
+    warnings.push(`Unknown item ${shown} in ${where} removed.`);
+    return undefined;
+  }
+  const record = entry as Record<string, unknown>;
+  const name = `${itemName(data, itemId)} (${itemId})`;
+  const runes = normalizeRunes(record.runes, data, name, warnings);
+  return {
+    item: itemId,
+    refine: normalizeRefine(record.refine, item, name, warnings),
+    ...(runes === undefined ? {} : { runes }),
+  };
+}
+
+function normalizeInventory(raw: unknown, data: GameData, warnings: string[]): EquippedRef[] {
+  if (raw === undefined || raw === null) return [];
+  if (!Array.isArray(raw)) {
+    warnings.push('The inventory is not a list; removed.');
+    return [];
+  }
+  const inventory: EquippedRef[] = [];
+  for (const entry of raw) {
+    const ref = normalizeRef(entry, data, 'the inventory', warnings);
+    if (ref) inventory.push(ref);
+  }
+  if (inventory.length > MAX_INVENTORY) {
+    warnings.push(
+      `The inventory holds ${inventory.length} items; only the first ${MAX_INVENTORY} were kept.`,
+    );
+    inventory.length = MAX_INVENTORY;
+  }
+  return inventory;
 }
 
 /**
@@ -167,9 +258,11 @@ function normalizeEquipment(raw: unknown, data: GameData, warnings: string[]): E
       continue;
     }
     for (const coveredSlot of covered) taken.add(coveredSlot);
+    const runes = normalizeRunes(isRecord(entry) ? entry.runes : undefined, data, name, warnings);
     equipment[homeSlot(item, slot)] = {
       item: itemId,
       refine: normalizeRefine(isRecord(entry) ? entry.refine : undefined, item, name, warnings),
+      ...(runes === undefined ? {} : { runes }),
     };
   }
   return equipment;
@@ -197,12 +290,23 @@ function normalizeRefine(
   return clamped;
 }
 
+export function sameRef(a: EquippedRef, b: EquippedRef): boolean {
+  const aRunes = a.runes ?? [];
+  const bRunes = b.runes ?? [];
+  return (
+    a.item === b.item &&
+    a.refine === b.refine &&
+    aRunes.length === bRunes.length &&
+    aRunes.every((rune, index) => rune === bRunes[index])
+  );
+}
+
 export function sameEquipment(a: Equipment, b: Equipment): boolean {
   return SLOTS.every((slot) => {
     const left = a[slot];
     const right = b[slot];
     if (!left || !right) return left === right;
-    return left.item === right.item && left.refine === right.refine;
+    return sameRef(left, right);
   });
 }
 
@@ -247,6 +351,11 @@ export function sameBuild(a: Build, b: Build): boolean {
     a.jobLevel === b.jobLevel &&
     STAT_NAMES.every((stat) => a.stats[stat] === b.stats[stat]) &&
     sameEquipment(a.equipment, b.equipment) &&
+    a.inventory.length === b.inventory.length &&
+    a.inventory.every((ref, index) => {
+      const other = b.inventory[index];
+      return other !== undefined && sameRef(ref, other);
+    }) &&
     a.dummies.length === b.dummies.length &&
     a.dummies.every((dummy, index) => {
       const other = b.dummies[index];

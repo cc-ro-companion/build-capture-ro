@@ -15,6 +15,10 @@
 //               element index, element level (index tables in ./dummy)
 //             tag 14, repeated, one per equipped slot: the value is varints
 //               slot index (SLOTS order in ./equipment), item id, refine
+//             tag 15, repeated, one per equipped slot with runes: varints slot
+//               index, rune count, then each rune id − 39000
+//             tag 16, repeated in list order: an inventory item as varints
+//               item id, refine, rune count, then each rune id − 39000
 //   4 bytes   data hash (8 hex characters)
 //   varint    label length, then the label as UTF-8
 import type { EngineConfig } from '../engine/config';
@@ -43,6 +47,12 @@ const TAG_TARGET_MONSTER = 11;
 const TAG_TARGET_DUMMY = 12;
 const TAG_DUMMY = 13;
 const TAG_EQUIPPED = 14;
+const TAG_RUNES = 15;
+const TAG_INVENTORY = 16;
+/** Rune ids are client ids 39xxx; storing the offset saves a byte per rune. */
+const RUNE_ID_BASE = 39000;
+/** rAthena MAX_SLOTS; a longer rune list cannot come from a valid build. */
+const MAX_RUNES_PER_ITEM = 4;
 type Field = keyof typeof FIELD_TAGS;
 const FIELD_BY_TAG = new Map(
   Object.entries(FIELD_TAGS).map(([field, tag]) => [tag as number, field as Field]),
@@ -152,6 +162,23 @@ export function encodeShareCode(build: Build, version: DataVersion): string {
     writeValue(`${slot} item`, entry.item);
     writeValue(`${slot} refine`, entry.refine);
   });
+  const writeRunes = (where: string, runes: readonly number[]) => {
+    writeValue(`${where} rune count`, runes.length);
+    for (const rune of runes) writeValue(`${where} rune`, rune - RUNE_ID_BASE);
+  };
+  SLOTS.forEach((slot, index) => {
+    const runes = build.equipment[slot]?.runes;
+    if (!runes || runes.length === 0) return;
+    writeVarint(bytes, TAG_RUNES);
+    writeValue('slot', index);
+    writeRunes(slot, runes);
+  });
+  for (const ref of build.inventory) {
+    writeVarint(bytes, TAG_INVENTORY);
+    writeValue('inventory item', ref.item);
+    writeValue('inventory refine', ref.refine);
+    writeRunes('inventory', ref.runes ?? []);
+  }
   for (const dummy of build.dummies) {
     writeVarint(bytes, TAG_DUMMY);
     writeText(bytes, dummy.name);
@@ -242,10 +269,17 @@ function readCode(code: string): DecodedCode | { error: string } {
     let target: Target = null;
     const dummies: Record<string, unknown>[] = [];
     // Unknown slot indexes are kept as `#index` keys so normalize warns about them.
-    const equipment: Record<string, { item: number; refine: number }> = {};
+    const equipment: Record<string, { item: number; refine: number; runes?: number[] }> = {};
     const addEquipped = (slot: string, item: number, refine: number) => {
       if (slot in equipment) throw new CorruptCode(`repeats the ${slot} slot`);
       equipment[slot] = { item, refine };
+    };
+    const runesBySlot = new Map<string, number[]>();
+    const inventory: { item: number; refine: number; runes?: number[] }[] = [];
+    const readRunes = (): number[] => {
+      const count = reader.varint();
+      if (count > MAX_RUNES_PER_ITEM) throw new CorruptCode('holds too many runes for one item');
+      return Array.from({ length: count }, () => reader.varint() + RUNE_ID_BASE);
     };
     let weaponSeen = false;
     for (let tag = reader.varint(); tag !== TAG_END; tag = reader.varint()) {
@@ -275,10 +309,29 @@ function readCode(code: string): DecodedCode | { error: string } {
         addEquipped(SLOTS[index] ?? `#${index}`, item, refine);
         continue;
       }
+      if (tag === TAG_RUNES) {
+        const index = reader.varint();
+        const slot = SLOTS[index] ?? `#${index}`;
+        if (runesBySlot.has(slot)) throw new CorruptCode(`repeats the runes of ${slot}`);
+        runesBySlot.set(slot, readRunes());
+        continue;
+      }
+      if (tag === TAG_INVENTORY) {
+        const item = reader.varint();
+        const refine = reader.varint();
+        const runes = readRunes();
+        inventory.push({ item, refine, ...(runes.length > 0 ? { runes } : {}) });
+        continue;
+      }
       const field = FIELD_BY_TAG.get(tag);
       if (!field) throw new CorruptCode(`has an unknown field ${tag}`);
       if (values[field] !== undefined) throw new CorruptCode(`repeats field ${tag}`);
       values[field] = reader.varint();
+    }
+    for (const [slot, runes] of runesBySlot) {
+      const entry = equipment[slot];
+      if (!entry) throw new CorruptCode(`has runes for the empty ${slot} slot`);
+      entry.runes = runes;
     }
     const hash = Array.from(reader.take(4), (byte) => byte.toString(16).padStart(2, '0')).join('');
     const label = reader.text();
@@ -299,6 +352,7 @@ function readCode(code: string): DecodedCode | { error: string } {
           luk: values.luk,
         },
         equipment,
+        inventory,
         dummies,
         target,
       },

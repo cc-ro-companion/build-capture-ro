@@ -87,6 +87,10 @@ export function itemName(data: GameData, itemId: number): string {
   return data.names.items[itemId] ?? data.items.get(itemId)?.aegisName ?? `Item ${itemId}`;
 }
 
+export function runeName(data: GameData, runeId: number): string {
+  return data.names.runes[runeId] ?? `Rune ${runeId}`;
+}
+
 export function monsterName(data: GameData, monsterId: number): string {
   return (
     data.names.monsters[monsterId] ??
@@ -133,7 +137,9 @@ export function resolveBuild(build: Build, data: GameData): ResolvedBuild {
   for (const slot of SLOTS) {
     const entry = build.equipment[slot];
     const item = entry && data.items.get(entry.item);
-    if (entry && item) equipment.push({ slot, item, refine: entry.refine });
+    if (!entry || !item) continue;
+    const runes = (entry.runes ?? []).flatMap((runeId) => data.runes.get(runeId) ?? []);
+    equipment.push({ slot, item, refine: entry.refine, ...(runes.length > 0 ? { runes } : {}) });
   }
   let monster: Monster | null = null;
   let dummy: Dummy | null = null;

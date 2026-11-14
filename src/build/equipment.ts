@@ -2,18 +2,25 @@
 // what equipping an item clears, and which equipped items the build's job or
 // level cannot wear. Mirrors rAthena's pc_equippoint and pc_equipitem.
 import type { Item } from '../data/types';
+import { runeFits } from '../engine/equipment';
 import { SLOTS, type Slot } from '../engine/gear';
 import { DUAL_WIELD_TYPES } from '../engine/status';
-import { itemName, jobCanEquip, jobName, levelCanEquip, type GameData } from './resolve';
+import { itemName, jobCanEquip, jobName, levelCanEquip, runeName, type GameData } from './resolve';
 
 export { SLOTS, type Slot };
 
 /** ccRO refines to +10, like rAthena's default. */
 export const MAX_REFINE = 10;
 
+/** rAthena `MAX_SLOTS`: no item has more card slots, so no item holds more runes. */
+export const MAX_RUNES = 4;
+
+/** An item as a build stores it: equipped, or kept in the inventory. */
 export interface EquippedRef {
   item: number;
   refine: number;
+  /** Rune ids in card slot order; left out when the item holds none. */
+  runes?: number[];
 }
 
 export type Equipment = Partial<Record<Slot, EquippedRef>>;
@@ -166,6 +173,34 @@ export function equipmentErrors(
       errors.push(levelError(name, item, baseLevel));
     } else if (!jobCanUseSlot(item, slot, jobId)) {
       errors.push(`${name}: ${jobName(data, jobId)} cannot hold a weapon in the left hand.`);
+    }
+  }
+  return errors;
+}
+
+/**
+ * Runes that do not fit the item they sit in: a location the slot does not
+ * take, or more runes than the item has card slots. They stay in the build,
+ * so a data change that lowers slots does not destroy it, are shown as
+ * errors and, like gear the job cannot wear, still count in the results.
+ */
+export function runeErrors(equipment: Equipment, data: GameData): string[] {
+  const errors: string[] = [];
+  for (const slot of SLOTS) {
+    const entry = equipment[slot];
+    const item = entry && data.items.get(entry.item);
+    if (!entry || !item || !entry.runes) continue;
+    const name = `${itemName(data, entry.item)} (${entry.item})`;
+    for (const runeId of entry.runes) {
+      const rune = data.runes.get(runeId);
+      if (rune && !runeFits(rune.location, slot, item)) {
+        const where = rune.location.toLowerCase();
+        errors.push(`${runeName(data, runeId)} goes into ${where}, not into ${name}.`);
+      }
+    }
+    if (entry.runes.length > item.slots) {
+      const slots = item.slots === 1 ? '1 slot' : `${item.slots} slots`;
+      errors.push(`${name} has ${slots} but holds ${entry.runes.length} runes.`);
     }
   }
   return errors;

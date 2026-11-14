@@ -124,7 +124,7 @@ results become fixtures that `pnpm test` then guards.
    pipeline tests; combo count in the progress log.
 5. [x] **Engine: runes, sets, combos.** Rune context, slot rules, active
    set and combo detection, album effects ignored. Check: engine tests.
-6. [ ] **Build model and share code.** Runes per item, inventory, tags 15
+6. [x] **Build model and share code.** Runes per item, inventory, tags 15
    and 16. Check: tests including a recorded 4a code.
 7. [ ] **UI.** Rune slots and rune search, draft badge, set/combo/album
    notes, inventory panel. Check: component tests, `pnpm build`.

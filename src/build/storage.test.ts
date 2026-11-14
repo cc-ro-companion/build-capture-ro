@@ -86,6 +86,7 @@ describe('storage', () => {
       jobLevel: 50,
       stats: phase3.stats,
       equipment: { rightHand: { item: 1250, refine: 0 } },
+      inventory: [],
       dummies: [],
       target: { monster: 1002 },
     });
@@ -140,5 +141,43 @@ describe('storage', () => {
     expect(storage.getItem(UNREADABLE_KEY)).toBe('{oops');
     expect(keepUnreadableBuild(memoryStorage())).toBe(false);
     expect(keepUnreadableBuild(throwingStorage())).toBe(false);
+  });
+});
+
+describe('storage with runes and inventory', () => {
+  it('round-trips runes and the inventory', () => {
+    const runed: Build = {
+      ...build,
+      equipment: { ...build.equipment, rightHand: { item: 1101, refine: 7, runes: [39101] } },
+      inventory: [
+        { item: 1201, refine: 3, runes: [39103, 39104] },
+        { item: 2303, refine: 0 },
+      ],
+    };
+    const storage = memoryStorage();
+    expect(saveBuild(runed, current, storage)).toBe(true);
+    expect(load(storage)).toEqual({ build: runed, warnings: [], dataHint: null });
+  });
+
+  it('opens a build saved by phase 4a, which has no runes or inventory, unchanged', () => {
+    const saved = {
+      v: 2,
+      job: 1,
+      baseLevel: 50,
+      jobLevel: 30,
+      stats: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 },
+      equipment: { armor: { item: 2303, refine: 10 }, rightHand: { item: 1101, refine: 7 } },
+      dummies: [],
+      target: { monster: 1002 },
+    };
+    // As the phase 4a planner saved it (commit f74284f).
+    const phase4a = { ...saved, d: current.hash, l: current.label };
+    const storage = memoryStorage();
+    storage.setItem(STORAGE_KEY, JSON.stringify(phase4a, null, 2));
+    expect(load(storage)).toEqual({
+      build: { ...saved, inventory: [] },
+      warnings: [],
+      dataHint: null,
+    });
   });
 });

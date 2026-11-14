@@ -270,3 +270,107 @@ describe('share code', () => {
 function fail(): never {
   throw new Error('test build needs a monster');
 }
+
+// Written by the phase 4a encoder (commit f74284f): Assassin 99/50 with
+// goggles +4, a jacket +10, a knife +8 and a cutter +6 dual wielded, against
+// one dummy; data 1a2b3c4d "ccRO 2026-11".
+const PHASE_4A_CODE =
+  'AQEMAmMDMgRjBVoGHgcBCCgJCgwBDgCwEQQOA_8RCg4IsQkIDgm0CQYNBUR1bW15YygBAQEBAQEBAQAAAQAaKzxNDGNjUk8gMjAyNi0xMQ';
+
+describe('share code with runes and inventory', () => {
+  const runed: Build = {
+    ...fullGear,
+    equipment: {
+      ...fullGear.equipment,
+      rightHand: { item: 1201, refine: 8, runes: [39101, 39103, 39101] },
+      leftHand: { item: 1204, refine: 6, runes: [39104] },
+    },
+    inventory: [
+      { item: 1250, refine: 7, runes: [39105, 39542] },
+      { item: 2303, refine: 0 },
+    ],
+  };
+
+  it('opens a phase 4a code unchanged, with the numbers the 4a engine gave', () => {
+    const result = decodeShareCode(PHASE_4A_CODE, gameData, rAthenaDefaults, current);
+    if (!('build' in result)) throw new Error(result.error);
+    expect(result.warnings).toEqual([]);
+    expect(result.build).toEqual({
+      ...defaultBuild(),
+      job: 12,
+      baseLevel: 99,
+      jobLevel: 50,
+      stats: { str: 99, agi: 90, vit: 30, int: 1, dex: 40, luk: 10 },
+      equipment: {
+        headTop: { item: 2224, refine: 4 },
+        armor: { item: 2303, refine: 10 },
+        rightHand: { item: 1201, refine: 8 },
+        leftHand: { item: 1204, refine: 6 },
+      },
+      inventory: [],
+      dummies: [{ ...defaultDummy(0), name: 'Dummy', level: 99, def: 40 }],
+      target: { dummy: 0 },
+    });
+    // Recorded from the phase 4a engine for this build (commit f74284f).
+    const resolved = resolveBuild(result.build, gameData);
+    expect(statusWindow(resolved.character, rAthenaDefaults)).toMatchObject({
+      atk: [263, 28],
+      aspd: 161,
+      critRate: 43,
+      def: [17, 32],
+      flee: 199,
+      maxHp: 7892,
+    });
+    const attack = autoAttack(
+      resolved.character,
+      resolved.monster ?? fail(),
+      gameData.tables,
+      rAthenaDefaults,
+    );
+    expect(attack.normal).toEqual({ min: 76, max: 76, avg: 76 });
+    expect(attack.left?.normal).toEqual({ min: 45, max: 45, avg: 45 });
+    expect(attack.dps).toBe(160.3919035314384);
+  });
+
+  it('round-trips runes per equipped item and the inventory in order', () => {
+    expect(decode(encodeShareCode(runed, current))).toEqual({
+      build: runed,
+      warnings: [],
+      dataHint: null,
+    });
+  });
+
+  it('stores rune ids as their offset from 39000', () => {
+    const build: Build = {
+      ...typical,
+      equipment: { rightHand: { item: 1250, refine: 7, runes: [39101] } },
+    };
+    const bytes = bytesOf(encodeShareCode(build, current));
+    const tagAt = bytes.indexOf(15);
+    // Tag 15, slot 8 (right hand), one rune, 101 (39101 − 39000).
+    expect(bytes.slice(tagAt, tagAt + 4)).toEqual([15, 8, 1, 101]);
+  });
+
+  it('rejects runes for an empty slot, repeated rune tags and too many runes', () => {
+    const bytes = bytesOf(encodeShareCode(typical, current));
+    // Tag 15 for the shoes (slot 5), which typical leaves empty.
+    expect(decode(codeOf([1, 15, 5, 1, 101, ...bytes.slice(1)]))).toEqual({
+      error: expect.stringMatching(/runes for the empty shoes slot/),
+    });
+    expect(decode(codeOf([1, 15, 8, 1, 101, 15, 8, 0, ...bytes.slice(1)]))).toEqual({
+      error: expect.stringMatching(/repeats the runes of rightHand/),
+    });
+    expect(decode(codeOf([1, 16, 0xe2, 0x09, 0, 5, 1, 1, 1, 1, 1, ...bytes.slice(1)]))).toEqual({
+      error: expect.stringMatching(/too many runes/),
+    });
+  });
+
+  it('drops unknown runes from a code with a warning', () => {
+    const bytes = bytesOf(encodeShareCode(typical, current));
+    // Tag 15: right hand, one rune 900 (39900, not a rune).
+    const result = decode(codeOf([1, 15, 8, 1, 0x84, 0x07, ...bytes.slice(1)]));
+    if (!('build' in result)) throw new Error(result.error);
+    expect(result.build.equipment.rightHand).toEqual({ item: 1250, refine: 7 });
+    expect(result.warnings).toEqual(['Unknown rune 39900 in Jur (1250) removed.']);
+  });
+});
